@@ -29,7 +29,7 @@ class Index extends \think\Controller
             }
             $evaluate_paper[$ek]['edit_time'] = substr($evaluate_paper[$ek]['edit_time'],0,strlen($evaluate_paper[$ek]['edit_time'])-3);
         }
-        return $evaluate_paper_shishenme123;
+        return $evaluate_paper_shishenme;
     }
 
     //获取分类名称
