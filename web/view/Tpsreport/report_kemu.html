@@ -1,0 +1,252 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>第9届武汉市小学生全科能力测评报告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/public/static/Chart.js-2.7.2/dist/Chart.js"></script>
+
+    <link href="/public/static/tps/css/wrcweb/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="/public/static/tps/css/wrcweb/style.css?v=201804121630" rel="stylesheet" type="text/css">
+
+    <!-- growingio 万人测  -->
+</head>
+<body>
+    <div class="header">
+        <script type="text/javascript">
+            $('.header').load('/index.php/web/Tpsreport/get_titlename?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}');
+        </script>
+    </div>
+    <div class="w1000 cf">
+        <!-- 学科数量 -->
+        <input id="subjectsSize" type="hidden" name="subjectsSize" value="3">
+        <img src="/gwots/static/skin/wrcweb/img/arrow.png" class="u-more" id="indicateMore" style="display: none;">
+        <div id="mSubs" class="m-subjects">
+            <!-- 显示全科 -->
+            <!-- U2登录方式查询全科报告 -->
+
+            <a id="allSubId" class=" first" href="/index.php/web/Tpsreport/report_all?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}">全科</a>
+
+            {volist name="geke" id = "ni" key="nk"}
+            <a  {if condition="($ni.id == $data.xueke )"} class="active" {/if} href="/index.php/web/Tpsreport/report_kemu?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}&xueke={$ni.id}">
+                {$ni.kemuname}
+            </a>
+            {/volist}
+        </div>
+        <div class="wbg">
+            <div class="m-tblWrap cf">
+                <div class="m-topBtn cf">
+                    <a href="javascript:void(0);" class="btn btn-s instn" onclick="window.print();">打印报告</a>
+                </div>
+            </div>
+            <div class="analysis">
+                <div class="serial">
+                    <span></span>英语诊断总结
+                </div>
+                <p class="para" style="white-space:normal">
+                    {$}学生您好，
+                    总得分98分。
+                    在该学科的专题知识点统计当中，其中在1.基础知识，6.交际能力，专题正确率
+                    高于50%，已基本掌握。
+                </p>
+            </div>
+            <div class="analysis">
+                <div class="serial">
+                    <span></span>知识点掌握情况
+                </div>
+                <div class="g-tblscroll">
+                    <table border="0" cellspacing="0" cellpadding="0" class="tbl-2">
+                        <tbody>
+                        <tr>
+                            <td class="bg">知识点</td>
+                            <td class="bg">占比</td>
+                            <td class="bg">题目数量</td>
+                            <td class="bg">武汉新东方平均正确率</td>
+                            <td class="bg">个人正确率</td>
+                            <td class="bg">掌握程度</td>
+                        </tr>
+
+                        {volist name = "paper_info" id="ki" key="kv"}
+                        <tr>
+                            <td class="bg">{$ki.kaodian_nid}</td>
+                            <td>
+                                {$ki.proportion}%
+                            </td>
+                            <td>{$ki.all_num}</td>
+                            <td>{$ki.acg}%</td>
+                            <td>{$ki.gr_acg}%</td>
+                            {if condition="($ki.gr_zwd == 1)"}
+                            <td>优秀</td>
+                            {elseif condition="($ki.gr_zwd == 2)"}
+                            <td>良好</td>
+                            {elseif condition="($ki.gr_zwd == 3)"}
+                            <td style="color:red;">需努力</td>
+                            {/if}
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="g-charts cf g-tblscroll">
+                    <div class="l-chart" id="allPieChart" style="height: 400px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;" _echarts_instance_="ec_1524538654591">
+                        <div style="position: relative; overflow: hidden; width: 423px; height: 400px;">
+                            <canvas width="423" id="huanxintu" height="400" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 423px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                        </div>
+                    </div>
+                    <div class="r-chart" id="allRadarChart" style="height: 400px; -webkit-tap-highlight-color: transparent; user-select: none; background: transparent;" _echarts_instance_="ec_1524538654592">
+                        <div style="position: relative; overflow: hidden; width: 423px; height: 400px;">
+                            <canvas width="423" id="leidatu"  height="400" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 423px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="analysis cf">
+                <div class="serial">
+                    <span></span>错误知识点情况
+                </div>
+                <div class="g-tblscroll">
+                    <table border="0" cellspacing="0" cellpadding="0" class="tbl-2">
+                        <tbody><tr>
+                            <td class="bg" style="width: 20%;">知识点</td>
+                            <td class="bg" style="width: 80%;">错误知识点</td>
+                        </tr>
+                        {volist name = "error_answer"  id = "ev" key = "ek"}
+                        <tr>
+                            <td class="bg">{$ev.kaodian_name}</td>
+                            <td>
+                                {volist name = "ev.error"  id = "eev" key = "eek"}
+                                <p>{$eev}</p>
+                                {/volist}
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="analysis cf">
+                <div class="serial">
+                    <span></span>个人诊断报告明细
+                </div>
+                {volist name = "paper_info" id="ki" key="kv"}
+                <div class="tbl-box">
+                    <h2 class="u-tit1">{$ki.kaodian_nid}</h2>
+                    <div class="g-tblscroll">
+                        <table border="0" cellspacing="0" cellpadding="0" class="tbl-2" style="table-layout：fixed">
+                            <tbody><tr>
+                                <td width="7%" class="bg">题号</td>
+                                <td width="10%" class="bg">个人正确率</td>
+                                <td width="12%" class="bg">武汉新东方正确率</td>
+                                <td class="bg">知识点说明</td>
+                                <td width="10%" class="bg">掌握程度</td>
+                            </tr>
+
+                            {volist name = "ki.xdf_th" id="kki" key="kkv" }
+                            <tr>
+                                <td width="7%">{$kki.num}</td>
+                                <td width="10%">{$kki.gracg}%</td>
+                                <td width="12%">{$kki.xdfacg}%</td>
+                                <td style="word-wrap: break-word;word-break:break-all;"><p>{$kki.zsd_sm}</p></td>
+
+                                {if condition="($kki.zwd == 1)"}
+                                <td>优秀</td>
+                                {elseif condition="($kki.zwd == 2)"}
+                                <td>良好</td>
+                                {elseif condition="($kki.zwd == 3)"}
+                                <td style="color:red;">需努力</td>
+                                {/if}
+                            </tr>
+                            {/volist}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+        </div>
+    </div>
+
+    <div style = "display:none;" id="zhi">
+
+        {volist name = "paper_info" id="ki" key="kv"}
+
+        <li  kaodian_name = "{$ki.kaodian_name}" zhanbi = "{$ki.proportion}" ming_c="{$ki.gr_acgs}"></li>
+
+
+        {/volist}
+    </div>
+
+
+    <div id="cli_dialog_div"></div>
+    </body>
+</html>
+<script>
+    var xdf_data = [];
+    var gr_data = [];
+    var name_data = [];
+    // xdf_data
+    $('#zhi li').each(function(){
+        xdf_data.push($(this).attr('kaodian_name'));
+        gr_data.push($(this).attr('zhanbi'));
+        name_data.push($(this).attr('ming_c'));
+    })
+
+    //环形图
+    data = {
+        datasets: [{
+            data: [10, 20, 30],
+            //backgroundColor: ['Red', 'Yellow', 'Blue']
+
+            backgroundColor: ['Red','orange','green','yellow','blue','purple']
+
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: xdf_data,
+
+    };
+
+
+    $(function () {
+        var ctx = document.getElementById("huanxintu");
+
+        var myPieChart = new Chart(ctx,{
+            type: 'pie',
+            data: data,
+            //options: options
+        });
+    });
+
+    //雷达图
+   var datas = {
+        labels: xdf_data,
+            datasets:[{
+            label: ['正确率'],
+            data: name_data,
+          //  pointRadius:0/0[0],
+            backgroundColor:'rgba(0,152,50,0.7)',
+                borderColor:'rgba(0,152,50,2)',
+                lineTension:0
+        }]
+    }
+
+
+    $(function () {
+        var ctx = document.getElementById("leidatu");
+        var myPieChart = new Chart(ctx,{
+            type: 'radar',
+            data: datas,
+
+            //options: options
+        });
+    });
+</script>

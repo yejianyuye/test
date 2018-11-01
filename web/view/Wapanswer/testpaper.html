@@ -1,0 +1,538 @@
+<html data-dpr="1" style="font-size: 37.5px;"><head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>看演示——复制副本</title>
+    <!-- 获取常量引用版本 -->
+    <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/public/static/tps/js/jq_cookie/jquery.cookie.js"></script>
+    <link href="/public/static/tps/css/student_info/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="/public/static/tps/css/student_info/style.css?v=201805221740" rel="stylesheet" type="text/css">
+
+
+
+    <style>
+    body{
+        height: initial;
+        overflow: initial;
+    }
+</style>
+    <title>看演示——复制副本</title>
+</head>
+<body style="font-size: 12px;">
+
+<div class="wx-tests">
+    <div class="wx-top">
+        <div class="wx-sub" style="position:fixed;top:0px;width:100%;height:37.5px;">
+            <div class="countdown">
+                <span id="countDownText">00:00:00</span>
+            </div>
+            <div class="order" onclick = "testing.finish();" style="padding-right:9.75px;">
+                <span id="subjectIndex">1</span>/{$num}
+            </div>
+        </div>
+    </div>
+    <div class="wx-scl" id="paperContainer" style="overflow-y: hidden;margin-top:56.25px;">
+        {volist name="paper_question" id="vo"  key="k"}
+        {if condition="($vo.question_type == 1)"}
+        <div class="wx-test page{$k}" paper_point_id = "{$vo.paper_point_id}" question_type = "1" question_num = "{$vo.id}"  id="subjectContainer" style="height: 566px; overflow-y: hidden;display:none;">
+            <div class="wx-radio" style="overflow-y: auto;">
+                <div class="wx-question"><p>{$vo.question_title}</p></div>
+                <ul class="wx-opts rdo">
+                    {volist name="vo['contents']" id="co"  key="ck"}
+                    <li onclick="xuanze(1,{$k},0,this);"   xuanxiang = "{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}">
+                        <div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div>
+                        <div class="wx-ocont"><p>{$co}</p></div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+
+        {elseif condition="($vo.question_type == 2)"}
+        <div class="wx-test page{$k}" paper_point_id = "{$vo.paper_point_id}" question_type = "2" question_num = "{$vo.id}" id="subjectContainer" style="height: 566px; overflow-y: hidden;display:none;">
+            <div class="wx-radio" style="overflow-y: hidden;">
+                <div class="wx-question" style="overflow-y: auto;"><p>{$vo.question_title3}</p></div>
+            </div>
+        </div>
+
+        {elseif condition="($vo.question_type == 3)"}
+        <div class="wx-test page{$k}" paper_point_id = "{$vo.paper_point_id}" question_type = "3" question_num = "{$vo.id}" id="subjectContainer" style="height: 566px; overflow-y: hidden;display:none;">
+            <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                <div class="wx-question"><p>{$vo.question_title}</p></div>
+                <ul class="wx-opts rdo">
+
+                    {volist name="vo['contents']" id="co"  key="ck"}
+                    <li onclick="xuanze(3,{$k},0,this);" xuanxiang = "{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}">
+                        <div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div>
+                        <div class="wx-ocont"><p>{$co}</p></div>
+                    </li>
+                    {/volist}
+
+                </ul>
+            </div>
+        </div>
+
+        {elseif condition="($vo.question_type == 4)"}
+        <div class="wx-test page{$k}" paper_point_id = "{$vo.paper_point_id}" question_type = "4" childcount = "{$vo.count}" style="display:none;overflow-y: hidden; ">
+            <div class="wx-stem" id="textContainer" style="overflow-y: scroll;">
+                <div class="wx-passage" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);"><p>{$vo.question_title}</p></div>
+            </div>
+            <div class="wx-boundary"></div>
+            <div class="wx-optlist" id="groupContainer" style="overflow:auto;">
+                <div class="wx-box" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+
+
+                    {volist name="vo['children']" id="vvvo"  key="kkk"}
+                    <div class="wx-wrap xpage{$kkk}" paper_point_id = "{$vo.paper_point_id}" question_num = "{$vvvo.id}"  style="{if condition="($kkk == 1)"} display: block; {else} display: none;{/if}">
+                        <div class="wx-question">
+                            <span class="wx-serial">{$vvvo.question_number}.</span>
+                            <div class="wx-qcont"><p>{$vvvo.question_title}</p></div>
+                        </div>
+                        <ul class="wx-opts rdo">
+                            {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
+                            <li onclick="xuanze(4,{$k},{$kkk},this);"  xuanxiang = "{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}">
+                                <div class="wx-opt">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</div>
+                                <div class="wx-ocont"><p>{$vvvvo}</p></div>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                    {/volist}
+
+                </div>
+
+            </div>
+        </div>
+
+        {elseif condition="($vo.question_type == 5)"}
+        <div class="wx-test page{$k}" paper_point_id = "{$vo.paper_point_id}" question_type = "5"  childcount = "{$vo.count}" style="display:none;">
+            <div class="wx-mask" style="top: 249px;"></div>
+            <div class="wx-stem" id="textContainer" style="overflow:auto;;">
+                <div class="wx-passage" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);"><p>{$vo.question_title}</p></div>
+            </div>
+            <div class="wx-boundary"></div>
+            <div class="wx-optlist" id="groupContainer" style="overflow:auto;">
+                <div class="wx-box" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                    {volist name="vo['children']" id="vvvo"  key="kkk"}
+                    <div class="wx-wrap xpage{$kkk}" paper_point_id = "{$vo.paper_point_id}"  question_num = "{$vvvo.id}" style="{if condition="($kkk == 1)"} display: block; {else} display: none;{/if}">
+                        <div class="wx-question">
+                            <span class="wx-serial">{$vvvo.question_number}.</span>
+                        </div>
+                        <ul class="wx-opts rdo">
+                            {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
+                            <li onclick="xuanze(5,{$k},{$kkk},this);" xuanxiang = "{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}">
+                                <div class="wx-opt">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</div>
+                                <div class="wx-ocont"><p>{$vvvvo}</p></div>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+        {/if}
+        {/volist}
+
+       </div>
+    <div class="wx-sub wx-btns" style="position:fixed;bottom:0px;width:100%;">
+        <a id="prevBtn" class="wx-prev" onclick = "testing.prev(1);">上一题</a><a id="nextBtn" class="wx-next" onclick = testing.next(1);>下一题</a>
+    </div>
+</div>
+
+<div class="loadingmask" style="z-index: 35; display: none;"></div>
+
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+<script>
+    var allnum = {$num};
+    var page = 1;
+    var evaluate_paper_id = {$evaluate_paper_id};
+    //获取预约id
+    var appointment_id = {$id};
+    //$.cookie('paperTestTime_17', '');
+    //考试测评时间
+    var paperTestTime = 0;
+
+
+
+
+
+    //删除cookie
+     // $.cookie('paperTestTime_'+appointment_id, '');
+
+
+    //页面加载算高度
+    $(function() {
+        //初始化第一页显示
+        $('.page1').css('display','block');
+        //重新设置高度
+        var oH1 = $(window).height() - $('.wx-top').height() - $('.wx-btns').height() - $('.wx-boundary').height();
+       // var oH2 = $('.wx-passage').height();
+        $('.wx-stem').css('height',oH1/2);
+        $('.wx-optlist').css('height',oH1/2);
+        $('.wx-mask').css('top',oH1/2-29);
+        //设置cookie
+        var time_sy = $.cookie('paperTestTime_'+appointment_id);
+        //设置是否开始时间限制
+        var time_allow = {$time_allow};
+        //时间函数
+        if(time_sy != 'NaN' && time_sy != '' && time_sy != undefined){
+            $("#countDownText").text(formatSeconds(time_sy));
+            paperTestTime = parseInt(time_sy);
+        }else{
+            //允许的时长
+            var timeall = 0;
+            if(time_allow == 1){
+                timeall ={$cp_time};
+            }
+            $("#countDownText").text(formatSeconds(timeall));
+            paperTestTime = parseInt(timeall);
+        }
+        if(time_allow == 1){
+            timer.countDown();
+        }else{
+            timer.countUp();
+        }
+    })
+
+
+    //计时器
+    var timer = {
+
+        timess : 1,
+        /**
+         * 继续测试
+         */
+        conTest:function(){
+            testing.countDown();
+            $.unblockUI();
+        },
+
+        countDown : function() {
+            if (paperTestTime > 0) {
+                timecan = setInterval(function () {
+                    paperTestTime = paperTestTime - 1;
+                    $("#countDownText").text(formatSeconds(paperTestTime));
+                    //以预约场次作为cookie的判断
+                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 1});
+                    if (paperTestTime < 1) {
+                        clearInterval(timecan);
+                        //fix 对于测试时间到没有完成的测评自动提交填空题答案
+                        $('.blockUI').css('display', 'block');
+                        $('#timeTips').css('display', 'block');
+                    }
+                }, 1000);
+            }
+        },
+
+        countUp : function() {
+            timecan = setInterval(function () {
+                paperTestTime = paperTestTime + 1;
+                $("#countDownText").text(formatSeconds(paperTestTime));
+                //以预约场次作为cookie的判断
+                $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 1});
+                if (paperTestTime < 1) {
+                    clearInterval(timecan);
+                    //fix 对于测试时间到没有完成的测评自动提交填空题答案
+                    $('.blockUI').css('display', 'block');
+                    $('#timeTips').css('display', 'block');
+                }
+            }, 1000);
+        },
+
+
+    }
+
+    //时间转换戳转化
+    function  formatSeconds(value){
+        var theTime = parseInt(value);// 秒
+        var theTime1 = 0;// 分
+        var theTime2 = 0;// 小时
+        if(theTime > 60) {
+            theTime1 = parseInt(theTime/60);
+            theTime = parseInt(theTime%60);
+            if(theTime1 > 60) {
+                theTime2 = parseInt(theTime1/60);
+                theTime1 = parseInt(theTime1%60);
+            }
+        }
+        var result = "";
+        if(theTime>=10){
+            result = ""+parseInt(theTime);
+        }else{
+            result = "0"+parseInt(theTime);
+        }
+        if(theTime1 >= 10){
+            result = ""+parseInt(theTime1)+":"+result;
+        }else{
+            result = "0"+parseInt(theTime1)+":"+result;
+        }
+        if(theTime2 >= 10){
+            result = ""+parseInt(theTime2)+":"+result;
+        }else{
+            result = "0"+parseInt(theTime2)+":"+result;
+        }
+        return result;
+    }
+
+
+    var testing = {
+        //上一页
+        prev: function (id) {
+            if(id == 1){
+                var dialog = "<div class=\"query layermask\">\n" +
+                    "    <div class=\"alertBox\">\n" +
+                    "        <div class=\"wx-zw\"></div>\n" +
+                    "        <p>已经到了第一题!</p>\n" +
+                    "        <div class=\"btns\"><a href=\"javascript:void(0)\" onclick = \"testing.jixu(1);\" class=\"btn btn-o\">继续</a></div>\n" +
+                    "    </div>\n" +
+                    "</div>";
+                $(".loadingmask").after(dialog)
+            }else if(id>1){
+                var ss = id - 1;
+                $('#prevBtn').attr('onclick','testing.prev('+ss+');');
+                $('#nextBtn').attr('onclick','testing.next('+ss+');');
+                $('.page'+id).css('display','none');
+                $('.page'+ss).css('display','block');
+                $('#subjectIndex').text(ss);
+
+                if($('.page'+ss).attr('question_type') == 4 || $('.page'+ss).attr('question_type') == 5 ){
+                    $('.page'+ss+' .wx-wrap').css('display','none');
+                    $('.page'+ss+' .xpage1').css('display','block');
+                }
+                page = page - 1;
+            }
+        },
+
+        //下一页
+        next: function (id) {
+            var ss = id + 1;
+            if(allnum < ss){
+                var dialog = '<div class="query layermask"><div class="alertBox"><div class="wx-zw"></div><p>是否提交?</p><div class="btns"><a href="javascript:;" class="btn btn-o">确定</a><a href="javascript:;" onclick = "testing.jixu(1);" class="btn btn-oe">取消</a></div></div></div>';
+                $(".loadingmask").after(dialog)
+                return false;
+            }else{
+                $('#prevBtn').attr('onclick','testing.prev('+ss+');');
+                $('#nextBtn').attr('onclick','testing.next('+ss+');');
+            }
+            $('#subjectIndex').text(ss);
+            $('.page'+id).css('display','none');
+            $('.page'+ss).css('display','block');
+            if($('.page'+ss).attr('question_type') == 4 || $('.page'+ss).attr('question_type') == 5 ){
+                $('.page'+ss+' .wx-wrap').css('display','none');
+                $('.page'+ss+' .xpage1').css('display','block');
+            }
+            page = page + 1;
+        },
+
+        //关闭弹出层
+        jixu: function (id) {
+            $('.layermask').remove();
+        },
+
+        //完成题目
+        finishs: function () {
+            $('.blockUI').css('display','block');
+            $('#finishTips').css('display','block');
+        },
+
+        //提交题目  完成题目  获取题目信息
+        finish: function () {
+            var use_time = $.cookie('paperTestTime_'+appointment_id);
+            var time_allow = {$time_allow};
+            var timeall = 0;
+            if(time_allow == 1){
+                timeall ={$cp_time};
+                use_time = parseInt(timeall)-parseInt(use_time);
+            }
+
+            var zhiall = all_xuanze();
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/web/Wapanswer/upload_testpaper",
+                data:{'zhiall':zhiall,'use_time':use_time,'evaluate_paper_id':evaluate_paper_id,'appointment_id':appointment_id},
+                success: function (data) {
+                   //console.log(appoint'zhiall':zhiallment_id);//
+                    // $.cookie('paperTestTime_' + appointment_id,null);
+
+
+                },
+            });
+        },
+    }
+
+
+    //选中
+    function xuanze(type,num,xnum,obj){
+
+        if(type == 1){
+            $('.page'+num+' li').removeClass('active');
+            $(obj).addClass('active');
+            setTimeout("xiayiti()",1000);
+
+        }else if(type == 3){
+
+            $(obj).toggleClass('active');
+
+        }else if(type == 4 || type == 5){
+
+            $('.page'+num+' .xpage'+xnum+' li').removeClass('active');
+            $(obj).addClass('active');
+            var childcount = $('.page'+num).attr('childcount');
+            if(xnum == childcount){
+
+               // xiayiti();
+                setTimeout("xiayiti()",1000);
+                $('.page'+num+' .wx-optlist .wx-wrap').css('display','none');
+                $('.page'+num+' .wx-optlist .xpage1').css('display','block');
+            }else{
+                var xxnum = xnum+1;
+                setTimeout(function () {
+                    $('.page'+num+' .xpage'+xnum).css('display','none');
+                    $('.page'+num+' .xpage'+xxnum).css('display','block');
+                }, 1000);
+            }
+        }
+    }
+
+    //下一题
+    function xiayiti(){
+
+        if(allnum == page){
+            var dialog = '<div class="query layermask"><div class="alertBox"><div class="wx-zw"></div><p>是否提交?</p><div class="btns"><a href="javascript:;" class="btn btn-o">确定</a><a href="javascript:;" onclick = "testing.jixu(1);" class="btn btn-oe">取消</a></div></div></div>';
+            $(".loadingmask").after(dialog);
+            return false;
+        }else{
+            var ss = page + 1;
+            $('#prevBtn').attr('onclick','testing.prev('+ss+');');
+            $('#nextBtn').attr('onclick','testing.next('+ss+');');
+            $('#subjectIndex').text(ss);
+            $('.page'+page).css('display','none');
+            $('.page'+ss).css('display','block');
+            page = ss;
+        }
+    }
+
+
+    $(".wx-scl").on("swipe",function(){
+        alert('向右移');
+    });
+
+
+    $(".wx-scl").on("swipeleft",function(){
+        alert("You swiped left!");
+    });
+
+    //向左滑动
+    $(".wx-scl").on('swipeLeft',function(){
+        alert('向左移');
+    })
+
+    function all_xuanze(){
+
+        var submit_data = new Object();
+
+        $('.wx-scl .wx-test').each(function(nn,thiss){
+            var ss= $(thiss);
+            var question_type = $(ss).attr('question_type');
+            var question_num = $(ss).attr('question_num');
+            var paper_point_id = $(ss).attr('paper_point_id');
+            var paper_point_ids = new Object();
+            var question_types = new Object();
+
+            //选择题选值
+            if(question_type == 1){
+                var zhi = '';
+                $(ss).find('ul li').each(function(nnn,thisss){
+                    var  sss= $(thisss).hasClass('active');
+                    if(sss){
+                        zhi = $(thisss).attr('xuanxiang');
+                        return false;
+                    }
+                })
+                question_types[question_type]=zhi;
+
+                paper_point_ids[paper_point_id]=question_types;
+
+                submit_data[question_num] = paper_point_ids;
+               // console.log(submit_data)
+            //填空题选值
+            }else if(question_type == 2){
+                var xztk = new Array();
+
+                $(ss).find('.wx-radio .wx-question .tkxz').each(function(nnn,thisss){
+                    xztk.push($(thisss).val());
+                })
+
+                question_types[question_type]=xztk;
+                paper_point_ids[paper_point_id]=question_types;
+
+                submit_data[question_num] = paper_point_ids;
+                // console.log(submit_data);
+
+            }else if(question_type == 3){
+
+                var dxt = new Array();
+                //php获取不到空数组项
+                var kongxiang = 0;
+                $(ss).find('ul li').each(function(nnn,thisss){
+                    var  sss= $(thisss).hasClass('active');
+
+                    if(sss){
+                        kongxiang =1;
+                        dxt.push($(thisss).attr('xuanxiang'));
+                    }
+                })
+                if(kongxiang ==0){
+                    dxt.push(0);
+                }
+                question_types[question_type]=dxt;
+               // console.log(question_types);
+                paper_point_ids[paper_point_id]=question_types;
+                //console.log(paper_point_ids);
+                submit_data[question_num] = paper_point_ids;
+
+            }else if(question_type == 4 || question_type == 5){
+
+                $(ss).find('.wx-optlist .wx-box .wx-wrap').each(function(nnn,thisss){
+
+                    var kk = $(thisss);
+                    var question_numwy = $(kk).attr('question_num');
+                    var paper_point_idwy = $(kk).attr('paper_point_id');
+                    var paper_point_idss = new Object();
+                    var question_typess = new Object();
+                    var zhi = '';
+                    $(kk).find('ul li').each(function(nnn,thissss){
+
+                        var  sss= $(thissss).hasClass('active');
+                        if(sss){
+                            zhi = $(thissss).attr('xuanxiang');
+                            return false;
+                        }
+                    })
+                    question_typess[question_type]=zhi;
+                    paper_point_idss[paper_point_idwy]=question_typess;
+                    submit_data[question_numwy] = paper_point_idss;
+                })
+            }
+        })
+        return submit_data;
+    }
+
+
+
+
+
+
+
+
+</script>

@@ -1,0 +1,47 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>遇到问题_手机号登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
+    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+
+</head>
+<body><!--nav begin-->
+<div class="m-nav2">
+    <h2>遇到问题_学员登录</h2>
+    <div class="m-nav2-back">
+        <a href="javascript:;" id="riaGoBack"><i></i></a>
+    </div>
+    <div class="m-nav2-action"></div>
+</div>
+<div class="m-nav2-extend">&nbsp;</div>
+<script type="text/javascript">
+
+    // 返回上一页
+    $("#riaGoBack").click(function(event){
+        window.history.go(-1);
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    // 在微信中干掉导航
+    if(navigator.userAgent.indexOf('MicroMessenger') > -1){
+        $(".m-nav2,.m-nav2-extend").remove();
+    }
+</script><!--nav end-->
+
+<div class="p139-main">
+    <div class="p139-text">
+        <h2>关于学员登录：</h2>
+        <p>登录的手机号码为您报名时使用的手机号码，姓名为报班人的姓名。</p>
+        <p>如果更换了手机号，请告知您的授课老师，让老师联系“我学”的运营人员修改。</p>
+        <h2>其他：</h2>
+        <p>如果您之前注册了新东方通行证，也可以用新东方通行证登录。</p>
+        <p>其他问题请拨打客服电话，我们帮您解决。</p>
+
+    </div>
+</div>
+
+<div id="cli_dialog_div"></div></body></html>

@@ -1,0 +1,160 @@
+
+
+
+	<div class="hd-data">
+		<div class="hd-tab cf">
+			<a href="javascript:void(0);" class="atab active">测评列表</a>
+			<!-- 机构 -->
+
+		</div>
+		<div class="sifts cf">
+			<form id="gwcp_qform" onsubmit="return false;">
+			<!-- 测评名称 -->
+			<input type="text" name = "paperName"  placeholder="试卷名称" value = "{$search_datas.paper_name}" class="txt ml5" id="paperName" style="color: #999;">
+			<!-- 学段 -->
+
+
+
+			<div id="paperStage" class="selt-box  " style="width: 50px;">
+				<input type="text" name="paperStage" value="{$search_datas.xueduan}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+				{if condition="($search_datas.xueduan == '')"}
+				<span class="selt-txt ft" title="学段">学段</span>
+				{else /}
+				<span class="selt-txt ft" title="{$search_datas.xueduan_name}">{$search_datas.xueduan_name}</span>
+				{/if}
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="" title="学段" class="ft">学段</a>
+					</li>
+					{volist name="paper_class" id="vo"  key="k"}
+					<li onclick = "ss(this,2)">
+						<a href="javascript:void(0);"  svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+					</li>
+					{/volist}
+				</ul>
+			</div>
+			<!-- 学科 -->
+
+
+
+			<div id="paperSubject" class="selt-box  " style="width: 50px;">
+				<input type="text" name="paperSubject"  valuename="" value="{$search_datas.xueke}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+				{if condition="($search_datas.xueke == '')"}
+				<span class="selt-txt ft" title="学科">学科</span>
+				{else /}
+				<span class="selt-txt ft" title="{$search_datas.xueke_name}">{$search_datas.xueke_name}</span>
+				{/if}
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="" title="学科" class="ft">学科</a>
+					</li>
+
+					{volist name="paper_class1" id="vo"  key="k"}
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+					</li>
+					{/volist}
+
+				</ul>
+			</div>
+			<!-- 状态 -->
+
+
+
+			<div id="paperStatus" class="selt-box  " style="width: 50px;">
+				<input type="text" name="paperStatus"  value="{$search_datas.status}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+
+
+				{if condition="($search_datas.status == 2)"}
+				<span class="selt-txt ft" title="进行中">进行中</span>
+				{elseif condition="($search_datas.status == 3)"/}
+				<span class="selt-txt ft" title="已结束">已结束</span>
+				{elseif condition="($search_datas.status == 1)"/}
+				<span class="selt-txt ft" title="未开始">未开始</span>
+				{else /}
+				<span class="selt-txt ft" title="状态">状态</span>
+				{/if}
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="" title="状态" class="ft">状态</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="2" title="进行中">进行中</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="3" title="已结束">已结束</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="1" title="未开始">未开始</a>
+					</li>
+				</ul>
+			</div>
+
+			<a id="paperTestSearch" onclick = "paperSearch(this)" href="javascript:void(0);" class="btn btn-s l">搜索</a>
+			<a id="exportPaperTestExcel" href="/ots/papertest/exportPaperTest" class="btn btn-s r" onclick="otsPaperTest.exportPaperTest()">导出excel</a>
+			</form>
+		</div>
+		<!-- 数据列表 -->
+		<div id="paperTestData">	<table border="0" cellspacing="0" cellpadding="0" class="rptbl1">
+			<tbody>
+			<tr>
+				<th width="35%">测评名称</th>
+				<th width="15%">发布时间</th>
+				<th width="10%">学科</th>
+				<th width="10%">学段</th>
+				<th width="10%">状态</th>
+				<th width="10%">参考人数</th>
+				<th width="10%">测评详情</th>
+			</tr>
+
+			{volist name="evaluate_papers" id="vv"  key="kk"}
+			<tr>
+				<td title="{$vv.paper_name}">{$vv.paper_name}</td>
+				<td>{$vv.edit_time}</td>
+				<td>{$vv.xueke_name}</td>
+				<td>{$vv.xueduan_name}</td>
+				<td>{$vv.type_status}</td>
+				<td><font class="afont">{$vv.p_num}</font></td>
+				<td>
+					<a title="测评详情" href="javascript:void(0);" style="margin-right:5px" class="hd-edb" onclick="otsPaper.initDetail({$vv.id})"><i class="iconfont"></i></a>
+				</td>
+			</tr>
+			{/volist}
+
+			</tbody>
+		</table>
+
+			<ul class="pagination tc">
+
+
+				<li class="total">共有{$count}条</li>
+
+				{$str}
+
+
+			</ul>
+
+		</div>
+		<input type="hidden" id="paperType" name="paperType" value="XKCPXA">
+		<input type="hidden" id="pageNo" name="pageNo" value="1">
+	</div>
+
+
+
+
+
+
+
+
+
+

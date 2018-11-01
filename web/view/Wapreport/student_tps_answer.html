@@ -1,0 +1,424 @@
+<html data-dpr="1" class = "geng" style="font-size: 36px;"><head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+    <link href="/public/static/tps/css/report/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/style.css?v=201805311740" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/extraEditor.css" rel="stylesheet" type="text/css"/>
+
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/static/tps/js/iscroll.js?v=201805311740"></script>
+
+
+    <title>看演示——复制副本</title>
+</head>
+<body style="font-size: 12px;">
+<div style="margin: 0 auto; width: 0px; height: 0px; overflow: hidden;">
+    <img src="/gwots/static/skin/weixin/otstest/img/ws.jpg" width="700">
+</div>
+<div class="wx-tests">
+    <div class="wx-top">
+        <div class="wx-sub">
+            <div class="wx-sub">
+                <div class="order">
+                    <span id="subjectIndex">{$page}</span>/{$num}
+                </div>
+            </div>
+        </div>
+        <div class="wx-title" style="visibility:hidden;margin:0 0.27rem;">
+            <h2 id="partName">单选题</h2>
+        </div>
+    </div>
+    <div class="wx-scl" id="paperContainer" style="height: 543px; overflow-y: hidden;">
+
+        {volist name="paper_question" id="vo"  key="k"}
+        {if condition="($vo.question_type == 1)"}
+
+        <div class="wx-test page{$k} subjectContainer{$k} putong" type="1" id="subjectContainer" style="display:none;height: 543px; overflow-y: hidden;display:none;" >
+            <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                <div class="wx-question"><p>{$vo.question_title}</p>
+                </div>
+                <ul class="wx-opts rdo">
+
+                    {volist name="vo['contents']" id="co"  key="ck"}
+
+
+                    {if condition="($vo.question_answer_shuzi == $ck)"}
+                    <li class="ok">
+                    {elseif condition="($vo.answer_isok == 2)"}
+
+                      {if condition="($vo.student_question_answer_shuzi == $ck)"}
+                        <li class="error">
+                      {else}
+                        <li>
+                      {/if}
+
+                    {else}
+                    <li>
+                    {/if}
+
+
+                        <div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div>
+                        <div class="wx-ocont"><p>{$co}</p></div>
+                    </li>
+                    {/volist}
+
+                </ul>
+
+                {if condition="($vo.answer_isok == 3)"}
+                <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题未作答</span>
+                {elseif condition="($vo.answer_isok == 1)"}
+                <span style="margin-left:0.27rem;color:#1dbabc;" class="undoMsg">试题作答正确</span>
+                {elseif condition="($vo.answer_isok == 2)"}
+                <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题作答错误</span>
+                {/if}
+
+                <div class="wx-parse">
+                    <div class="wx-ptit">试题解析</div>
+                    <div class="wx-pbox">
+                        暂无解析
+                    </div>
+                </div>
+            </div>
+            <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;">
+                <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 535px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+            </div>
+        </div>
+
+        {elseif condition="($vo.question_type == 2)"}
+        <div class="wx-test page{$k} subjectContainer{$k} putong" type="1"  id="subjectContainer" style="height: 566px; overflow-y: hidden;display:none;">
+            <div class="wx-radio" style="padding:0rem 0rem 0.5rem 0rem;transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                <div class="wx-question" style="overflow-y: auto;"><p>{$vo.question_title}</p></div>
+            </div>
+
+            {if condition="($vo.answer_isok == 3)"}
+            <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题未作答</span>
+            {elseif condition="($vo.answer_isok == 1)"}
+            <span style="margin-left:0.27rem;color:#1dbabc;" class="undoMsg">试题作答正确</span>
+            {elseif condition="($vo.answer_isok == 2)"}
+            <span style="color: rgb(255, 190, 50); margin-left: 0.27rem;margin-top:50px;" class="doerrMsg">
+	            作答有误,<em class="subjectAnswer">{$vo.student_describe}</em>
+                </span>
+            {/if}
+
+            <div class="wx-parse">
+                <div class="wx-ptit">试题解析</div>
+                <div class="wx-pbox">
+                    暂无解析
+                </div>
+            </div>
+
+
+
+        </div>
+
+        {elseif condition="($vo.question_type == 3)"}
+
+        <div class="wx-test page{$k} subjectContainer{$k} putong" type="1" id="subjectContainer" style="height: 543px; overflow-y: hidden;display:none;" >
+            <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                <div class="wx-question"><p>{$vo.question_title}<span style="color:#02a4a6;">【多选题】</span></p></div>
+                <ul class="wx-opts rdo">
+
+                    {volist name="vo['pp']" id="co"  key="ck"}
+
+                    {if condition="($co.is_answer == 0)"}
+                    <li>
+                    {else /}
+                    <li class = "ok">
+                    {/if}
+                        <div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div>
+                        <div class="wx-ocont"><p>{$co.contents}</p></div>
+                    </li>
+                    {/volist}
+                </ul>
+
+                {if condition="($vo.answer_isok == 3)"}
+                <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题未作答</span>
+                {elseif condition="($vo.answer_isok == 1)"}
+                <span style="margin-left:0.27rem;color:#1dbabc;" class="undoMsg">试题作答正确</span>
+                {elseif condition="($vo.answer_isok == 2)"}
+                <span style="color: rgb(255, 190, 50); margin-left: 0.27rem;" class="doerrMsg">
+	            作答错误,正确答案<em class="subjectAnswer">{$vo.question_answer}</em>,您提交的答案<em class="userAnswer">{$vo.student_answer}</em>
+                </span>
+                {/if}
+
+                <div class="wx-parse">
+                    <div class="wx-ptit">试题解析</div>
+                    <div class="wx-pbox">
+                        暂无解析
+                    </div>
+                </div>
+            </div>
+            <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;">
+                <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 535px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+            </div>
+        </div>
+        {elseif condition="($vo.question_type == 4 || $vo.question_type == 5)"}
+
+        <div class="wx-test page{$k} teshu" type ="4" style = "display:none;" childcount = "{$vo.count}">
+            <div class="wx-mask" style="top: 237.5px;"></div>
+            <div class="wx-stem textContainer{$k}" id="textContainer" style="height: 266.5px;">
+                <div class="wx-passage" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);"><p>蓝天碧海间越过地平线，远离尘嚣，一路向东、向东……这次看似寻常的航海之旅其实绝不普通。它不仅深化了的新东方A Better You, A Bigger World (更好的你、更大的世界)新的教育理念，更开启了新东方"通识教育"的破冰之旅。新东方历经24年发展，已经历炼出自身独特的文化：从"绝望中寻找希望人生终将辉煌"，到"终身学习、全球视野、独立人格";从"You are better than you think"到"A Better You, A Bigger World"……不难看出，新东方的教育理念正从过去更多地关注个人的奋斗，向更多地关注个人与世界的关系倾斜。或者说，对新东方人而言，以提升一个人的整体素质和培养正确的人生观为重正成为一种教育自觉。(试题模板,双击可修改)</p></div>
+                <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;"><div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 229px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div></div></div>
+            <div class="wx-boundary"></div>
+            <div class="wx-optlist groupContainer{$k}" id="groupContainer" style="height: 266.5px;">
+                <div class="wx-box" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+
+                    {volist name="vo['children']" id="vvvo"  key="kkk"}
+                    <div class="wx-wrap xianshi xpage{$kkk}" xpage = {$kkk} style="{if condition="($kkk == 1)"} display: block; {else} display: none;{/if}">
+                        <div class="wx-question">
+                            <span class="wx-serial">{$vvvo.question_number}.</span>
+                            <div class="wx-qcont"><p>{$vvvo.question_title}</p></div>
+                        </div>
+                        <ul class="wx-opts rdo">
+
+                            {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
+
+                            {if condition="($vvvo.question_answer_shuzi == $kkkk)"}
+                            <li class="ok">
+                            {elseif condition="($vvvo.answer_isok == 2)"}
+
+                                {if condition="($vvvo.student_question_answer_shuzi == $kkkk)"}
+                                <li class="error">
+                                {else/}
+                                 <li>
+                                {/if}
+
+                            {else/}
+                             <li>
+                            {/if}
+                                <div class="wx-opt">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</div>
+                                <div class="wx-ocont"><p>{$vvvvo}</p></div>
+                            </li>
+                            {/volist}
+                        </ul>
+
+                        {if condition="($vvvo.answer_isok == 3)"}
+                        <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题未作答</span>
+                        {elseif condition="($vvvo.answer_isok == 1)"}
+                        <span style="margin-left:0.27rem;color:#1dbabc;" class="undoMsg">试题作答正确</span>
+                        {elseif condition="($vvvo.answer_isok == 2)"}
+                        <span style="margin-left:0.27rem;color:#ffbe32;" class="undoMsg">试题作答错误</span>
+                        {/if}
+
+                        <div class="wx-parse">
+                            <div class="wx-ptit">试题解析</div>
+                            <div class="wx-pbox">
+                                暂无解析
+                            </div>
+                        </div>
+                    </div>
+
+                    {/volist}
+
+                </div>
+                <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;"><div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 164px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div></div></div>
+
+        </div>
+        {/if}
+        {/volist}
+        <script>
+            $(function(){
+
+                var oH1=$(window).height()-$('.wx-top').height()-$('.wx-btns').height();
+                $('.wx-scl,.wx-test').css({height:oH1,overflowY:'hidden'});
+
+            });
+
+
+
+        </script>
+    </div>
+    <div class="wx-sub wx-btns">
+        <a id="prevBtn" class="wx-prev">上一题</a><a id="nextBtn" class="wx-next">下一题</a>
+    </div>
+</div>
+
+<div class="loadingmask" style="z-index: 35; display: none;"></div>
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+<script>
+    $(function() {
+        //初始化第一页显示
+        var width = $(window).width()/10;
+        $('.geng').css('font-size',width);
+        var type = {$type};
+        var page = {$page};
+        var xpage = {$xpage};
+        if(type == 4 || type == 5){
+
+
+            $('.page'+page).css('display', 'block');
+            $('.page'+page+' .wx-optlist .wx-box .wx-wrap').removeClass('xianshi ').css('display','none');
+            $('.page'+page+' .wx-optlist .wx-box .xpage'+xpage).addClass('xianshi ').css('display','block');
+            loadScrolls(page);
+
+        }else{
+
+            $('.page'+page).css('display', 'block');
+            loadScroll(page);
+        }
+
+        //初始化页面高度
+       // var oH1 = $(window).height()-$('.wx-top').height();
+        var oH2 = $(window).height()-$('.wx-top').height()-$('.wx-btns').height();
+        $('.putong').css({height:oH2,overflowY:'hidden'});
+        //完型填空和阅读理解
+        var oH1=$(window).height()-$('.wx-top').height()-$('.wx-btns').height()-$('.wx-boundary').height();
+        $('.wx-stem').css('height',oH1/2);
+        $('.wx-optlist').css('height',oH1/2);
+        $('.wx-mask').css('top',oH1/2-29);
+    })
+    var myScroll;
+    var myScrolll;
+    var myScrollll;
+    var allnum = {$num};
+    function loadScroll(nn){
+        myScroll = new IScroll('.subjectContainer'+nn, {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true
+        });
+
+
+    }
+
+    //完型填空和阅读理解
+    function loadScrolls(nn){
+        myScrolll = new IScroll('.groupContainer'+nn, {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+        });
+        myScrollll = new IScroll('.textContainer'+nn, {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+
+        });
+    }
+
+
+    //当前页数
+    var n = {$page};
+    //上一题
+    $('#prevBtn').click(function(){
+        if(n<2){
+            alert('已经是第一题了');
+        }else{
+            var types = $('.page' + n).attr('type');
+            var xpage = $('.page' +n+ ' .xianshi').attr('xpage');
+            var nn = n;
+            if(types ==4){
+
+                if(xpage != 1) {
+
+                    var xxpage = parseInt(xpage)-1;
+                    $('.page' + nn + ' .xpage'+xpage).removeClass('xianshi').css('display','none');
+                    $('.page' + nn + ' .xpage'+xxpage).addClass('xianshi').css('display','block');
+                    $('.page' + nn + ' .wx-optlist .wx-box').css('transform','translate(0px, 0px) translateZ(0px)');
+
+
+
+                }else{
+
+                    $('.page' + n).css('display', 'none');
+                    n = n - 1;
+                    $('.page' + n).css('display', 'block');
+                    $('#subjectIndex').text(n);
+
+                    $('#subjectIndex').text(n);
+                    if ($('.page' + n).attr('type') == 4) {
+                        loadScrolls(n);
+                    } else if ($('.page' + n).attr('type') == 1) {
+                        loadScroll(n);
+                    }
+                }
+
+            }else{
+
+                $('.page' + n).css('display', 'none');
+                n = n - 1;
+                $('.page' + n).css('display', 'block');
+                $('#subjectIndex').text(n);
+                if ($('.page' + n).attr('type') == 4) {
+                    loadScrolls(n);
+                } else if ($('.page' + n).attr('type') == 1) {
+                    loadScroll(n);
+                }
+            }
+
+        }
+    })
+
+    //下一题
+    $('#nextBtn').click(function(){
+        if(  n < allnum) {
+            var types = $('.page' + n).attr('type');
+            var childcount = $('.page'+n).attr('childcount');
+            var xpage = $('.page' +n+ ' .xianshi').attr('xpage');
+            var nn = n;
+            if(types ==4 ){
+
+                if(xpage == childcount){
+                    $('.page' + n).css('display', 'none');
+                    n = n + 1;
+                    $('.page' + n).css('display', 'block');
+
+                    $('.page' + nn + ' .xpage'+childcount).removeClass('xianshi').css('display', 'none');
+                    $('.page' + nn + ' .xpage1').addClass('xianshi').css('display','block');
+
+                    $('#subjectIndex').text(n);
+                    if ($('.page' + n).attr('type') == 4) {
+                        loadScrolls(n);
+                    } else if ($('.page' + n).attr('type') == 1) {
+                        loadScroll(n);
+                    }
+                }else{
+                    var xxpage = parseInt(xpage)+1;
+                    $('.page' + n + ' .xpage'+xpage).removeClass('xianshi').css('display','none');
+                    $('.page' + n + ' .xpage'+xxpage).addClass('xianshi').css('display','block');
+                    $('.page' + n + ' .wx-optlist .wx-box').css('transform','translate(0px, 0px) translateZ(0px)');
+                }
+
+
+            }else{
+                $('.page' + n).css('display', 'none');
+                n = n + 1;
+                $('.page' + n).css('display', 'block');
+                $('#subjectIndex').text(n);
+                if ($('.page' + n).attr('type') == 4) {
+                    loadScrolls(n);
+                } else if ($('.page' + n).attr('type') == 1) {
+                    loadScroll(n);
+                }
+
+
+
+            }
+
+
+        }else{
+
+            alert('已经是最后一题了');
+
+        }
+
+
+    })
+
+
+
+</script>

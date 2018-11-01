@@ -1,0 +1,63 @@
+
+
+
+{volist name = "appointment_info" id="vo"  key="k"}
+{if condition="($vo.question_type == 1)"}
+<a  id="img_1" href="cwtm_only?question_type=1&curPage={$curPage}&page={$k}&question_id={$vo.id}" class="wx-alink">
+    <div class="wx-radio">
+        <div class="wx-question"><p>{$vo.question_title}</p>
+        </div>
+        <ul class="wx-opts rdo">
+
+            {volist name = "vo.question_content" id="vvo"  key="ck"}
+            <li><div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div><div class="wx-ocont"><p>{$vvo}</p></div></li>
+            {/volist}
+        </ul>
+    </div>
+    <div class="wx-tag">
+        <span class="l-tag">错题</span>
+        <span class="r-time">2018-06-20</span>
+    </div>
+</a>
+{elseif condition="($vo.question_type == 2)"}
+<a id="img_1" href="cwtm_only?question_type=2&curPage={$curPage}&page={$k}&question_id={$vo.id}" class="wx-alink">
+    <div class="wx-radio">
+        <div class="wx-question"><p>{$vo.question_title3}</p>
+        </div>
+    </div>
+    <div class="wx-tag">
+        <span class="l-tag">错题</span>
+        <span class="r-time">2018-06-20</span>
+    </div>
+</a>
+{elseif condition="($vo.question_type == 3)"}
+<a id="img_1" href="cwtm_only?question_type=2&curPage={$curPage}&page={$k}&question_id={$vo.id}" class="wx-alink">
+    <div class="wx-radio">
+        <div class="wx-question"><p>{$vo.question_title}</p>
+        </div>
+        <ul class="wx-opts rdo">
+
+            {volist name = "vo.question_content" id="vvo"  key="ck"}
+            <li><div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div><div class="wx-ocont"><p>{$vvo}</p></div></li>
+            {/volist}
+
+
+        </ul>
+    </div>
+    <div class="wx-tag">
+        <span class="l-tag">错题</span>
+        <span class="r-time">2018-06-20</span>
+    </div>
+</a>
+{elseif condition="($vo.question_type == 4 || $vo.question_type == 5)"}
+<a id="img_1"  href="cwtm_only?question_type=2&curPage={$curPage}&page={$k}&question_id={$vo.id}" class="wx-alink">
+    <!-- 完形填空  -->
+    <div class="wx-passage para"><p>{$vo.question_title}</p></div>
+    <div class="wx-tag">
+        <span class="l-tag">错题</span>
+        <span class="l-tag">共{$vo.count}小题</span>
+        <span class="r-time">2018-06-20</span>
+    </div>
+</a>
+{/if}
+{/volist}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-animate){display:none !important;}ng\:form{display:block;}</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>定位考分数查询新东方平台</title>
+    <link rel="stylesheet" type="text/css" href="/public/static/css/test/ex.css">
+    <link rel="stylesheet" type="text/css" href="/public/static/css/test/cxb.css">
+    <link href="/public/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+</head>
+<body>
+
+<include file="Publichtml:header"/>
+	<div style="padding:0px;background-color: #e5e2e3" clas><img src="/public/static/images/test/345.jpg" class="img-responsive center-block"></div>
+<section class="container-fluid"  style="">
+	<section class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 50px;">
+		<div class="margin-top p-header" >
+			<span class='text-danger'>{$data.student_name}</span>同学，您好。
+			<span class="hidden-xs">欢迎使用定位考查分系统。</span>
+		</div>
+		<div class="visible-xs-block">
+			<table class="table margin-top table-bordered" style="font-size: 16px;" >
+				<tr>
+					<td class='cxb-black'>排名</td>
+					<td class='cxb-blue'>{$data.order}</td>
+				</tr>
+				<tr>
+					<td class='cxb-black'>年级</td>
+					<td class='cxb-blue'>{$data.grade}</td>
+				</tr>
+				<tr>
+					<td class='cxb-black'>语文</td>
+					<td class='cxb-blue'>{$data.chinese}</td>
+				</tr>
+
+				<tr>
+					<td class='cxb-black'>数学</td>
+					<td class='cxb-blue'>{$data.math}</td>
+				</tr>
+
+				<tr>
+					<td class='cxb-black'>英语</td>
+					<td class='cxb-blue'>{$data.english}</td>
+				</tr>
+
+				<tr>
+					<td class='cxb-black'>总分</td>
+					<td class='cxb-blue'>{$data.all}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<img src="/public/static/images/test/123.jpg" class="img-responsive center-block">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="text-center" >
+						扫一扫，关注武汉泡泡之家，<br/>了解更多2018年小学竞赛信息。
+					</td>
+				</tr>
+			</table>
+			<div>
+				<div class="" >
+					
+				</div>
+				<div class="col-xs-5">
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="hidden-xs">
+			<table class="table table-bordered">
+				<thead>
+					<th>排名</th>
+					<th>年级</th>
+					<th>语文</th>
+					<th>数学</th>
+					<th>英语</th>
+					<th>总分</th>
+				</thead>
+				<tr>
+					<td>{$data.order}</td>
+					<td>{$data.grade}</td>
+					<td>{$data.chinese}</td>
+					<td>{$data.math}</td>
+                    <td>{$data.english}</td>
+                    <td>{$data.all}</td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						<img style = "width:200px;height:200px;" src="/public/static/images/test/snj.jpg" class="img-responsive center-block">
+					</td>
+					
+				</tr>
+
+				<tr>
+					<td colspan="5" class="text-center" >
+						扫一扫，关注武汉泡泡之家,了解更多2018年小学竞赛信息。
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-offset-5 col-sm-2 col-xs-12 margin-top" style='padding:0px;'><a href="/index.php/web/Grade/sdwk" class="center-block btn btn-danger btn-block ">退出</a></div>
+	</section>
+</section>
+</body>
+</html>

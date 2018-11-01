@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>看演示</title>
+    <script>var ctx = '/gwots';</script>
+
+    <!-- 获取常量引用版本 -->
+
+    <!-- 开启使用CDN -->
+
+    <link href="/public/static/tps/css/jg_iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/jg_style.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<div class="header">
+    <div class="w1000 cf">
+        <a href="#" class="t-logo">
+            <img src="/public/static/tps/img/xdf-1.jpg" alt="新东方" />
+        </a>
+        <div class="t-cities accessType">
+        </div>
+        <div class="t-log accessType">
+            <span class="user l">欢迎,2323132</span>
+            <a href="/gwots/otstest/paper/userindex" class="btn btn-s  ml5">查看诊断历史</a>
+            <a href="/gwots/otstest/passport/logout" class="btn btn-e r">退出</a>
+        </div>
+    </div>		</div>
+<div class="w1000 cf">
+    <div class="crump">
+        <a href="/gwots/otstest/home/index">首页</a><i class="iconfont">&gt;</i>
+        看演示
+    </div>
+    <div class="wl">
+        <div class="level">
+            <div class="level-line">
+                <div class="level-n">你的等级<span>{$student_report.dengji}</span></div>
+            </div>
+            <div class="level-step">
+                <div class="model p{$student_report.dengji}"></div>
+                <div class="ruler"></div>
+
+                <ul class="steps">
+                    <li class="st-1"><span>1</span></li>
+                    <li class="st-2"><span>2</span></li>
+                    <li class="st-3"><span>3</span></li>
+                    <li class="st-4"><span>4</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="analysis">
+            <div class="serial">
+                <span></span>结果分析
+            </div>
+            <div class="tester">
+                亲爱的<span class="cr">{$student_report.student_name}</span>同学:
+            </div>
+            <p class="para">你于 <span class="cr">2018年04月08日 13时11分</span>参加新东方 <span class="cr">看演示</span>，
+                你的试卷总正确率是 <span class="cr">66.67%</span>，
+                用时<span class="cr">2分44秒</span>，
+                以下是对诊断情况的详细分析。</p>
+            <p class="para">你的<span class="cr">数学</span>
+                学科能力位处<span class="cr">等级{$student_report.dengji}</span>，{$student_report.res_desc}。</p>
+            <div class="cf">
+                <div class="w380 l" style="margin:0 auto;">
+                    <table border="0" cellspacing="0" cellpadding="0" class="tbl">
+                        <tr>
+                            <th>知识点</th>
+                            <th>正确题目/总题目</th>
+                            <th>掌握度</th>
+                        </tr>
+
+                        {volist name="point_array" id="vo"  key="k" }
+                        <tr>
+                            <td title="{$vo.point_name}">{$vo.point_name}</td>
+                            <td>{$vo.point_num}/{$vo.question_all}</td>
+                            <td>{$vo.point_zq}%</td>
+                        </tr>
+                        {/volist}
+
+                    </table>
+                </div>
+                <div class="w380 r" id="imgRadarMapId" style="display:none;width:345px;height:270px;">
+                    <img id="radarMapImgId" src="" style="width:100%;height:100%"/>
+                </div>
+                <div id="radarMapId" class="w380 r" style="display:none;width:345px;height:270px;"></div>
+            </div>
+            <a href="/index.php/index/tps/report_answer_detail?appointment_id={$appointment_id}"   target="_blank"  id="checkAnswer" class="btn btn-s">查看答案</a>
+        </div>
+        <div class="analysis">
+            <div class="serial">
+                <span></span>单项分析
+            </div>
+
+
+
+            {volist name="point_array" id="vo"  key="k" }
+            <div class="key-points cf">
+                <div class="key-tit">{$vo.point_name}</div>
+                <div class="key-prg">
+                    <div class="percents pc1">
+                        <h3><span class="p-n">题目比重</span><span class="pcr">{$vo.point_bz}%</span></h3>
+                        <div class="po-bar"><div class="pi-bar" style="width: 50.0%;"></div></div>
+                    </div>
+                    <div class="percents pc2">
+                        <h3><span class="p-n">答题正确率</span><span class="pcr">{$vo.point_zq}%</span></h3>
+                        <div class="po-bar"><div class="pi-bar" style="width: 66.67%;"></div></div>
+                    </div>
+                    <div class="percents pc3">
+                        <h3><span class="p-n">掌握程度</span><span class="pcr"></span></h3>
+
+                        <span class='p-cir {if condition="($vo.point_dengji == 5)"}  cr {/if} '><b><i>不足</i></b></span>
+                        <span class='p-cir {if condition="($vo.point_dengji == 4)"}  cr {/if}'><b><i>了解</i></b></span>
+                        <span class='p-cir {if condition="($vo.point_dengji == 3)"}  cr {/if}'><b><i>熟悉</i></b></span>
+                        <span class='p-cir {if condition="($vo.point_dengji == 2)"}  cr {/if}'><b><i>掌握</i></b></span>
+                        <span class='p-cir {if condition="($vo.point_dengji == 1)"}  cr {/if}'><b><i>精通</i></b></span>
+                    </div>
+                </div>
+                <div class="result-analysis">
+                    <h3>结果分析</h3>
+                    <p class="para">{$vo.dx_desc}。</p>
+                </div>
+            </div>
+            {/volist}
+
+        </div>
+        <div class="analysis">
+            <div class="serial">
+                <span></span>总结
+            </div>
+            <p class="para">
+               {$student_report.zongji}
+            </p>
+        </div>
+        <div class="analysis cf">
+            <div class="serial">
+                <span></span>推荐资讯
+            </div>
+
+            <div class="course">
+                <div class="hd-nothing">{$student_report.tuijian}</div>
+            </div>
+        </div>
+    </div>
+    <div class="wr">
+        <div class="more">
+            <h2>更多诊断</h2>
+            <!--<ul class="test-list">
+                <li>没有更多诊断内容</li>
+            </ul>-->
+        </div>
+        <div class="imgPub">
+            <img src="/public/static/tps/img/a1.jpg" alt="" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

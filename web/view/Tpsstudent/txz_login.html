@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head lang="en"><title>
+    新东方通行证登录
+</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="screen-orientation" content="portrait">
+    <!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+<form name="form1" method="post" action="" id="form1">
+    <!--nav begin-->
+    <div class="m-nav2" style="">
+        <h2>新东方通行证登录</h2>
+        <div class="m-nav2-back">
+            <a href="javascript:;" id="riaGoBack"><i></i></a>
+        </div>
+        <div class="m-nav2-action"></div>
+    </div>
+    <div class="m-nav2-extend" style="">&nbsp;</div>
+    <script type="text/javascript">
+
+        // 返回上一页
+        $("#riaGoBack").click(function (event) {
+            window.history.go(-1);
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        // 在微信中干掉导航
+        if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
+            $(".m-nav2,.m-nav2-extend").remove();
+        }
+    </script>
+    <!--nav end-->
+
+    <div class="p139-main">
+        <div class="p139-input-wrap">
+
+            <span id="txtUserIcon"></span><span class="p139-error-tip" id="txtUserTip"></span>
+
+            <div class="p139-input-group p139-input-bottom">
+                <input name="mail" type="text" maxlength="50" id="txtUser" class="p139-input" placeholder="请输入手机/邮箱">
+            </div>
+
+            <div class="p139-input-group p139-input-captcha">
+                <input name="permit_psd" type="password" maxlength="20" id="txtPwd" class="p139-input" placeholder="请输入通行证密码">
+            </div>
+
+           <!-- <div id="trVCode" class="p139-input-group p139-input-captcha p139-input-top" style="display: none;">
+                <input name="txtVCode" type="text" maxlength="5" id="txtVCode" class="p139-input" placeholder="请输入验证码" style="width:100px;">
+                <span class="captcha-img">
+                     <img id="Image1" class="x-vcode-img" onclick="this.src=this.src+'?'" title="看不清楚？换张图片" src="/index.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor:pointer;vertical-align:top;width:54px;height:32px;">
+                </span>
+            </div>-->
+
+        </div>
+        <div class="p139-btn-wrap">
+            <a class="p139-btn" id="btnLogin">登录</a>
+        </div>
+        <div class="p139-option">
+            <span class="p139-option-left" style="width:35%;"><a href="forgetPwd">忘记密码</a></span>
+            <span class="p139-option-right" style=" ;width:65%;"><a href="ls_login">老生登录</a>
+                     |  <a href="student_login">短信登录</a></span>
+        </div>
+
+        <div class="p139-btn2-wrap">
+            <a class="p139-btn2" href="register">新生注册</a>
+        </div>
+
+    </div>
+</form>
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+
+<script>
+
+    $('#btnLogin').click(function(){
+        var tel = $('#txtUser').val();
+        var txtPwd = $('#txtPwd').val();
+        if(tel == ''){
+            $('#txtUserTip').text('输入邮箱');
+            return false;
+        }
+        if(txtPwd == ''){
+            $('#txtUserTip').text('通行证密码不能为空');
+            return false;
+        }
+        var formdata = $('#form1').serialize();
+
+
+
+        formdata = formdata;
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tpsstudent/txz_login_post",
+            data:formdata ,
+            success: function (data) {
+                console.log(data);
+                if(data.error == 0){
+                    alert(data.error_info)
+                }else if(data.error == 1){
+                    window.location.href = '/index.php/web/Tpsstudentinfo/student_index';
+                }
+            }
+        });
+    })
+
+
+</script>

@@ -1,0 +1,127 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <title>
+    短信登录
+   </title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="screen-orientation" content="portrait">
+    <!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+
+
+
+</head>
+
+
+<body>
+<form name="form1" method="post" action="/index.php/web/Tpsstudent/login_post" id="form1">
+
+    <!--nav begin-->
+    <div class="m-nav2" style="">
+        <h2>短信登录</h2>
+        <div class="m-nav2-back">
+            <a href="javascript:;" id="riaGoBack"><i></i></a>
+        </div>
+        <div class="m-nav2-action"></div>
+    </div>
+    <div class="m-nav2-extend" style="">&nbsp;</div>
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+        // 返回上一页
+        $("#riaGoBack").click(function (event) {
+            window.history.go(-1);
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        // 在微信中干掉导航
+        if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
+            $(".m-nav2,.m-nav2-extend").remove();
+        }
+    </script>
+    <!--nav end-->
+
+    <div class="p139-main">
+
+        <div class="p139-input-wrap">
+            <span id="txtUserIcon"></span>
+            <span class="p139-error-tip" id="txtUserTip"></span>
+            <div class="p139-input-group p139-input-bottom">
+                <input name="tel" type="text" maxlength="11" id="tel" class="p139-input" placeholder="请输入预约时的手机号">
+                <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$evaluate_paper_id}" />
+            </div>
+
+            <div class="p139-input-group p139-input-bottom">
+                <input name="tel" type="text" maxlength="11" id="txtStudentName" class="p139-input" placeholder="请输入预约时的姓名">
+            </div>
+
+        </div>
+
+
+
+        <div class="p139-btn-wrap">
+            <a class="p139-btn" id="btnLogin" onclick = "clickbtnNext();">登录</a>
+        </div>
+
+
+    </div>
+
+
+
+
+</form>
+</body>
+</html>
+
+<script>
+
+    function clickbtnNext(){
+        var tel = $('#tel').val();
+        if(tel == ''){
+            $('#txtUserTip').text('请输入电话号码');
+            return false;
+        }
+
+        var name = $('#txtStudentName').val();
+        var paper_id = $('#paper_id').val();
+        if(name == ''){
+            $('#txtUserTip').text('请输入姓名');
+        }
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tpsappointment/do_login_test",
+            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,},
+            success: function (data) {
+                if(data == -1){
+
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('该考试没有这个预约电话');
+
+                }else if(data == 0){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('电话或者姓名错误');
+
+                }else if(data == -2){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('考生已完成答题');
+
+                }else{
+                    window.location.href = "/index.php/web/Wapanswer/testpaper?evaluate_paper_id="+data;
+                }
+            },
+        });
+
+    }
+
+
+
+
+</script>

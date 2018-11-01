@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>试卷发布</title> <!-- 获取常量引用版本 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <link href="/public/static/tps/css/hdiconfont.css?v=201805101740" rel="stylesheet"  type="text/css" rel="stylesheet"/>
+        <link href="/public/static/tps/css/ppfullscreen.css?v=201805101740" rel="stylesheet" type="text/css" rel="stylesheet" /> 
+        
+        <link href="/public/static/tps/css/zTreeStyle.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="http://tps.xdf.cn/static/css/ppfullscreen.css?v=201805101740" rel="stylesheet" type="text/css" /> -->
+       <!--  <link href="/public/static/tps/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" /> -->
+
+        <link href="/public/static/tps/css/qtip.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body style="overflow-y: auto; position: relative;">
+    <!--头部-->
+    <div class="hd-section">
+        <div class="cf">
+            <h2 class="tit-1 l" id="backPaper" style="cursor:pointer;">
+                <a class="hd-back" href="/index.php/index/Tps/index"><i class="iconfont"></i>返回组卷中心</a>
+            </h2>
+            <a href="javascript:void(0);" class="btn-view r publishWin" onclick="fabu()">发布</a>
+        </div>
+    </div>
+    <!--中间-->
+    <div class="mid-section">
+    <form  id = "tuijian">
+        <div class="mid-wrap">
+            <!--左-->
+            <div class="mc-p mc-1 active">
+                <div class="navi">
+                    <a href="javascript:void(0);" class="active"><i class="ico ico-2"></i><em>测评信息</em></a>
+                </div>
+            </div>
+            <!--右-->
+            <div class="mc-p mc-7 bg active aaaaa">
+                <div class="hd-issue">
+                    <div class="test-titarea">
+                        <h3 class="htit3" title="{$tep.paper_name}">{$tep.paper_name}</h3>
+                        <!-- 调查问卷、多元测评不显示学段、年级、学科 -->
+                        <!-- 其他测评类型试卷读取模块通用常量 -->
+                        <span class="hd-submark">学段：{$tep.xueduan_name}</span>
+                        <span class="hd-submark">年级：{$tep.nianji_name}</span>
+                        <span class="hd-submark">学科：{$tep.xueke_name}</span>
+                    </div>
+                    <ul class="tx-info" style="width:100%">
+                        <li>
+                            <input type="checkbox" {if condition="($tep.cp_sc == 1)"}checked="checked"{/if} id="flagAllowedTestTimeCheckbox" class="input_valign" value="">测评时长:<input type="text" class="input_num" id="testTimeval" value="{$tep.cp_time}" {if condition="($tep.cp_sc == 0)"}disabled="disabled"{/if} >分钟  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;满分:&nbsp;{$tep.grade}分
+                        </li>
+                        <li>
+                            <input type="checkbox" {if condition="($tep.cp_sj == 1)"}checked="checked"{/if} id="testTimeCheckbox" class="input_valign" value="0">测评时间:
+                            <input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if}  id="publishBeginTime" class="input_num Wdate" value="{$tep.cp_begintime}"  style="width:180px;" >至<input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if} id="publishEndTime" class="input_num Wdate" value="{$tep.cp_begintime}"  style="width:180px;" >
+                        </li>
+                    </ul>
+
+                    <ul class="tx-info cr">
+                        <li>
+                            <input type="checkbox" {if condition="($tep.fb_sj == 1)"}checked="checked"{/if} id="publishTimeCheckbox" class="input_valign" value="0">发布报告时间
+                            <input  {if condition="($tep.fb_sj == 0)"}disabled="disabled"{/if} value="2018-05-23" type="date" id="publishTime" class="input_num Wdate"   style="width: 130px;">
+                        </li>
+                        <li><input type="checkbox" {if condition="($tep.stop == 1)"}checked="checked"{/if} id="flagPauseCheckbox" class="input_valign" value="">支持暂停</li>
+                        <li><input type="checkbox" {if condition="($tep.luanxu == 1)"}checked="checked"{/if} id="flagDisOrderCheckbox" class="input_valign" value="">试题乱序展示</li>
+                    </ul>
+
+                    <ul class="tx-info cr">
+                        <li><input type="checkbox" {if condition="($tep.tuijian_kc == 1)"}checked="checked"{/if}   id="pushCourseCheckbox" class="input_valign" value="0">推荐课程</li>
+
+                        <li class="pustoption" style="display: none;">
+                            <input type="checkbox" id="flagPushWhiteListCheckbox" class="input_valign" value="">分层资格推送
+                        </li>
+                        <li class="pustoption" style="display: none;">
+                            <input type="checkbox" id="flagCheckWrcCheckbox" class="input_valign" value="">检查万人测
+                            <input type="text" id="checkMatchID" class="input_txt" value="输入活动编号" style="width: 300px;">
+                        </li>
+                    </ul>
+
+                    <!-- 多元测评、教师测评不需设置分数线及自定义话术 -->
+                    <div id="publishContentCourse" style="min-width:680px; min-height: auto; {if condition="($tep.tuijian_kc == 0)"}display:none;{/if} ">
+                    
+                        <div class="courseRec cf" style="overflow:visible;">
+                            <div class="set-section" id="section" style="width: 77%; display: none;">
+                                <span class="s-btn">
+                                    <a href="javascript:void(0);" class="btn btn-s y" style="margin-right:3px">确定</a>
+                                    <a href="javascript:void(0);" class="btn btn-e n">取消</a>
+                                </span>
+                                <input type="text" class="input_num" style="margin-left:15px" id="minScore">至<input type="text" class="input_num" style="margin-left:15px" id="maxScore">分
+                                级次:
+                                <div id="scoreLevel" class="selt-box  " style="width: 100px;float: right;margin-top:10px;background:#fff; margin-right: 270px;">
+                                    <input type="hidden" name="scoreLevel" valuename="基础" value="0" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+                                    <span class="selt-txt" title="基础" value="0">基础</span>
+
+                                    <i class="iconfont" id = "noneblock"></i>
+                                    <ul class="opt" style="display: none;">
+                                        <li>
+                                            <a href="javascript:void(0);" svalue="0" title="基础">基础</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" svalue="1" title="提高">提高</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" svalue="2" title="尖子">尖子</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" svalue="3" title="精英">精英</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h3>分数段设置</h3>
+                            <a href="javascript:void(0);" class="add-section" id="addSection"><i class="iconfont"></i></a>
+                        </div>
+
+                        <div class="section-tabs cf" id="setionTab" style="margin-top:15px">
+
+                            {volist name="tev" id = "ti" key="k"}
+                            <a href="javascript:void(0);" class="pcourseCla {if condition="($k == 1)"}active{/if} sim" id="pcourseId_0" courseno="0" zhi = "{$ti.id}">
+                                <span class="del-icn"><i class="iconfont"></i></span>
+                                 {$ti.minScore}-{$ti.maxScore}分 {$ti.dengji_name}
+                            <input type="hidden" name = "minScore[{$ti.id}]" value="{$ti.minScore}">
+                            <input type="hidden" name = "maxScore[{$ti.id}]" value="{$ti.maxScore}">
+                            <input type="hidden" name = "dengji_name[{$ti.id}]" value="{$ti.dengji_name}">
+                            <input type="hidden" name = "dengji[{$ti.id}]" value="{$ti.dengji}">
+                            </a>
+                            {/volist}
+                        </div>
+
+
+                        {volist name="tev" id = "ti" key="ki"}
+
+                        {if condition="($ki == 1)"}
+                        <div class="s-tab kk{$ti.id}" style="display: block;">
+                        {else} 
+                        <div class="s-tab kk{$ti.id}" style="display: none;">
+                        {/if}    
+                            {volist name="ti.tj_kcarray" id = "tii" key="kii"}
+                            <div style="margin-left: 20px; margin-top: 0px;" class = "shanchus">
+                                <h2 class="disCourseEditor m-recmd">
+                                    <span>课程名称：</span>
+                                    <input type="text" value = "{$tii}" name="kec[{$ti.id}][{$kii}]">
+                                    <span>课程编号：</span>
+                                    <input type="text" value = "{$ti['tj_kcbharray'][$kii-1]}" name="kcnum[{$ti.id}][{$kii}]">
+                                    <span>课程地址：</span>
+                                    <input type="text" value = "{$ti['tj_kcdzarray'][$kii-1]}" name="kcurl[{$ti.id}][{$kii}]">
+                                    <a href="javascript:void(0);" xx="{$ti.id}"  style="margin-top:0px;background-color:#DC143C;border: 1px solid #DC143C;" class="shancun btn btn-s">删除</a>
+                                    <span style="color:orange;margin-left:10px"></span>
+                                </h2>
+                            </div>
+                            {/volist}
+                        </div>
+                        {/volist}
+                    </div>
+                    <div id = "tianjiadiv" style="text-align: center;margin-top:15px; {if condition="($tep.tuijian_kc == 0)"}display:none;{/if}">
+                        <a href="javascript:void(0);"   style="margin-top:0px;" id = "tianjia" class="btn btn-s">添加</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    <!--底部-->
+    <div class="ft-section">
+        武汉新东方培训学校
+    </div>
+    <div id="cli_dialog_div"></div>
+    </body>
+</html>
+
+<script>
+    $(function(){
+
+        if($('#setionTab .pcourseCla').length == 0){
+            $('#tianjiadiv').css('display','none');
+        }
+
+    })
+   // var ss = 1;
+    var ssss= 200;//用于区分分数段推荐课程
+    var evaluate_paper_id= {$evaluate_paper_id};
+    var pp = {$first_id};//添加推荐项
+    $('.input_valign').change(function(){
+
+       if($(this).is(':checked')){
+           $(this).siblings().attr("disabled",false);
+       }else{
+           $(this).siblings().attr("disabled",true);
+       }
+
+    })
+
+    $('#pushCourseCheckbox').change(function(){
+
+        if($(this).is(':checked')){
+            $('#publishContentCourse').css('display','block');
+            if($('#setionTab .pcourseCla').length >0){
+                 $('#tianjiadiv').css('display','block');
+            }
+        }else{
+
+            $('#publishContentCourse').css('display','none');
+            $('#tianjiadiv').css('display','none');
+        }
+    })
+
+    $('#addSection').click(function(){
+        $('#section').css('display','block');
+    })
+
+    //添加分数段推荐课程
+    $('#publishContentCourse .courseRec .set-section .btn-s').click(function(){
+        var minScore = parseInt($('#minScore').val());
+        var maxScore = parseInt($('#maxScore').val());
+        if(minScore == '' || maxScore == '' ){
+            alert('分数不能为空！！！');return false;
+        }
+        if(minScore>maxScore){
+            alert('小分数值大于打分数值！！！');return false;
+        }
+
+        var dengji_name  = $('#scoreLevel .selt-txt').text();
+
+        var dengji  = $('#scoreLevel .selt-txt').attr('value');
+
+    
+
+        $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/tps/add_evaluate_tuijian",
+                data: {'minScore':minScore,'maxScore':maxScore,'dengji_name':dengji_name,'dengji':dengji,'evaluate_paper_id':evaluate_paper_id},
+                success: function (data) {
+                    if(data){
+                        pp = data//修改添加的地方
+                        var kc = '<div class="s-tab kk'+data+'">\n' +
+                            ' <div style="margin-left: 20px; margin-top: 0px;" class = "shanchus">\n' +
+                            '<h2 class="disCourseEditor m-recmd">\n' +
+                            '<span>推荐名称：</span>\n' +
+                            '<input type="text" name="kec['+data+'][1]">\n' +
+                            '<span>课程编号：</span>\n' +
+                            '<input type="text" name="kcnum['+data+'][1]">\n' +
+                            '<span>课程地址：</span>\n' +
+                            '<input type="text" name="kcurl['+data+'][1]">\n' +
+                            ' <a href="javascript:void(0);" style="margin-top:0px;background-color:#DC143C;border: 1px solid #DC143C;" style = "margin-top:0px;" class="shancun btn btn-s">删除</a>\n' +
+                            '<span style="color:orange;margin-left:10px"></span>\n' +
+                            '</h2>\n' +
+                            '</div>\n' +
+                            '</div>';
+
+                            $('#publishContentCourse').append(kc);
+                            $('#section').css('display','none');
+                            $('.section-tabs a').removeClass('active');
+                            var minScores = $('#minScore').val();
+                            var maxScores = $('#maxScore').val();
+                            var dengji_name  = $('#scoreLevel .selt-txt').text();
+                            var dengji  = $('#scoreLevel .selt-txt').attr('value');
+                            var sss= '';
+                            sss +='<a href="javascript:void(0);"  class="pcourseCla active" courseno="1" zhi = "'+data+'"> <span class="del-icn" ><i class="iconfont"></i></span>'+minScores+'-'+maxScores+'分 '+dengji_name+'\n' +
+                                '                            <input type="hidden" name = "minScore['+data+']" value="'+minScores+'">\n' +
+                                '                            <input type="hidden" name = "maxScore['+data+']" value="'+maxScores+'">\n' +
+                                '                            <input type="hidden" name = "dengji_name['+data+']" value="'+dengji_name+'">\n' +
+                                '                            <input type="hidden" name = "dengji['+data+']" value="'+dengji+'">\n' +
+                                '                            </a>';
+                            $('#setionTab').append(sss);
+                            $('#publishContentCourse .s-tab').css('display','none');
+                            $('#publishContentCourse .kk'+data).css('display','block');
+                            $('#tianjiadiv').css('display','block');
+                        $('#minScore').val('');
+                        $('#maxScore').val('');
+                        }else{
+                        alert('分数段分数不能重复设置');
+                        return false;
+                    }    
+                    }
+
+               
+         });
+    })
+
+    //添加课程信息
+    $('.aaaaa').on('click','#tianjia',function(){
+        ssss++;
+        var oo = '<div style="margin-left: 20px; margin-top: 0px;" class = "shanchus">\n' +
+            '                                <h2 class="disCourseEditor m-recmd">\n' +
+            '                                    <span>课程名称：</span>\n' +
+            '                                    <input type="text" name="kec['+pp+']['+ssss+']">\n' +
+            '                                    <span>课程编号：</span>\n' +
+            '                                    <input type="text" name="kcnum['+pp+']['+ssss+']">\n' +
+            '                                    <span>课程地址：</span>\n' +
+            '                                    <input type="text" name="kcurl['+pp+']['+ssss+']">\n' +
+            '                                        <a href="javascript:void(0);"  style="margin-top:0px;background-color:#DC143C;border: 1px solid #DC143C;" style = "margin-top:0px;" class="shancun btn btn-s">删除</a>\n' +
+            '                                    <span style="color:orange;margin-left:10px"></span>\n' +
+            '                                </h2>\n' +
+            '                            </div>'
+        $('.kk'+pp).append(oo);
+    });
+
+    $('#publishContentCourse .courseRec .set-section .btn-e').click(function(){
+        $('#section').css('display','none');
+    })
+
+    //级次等级显示
+    $('#noneblock').click(function(){
+        if($("#scoreLevel .opt").css("display")=='none'){
+            $("#scoreLevel .opt").css('display','block');
+        }else{
+            $("#scoreLevel .opt").css('display','none');
+        }
+
+    })
+
+    //级次隐藏
+    $('.opt li a').click(function(){
+        //console.log(1);
+        var title = $(this).attr('title');
+        var svalue = $(this).attr('svalue');
+        $('#scoreLevel .selt-txt').html(title).attr('value',svalue);
+        $("#scoreLevel .opt").css('display','none');
+    })
+
+
+    //删除分数段设置
+    $("#publishContentCourse").on('click','.del-icn',function(){
+
+
+        var zhi = $(this).parent('.pcourseCla').attr('zhi');
+        var kk = $(this);
+        kk.parent('.pcourseCla').remove();
+        $('#publishContentCourse .kk'+zhi).remove();
+        if($('#setionTab .pcourseCla').length ==0){
+            $('#tianjiadiv').css('display','none');
+            return false;
+        }
+        var  cunzai  = 0;
+        $('#publishContentCourse .s-tab').each(function(){
+            if($(this).hasClass('kk'+zhi)){
+                cunzai  = 1;
+                return false;
+            }
+        })
+
+        if(cunzai  ==1){
+
+            $('#publishContentCourse .kk'+zhi).css('display','block');
+            pp = zhi;
+        }else{
+
+            zhi = $('#setionTab').children(":first").attr('zhi');
+            $('#setionTab').children(":first").addClass('active');
+            $('#publishContentCourse .kk'+zhi).css('display','block');
+            pp = zhi;
+        }
+
+    })
+
+
+    //分数段显示
+    $('.section-tabs').on('click','a',function(){　　　　//动态事件绑定  为页面所有的dd添加一个事件 包括新增的节点
+        $('.section-tabs a').removeClass('active');
+        $(this).addClass('active');
+        var zhi = $(this).attr('zhi');
+
+        $('#publishContentCourse .s-tab').css('display','none');
+
+        $('#publishContentCourse .kk'+zhi).css('display','block');
+        pp = zhi;
+    });
+
+   //删除分数段下面的课程设置
+   $("#publishContentCourse").on('click','.shancun',function(){
+       var leng = $(this).parents(".s-tab").children('.shanchus').length;
+       if(leng < 2){
+           alert('不能在删除了！！！');
+       }else{
+           $(this).parents(".shanchus").remove();
+       }
+
+   })
+
+
+   //发布试卷
+   function fabu(){
+
+       //测评时长
+       var cp_sc = $('#flagAllowedTestTimeCheckbox').is(':checked');
+       var cp_time = parseInt($('#testTimeval').val());
+       (cp_sc == true) ? cp_time : cp_time=30;
+       //测评时间
+       var cp_sj = $('#testTimeCheckbox').is(':checked');
+       var publishBeginTime = '';
+       var publishEndTime = '';
+       if(cp_sj == true){
+           publishBeginTime = $('#publishBeginTime').val();
+           publishEndTime = $('#publishEndTime').val();
+           if(publishBeginTime == '' || publishEndTime == ''){
+               alert('请选择测评时间');
+               return false;
+           }
+           if(publishBeginTime>publishEndTime){
+               alert('测评开始时间不能大于截至时间');
+               return false;
+           }
+
+       }
+       //发布报告时间
+       var fb_sj = $('#publishTimeCheckbox').is(':checked');
+       var publishTime = '';
+       if(fb_sj == true){
+           publishTime = $('#publishTime').val();
+           if(publishTime == ''){
+               alert('请选择发布报告时间');
+               return false;
+           }
+       }
+
+       var forminfo = $("form").serialize();
+       //支持暂停
+       var zczt = $('#flagPauseCheckbox').is(':checked');
+       //试题乱序展示
+       var stlxzs = $('#flagDisOrderCheckbox').is(':checked');
+       //推荐课程
+       var tjkc = $('#pushCourseCheckbox').is(':checked');
+       forminfo = forminfo + '&zczt='+zczt+ '&stlxzs='+stlxzs+ '&tjkc='+tjkc+ '&fb_sj='+fb_sj+ '&publishTime='+publishTime+ '&cp_sj='+cp_sj+ '&publishBeginTime='+publishBeginTime+ '&publishEndTime='+publishEndTime+ '&cp_sc='+cp_sc+ '&cp_time='+cp_time+ '&evaluate_paper_id='+evaluate_paper_id;
+
+       $.ajax({
+           type: "get",
+           dataType: "json",
+           url: "/index.php/index/tps/add_evaluate_fabu",
+           /*data: {'evaluate_paper_id':evaluate_paper_id,'cp_sc':cp_sc,'cp_time':cp_time,'cp_sj':cp_sj,'publishBeginTime':publishBeginTime,'publishEndTime':publishEndTime,'fb_sj':fb_sj,'publishTime':publishTime,'zczt':zczt,'stlxzs':stlxzs,'tjkc':tjkc,forminfo},*/
+           data:forminfo,
+           success: function (data) {
+
+                if(data){
+                    alert('发布成功');
+                    window.location.href= "/index.php/index/Tps/index"
+                }
+
+
+           }
+       });
+   }
+
+</script>

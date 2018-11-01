@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-animate){display:none !important;}ng\:form{display:block;}</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>创新杯初赛分数查询新东方平台</title>
+    <link rel="stylesheet" type="text/css" href="/public/static/css/test/ex.css">
+    <link rel="stylesheet" type="text/css" href="/public/static/css/test/cxb.css">
+    <link href="/public/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+</head>
+<body>
+
+<include file="Publichtml:header"/>
+	<div style="padding:0px;background-color: #e5e2e3" clas><img src="/public/static/images/test/345.jpg" class="img-responsive center-block"></div>
+<section class="container-fluid"  style="">
+	<section class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 50px;">
+		<div class="margin-top p-header" >
+			<span class='text-danger'>{$data.student_name}</span>同学，您好。
+			<span class="hidden-xs">欢迎使用新希望杯查分系统。</span>
+		</div>
+		<div class="visible-xs-block">
+			<table class="table margin-top table-bordered" style="font-size: 16px;" >
+				<tr style="border-top: 1px solid #aaa">
+					<td class='cxb-black'>准考证号</td>
+					<td class='cxb-blue'>{$data.examid}</td>
+				</tr>
+				<tr>
+					<td class='cxb-black'>年级</td>
+					<td class='cxb-blue'>{$data.grade}</td>
+				</tr>
+				<tr>
+					<td class='cxb-black'>分数</td>
+					<td class='cxb-blue'>{$data.scored}</td>
+				</tr>
+				<tr>
+					<td class='cxb-black'>是否过线</td>
+					<td class='cxb-blue'>
+						<span  <?php if($data['rank'] == '过线'){echo  'class="text-danger" style="font-weight:bold"';}  ?>  >{$data.rank}</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<img src="/public/static/images/test/123.jpg" class="img-responsive center-block">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="text-center" >
+						扫一扫，关注武汉泡泡之家，<br/>了解更多2018年小学竞赛信息。
+					</td>
+				</tr>
+			</table>
+			<div>
+				<div class="" >
+					
+				</div>
+				<div class="col-xs-5">
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="hidden-xs">
+			<table class="table table-bordered">
+				<thead>
+					
+					
+					<th>准考证号</th>
+					<th>年级</th>
+					<th>分数</th>
+					<th>是否过线</th>
+				</thead>
+				<tr>
+					
+					<td>{$data.examid}</td>
+					<td>{$data.grade}</td>
+					<td>{$data.scored}</td>
+                    <td>{$data.rank}</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<img style = "width:200px;height:200px;" src="/public/static/images/test/123.jpg" class="img-responsive center-block">
+					</td>
+					
+				</tr>
+
+				<tr>
+					<td colspan="4" class="text-center" >
+						扫一扫，关注武汉泡泡之家,了解更多2018年小学竞赛信息。
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-offset-5 col-sm-2 col-xs-12 margin-top" style='padding:0px;'><a href="/index.php/web/Grade/cxb" class="center-block btn btn-danger btn-block ">退出</a></div>
+	</section>
+</section>
+</body>
+</html>

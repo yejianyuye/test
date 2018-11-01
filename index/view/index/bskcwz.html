@@ -1,0 +1,46 @@
+<div class="hd-data">
+    <div class="hd-tab crump cf">
+        <a href="javascript:void(0);" onclick="otsPaper.paper(this,4);">考场列表</a><i class="iconfont"></i><a href="{$to_url}" title="">{$kc_name}</a>
+    </div>
+    <div class="sifts cf">
+    </div>
+    <!-- 数据列表部分 -->
+    <div id="examRoomOrderDataList">
+        <table class="listab mpt" cellpadding="0" cellspacing="0">
+        <tbody></tbody>
+            <thead>
+                <tr>
+                    <th width="10%">座号</th>
+                    <th width="10%">座次号</th>
+                    <th width="15%">姓名</th>
+                    <th width="15%">手机号</th>
+                    <th width="30%">准考证号</th>
+                    <th width="20%">占用情况</th>
+                </tr>
+            </thead>
+        <tbody>
+
+
+        {volist name="kcwz" id="vv"  key="kk"}
+        <tr>
+            <td>{$vv.zuohao}</td>
+            <td>{$vv.zuocihao}</td>
+            <td>{$vv.name}</td>
+            <td>{$vv.tel}</td>
+            <td>{$vv.zhunkaonum}</td>
+            <td> {if condition="($vv.status == '0')"} 未占用 {else /} 已使用 {/if}</td>
+        </tr>
+        {/volist}
+
+        </tbody>
+    </table>
+
+        <ul class="pagination tc">
+            <li class="total">共有{$count}条</li>
+            {$str}
+        </ul>
+
+
+    </div>
+    <input type="hidden" id="pageNo" name="pageNo" value="1">
+</div>

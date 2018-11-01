@@ -1,0 +1,156 @@
+	<!-- 分tab页 未发布、发布-->
+	<div class="hd-tab cf">
+		<a href="javascript:void(0);" class="atab active">测评结果列表</a>
+	</div>
+
+	<!--  检索条件   -->
+	<div class="sifts cf">
+		<form id="gwcp_qform" onsubmit="return false;">
+			<input id="paperName" name = "paperName" type="text" value = "{$search_datas.paper_name}"  placeholder="试卷名称"  class="txt" style="color: #999;width:90px;">
+			<input id="userTel"   name = "userTel"   type="text" value = "{$search_datas.tel}"  placeholder="手机号"  class="txt ml5" style="color: #999;width: 80px;">
+			<input id="userName"  name = "userName"  type="text" value = "{$search_datas.student_name}" placeholder="学员姓名"  class="txt ml5" style="color: #999;width: 80px;">
+
+			<div id="paperStage" class="selt-box  " style="width: 50px;">
+				<input type="text" name="paperStage"  value="{$search_datas.xueduan}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+				{if condition="($search_datas.xueduan == '')"}
+				<span class="selt-txt ft" title="学段">学段</span>
+				{else /}
+				<span class="selt-txt ft" title="{$search_datas.xueduan_name}">{$search_datas.xueduan_name}</span>
+				{/if}
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);"  svalue="" title="学段" class="ft">学段</a>
+					</li>
+					{volist name="paper_class" id="vo"  key="k"}
+
+					<li onclick = "ss(this,2)">
+						<a href="javascript:void(0);"  svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+					</li>
+
+					{/volist}
+				</ul>
+			</div>
+
+			<div id="gwcpgrade" class="l">
+				<div id="paperGrade" class="selt-box  " style="width: 50px;">
+					<input type="text" name="paperGrade" value="{$search_datas.nianji}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+					{if condition="($search_datas.nianji == '')"}
+					<span class="selt-txt ft" id = "nianji1" title="年级" style="color: rgb(153, 153, 153);">年级</span>
+					{else /}
+					<span class="selt-txt ft" id = "nianji1" title="{$search_datas.nianji_name}" style="color: rgb(153, 153, 153);">{$search_datas.nianji_name}</span>
+					{/if}
+
+					<i class="iconfont" onclick = "tt(this)"></i>
+					<ul class="opt" id="nianji" style="display: none;">
+						{if condition="($search_datas.nianji_search != '')"}
+						{volist name="search_datas.nianji_search" id="vo"  key="k"}
+						<li onclick = "ss(this)">
+							<a href="javascript:void(0);" svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+						</li>
+						{/volist}
+						{/if}
+					</ul>
+				</div>
+			</div>
+
+
+
+			<div id="paperSubject" class="selt-box  " style="width: 50px;">
+				<input type="text" name="paperSubject" valuename="" value="" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+				{if condition="($search_datas.xueke == '')"}
+				<span class="selt-txt ft" title="学科">学科</span>
+				{else /}
+				<span class="selt-txt ft" title="{$search_datas.xueke_name}">{$search_datas.xueke_name}</span>
+				{/if}
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="" title="学科" class="ft">学科</a>
+					</li>
+
+					{volist name="paper_class1" id="vo"  key="k"}
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+					</li>
+					{/volist}
+				</ul>
+			</div>
+			<div id="datePicker1"></div>
+			<a id="paperSearch" onclick = "paperSearch(this)" href="javascript:void(0);" class="btn btn-s l">搜索</a>
+			<a id="exportExcelId" href="javascript:void(0);" class="btn btn-s l">导出</a>
+			<!-- 此同步功能修改为按试卷手动同步，为防止同步出错，此按钮先设置为不显示，作为一种预留补救措施 -->
+			<a id="sync" href="javascript:void(0);" class="btn btn-s l" onclick="reportList.syncOtsTdTestDetailStatistics();" style="display: none">数据同步</a>
+			<!-- 此功能用于更新excel数据，不开放显示 -->
+			<!-- <a href="javascript:void(0);" class="btn btn-s l" onclick="reportList.updateReportExcelData()">数据转化</a> -->
+		</form>
+	</div>
+
+	<!-- 数据导出 -->
+	<form id="exportExcelForm" name="exportExcelForm" action="/ots/report/exportExcel" method="post" target="_blank" style="display:none;">
+		<input type="hidden" id="form_schID" name="schID">
+		<input type="hidden" id="form_paperName" name="paperName">
+		<input type="hidden" id="form_userName" name="userName">
+		<input type="hidden" id="form_paperType" name="paperType">
+		<input type="hidden" id="form_paperStage" name="paperStage">
+		<input type="hidden" id="form_paperGrade" name="paperGrade" value="">
+		<input type="hidden" id="form_paperSubject" name="paperSubject">
+		<input type="hidden" id="form_startTime" name="startTime">
+		<input type="hidden" id="form_endTime" name="endTime">
+		<input type="hidden" id="form_exportType" name="exportType">
+	</form>
+	<!-- 数据列表部分 -->
+	<div id="dataList"><table border="0" cellspacing="0" cellpadding="0" class="rptbl1">
+		<tbody>
+		<tr>
+			<th width="9%">姓名</th>
+			<th width="17%">电话</th>
+			<th>测评名称</th>
+			<th width="6%">分数</th>
+			<th width="6%">学段</th>
+			<th width="6%">学科</th>
+			<th width="15%">测评时间</th>
+			<th width="7%">用时</th>
+			<th width="7%">测评报告</th>
+		</tr>
+
+
+		{volist name="evaluate_content" id="vv"  key="kk"}
+		<tr>
+			<td><span title="{$vv.student_name}">{$vv.student_name}</span></td>
+			<td>
+				<span>{$vv.tel}</span>
+			</td>
+			<td>
+				<span title="{$vv.paper_name}">{$vv.paper_name}</span>
+			</td>
+			<td>{$vv.student_grade}</td>
+			<td>{$vv.xueduan_name}</td>
+			<td>{$vv.xueke_name}</td>
+			<td>{$vv.tp_time}</td>
+			<td>{$vv.run_time}</td>
+			<td>
+				<a target="_blank" href="http://tps.xdf.cn/gwots/testprocess/control/step?testId=ADEF734D-93D5-43F2-B407-1B9B6897B63B&amp;clientType=pc&amp;moduleType=report&amp;ext=roleType@teacher" class="btn btn-ge"><i class="iconfont"></i></a>
+			</td>
+		</tr>
+		{/volist}
+
+
+		</tbody>
+	</table>
+
+		<ul class="pagination tc">
+			<li class="total">共有{$count}条</li>
+			{$str}
+		</ul>
+
+	</div>
+	<!-- 分页 -->
+	<input type="hidden" id="pageNo" name="pageNo" value="1">
+	<!-- 二维码 -->
+	<div id="qrcodeBox"></div>

@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>第三届新东方小学生综合能力测评</title>
+    <style>
+        body {
+            height:auto;
+            max-height:inherit;
+        }
+        #mask {
+            background: rgba(153, 153, 153,0) none repeat scroll 0 0 !important;
+            filter: Alpha(opacity=0);
+            background: #999;
+            text-align: center;
+            z-index: 10;
+            position: absolute;
+        }
+        #mask img {
+            display: inline-block;
+            position: relative;
+        }
+
+        .m-buttons button.active {
+            background-color: #fdac38;
+            color: #fff;
+        }
+        .m-buttons button {
+            border: 1px solid #fdac38;
+            border-radius: 3px;
+            color: #fdac38;
+            display: block;
+            font-size: 14px;
+            height: 46px;
+            line-height: 46px;
+            margin: 0 auto 10px;
+            text-align: center;
+            width: 330px;
+            cursor: pointer;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="w1000 cf">
+        <!-- 手机号+姓名形式查询，不显示LOGO -->
+        <!-- U2登录方式查看报告 -->
+        <a href="#" class="t-clogo" style="cursor:default;">
+            新东方考试预约
+        </a>
+        <div class="t-cities accessType">
+        </div>
+        <div class="t-log accessType">
+        </div>
+    </div>
+</div>
+<div class="w1000 cf">
+    <a href="/gwots/wrcweb/passport/logout" class="f-exit"></a>
+    <div class="crump">
+
+    </div>
+    <div class="wl">
+        <div class="g-wp">
+            <div class="m-form1">
+                <h2><span>{$appointment.student_name}</span>同学，您好！恭喜您预约成功！</h2>
+                <table border="0" cellspacing="0" cellpadding="0" class="tbl-1">
+                    <tr>
+                        <td class="bg">姓名</td>
+                        <td>{$appointment.student_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">电话号码</td>
+                        <td>{$appointment.tel}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">学员号</td>
+                        <td>{$appointment.studentNo}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">准考证号</td>
+                        <td>{$appointment.zhunkaonum}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">推荐老师</td>
+                        <td>{$appointment.teacher}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg">预约年级</td>
+                        <td>{$appointment.nianji}年级</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">预约校区</td>
+                        <td>{$appointment_info.dq_name} {$appointment_info.xq_name}</td>
+                    </tr>
+                    <!-- 需要分配考场座次的活动显示考场座次信息 -->
+                    <!-- 不分配考场座次，显示报名校区；分配考场座次，显示考试校区 -->
+                    <tr>
+                        <td class="bg">考场名</td>
+                        <td>{$appointment_info.kc_name}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg">考试时间</td>
+
+                        <td>{$appointment_info.ks_rq} {$appointment_info.ks_data}</td>
+                    </tr>
+
+
+                    <!-- 不需要分配考场座次的活动显示身份证号 -->
+
+                    <tr>
+                        <td class="bg">就读公立校</td>
+                        <td>{$appointment.school}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg">提示：</td>
+                        <td>
+                            <!--请妥善保存预约信息-->
+                            <span class="finish">请妥善保存预约信息</span>
+                        </td>
+                    </tr>
+
+
+                </table>
+                <div class="m-buttons">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wr">
+        <div class="imgPub">
+            <img src="/public/static/tps/img/a1.jpg" alt="" />
+            <img src="/public/static/tps/img/a2.jpg" alt="" />
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<div id="qrcode"></div>
+
+<script type="text/javascript" src="/public/static/erweima/jquery.qrcode.min.js"></script>
+
+<script>
+jQuery('#qrcode').qrcode({width: 200,height: 200,correctLevel:0,render: "table",text: "http://www.baidu.com"});
+</script>
+

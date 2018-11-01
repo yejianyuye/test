@@ -1,0 +1,1659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0113)https://www.wjx.cn/mysojump/questionnairemng/designnew.aspx?version=7&openType=redesign&curid=18876714&nqt=&osa=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>设计测试题目</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+
+    <meta name="robots" content="noindex">
+    <link href="/public/static/tps/css/NewDefault.css" rel="stylesheet" type="text/css">
+    <link id="linkBaseUrl" rel="stylesheet" type="text/css" href="/public/static/tps/css/q.css">
+    <link href="/public/static/tps/css/designnew.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <link href="/public/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/public/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- bootstrap弹框插件js以及css -->
+    <link href="/public/static/bootstrap-toastr/build/toastr.min.css" rel="stylesheet">
+    <script src="/public/static/bootstrap-toastr/build/toastr.min.js"></script>
+    <script type="text/javascript" src="/public/static/js/fuzhuang.js"></script>
+    <!--ueditor编辑器js以及css -->
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/ueditor.all.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+</head>
+<body style="background: #eeeeee; margin: 0px; padding: 0px;">
+<div id="ss-header">
+    <div id="divMenu" style="visibility: visible;">
+        <div style="display: none;"><a href="javascript:void(0);" ><span><strong>保存</strong></span></a>(<input
+                id="chkAutoSave" type="checkbox" checked="checked">自动保存)
+        </div>
+        <div style="margin-right: 25px;float:left;"><a href="javascript:void(0);" onclick = "submit({$evaluate_paper_id});" style="padding-left: 15px; padding-right: 15px;" class="sumitbutton" id="hrefFiQ">完成编辑</a></div>
+        <!--<div style="float:left;"><a href="https://www.wjx.cn/jq/18876714.aspx?wg=1" class="preview" target="_blank"><i class="design-icon design-preview"></i>预览</a></div>-->
+    </div>
+</div>
+
+<div style="margin: 0 auto; text-align: left; width: 1000px; position: relative;">
+    <div id="topnav" style="visibility: visible;">
+        <ul class="tabQTypet" id="divNormal" style="width: 996px;margin-bottom:0px;height:40px;">
+            <li ><a href="javascript:void(0);" onclick = "addnum();" ><i class="design-icon design-qtype design-radio"></i>添加试题考点</a></li>
+            <li style = "width:165px;"><a onclick = "single();" id="hrefChoice" href="javascript:void(0);" ><i class="design-icon design-qtype design-radio"></i>单选</a></li>
+            <li style = "width:165px;"><a onclick = "checkbox();" id="hrefChoice" href="javascript:void(0);"><i class="design-icon design-qtype design-check"></i>多选</a></li>
+            <li style = "width:165px;"><a href="javascript:void(0);"  onclick = "blanks();"><i class="design-icon design-qtype design-text"></i>填空</a></li>
+            <li style = "width:175px;" ><a href="javascript:void(0);"  onclick = "cloze_test();" ><i class="design-icon design-qtype design-juzhen"></i>完形填空</a></li>
+            <li style = "width:170px;"><a href="javascript:void(0);"  onclick = "reading();"><i class="design-icon design-qtype design-juzhen"></i>阅读理解</a></li>
+            <div style="clear: both;"></div>
+        </ul>
+        <div id="divCepingTip" style="display: none;">
+        </div>
+        <div style="position: absolute; left: -49px; top: 10px; cursor: pointer;" id="divNewTip" title="">
+            <img src="/public/static/tps/img/addxtpic.gif" alt="">
+        </div>
+    </div>
+
+    <div class="survey"
+         style="padding-bottom: 5px; margin: 0px 26px 0px 0px; overflow: auto; background: rgb(255, 255, 255); width: 1000px; position: relative; height: 601px;"
+         id="sur">
+        <div style="width: 840px; margin: 0 auto;">
+            <div id="question" class="surveycontent">
+
+
+                <div id = "tjstkd">
+
+                    {volist name="paper_point" id="vo"  key="k"}
+
+                    {if condition="($k == 1)"}
+                    <div tj="2" order="{$vo.id}" class="length sss{$vo.id}" onmouseover="backgd(this,1);" onmouseout="backgd(this,2,1);" onclick="backgd(this,3,{$vo.id});" style="float: left; border: 1px solid rgb(233, 233, 233); height: 75px; line-height: 15px; margin-top: 40px; width: 150px; margin-right: 10px; background: rgb(0, 186, 151);"><div style="padding-top:5px; float:right;height:20px;"><span><img onclick="backgd(this,4,{$vo.id});" kspx="{$vo.point_order}" kdmc="{$vo.point_title}" spfs="{$vo.point_grade}" src="/public/static/tps/img/02.png"></span><span><img onclick="backgd(this,5,{$vo.id});" src="/public/static/tps/img/03.png"></span></div><div style="float: right; width: 150px; font-size: 14px; padding: 0px 5px; text-align: center; color: rgb(255, 255, 255);"><p><span class="subjectScore kdmc">{$vo.point_title}</span></p><p>共<span class="partScore">{$vo.all_grade}</span>分(每小题<span class="subjectScore spfs">{$vo.point_grade}</span>分)</p></div></div>
+                    {else /}
+                    <div tj="1" order="{$vo.id}" class="length sss{$vo.id}" onmouseover="backgd(this,1);" onmouseout="backgd(this,2,1);" onclick="backgd(this,3,{$vo.id});" style="float: left; border: 1px solid rgb(233, 233, 233); height: 75px; line-height: 15px; margin-top: 40px; width: 150px; margin-right: 10px;"><div style="padding-top:5px; float:right;height:20px;"><span><img onclick="backgd(this,4,{$vo.id});" kspx="{$vo.point_order}" kdmc="{$vo.point_title}" spfs="{$vo.point_grade}" src=""></span><span><img onclick="backgd(this,5,{$vo.id});"   src=""></span></div><div style="float: right; width: 150px; font-size: 14px; padding: 0px 5px; text-align: center; color: rgb(148, 148, 148);"><p><span class="subjectScore kdmc">{$vo.point_title}</span></p><p>共<span class="partScore">{$vo.all_grade}</span>分(每小题<span class="subjectScore spfs">{$vo.point_grade}</span>分)</p></div></div>
+                    {/if}
+                    {/volist}
+
+
+                </div>
+
+
+
+                <div id="divId" class="surveyhead div_question"
+                     style="border: 2px solid rgb(255, 255, 255); margin-top: 18px; width: 800px; cursor: pointer; padding-top: 2px; padding-bottom: 10px;"
+                     title="试题考点">
+                    <div id="pater_desc" class="surveydescription" style="cursor: pointer;margin-top: 3px;" ></div>
+                </div>
+
+                <div style="clear: both;"></div>
+                {volist name="paper_question" id="vo"  key="k"}
+                {volist name="vo" id="vvo"  key="kk"}
+                {if condition="($vvo.question_type == 1)"}
+                <div class="div_question div_question_mouseover ss{$vvo.id} ssss{$vvo.paper_point_id}   {if condition="($k == 1)"}  hass {else /} hide {/if}" tabindex="1" style="visibility: visible;" leix="1" tihao="{$vvo.question_number}">
+                    <div class="div_preview">
+                        <div class="div_title_question_all">
+                            <div class="div_topic_question">{$vvo.question_number}</div>
+                            <div class="div_title_question"><span class="question_title">{$vvo.question_title}</span></div>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                        <div class="div_table_radio_question">
+                            <div class="div_table_clear_top"></div>
+                            <ul>
+                                {volist name="vvo['contents']" id="co"  key="ck"}
+                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode[{$vvo.id}]" onclick = "answer({$vvo.id})" {if condition="($ck == $vvo.question_answer_shuzi )"} checked = "checked" {/if}  type="radio" {if condition="($ck == 1)"}value="A"{elseif condition="($ck == 2)"/}value="B"{elseif condition="($ck == 3)"/}value="C"{elseif condition="($ck == 4)"/}value="D"{elseif condition="($ck == 5)"/}value="E"{/if} ></label><label style="vertical-align:middle;padding-left:2px;">{if condition="($ck == 1)"}A.{elseif condition="($ck == 2)"/}B.{elseif condition="($ck == 3)"/}C.{elseif condition="($ck == 4)"/}D.{elseif condition="($ck == 5)"/}E.{/if}</label><label style="vertical-align:middle;padding-left:2px;">{$co}</label></li>
+                                {/volist}
+                                <div style="clear:both;"></div>
+                            </ul>
+                            <div class="div_table_clear_bottom"></div>
+                        </div>
+
+                        <div class="div_ins_question"></div>
+
+                        <div class="spanLeft" style="height: 18px;">
+                            <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+                        </div>
+
+                        <div class="spanRight" style="clear: none; visibility: visible;">
+                            <ul class="stuff">
+                                <li style="border: 1px solid #ff9900;">
+                                    <a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvo.id},1);">
+                                        <span class="design-icon design-edit"></span><span>编辑</span></a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);" onclick="TableObj.del({$vvo.id});">
+                                        <span class="design-icon design-delete"></span><span>删除</span></a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);" onclick="TableObj.moveUp({$vvo.id});" title="将此题上移">
+                                        <span class="design-icon design-up"></span><span>上移</span></a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);" onclick="TableObj.moveDown({$vvo.id});" title="将此题下移">
+                                        <span class="design-icon design-down"></span><span>下移</span></a>
+                                </li>
+
+                                <div style="clear:both;"></div>
+                            </ul>
+                        </div>
+                        <div style="clear: both;"></div>
+                     </div>
+                </div>
+
+            {elseif condition="($vvo.question_type == 2)"}
+            <div class="div_question hass div_question_mouseover  ss{$vvo.id} ssss{$vvo.paper_point_id}   {if condition="($k == 1)"}  hass {else /} hide {/if}"" tabindex="1" style="visibility: visible;" leix="2" tihao="{$vvo.question_number}">
+                <div class="div_preview">
+                    <div class="div_title_question_all">
+                        <div class="div_topic_question">{$vvo.question_number}</div>
+                        <div class="div_title_question">{$vvo.question_title}</div>
+                        <div style="clear: both;"></div>
+                    </div>
+                   <!-- <div class="ppp" style="display:none;">
+                        <div id="question{$vvo.id}">{$vvo.question_title}</div>
+                        <div style="clear: both;"></div>
+                    </div>-->
+                    <div class="div_ins_question"></div>
+                    <div class="spanLeft" style="height: 18px;">
+                        <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+                    </div>
+                     <div class="spanRight" style="clear: none; visibility: visible;">
+                        <ul class="stuff">
+                            <li style="border: 1px solid #ff9900;">
+                                <a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvo.id},2);">
+                                    <span class="design-icon design-edit"></span><span>编辑</span></a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" onclick="TableObj.del({$vvo.id});">
+                                    <span class="design-icon design-delete"></span><span>删除</span></a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" onclick="TableObj.moveUp({$vvo.id});" title="将此题上移">
+                                    <span class="design-icon design-up"></span><span>上移</span></a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" onclick="TableObj.moveDown({$vvo.id});" title="将此题下移">
+                                    <span class="design-icon design-down"></span><span>下移</span></a>
+                            </li>
+
+                            <div style="clear:both;"></div>
+                        </ul>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            {elseif condition="($vvo.question_type == 3)"}
+            <div class="div_question div_question_mouseover ss{$vvo.id} ssss{$vvo.paper_point_id}  {if condition="($k == 1)"}  hass {else /} hide {/if}" tabindex="1" style="visibility: visible;" leix="1" tihao="{$vvo.question_number}">
+            <div class="div_preview">
+                <div class="div_title_question_all">
+                    <div class="div_topic_question">{$vvo.question_number}</div>
+                    <div class="div_title_question"><span class="question_title">{$vvo.question_title}</span></div>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <div class="div_table_radio_question">
+                    <div class="div_table_clear_top"></div>
+                    <ul>
+                        {volist name="vvo['contents']" id="co"  key="ck"}
+
+
+                        <li style="width:99%;">
+                            <label style="vertical-align:middle;padding-left:2px;">
+                            <input   onclick = "answer_checkbox({$vvo.id})" name="wode[{$vvo.id}]" type="checkbox"  {volist name="vvo['question_answer_shuzi']" id="cco"  key="cck"}  {if condition="($ck== $cco)"}  checked = "checked" {/if}    {/volist}   {if condition="($ck == 1)"}value="A"{elseif condition="($ck == 2)"/}value="B"{elseif condition="($ck == 3)"/}value="C"{elseif condition="($ck == 4)"/}value="D"{elseif condition="($ck == 5)"/}value="E"{/if} >
+                            </label>
+                            <label style="vertical-align:middle;padding-left:2px;">{if condition="($ck == 1)"}A.{elseif condition="($ck == 2)"/}B.{elseif condition="($ck == 3)"/}C.{elseif condition="($ck == 4)"/}D.{elseif condition="($ck == 5)"/}E.{/if}</label><label style="vertical-align:middle;padding-left:2px;">{$co}</label>
+                        </li>
+                        {/volist}
+                        <div style="clear:both;"></div>
+                    </ul>
+                    <div class="div_table_clear_bottom"></div>
+                </div>
+
+                <div class="div_ins_question"></div>
+
+                <div class="spanLeft" style="height: 18px;">
+                    <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+                </div>
+
+                <div class="spanRight" style="clear: none; visibility: visible;">
+                    <ul class="stuff">
+                        <li style="border: 1px solid #ff9900;">
+                            <a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvo.id},3);">
+                                <span class="design-icon design-edit"></span><span>编辑</span></a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.del({$vvo.id});">
+                                <span class="design-icon design-delete"></span><span>删除</span></a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.moveUp({$vvo.id});" title="将此题上移">
+                                <span class="design-icon design-up"></span><span>上移</span></a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.moveDown({$vvo.id});" title="将此题下移">
+                                <span class="design-icon design-down"></span><span>下移</span></a>
+                        </li>
+
+                        <div style="clear:both;"></div>
+                    </ul>
+                </div>
+                <div style="clear: both;"></div>
+                </div>
+                </div>
+                {elseif condition="($vvo.question_type == 5)"/}
+
+                <div class="div_question div_question_mouseover  ss{$vvo.id} ssss{$vvo.paper_point_id} {if condition="($k == 1)"}  hass {else /} hide {/if}" id="wode" tabindex="1" style="visibility: visible;" leix="5" tihao="{$vvo.question_number}"><div class="div_preview"><div class="div_title_question_all">
+                    <div class="div_topic_question">{$vvo.question_number}</div>
+                    <div class="div_title_question"><span class="question_title class_content">{$vvo.question_title}</span></div>
+                    <div style="clear: both;"></div>
+                </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">
+                    <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+                </div><div class="spanRight" style="clear: none; visibility: visible;">
+                    <ul class="stuff">
+                        <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvo.id},5);">
+                            <span class="design-icon design-edit"></span><span>编辑</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.del({$vvo.id});">
+                                <span class="design-icon design-delete"></span><span>删除</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.moveUp({$vvo.id});" title="将此题上移">
+                                <span class="design-icon design-up"></span><span>上移</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="TableObj.moveDown({$vvo.id});" title="将此题下移">
+                                <span class="design-icon design-down"></span><span>下移</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="cloze_test_reading.addcloze({$vvo.id});" title="添加">
+                                <span class="design-icon design-down"></span><span>添加</span></a>
+                        </li>
+                        <div style="clear:both;"></div>
+                    </ul>
+                </div><div style="clear: both;"></div>
+                </div>
+            {volist name="vvo['children']" id="vvvo"  key="kkk"}
+
+            <div class="div_preview ss{$vvvo.id}" tihao="{$vvvo.question_number}"><div class="div_title_question_all">
+                <div class="div_topic_questions"></div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="div_table_radio_question">
+                <div class="div_table_clear_top"></div>
+                <ul>
+                    {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
+                    <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer({$vvvo.id})"  name="wode[{$vvvo.id}]" {if condition="($kkkk == $vvvo.question_answer_shuzi )"} checked = "checked" {/if} type="radio" {if condition="($kkkk== 1)"}value="A"{elseif condition="($kkkk == 2)"/}value="B"{elseif condition="($kkkk == 3)"/}value="C"{elseif condition="($kkkk == 4)"/}value="D"{elseif condition="($kkkk== 5)"/}value="E"{/if} ></label><label style="vertical-align:middle;padding-left:2px;">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</label><label style="vertical-align:middle;padding-left:2px;">{$vvvvo}</label></li>
+                    {/volist}
+
+                    <div style="clear:both;"></div>
+                </ul>
+                <div class="div_table_clear_bottom"></div>
+            </div>
+             <div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">
+                <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+            </div><div class="spanRight" style="clear: none; visibility: visible;">
+                <ul class="stuff">
+                    <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" class="editedit" onclick="cloze_test_reading.edit_cloze_test({$vvvo.id},7);">
+                        <span class="design-icon design-edit"></span><span>编辑</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="deldel" onclick="cloze_test_reading.del({$vvvo.id});">
+                            <span class="design-icon design-delete"></span><span>删除</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="upup" tihao="1" onclick="cloze_test_reading.moveUp({$vvvo.id});" title="将此题上移">
+                            <span class="design-icon design-up"></span><span>上移</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="downdown" tihao="1" onclick="cloze_test_reading.moveDown({$vvvo.id});" title="将此题下移">
+                            <span class="design-icon design-down"></span><span>下移</span></a>
+                    </li>
+                    <div style="clear:both;"></div>
+                </ul>
+            </div><div style="clear: both;"></div>
+            </div>
+            {/volist}
+              </div>
+        {elseif condition="($vvo.question_type == 4)"/}
+        <div class="div_question div_question_mouseover  ss{$vvo.id} ssss{$vvo.paper_point_id} {if condition="($k == 1)"}  hass {else /} hide {/if}" " id="wode" tabindex="1" style="visibility: visible;" leix="4" tihao="{$vvo.question_number}"><div class="div_preview"><div class="div_title_question_all">
+            <div class="div_topic_question">{$vvo.question_number}</div>
+            <div class="div_title_question"><span class="question_title">  {$vvo.question_title}    </span></div>
+            <div style="clear: both;"></div>
+        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">
+            <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+        </div><div class="spanRight" style="clear: none; visibility: visible;">
+            <ul class="stuff"><li style="border: 1px solid #ff9900;">
+                <a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvo.id},4);">
+                    <span class="design-icon design-edit"></span><span>编辑</span></a>
+            </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="TableObj.del({$vvo.id});">
+                        <span class="design-icon design-delete"></span><span>删除</span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="TableObj.moveUp({$vvo.id});" title="将此题上移">
+                        <span class="design-icon design-up"></span><span>上移</span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="TableObj.moveDown({$vvo.id});" title="将此题下移">
+                        <span class="design-icon design-down"></span><span>下移</span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="cloze_test_reading.addread({$vvo.id});" title="添加">
+                        <span class="design-icon design-down"></span><span>添加</span></a>
+                </li>
+                <div style="clear:both;"></div>
+            </ul>
+        </div><div style="clear: both;"></div>
+        </div>
+
+            {volist name="vvo['children']" id="vvvo"  key="kkk"}
+        <div class="div_preview ss{$vvvo.id}" tihao="{$vvvo.question_number}"><div class="div_title_question_all">
+            <div class="div_topic_questions"></div>
+            <div class="div_title_question"><span class="question_title">{$vvvo.question_title}</span></div>
+            <div style="clear: both;"></div>
+        </div><div class="div_table_radio_question">
+            <div class="div_table_clear_top"></div>
+            <ul>
+
+                {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
+                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer({$vvvo.id})" name="wode[{$vvvo.id}]" {if condition="($kkkk == $vvvo.question_answer_shuzi )"} checked = "checked" {/if}  type="radio" {if condition="($kkkk== 1)"}value="A"{elseif condition="($kkkk == 2)"/}value="B"{elseif condition="($kkkk == 3)"/}value="C"{elseif condition="($kkkk == 4)"/}value="D"{elseif condition="($kkkk== 5)"/}value="E"{/if}></label><label style="vertical-align:middle;padding-left:2px;">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</label><label style="vertical-align:middle;padding-left:2px;">{$vvvvo}</label></li>
+                {/volist}
+                <div style="clear:both;"></div>
+            </ul>
+            <div class="div_table_clear_bottom"></div>
+        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">
+            <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>
+        </div><div class="spanRight" style="clear: none; visibility: visible;">
+            <ul class="stuff">
+                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test({$vvvo.id},6);">
+                    <span class="design-icon design-edit"></span><span>编辑</span></a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);" class="deldel" onclick="cloze_test_reading.del({$vvvo.id});">
+                        <span class="design-icon design-delete"></span><span>删除</span></a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);" class="upup" onclick="cloze_test_reading.moveUp({$vvvo.id});" title="将此题上移">
+                        <span class="design-icon design-up"></span><span>上移</span></a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);" class="downdown" onclick="cloze_test_reading.moveDown({$vvvo.id});" title="将此题下移">
+                        <span class="design-icon design-down"></span><span>下移</span></a>
+                </li>
+                <div style="clear:both;"></div>
+            </ul>
+        </div><div style="clear: both;"></div>
+        </div>
+            {/volist}
+        </div>
+                {/if}
+                {/volist}
+                {/volist}
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="cli_dialog_div"></div>
+
+</div>
+
+<div class="modal fade" id="addnum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title">添加试题</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div class="form-group" >
+                    <label >考点名称:</label>
+                    <input type="text" class = "kdmc">
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group">
+                    <label >考试排序:</label>
+                    <input type="text" class = "kspx"  value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" >
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group" >
+                    <label>试题分数:</label>
+                    <input type="text" class = "spfs" value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)">
+                </div>
+                </p>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit"  class="btn btn-primary" onclick = "adddemo();">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editnum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title">编辑试题</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div class="form-group" >
+                    <label >考点名称:</label>
+                    <input type="text" class = "kdmc">
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group">
+                    <label >考试排序:</label>
+                    <input type="text" class = "kspx"  value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" >
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group" >
+                    <label>试题分数:</label>
+                    <input type="text" class = "spfs" value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)">
+                </div>
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit"  class="btn btn-primary" onclick = "editnum(this,5);">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"   >
+    <div class="modal-dialog" role="document" style = "width:1000px;" >
+        <div class="modal-content" >
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabell" >编辑试题</h4>
+            </div>
+            <div class="modal-body" style = "height:550px;" >
+                <script id="editor" type="text/plain" ></script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  data-dismiss="modal">关闭</button>
+                <button type="submit" id ="s_edit"  onclick = "edit_tm(1,1);"   class="btn btn-primary" >修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script >
+
+    var ue = UE.getEditor('editor');
+    ue.ready(function() {
+        ue.setHeight(400);
+    });
+    //class = "ss"  用来编辑题号  class = "sss"  用来标记题型  class = "ssss"  对应的是考点的order
+    //识别题号   每加一题就加1保证每题不重复
+    var evaluate_paper_id = {$evaluate_paper_id};
+    var  ssss = '';
+
+    toastr.options = {
+        closeButton: false,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-center",
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "2000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+
+    //试题考点的操作
+    function backgd(obj,type,order){
+        //划过
+        if(type == 1){
+            obj.style.background="#00ba97";
+            obj.lastChild.style.color = "#fff";
+            obj.firstChild.firstChild.getElementsByTagName("img")[0].setAttribute("src", "/public/static/tps/img/02.png");
+            obj.firstChild.lastChild.getElementsByTagName("img")[0].setAttribute("src", "/public/static/tps/img/03.png");
+        }
+        //划出
+        if(type == 2){
+            var tj = obj.getAttribute('tj');
+            if(tj == 1){
+                obj.style.background="";
+                obj.lastChild.style.color = "#949494";
+                obj.firstChild.firstChild.getElementsByTagName("img")[0].setAttribute("src", "");
+                obj.firstChild.lastChild.getElementsByTagName("img")[0].setAttribute("src", "");
+            }
+        }
+        //选中  tj==1  没有选中  tj == 2 选中
+        if(type == 3){
+            var tj = $('#tjstkd').children('div');
+            //除去之前选择的题号
+            $(tj).each(function(){
+                if(parseInt($(this).attr('tj')) == 2 && order!=$(this).attr('order')  ){
+                    $(this).attr('tj','1');
+                    $(this).css({"background":""});
+                    $(this).children("div:first-child").find('img').first().attr("src", "");
+                    $(this).children("div:first-child").find('img').last().attr("src", "");
+                    $(this).children("div:last-child").css({"color":"#949494"});
+                    return false;
+                }
+            });
+
+            $('#question .div_question_mouseover').addClass('hide').removeClass('hass');
+            var ssss_v  = obj.getAttribute('order');
+            $('.ssss'+ssss_v).removeClass('hide').addClass('hass');
+            obj.setAttribute('tj','2');
+        }
+
+        //编辑题目页面
+        if(type == 4){
+            $('#editnum .kdmc').val(obj.getAttribute('kdmc'));
+            $('#editnum .kspx').val(obj.getAttribute('kspx'));
+            $('#editnum .spfs').val(obj.getAttribute('spfs'));
+            $('#editnum .btn-primary').attr('onclick',"editnum("+order+");");
+            $('#editnum').modal();
+        }
+
+        //删除
+        if(type == 5){
+
+            Ewin.confirm({ message: "删除该考点后，该考点下面的题目全部删除，确认要删除吗？",title: "确认操作"}).on(function (e) {
+                if (!e) {
+                    return;
+                }
+
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "/index.php/index/Tps/del_point",
+                    data: {'evaluate_paper_id':evaluate_paper_id,'paper_point_id':order},
+                    success: function (data) {
+                        if(data['res'] == 1){
+                            toastr.success("删除成功!");
+                            $('.sss'+order).remove();
+                            $('.ssss'+order).remove();
+                            if($('#tjstkd .length').length !=0){
+                                $('.sss'+data['id']).attr('tj',2);
+                                $('.sss'+data['id']).css("background","#00ba97");
+                                $('.sss'+data['id']).children("div:last-child").css("color","#fff");
+                                $('.sss'+data['id']).children("div:first-child").children("span:first-child").find('img').attr("src","/public/static/tps/img/02.png");
+                                $('.sss'+data['id']).children("div:first-child").children("span:last-child").find('img').attr("src","/public/static/tps/img/03.png");
+                                $('.ssss'+data['id']).removeClass('hide').addClass('hass');
+                            }
+                        }else{
+                            toastr.error("删除失败!");
+                        }
+                    },
+                });
+
+            });
+        }
+    }
+
+    //添加考题
+    function addnum(){
+        $('#addnum .kdmc').val('');
+        $('#addnum .kspx').val(1);
+        $('#addnum .spfs').val(1);
+        $('#addnum').modal();
+    }
+
+    function adddemo(){
+
+        var kdmc = $('#addnum .kdmc').val();
+        var kspx = $('#addnum .kspx').val();
+        var spfs = $('#addnum .spfs').val();
+        if(spfs == '' || kspx == '' || kdmc == ''){
+            alert('数据必填');
+            return ;
+        }else{
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/add_point",
+                data: {'kdmc':kdmc,'kspx':kspx,'spfs':spfs,'evaluate_paper_id':evaluate_paper_id},
+                success: function (data) {
+                    if(data){
+
+                        var arr = '<div  tj = "1" order = "'+data.id+'" class = "sss'+data.id+'" onmouseover="backgd(this,1);" onmouseout="backgd(this,2,1);" onclick="backgd(this,3,'+data.id+');" style=" float:left;border: 1px solid #e9e9e9; height:75px; line-height:15px; margin-top:40px; width:150px; margin-right:10px"><div style="padding-top:5px; float:right;height:20px;">';
+                        arr += '<span><img onclick="backgd(this,4,'+data.id+');" kspx = "'+data.point_order+'"  kdmc = "'+data.point_title+'" spfs = "'+data.point_grade+'" src="" /></span><span><img onclick="backgd(this,5,'+data.id+');" src="" /></span></div><div style="float:right; width:150px;font-size:14px;padding:0 5px; text-align:center; color: #949494;"><p><span class="subjectScore kdmc">'+data.point_title+'</span></p><p>';
+                        arr += '共<span class="partScore">0</span>分(每小题<span class="subjectScore spfs">'+data.point_grade+'</span>分)</p></div></div>';
+                        $('#tjstkd').append(arr);
+                        $('#addnum').modal('hide');
+                        $('#editnum').modal('hide');
+                    }else{
+                        toastr.error("添加失败!");
+                    }
+                },
+            });
+
+        }
+    }
+    //编辑试题考点
+    function  editnum(order){
+        var kdmc = $('#editnum .kdmc').val();
+        var kspx = $('#editnum .kspx').val();
+        var spfs = $('#editnum .spfs').val();
+        if(spfs == '' || kspx == '' || kdmc == ''){
+            alert('数据必填');
+            return ;
+        }else{
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/edit_point",
+                data: {'kdmc':kdmc,'kspx':kspx,'spfs':spfs,'point_id':order},
+                success: function (data) {
+                    if(data){
+                        toastr.success("修改成功!");
+                        var div = $('.sss'+data['id']);
+                        div.find('.kdmc').text(data['point_title']);
+                        div.find('.partScore').text(data['all_grade']);
+                        div.find('.spfs').text(data['point_grade']);
+                        div.children("div:first-child").find('img').first().attr("kdmc", data.point_title);
+                        div.children("div:first-child").find('img').first().attr("kspx", data.point_order);
+                        div.children("div:first-child").find('img').first().attr("spfs", data.point_grade);
+                        $('#editnum').modal('hide');
+                    }else{
+                        toastr.error("修改失败!");
+                    }
+                },
+            });
+        }
+    }
+
+
+    //考点下面题目编辑
+    var TableObj = {
+        moveUp: function (id) {
+            var box = $('.ss'+id);
+            var btihao = parseInt(box.attr('tihao'));
+            if(btihao == 1){
+                return false;
+            }
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/question_edit",
+                data: {'type':1,'id':id},
+                success: function (data) {
+                    if(data['res'] == 1){
+                        var ptihao = btihao - 1;
+                        $(box.prevAll()).each(function(n,thiss){
+                            if($(thiss).attr('tihao') == ptihao && $(thiss).hasClass('hass')){
+                                box.attr('tihao',ptihao).find('.div_topic_question').text(ptihao);
+                                $(thiss).attr('tihao',btihao).find('.div_topic_question').text(btihao);
+                                $(thiss).insertAfter(box);
+                                return false;
+                            }
+                        });
+                    }else{
+                        toastr.error("上移失败!");
+                    }
+                },
+            });
+
+        },
+
+        moveDown: function (id) {
+            var box = $('.ss'+id);
+            console.log(123);
+            var btihao =parseInt(box.attr('tihao'));
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/question_edit",
+                data: {'type':2,'id':id},
+                success: function (data) {
+                    if(data['res'] == 1){
+                        var ntihao = btihao + 1;
+                        $(box.nextAll()).each(function(n,thiss){
+                            if($(thiss).attr('tihao') == ntihao && $(thiss).hasClass('hass')) {
+                                box.attr('tihao', ntihao).find('.div_topic_question').text(ntihao);
+                                $(thiss).attr('tihao', btihao).find('.div_topic_question').text(btihao);
+                                box.insertAfter($(thiss));
+                                return false;
+                            }
+                        })
+                    }else{
+                        toastr.error("无法下移!");
+                    }
+                },
+            });
+
+        },
+
+        //删除题目
+        del: function (id) {
+
+            Ewin.confirm({ message: "确认要删除吗？",title: "确认操作"}).on(function (e) {
+                if (!e) {
+                    return;
+                }
+
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "/index.php/index/Tps/question_edit",
+                    data: {'type':3,'id':id},
+                    success: function (data) {
+                        if(data['res'] == 1){
+                            toastr.success("删除成功!");
+                            var  div = $('.sss'+data['point_id']);
+                            div.find('.partScore').text(data['all_grade']);
+                            $("#question .ss"+id).remove();
+                            $("#question .hass").each(function(n){
+                                $(this).find('.div_topic_question').text(n+1);
+                                $(this).attr('tihao',n+1);
+                            })
+                        }else{
+                            toastr.error("删除失败!");
+                        }
+                    },
+                });
+            })
+        },
+    }
+
+    //判断是否具备添加条件
+
+    function  allowadd(){
+        var tj = $('#tjstkd').children('div');
+        var isok = 1;
+        $(tj).each(function(){
+            if(parseInt($(this).attr('tj')) == 2){
+                ssss = $(this).attr('order');
+                isok = 2;
+                return false;
+            }
+        });
+        return isok;
+    }
+
+    //单选模板
+    function single(){
+        //判断添加条件
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_paper_question",
+            data: {'paper_point_id':ssss,'evaluate_paper_id':evaluate_paper_id,'question_type':1,'question_number':length},
+            success: function (data) {
+                if(data){
+                    var arr = '<div class="div_question hass div_question_mouseover  ss'+data.id+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "1" tihao = "'+length+'"><div class="div_preview">';
+                    arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+                        '<div class="div_title_question"><span class = "question_title">新东方新的教育理念是什么</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+
+                    arr +='<div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')" name="wode['+data.id+']" type="radio" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')" name="wode['+data.id+']" type="radio" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')" name="wode['+data.id+']" type="radio" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')" name="wode['+data.id+']" type="radio" value="D"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div>';
+
+                    arr +='<div class="div_ins_question"></div>';
+                    arr +='<div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div>';
+                    arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);"  onclick="cloze_test_reading.edit_cloze_test('+data.id+',1);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div>';
+                    arr +='<div style="clear: both;"></div>\n' +
+                        '                    </div>\n' +
+                        '                </div>';
+                    //添加分数
+
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('#question').append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            },
+        });
+
+
+    }
+
+    //复选题
+    function  checkbox(){
+        //判断添加条件
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_paper_question",
+            data: {'paper_point_id':ssss,'evaluate_paper_id':evaluate_paper_id,'question_type':3,'question_number':length},
+            success: function (data) {
+                if(data){
+                    var arr = '<div class="div_question hass div_question_mouseover  ss'+data.id+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "3" tihao = "'+length+'"><div class="div_preview">';
+                    arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+                        '<div class="div_title_question"><span class = "question_title">新东方新的教育理念是什么</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+
+                    arr +='<div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer_checkbox('+data.id+')" name="wode['+data.id+']" type="checkbox" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer_checkbox('+data.id+')" name="wode['+data.id+']" type="checkbox" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer_checkbox('+data.id+')" name="wode['+data.id+']" type="checkbox" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer_checkbox('+data.id+')" name="wode['+data.id+']" type="checkbox" value="D"></label><label style="vertical-align:middle;padding-left:2px;">D.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div>';
+
+                    arr +='<div class="div_ins_question"></div>';
+                    arr +='<div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div>';
+                    arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);"  onclick="cloze_test_reading.edit_cloze_test('+data.id+',3);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div>';
+                    arr +='<div style="clear: both;"></div>\n' +
+                        '                    </div>\n' +
+                        '                </div>';
+                    //添加分数
+
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('#question').append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            },
+        });
+    }
+
+    //填空题
+    function blanks(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_paper_question",
+            data: {'paper_point_id':ssss,'evaluate_paper_id':evaluate_paper_id,'question_type':2,'question_number':length},
+            success: function (data) {
+                if(data){
+                    var arr = '<div class="div_question hass div_question_mouseover  ss'+data.id+' ssss'+ssss+'"   tabindex="1" style="visibility: visible;" leix = "2" tihao = "'+length+'"><div class="div_preview">';
+                    arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+                        '<div class="div_title_question">'+data.question_title+'</div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+
+                    arr +='<div class="div_ins_question"></div>';
+                    arr +='<div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div>';
+                    arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+                        '                                <a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.id+',2);" >\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div>';
+                    arr +='<div style="clear: both;"></div>\n' +
+                        '                    </div>\n' +
+                        '                </div>';
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('#question').append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            },
+        });
+    }
+
+    //阅读理解
+    function reading(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_paper_question",
+            data: {'paper_point_id':ssss,'evaluate_paper_id':evaluate_paper_id,'question_type':4,'question_number':length,'parent_id':0},
+            success: function (data) {
+                if(data){
+                    var arr = '<div class="div_question hass div_question_mouseover  ss'+data.id+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "4" tihao = "'+data.question_number+'"><div class="div_preview">';
+                    arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+                        '<div class="div_title_question"><span class = "question_title class_content">蓝天碧海间越过地平线，远离尘嚣，一路向东、向东……这次看似寻常的航海之旅其实绝不普通。它不仅深化了的新东方A Better You, A Bigger World (更好的你、更大的世界)新的教育理念，更开启了新东方"通识教育"的破冰之旅。新东方历经24年发展，已经历炼出自身独特的文化：从"绝望中寻找希望人生终将辉煌"，到"终身学习、全球视野、独立人格";从"You are better than you think"到"A Better You, A Bigger World"……不难看出，新东方的教育理念正从过去更多地关注个人的奋斗，向更多地关注个人与\n' +
+                        '&nbsp;&nbsp;世界的关系倾斜。或者说，对新东方人而言，以提升一个人的整体素质和培养正确的人生观为重正成为一种教育自觉。(试题模板,双击可修改)</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+
+                    arr +='<div class="div_ins_question"></div>';
+                    arr +='<div class="spanLeft" style="height: 18px;">\n' +
+                        '<div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '</div>';
+                    arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.id+',4);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);"  onclick="TableObj.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="cloze_test_reading.addread('+data.id+');" title="添加">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>添加</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div>';
+                    arr +='<div style="clear: both;"></div>\n' +
+                        '                    </div>\n'
+
+
+                    arr +=  '<div class="div_preview ss'+data.children.id+'" tihao = "1"><div class="div_title_question_all">\n' +
+                        '<div class="div_topic_questions"></div>\n' +
+                        '<div class="div_title_question"><span class="question_title">'+data.children.question_title+'</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+                    arr +='<div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="D"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div>';
+                    arr +='<div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.children.id+',6);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+data.children.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "upup" onclick="cloze_test_reading.moveUp('+data.children.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+data.children.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div><div style="clear: both;"></div>\n' +
+                        '                    </div>'
+                    arr +='</div>';
+
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('#question').append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            },
+        });
+    }
+
+    //完形填空
+    function cloze_test(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_paper_question",
+            data: {'paper_point_id':ssss,'evaluate_paper_id':evaluate_paper_id,'question_type':5,'question_number':length,'parent_id':0},
+            success: function (data) {
+                console.log(data);
+                if(data){
+                    var arr = '<div class="div_question hass div_question_mouseover  ss'+data.id+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "4" tihao = "'+data.question_number+'"><div class="div_preview">';
+                    arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+                        '<div class="div_title_question"><span class = "question_title class_content">蓝天碧海间越过地平线，远离尘嚣，一路向东、向东……这次看似寻常的航海之旅其实绝不普通。<span style="text-decoration: underline;"> &nbsp; &nbsp;1 &nbsp; &nbsp;&nbsp;</span>它不仅深化了的新东方<span style="text-decoration: underline;"> &nbsp; &nbsp;2 &nbsp; &nbsp;&nbsp;</span> (更好的你、更大的世界)新的教育理念;</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+
+                    arr +='<div class="div_ins_question"></div>';
+                    arr +='<div class="spanLeft" style="height: 18px;">\n' +
+                        '<div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '</div>';
+                    arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.id+',5);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);"  onclick="TableObj.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" onclick="cloze_test_reading.addcloze('+data.id+');" title="添加">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>添加</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div>';
+                    arr +='<div style="clear: both;"></div>\n' +
+                        '                    </div>\n'
+
+
+                    arr +=  '<div class="div_preview ss'+data.children.id+'"  tihao = "1"><div class="div_title_question_all">\n' +
+                        '<div class="div_topic_questions"></div>\n' +
+
+                        '<div style="clear: both;"></div>\n' +
+                        '</div>'
+                    arr +='<div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')"  name="wode['+data.children.id+']" type="radio" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.children.id+')" name="wode['+data.children.id+']" type="radio" value="D"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div>';
+                    arr +='<div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.children.id+',7);">\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+data.children.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "upup" onclick="cloze_test_reading.moveUp('+data.children.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+data.children.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div><div style="clear: both;"></div>\n' +
+                        '                    </div>'
+                    arr +='</div>';
+
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('#question').append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            },
+        });
+    }
+
+    var cloze_test_reading = {
+        edit_cloze_test: function (id,type) {
+            var box = $('.ss'+id);
+
+            if(type == 1 || type == 3 || type ==6){
+                var edit_title = box.find('.question_title').html();
+                ue.setContent(edit_title,false);
+                box.find('.div_table_radio_question li').each(function(nnn,thissss){
+                    var pp = $(thissss).children("label:last-child").html();
+                    ue.setContent(pp,true);
+                })
+            }else if(type == 2){
+                var edit_title = '';
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "/index.php/index/Tps/get_question",
+                    data: {'id':id},
+                    success: function (data) {
+                        if(data) {
+                             edit_title = data.question_title2;
+                             ue.setContent(edit_title,false);
+                        }
+                    }
+                });
+            }else if(type == 4 || type == 5){
+                var edit_title = box.find('.div_title_question').html();
+                ue.setContent(edit_title,false);
+            }else if(type == 7){
+                        if(type == 6) {
+                            var edit_title = box.find('.question_title').html();
+                            ue.setContent(edit_title, false);
+                        }
+                box.find('.div_table_radio_question li').each(function(nnn,thissss){
+                    var pp = $(thissss).children("label:last-child").html();
+                    if(nnn == 0){
+                        ue.setContent(pp,false);
+                    }else{
+                        ue.setContent(pp,true);
+                    }
+                })
+            }
+            $('#edit #s_edit').attr('onclick','edit_tm('+id+','+type+');');
+            $('#edit').modal();
+        },
+
+        del: function (id) {
+            Ewin.confirm({ message: "确认要删除吗？",title: "确认操作"}).on(function (e) {
+                if (!e) {
+                    return;
+                }
+
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "/index.php/index/Tps/question_edit",
+                    data: {'id':id,'type':3},
+                    success: function (data) {
+                        if(data['res'] == 1){
+                            toastr.success("删除成功!");
+                            var  div = $('.sss'+data['point_id']);
+                            div.find('.partScore').text(data['all_grade']);
+                            $("#question .ss"+id).remove();
+                            $("#question .ss"+id+" .div_preview").each(function(n,thisss){
+                                $(thisss).attr('tihao',n);
+                            })
+                        }else{
+                            toastr.error("删除失败!");
+                        }
+                    },
+                });
+
+            })
+        },
+
+        addread: function (id) {
+            add_reading(id);
+        },
+
+        addcloze: function (id) {
+            add_cloze(id);
+        },
+
+        moveUp: function (id) {
+            var box = $('.ss'+id);
+            var btihao = parseInt(box.attr('tihao'));
+            if(btihao == 1){
+                return false;
+            }
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/question_edit",
+                data: {'type':1,'id':id},
+                success: function (data) {
+                    if(data['res'] == 1){
+                        var ptihao = btihao - 1;
+                        $(box.prevAll()).each(function(n,thiss){
+                            if($(thiss).attr('tihao') == ptihao){
+                                box.attr('tihao',ptihao);
+                                $(thiss).attr('tihao',btihao);
+                                $(thiss).insertAfter(box);
+                                return false;
+                            }
+                        });
+                    }else{
+                        toastr.error("上移失败!");
+                    }
+                },
+            });
+
+        },
+
+        moveDown: function (id) {
+            var box = $('.ss'+id);
+            var btihao =parseInt(box.attr('tihao'));
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/index.php/index/Tps/question_edit",
+                data: {'type':2,'id':id},
+                success: function (data) {
+                    if(data['res'] == 1){
+                        var ntihao = btihao + 1;
+                        $(box.nextAll()).each(function(n,thiss){
+                            if($(thiss).attr('tihao') == ntihao) {
+                                box.attr('tihao', ntihao);
+                                $(thiss).attr('tihao', btihao);
+                                box.insertAfter($(thiss));
+                                return false;
+                            }
+                        })
+                    }else{
+                        toastr.error("上移失败!");
+                    }
+                },
+            });
+
+        },
+
+    }
+
+    function edit_tm(id,type){
+        var content = ue.getContent();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/edit_question",
+            data: {'content':content,'type':type,'id':id},
+            success: function (data) {
+            if(data) {
+                toastr.success("修改成功!");
+                if (type == 1 || type == 3 || type == 6) {
+                    var  str = xuanze(data.question_content,type,id,data.isok_answer);
+                    $('.ss' + id + ' .div_table_radio_question').html(str);
+                    $('.ss' + id + ' .question_title').html(data.question_title);
+                } else if (type == 2) {
+                    $('.ss' + id + ' .div_title_question').html(data.question_title);
+                } else if (type == 4 || type == 5) {
+                    $('.ss' + id + ' .class_content').html(data.question_title);
+                }else if(type == 7){
+                    var  str = xuanze(data.question_content,1,id,data.isok_answer);
+                    $('.ss' + id + ' .div_table_radio_question').html(str);
+                }
+            }
+            }
+        });
+       // return fales;
+        $('#edit').modal('hide');
+    }
+
+    //选择
+    function  xuanze(data,type,id,answer){
+        var str = '<div class="div_table_clear_top"></div><ul>';
+        var contentss = data.split("{#}");
+        for (var i = 0; i < contentss.length; i++) {
+            switch (i) {
+                case 0:
+                    var val_look = 'A';
+                    break;
+                case 1:
+                    var val_look = 'B';
+                    break;
+                case 2:
+                    var val_look = 'C';
+                    break;
+                case 3:
+                    var val_look = 'D';
+                    break;
+                case 4:
+                    var val_look = 'E';
+                    break;
+                case 5:
+                    var val_look = 'F';
+                    break;
+                case 6:
+                    var val_look = 'G';
+                    break;
+            }
+            var kk ='';
+            var ck = ' onclick="answer('+id+')" ';
+            if (type == 3) {
+                var ss = 'type="checkbox" ';
+                var sss = answer.split(",");
+                ck = ' onclick="answer_checkbox('+id+')" ';
+                var n = sss.length;
+                if(n>0){
+
+                    for (var ii = 0; ii < n; ii++) {  //n的长度为3，i是从0开始的
+                        if(sss[ii] == val_look){
+                            kk = 'checked = "checked" ';
+                        }
+                    }
+
+                }
+
+            } else {
+                var ss = 'type="radio" ';
+
+                if (val_look == answer) {
+                    kk = 'checked = "checked" ';
+                }
+            }
+
+
+            str += '<li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input '+ck+' name="wode[' + id + ']" ' + ss + '  ' + kk + ' value="' + val_look + '"></label><label style="vertical-align:middle;padding-left:2px;">' + val_look + '.</label><label style="vertical-align:middle;padding-left:2px;">' + contentss[i] + '</label></li>';
+        }
+        str += '<div style="clear:both;"></div></ul> <div class="div_table_clear_bottom"></div>';
+        return str;
+    }
+
+    //单选题答案
+    function answer(id){
+        var chk_value = $("input[name='wode["+id+"]']:checked").val();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/edit_answer",
+            data: {'id':id,'question_answer':chk_value,'type':1},
+            success: function (data) {
+                return false;
+
+            }
+        })
+    }
+
+    //多选题答案
+    function answer_checkbox(id){
+
+        var chk_value =new Array();//定义一个数组12
+        $("input[name='wode["+id+"]']:checked").each(function(n,thiss){
+            chk_value.push($(thiss).val());//将选中的值添加到数组chk_value中
+        });
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/edit_answer",
+            data: {'id':id,'question_answer':chk_value,'type':2},
+            success: function (data) {
+                return false;
+            }
+        })
+    }
+
+
+    //添加阅读理解
+    function add_reading(id){
+        var length =$('.ss'+id+' .div_preview').length;
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_close_read",
+            data: {
+                'paper_point_id': ssss,
+                'evaluate_paper_id': evaluate_paper_id,
+                'question_type': 4,
+                'question_number': length,
+                'id': id
+            },
+            success: function (data) {
+                if(data){
+                    var arr = '';
+                    arr +='<div class="div_preview ss'+data.id+' " tihao ="'+data.question_number+'"><div class="div_title_question_all">\n' +
+                        '<div class="div_topic_questions"></div>\n' +
+                        '<div class="div_title_question"><span class="question_title">新东方教育</span></div>\n' +
+                        '<div style="clear: both;"></div>\n' +
+                        '</div><div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="D"></label><label style="vertical-align:middle;padding-left:2px;">D.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a class = "editedit" href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.id+',6);" >\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "upup"  onclick="cloze_test_reading.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div><div style="clear: both;"></div>\n' +
+                        '                    </div>'
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('.ss'+id).append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+
+
+            }
+        })
+
+    }
+
+    //添加完形填空
+    function add_cloze(id){
+        var length =$('.ss'+id+' .div_preview').length;
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/add_close_read",
+            data: {
+                'paper_point_id': ssss,
+                'evaluate_paper_id': evaluate_paper_id,
+                'question_type': 5,
+                'question_number': length,
+                'id': id
+            },
+            success: function (data) {
+                if (data) {
+                    var arr = '';
+                    arr +='<div class="div_preview ss'+data.id+' " tihao ="'+data.question_number+'"><div class="div_title_question_all">\n' +
+                        '<div class="div_topic_questions"></div>\n' +
+
+                        '<div style="clear: both;"></div>\n' +
+                        '</div><div class="div_table_radio_question">\n' +
+                        '                            <div class="div_table_clear_top"></div>\n' +
+                        '                            <ul>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')" name="wode['+data.id+']" type="radio" value="A"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">a better you,a bigger world</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="B"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">a bigger world,a better you</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="C"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">live beautifully, dream passionately, love completely</label></li>\n' +
+                        '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input onclick = "answer('+data.id+')"  name="wode['+data.id+']" type="radio" value="D"></label><label style="vertical-align:middle;padding-left:2px;">D.</label><label style="vertical-align:middle;padding-left:2px;">a better life,a better world</label></li>\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                            <div class="div_table_clear_bottom"></div>\n' +
+                        '                        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+                        '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+                        '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+                        '                            <ul class="stuff">\n' +
+                        '                                <li style="border: 1px solid #ff9900;"><a class = "editedit" href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+data.id+',7);" >\n' +
+                        '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+data.id+');">\n' +
+                        '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "upup"  onclick="cloze_test_reading.moveUp('+data.id+');" title="将此题上移">\n' +
+                        '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <li>\n' +
+                        '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+data.id+');" title="将此题下移">\n' +
+                        '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+                        '                                </li>\n' +
+                        '\n' +
+                        '                                <div style="clear:both;"></div>\n' +
+                        '                            </ul>\n' +
+                        '                        </div><div style="clear: both;"></div>\n' +
+                        '                    </div>'
+                    var  div = $('.sss'+data['paper_point_id']);
+                    div.find('.partScore').text(data['all_grade']);
+                    $('.ss'+id).append(arr);
+                }else{
+                    toastr.error("添加失败!");
+                }
+            }
+        })
+    }
+
+
+    //完成整套试卷的编辑
+    function submit(evaluate_id){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/index/Tps/do_all_paper",
+            data: {
+                'evaluate_paper_id': evaluate_id,
+            },
+            success: function (data) {
+                if(data==''){
+                    Ewin.confirm({ message: "试卷已保存完成。确定返回列表吗？",title: "确认操作"}).on(function (e) {
+                        if (!e) {
+                            return;
+                        }else{
+
+                            window.location.href = "/index.php/index/Tps/index"
+                        }
+                    })
+
+                }else{
+                    toastr.error(data);
+                }
+
+
+            }
+        })
+    }
+
+
+</script>

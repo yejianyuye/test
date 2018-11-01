@@ -1,0 +1,1336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0113)https://www.wjx.cn/mysojump/questionnairemng/designnew.aspx?version=7&openType=redesign&curid=18876714&nqt=&osa=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>设计测试题目</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+
+    <meta name="robots" content="noindex">
+    <link href="/public/static/tps/css/NewDefault.css" rel="stylesheet" type="text/css">
+    <link id="linkBaseUrl" rel="stylesheet" type="text/css" href="/public/static/tps/css/q.css">
+    <link href="/public/static/tps/css/designnew.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <link href="/public/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/public/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- bootstrap弹框插件js以及css -->
+    <link href="/public/static/bootstrap-toastr/build/toastr.min.css" rel="stylesheet">
+    <script src="/public/static/bootstrap-toastr/build/toastr.min.js"></script>
+    <script type="text/javascript" src="/public/static/js/fuzhuang.js"></script>
+    <!--ueditor编辑器js以及css -->
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/public/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+
+
+
+
+</head>
+<body style="background: #eeeeee; margin: 0px; padding: 0px;">
+<div id="ss-header">
+    <div id="divMenu" style="visibility: visible;">
+        <div style="display: none;"><a href="javascript:void(0);" ><span><strong>保存</strong></span></a>(<input
+                id="chkAutoSave" type="checkbox" checked="checked">自动保存)
+        </div>
+        <div style="margin-right: 25px;float:left;"><a href="javascript:void(0);" onclick = "submit();" style="padding-left: 15px; padding-right: 15px;" class="sumitbutton" id="hrefFiQ">完成编辑并运行</a></div>
+        <div style="float:left;"><a href="https://www.wjx.cn/jq/18876714.aspx?wg=1" class="preview" target="_blank"><i class="design-icon design-preview"></i>预览</a></div>
+    </div>
+</div>
+
+<div style="margin: 0 auto; text-align: left; width: 1000px; position: relative;">
+    <div id="topnav" style="visibility: visible;">
+        <ul class="tabQTypet" id="divNormal" style="width: 996px;margin-bottom:0px;height:40px;">
+            <li ><a href="javascript:void(0);" onclick = "addnum();" ><i class="design-icon design-qtype design-radio"></i>添加试题考点</a></li>
+            <li style = "width:165px;"><a onclick = "single();" id="hrefChoice" href="javascript:void(0);" ><i class="design-icon design-qtype design-radio"></i>单选</a></li>
+            <li style = "width:165px;"><a onclick = "checkbox();" id="hrefChoice" href="javascript:void(0);"><i class="design-icon design-qtype design-check"></i>多选</a></li>
+            <li style = "width:165px;"><a href="javascript:void(0);"  onclick = "blanks();"><i class="design-icon design-qtype design-text"></i>填空</a></li>
+            <li style = "width:175px;" ><a href="javascript:void(0);"  onclick = "cloze_test();" ><i class="design-icon design-qtype design-juzhen"></i>完形填空</a></li>
+            <li style = "width:170px;"><a href="javascript:void(0);"  onclick = "reading();"><i class="design-icon design-qtype design-juzhen"></i>阅读理解</a></li>
+            <div style="clear: both;"></div>
+        </ul>
+        <div id="divCepingTip" style="display: none;">
+        </div>
+        <div style="position: absolute; left: -49px; top: 10px; cursor: pointer;" id="divNewTip" title="">
+            <img src="/public/static/tps/img/addxtpic.gif" alt="">
+        </div>
+    </div>
+
+    <div class="survey"
+         style="padding-bottom: 5px; margin: 0px 26px 0px 0px; overflow: auto; background: rgb(255, 255, 255); width: 1000px; position: relative; height: 601px;"
+         id="sur">
+        <div style="width: 840px; margin: 0 auto;">
+            <div id="question" class="surveycontent">
+
+
+                <div id = "tjstkd">
+                <!--<div onmouseover="backgd(this,1);" onmouseout="backgd(this,2);" style=" float:left; background-color:#00ba97; height:75px; line-height:15px; margin-top:20px; width:150px; margin-right:10px"> <div style="padding-top:5px; float:right;">&lt;!&ndash;<span><img src="img/01.png" /></span>&ndash;&gt;<span ><img title = "编辑" src="img/02.png" /></span><span><img title = "删除" src="img/03.png" /></span></div><div style="float:right; width:150px;font-size:14px;padding:0 5px; text-align:center; color: #fff;"><p class="titles"><span class="subjectScore">选择题</span></p><p class = "titles" >共<span class="partScore">7</span>分(每小题<span class="subjectScore">1</span>分)</p></div></div>-->
+
+                </div>
+
+
+
+                <div id="divId" class="surveyhead div_question"
+                           style="border: 2px solid rgb(255, 255, 255); margin-top: 18px; width: 800px; cursor: pointer; padding-top: 2px; padding-bottom: 10px;"
+                           title="试题考点">
+
+                    <div id="pater_desc" class="surveydescription" style="cursor: pointer;margin-top: 3px;" ></div>
+                </div>
+
+
+
+                <div style="clear: both;"></div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="cli_dialog_div"></div>
+
+</div>
+
+<div class="modal fade" id="addnum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title">添加试题</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <div class="form-group" >
+                        <label >考点名称:</label>
+                        <input type="text" class = "kdmc">
+                    </div>
+                </p>
+
+                <p>
+                    <div class="form-group">
+                        <label >考试排序:</label>
+                        <input type="text" class = "kspx"  value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" >
+                    </div>
+                </p>
+
+                <p>
+                    <div class="form-group" >
+                        <label>试题分数:</label>
+                        <input type="text" class = "spfs" value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)">
+                    </div>
+                </p>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit"  class="btn btn-primary" onclick = "adddemo();">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editnum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title">编辑试题</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div class="form-group" >
+                    <label >考点名称:</label>
+                    <input type="text" class = "kdmc">
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group">
+                    <label >考试排序:</label>
+                    <input type="text" class = "kspx"  value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" >
+                </div>
+                </p>
+
+                <p>
+                <div class="form-group" >
+                    <label>试题分数:</label>
+                    <input type="text" class = "spfs" value = "1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)">
+                </div>
+                </p>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit"  class="btn btn-primary" onclick = "editnum(this,5);">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"   >
+    <div class="modal-dialog" role="document" style = "width:1000px;" >
+        <div class="modal-content" >
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabell" >编辑试题</h4>
+            </div>
+            <div class="modal-body" style = "height:550px;" >
+                <script id="editor" type="text/plain" ></script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  data-dismiss="modal">关闭</button>
+                <button type="submit"  class="btn btn-primary" >修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"   >
+    <div class="modal-dialog" role="document" style = "width:1000px;" >
+        <div class="modal-content" >
+            <div class="modal-header"style="background:#0095da;color: #fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style = "font-size: 28px;">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabell" >编辑试题</h4>
+            </div>
+            <div class="modal-body" style = "height:550px;" >
+                <script id="editor" type="text/plain" ></script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  data-dismiss="modal">关闭</button>
+                <button type="submit" id ="s_edit"  onclick = "edit_tm(1,1);"   class="btn btn-primary" >修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    var ue = UE.getEditor('editor');
+    ue.ready(function() {
+        ue.setHeight(400);
+            });
+    //class = "ss"  用来编辑题号  class = "sss"  用来标记题型  class = "ssss"  对应的是考点的order
+    //has  代表当前考点  sssss用来区分完形填空和阅读理解下面的题号
+    //识别题型
+    var tx_length = parseInt($("#tjstkd div").length);
+    //识别题号   每加一题就加1保证每题不重复
+    var th_length = 1;
+    var  ssss = '';
+    //name 名称不重复
+    var name_length = 1;
+
+    //试题考点的操作
+    function backgd(obj,type,order){
+        //划过
+
+        if(type == 1){
+            //console.log(obj.lastChild);
+            obj.style.background="#00ba97";
+            obj.lastChild.style.color = "#fff";
+            obj.firstChild.firstChild.getElementsByTagName("img")[0].setAttribute("src", "/public/static/tps/img/02.png");
+            obj.firstChild.lastChild.getElementsByTagName("img")[0].setAttribute("src", "/public/static/tps/img/03.png");
+        }
+        //划出
+        if(type == 2){
+            var tj = obj.getAttribute('tj');
+            if(tj == 1){
+                obj.style.background="";
+                obj.lastChild.style.color = "#949494";
+                obj.firstChild.firstChild.getElementsByTagName("img")[0].setAttribute("src", "");
+                obj.firstChild.lastChild.getElementsByTagName("img")[0].setAttribute("src", "");
+            }
+        }
+       //选中  tj==1  没有选中  tj == 2 选中
+        if(type == 3){
+            var tj = $('#tjstkd').children('div');
+            //除去之前选择的题号
+            $(tj).each(function(){
+                if(parseInt($(this).attr('tj')) == 2 && order!=$(this).attr('order')  ){
+                    $(this).attr('tj','1');
+                    $(this).css({"background":""});
+                    $(this).children("div:first-child").find('img').first().attr("src", "");
+                    $(this).children("div:first-child").find('img').last().attr("src", "");
+                    $(this).children("div:last-child").css({"color":"#949494"});
+                    return false;
+                }
+            });
+
+            $('#question .div_question_mouseover').addClass('hide').removeClass('hass');
+            var ssss_v  = obj.getAttribute('order');
+            $('.ssss'+ssss_v).removeClass('hide').addClass('hass');
+            obj.setAttribute('tj','2');
+        }
+
+        //编辑题目页面
+        if(type == 4){
+            $('#editnum .kdmc').val(obj.getAttribute('kdmc'));
+            $('#editnum .kspx').val(obj.getAttribute('kspx'));
+            $('#editnum .spfs').val(obj.getAttribute('spfs'));
+            $('#editnum .btn-primary').attr('onclick',"editnum("+order+");");
+            $('#editnum').modal();
+        }
+
+        //删除
+        if(type == 5){
+             $('.sss'+order).remove();
+             $('.ssss'+order).remove();
+
+        }
+    }
+
+    //添加考题
+    function addnum(){
+        $('#addnum .kdmc').val('');
+        $('#addnum .kspx').val(1);
+        $('#addnum .spfs').val(1);
+        $('#addnum').modal();
+    }
+
+    function adddemo(){
+
+        var kdmc = $('#addnum .kdmc').val();
+        var kspx = $('#addnum .kspx').val();
+        var spfs = $('#addnum .spfs').val();
+        if(spfs == '' || kspx == '' || kdmc == ''){
+            alert('数据必填');
+            return ;
+        }else{
+            tx_length += 1;
+            var arr = '<div  tj = "1" order = "'+tx_length+'" class = "sss'+tx_length+'" onmouseover="backgd(this,1);" onmouseout="backgd(this,2,1);" onclick="backgd(this,3,'+tx_length+');" style=" float:left;border: 1px solid #e9e9e9; height:75px; line-height:15px; margin-top:50px; width:150px; margin-right:10px"><div style="padding-top:5px; float:right;height:20px;">';
+            arr += '<span><img onclick="backgd(this,4,'+tx_length+');" kspx = "'+kspx+'"  kdmc = "'+kdmc+'" spfs = "'+spfs+'" src="" /></span><span><img onclick="backgd(this,5,'+tx_length+');" src="" /></span></div><div style="float:right; width:150px;font-size:14px;padding:0 5px; text-align:center; color: #949494;"><p><span class="subjectScore kdmc">'+kdmc+'</span></p><p>';
+            arr += '共<span class="partScore">0</span>分(每小题<span class="subjectScore spfs">'+spfs+'</span>分)</p></div></div>';
+
+            $('#tjstkd').append(arr);
+            $('#addnum').modal('hide');
+        }
+    }
+
+    //编辑试题考点
+    function  editnum(order){
+            var kdmc = $('#editnum .kdmc').val();
+            var kspx = $('#editnum .kspx').val();
+            var spfs = $('#editnum .spfs').val();
+            if(spfs == '' || kspx == '' || kdmc == ''){
+                alert('数据必填');
+                return ;
+            }else{
+
+                var div = $('.sss'+order);
+                console.log(div);
+                div.find('.kdmc').text(kdmc);
+                div.find('.kspx').text(kspx);
+                div.find('.spfs').text(spfs);
+                div.children("div:first-child").find('img').first().attr("kdmc", kdmc);
+                div.children("div:first-child").find('img').first().attr("kspx", kspx);
+                div.children("div:first-child").find('img').first().attr("spfs", spfs);
+                $('#editnum').modal('hide');
+            }
+    }
+
+    //切换题目排序  必须选中
+    var TableObj = {
+        moveUp: function (id) {
+            var box = $('.ss'+id);
+                var btihao =parseInt(box.attr('tihao'));
+                var ptihao = btihao - 1;
+                $(box.prevAll()).each(function(n,thiss){
+                    if($(thiss).attr('tihao') == ptihao && $(thiss).hasClass('hass')){
+                        box.attr('tihao',ptihao).find('.div_topic_question').text(ptihao);
+                        $(thiss).attr('tihao',btihao).find('.div_topic_question').text(btihao);
+                        $(thiss).insertAfter(box);
+                        return false;
+                    }
+                });
+        },
+
+        moveDown: function (id) {
+            var box = $('.ss'+id);
+                var btihao =parseInt(box.attr('tihao'));
+                var ntihao = btihao + 1;
+
+                $(box.nextAll()).each(function(n,thiss){
+                    if($(thiss).attr('tihao') == ntihao && $(thiss).hasClass('hass')) {
+                        box.attr('tihao', ntihao).find('.div_topic_question').text(ntihao);
+                        $(thiss).attr('tihao', btihao).find('.div_topic_question').text(btihao);
+                        box.insertAfter($(thiss));
+                        return false;
+                    }
+                })
+
+        },
+
+        //所编辑的题目所属类型
+        edit: function (id,lx,t) {
+
+
+            if(lx == 1 || lx == 3){
+                var edit_title = $('.ss'+id+' .question_title').html();
+                        ue.setContent(edit_title,false);
+                        $('.ss'+id+' .div_table_radio_question li').each(function(nnn,thissss){
+                            var pp = $(thissss).children("label:last-child").html();
+                            ue.setContent(pp,true);
+                        })
+             }else if(lx == 2){
+                var edit_title = $('.ss'+id+' .div_title_question').html();
+                ue.setContent(edit_title,false);
+            }else if(lx == 5 || lx == 4){
+
+                 var edit_title = $('.ss'+id+' .question_title').html();
+                     ue.setContent(edit_title,false);
+            }
+                $('#edit #s_edit').attr('onclick','edit_tm('+id+','+lx+','+t+');');
+                $('#edit').modal();
+        },
+
+        del: function (id,sz) {
+
+            Ewin.confirm({ message: "确认要删除吗？",title: "确认操作"}).on(function (e) {
+                if (!e) {
+                    return;
+                }
+
+
+                var  div = $('.sss'+sz);
+                if($("#question .ss"+id).attr('leix') == 4  || $("#question .ss"+id).attr('leix') == 5 ){
+                    var  each_grade = div.children("div:first-child").find('img').first().attr("spfs");
+                    var grades =parseInt($("#question .ss"+id+" .div_preview").length-1)*parseInt(each_grade);
+                    var fenshu  = parseInt(div.find('.partScore').text())-grades;
+                    div.find('.partScore').text(fenshu);
+                }else{
+                    //定义选中考点的分数
+                    var each_grade = div.children("div:first-child").find('img').first().attr("spfs");
+                    var fenshu  = parseInt(div.find('.partScore').text())-parseInt(each_grade);
+                    div.find('.partScore').text(fenshu);
+                }
+                $("#question .ss"+id).remove();
+                $("#question .hass").each(function(n){
+                    $(this).find('.div_topic_question').text(n+1);
+                    $(this).attr('tihao',n+1);
+                })
+            })
+        },
+    }
+
+    //编辑题目     lx  1 单选题   2 填空题 3 多选题 4阅读题  5 完形填空题  num  代表content下的题号
+    //t  p == 0 代表编辑content      p == 其他代表编辑content下面的题目
+    function edit_tm(id,lx,t,num){
+        var content = ue.getContent();
+        var contents = content.split("</p>");
+        contents.pop();
+        for(var n=0;n < contents.length;n++){
+
+            if(contents[n] == "<p><br/>" ){
+                contents.splice(n,1);
+            }else{
+                contents[n] = contents[n].substring(3);
+            }
+        }
+
+        if(lx == 1){
+            var str = '<div class="div_table_clear_top"></div><ul>';
+            for(var i=1;i < contents.length;i++){
+                switch (i)
+                {
+                    case 1:
+                        var val_look= 'A';
+                        break;
+                    case 2:
+                        var val_look= 'B';
+                        break;
+                    case 3:
+                        var val_look= 'C';
+                        break;
+                    case 4:
+                        var val_look= 'D';
+                        break;
+                    case 5:
+                        var val_look= 'E';
+                        break;
+                    case 6:
+                        var val_look= 'F';
+                        break;
+                    case 7:
+                        var val_look= 'G';
+                        break;
+                }
+                str += '<li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']" type="radio" value="'+i+'"></label><label style="vertical-align:middle;padding-left:2px;">'+val_look+'.</label><label style="vertical-align:middle;padding-left:2px;">'+contents[i]+'</label></li>';
+            }
+
+            str += '<div style="clear:both;"></div></ul> <div class="div_table_clear_bottom"></div>';
+            $('.ss'+id+ ' .div_table_radio_question').html(str);
+            $('.ss'+id+ ' .question_title').html(contents[0]);
+        }else if(lx == 3){
+
+            var str = '<div class="div_table_clear_top"></div><ul>';
+            for(var i=1;i < contents.length;i++){
+                switch (i)
+                {
+                    case 1:
+                        var val_look= 'A';
+                        break;
+                    case 2:
+                        var val_look= 'B';
+                        break;
+                    case 3:
+                        var val_look= 'C';
+                        break;
+                    case 4:
+                        var val_look= 'D';
+                        break;
+                    case 5:
+                        var val_look= 'E';
+                        break;
+                    case 6:
+                        var val_look= 'F';
+                        break;
+                    case 7:
+                        var val_look= 'G';
+                        break;
+                }
+                str += '<li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']" value="'+i+'" type="checkbox"></label><label style="vertical-align:middle;padding-left:2px;">'+val_look+'.</label><label style="vertical-align:middle;padding-left:2px;">'+contents[i]+'</label></li>';
+            }
+            str += '<div style="clear:both;"></div></ul> <div class="div_table_clear_bottom"></div>';
+            $('.ss'+id+ ' .div_table_radio_question').html(str);
+            $('.ss'+id+ ' .question_title').html(contents[0]);
+        }else if(lx == 5){
+
+            if(t == 0){
+                $('.ss'+id+ ' .question_title').html(content);
+            }else{
+
+                var str = '<div class="div_table_clear_top"></div><ul>';
+                for(var i=0;i < contents.length;i++){
+                    switch (i)
+                    {
+                        case 0:
+                            var val_look= 'A';
+                            break;
+                        case 1:
+                            var val_look= 'B';
+                            break;
+                        case 2:
+                            var val_look= 'C';
+                            break;
+                        case 3:
+                            var val_look= 'D';
+                            break;
+                        case 4:
+                            var val_look= 'E';
+                            break;
+                        case 5:
+                            var val_look= 'F';
+                            break;
+                        case 6:
+                            var val_look= 'G';
+                            break;
+                    }
+                    var kk = i + 1;
+                    str += '<li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+num+']" type="radio" value="'+kk+'"></label><label style="vertical-align:middle;padding-left:2px;">'+val_look+'.</label><label style="vertical-align:middle;padding-left:2px;">'+contents[i]+'</label></li>';
+                }
+
+                str += '<div style="clear:both;"></div></ul> <div class="div_table_clear_bottom"></div>';
+            }
+            var box = $('.ss'+id);
+            var boxq = new Object();
+            $(box.find('.div_preview')).each(function(n,thiss){
+                if(parseInt($(thiss).attr('tihao')) == num) {
+                    boxq = $(thiss);
+                    return false;
+                }
+            })
+            boxq.find('.div_table_radio_question').html(str);
+
+        }else if(lx == 4){
+            if(t == 0){
+                $('.ss'+id+ ' .class_content').html(content);
+            }else{
+                var str = '<div class="div_table_clear_top"></div><ul>';
+                for(var i=1;i < contents.length;i++){
+                    switch (i)
+                    {
+                        case 1:
+                            var val_look= 'A';
+                            break;
+                        case 2:
+                            var val_look= 'B';
+                            break;
+                        case 3:
+                            var val_look= 'C';
+                            break;
+                        case 4:
+                            var val_look= 'D';
+                            break;
+                        case 5:
+                            var val_look= 'E';
+                            break;
+                        case 6:
+                            var val_look= 'F';
+                            break;
+                        case 7:
+                            var val_look= 'G';
+                            break;
+                    }
+                    str += '<li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']" type="radio" value="'+i+'"></label><label style="vertical-align:middle;padding-left:2px;">'+val_look+'.</label><label style="vertical-align:middle;padding-left:2px;">'+contents[i]+'</label></li>';
+                }
+
+                str += '<div style="clear:both;"></div></ul> <div class="div_table_clear_bottom"></div>';
+                var box = $('.ss'+id);
+                var boxq = new Object();
+                $(box.find('.div_preview')).each(function(n,thiss){
+                    if(parseInt($(thiss).attr('tihao')) == num) {
+                        boxq = $(thiss);
+                        $(thiss).find('.question_title').html(contents[0]);
+                        return false;
+                    }
+                })
+
+                boxq.find('.div_table_radio_question').html(str);
+
+            }
+
+        }
+        $('#edit').modal('hide');
+    }
+
+
+    //判断是否具备添加条件
+
+    function  allowadd(){
+        var tj = $('#tjstkd').children('div');
+        var isok = 1;
+        $(tj).each(function(){
+            if(parseInt($(this).attr('tj')) == 2){
+                ssss = $(this).attr('order');
+                isok = 2;
+                return false;
+            }
+        });
+        return isok;
+    }
+
+    function addGrade(id){
+        var  div = $('.sss'+id);
+
+        //定义选中考点的分数
+        var  each_grade = div.children("div:first-child").find('img').first().attr("spfs");
+        var fenshu  = parseInt(div.find('.partScore').text())+parseInt(each_grade);
+        div.find('.partScore').text(fenshu);
+
+    }
+    //变量ssss为考点的顺序
+    //单选模板
+    function single(){
+        //判断添加条件
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        var arr = '<div class="div_question hass div_question_mouseover  ss'+th_length+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "1" tihao = "'+length+'"><div class="div_preview">';
+        arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+            '<div class="div_title_question"><span class = "question_title">新东方员工满意度新东方员工满意度 <img src="/public/static/tps/img/123.png"/>123213233313321313131</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+
+        arr +='<div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" type="radio" value="1"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;"> &nbsp; &nbsp;是的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" type="radio" value="2"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" type="radio" value="3"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div>';
+
+        arr +='<div class="div_ins_question"></div>';
+        arr +='<div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div>';
+        arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+            '                                <a href="javascript:void(0);"  onclick="TableObj.edit('+th_length+',1);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.del('+th_length+','+ssss+');">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+th_length+');" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+th_length+');" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div>';
+        arr +='<div style="clear: both;"></div>\n' +
+            '                    </div>\n' +
+            '                </div>';
+        //添加分数
+        addGrade(ssss)
+        th_length += 1;
+        $('#question').append(arr);
+    }
+
+    //复选题
+    function  checkbox(){
+        //判断添加条件
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        var arr = '<div class="div_question hass div_question_mouseover  ss'+th_length+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "3" tihao = "'+length+'"><div class="div_preview">';
+        arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+            '<div class="div_title_question"><span class = "question_title">新东方员工满意度</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+
+        arr +='<div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" value = "1" type="checkbox"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">是的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" value = "2" type="checkbox"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+']" value = "3" type="checkbox"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div>';
+
+        arr +='<div class="div_ins_question"></div>';
+        arr +='<div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div>';
+        arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+            '                                <a href="javascript:void(0);" onclick="TableObj.edit('+th_length+',3);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.del('+th_length+','+ssss+');">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+th_length+');" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+th_length+');" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div>';
+        arr +='<div style="clear: both;"></div>\n' +
+            '                    </div>\n' +
+            '                </div>';
+        //添加分数
+        //添加分数
+        addGrade(ssss);
+        th_length += 1;
+        $('#question').append(arr);
+    }
+
+    //填空题
+    function blanks(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        var arr = '<div class="div_question hass div_question_mouseover  ss'+th_length+' ssss'+ssss+'"  tabindex="1" style="visibility: visible;" leix = "2" tihao = "'+length+'"><div class="div_preview">';
+        arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+            '<div class="div_title_question"><span>填空题<span style="text-decoration:underline;"></span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+
+        arr +='<div class="div_ins_question"></div>';
+        arr +='<div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div>';
+        arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+            '                                <a href="javascript:void(0);" onclick="TableObj.edit('+th_length+',2);" >\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.del('+th_length+','+ssss+');">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveUp('+th_length+');" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+th_length+');" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div>';
+        arr +='<div style="clear: both;"></div>\n' +
+            '                    </div>\n' +
+            '                </div>';
+        //添加分数
+        //添加分数
+        addGrade(ssss);
+        th_length += 1;
+        $('#question').append(arr);
+    }
+
+    //阅读理解
+    function reading(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        var arr = '<div class="div_question hass div_question_mouseover  ss'+th_length+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "4" tihao = "'+length+'"><div class="div_preview">';
+        arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+            '<div class="div_title_question"><span class = "question_title class_content">蓝天碧海间越过地平线，远离尘嚣，一路向东、向东……这次看似寻常的航海之旅其实绝不普通。它不仅深化了的新东方A Better You, A Bigger World (更好的你、更大的世界)新的教育理念，更开启了新东方"通识教育"的破冰之旅。新东方历经24年发展，已经历炼出自身独特的文化：从"绝望中寻找希望人生终将辉煌"，到"终身学习、全球视野、独立人格";从"You are better than you think"到"A Better You, A Bigger World"……不难看出，新东方的教育理念正从过去更多地关注个人的奋斗，向更多地关注个人与\n' +
+            '&nbsp;&nbsp;世界的关系倾斜。或者说，对新东方人而言，以提升一个人的整体素质和培养正确的人生观为重正成为一种教育自觉。(试题模板,双击可修改)</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+
+        arr +='<div class="div_ins_question"></div>';
+        arr +='<div class="spanLeft" style="height: 18px;">\n' +
+            '<div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '</div>';
+        arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff">\n' +
+            '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="TableObj.edit('+th_length+',4,0);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.del('+th_length+','+ssss+');">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);"  onclick="TableObj.moveUp('+length+');" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+length+');" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="cloze_test_reading.addread('+th_length+','+ssss+');" title="添加">\n' +
+            '                                    <span class="design-icon design-down"></span><span>添加</span></a>\n' +
+            '                                </li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div>';
+        arr +='<div style="clear: both;"></div>\n' +
+            '                    </div>\n'
+
+
+        arr +=  '<div class="div_preview"  tihao = "1"><div class="div_title_question_all">\n' +
+            '<div class="div_topic_questions"></div>\n' +
+            '<div class="div_title_question"><span class="question_title">蓝天碧海间越过地平线' +
+            '&nbsp;&nbsp;世界的关123</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+        arr +='<div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="1"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">是的123</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="2"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的123</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="3"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的123</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div>';
+          arr +='<div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff">\n' +
+            '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+th_length+',1,4);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del(('+length+',1,'+ssss+',4););">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "upup" tihao ="1"  onclick="cloze_test_reading.moveUp('+length+',1,'+ssss+',4);" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "downdown" tihao ="1" onclick="cloze_test_reading.moveDown('+length+',1,'+ssss+',4);" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div><div style="clear: both;"></div>\n' +
+            '                    </div>'
+            arr +='</div>';
+        //添加分数
+        //添加分数
+        addGrade(ssss)
+        th_length += 1;
+        name_length +=1;
+        $('#question').append(arr);
+    }
+
+    //完形填空
+    function cloze_test(){
+        var isok = allowadd();
+        if(isok == 1){alert ('请选择试题考点'); return false;}
+        var length = parseInt($("#question .hass").length)+1;
+        var arr = '<div class="div_question hass div_question_mouseover  ss'+th_length+' ssss'+ssss+'"   id = "wode" tabindex="1" style="visibility: visible;"  leix = "5" tihao = "'+length+'"><div class="div_preview">';
+        arr += '<div class="div_title_question_all">\n'+'<div class="div_topic_question">'+length+'</div>\n' +
+            '<div class="div_title_question"><span class = "question_title">蓝天碧海间越过地平线，远离尘嚣，一路向东、向东……这次看似寻常的航海之旅其实绝不普通。它不仅深化了的新东方A Better You, A Bigger World (更好的你、更大的世界)新的教育理念，更开启了新东方"通识教育"的破冰之旅。新东方历经24年发展，已经历炼出自身独特的文化：从"绝望中寻找希望人生终将辉煌"，到"终身学习、全球视野、独立人格";从"You are better than you think"到"A Better You, A Bigger World"……不难看出，新东方的教育理念正从过去更多地关注个人的奋斗，向更多地关注个人与\n' +
+            '&nbsp;&nbsp;世界的关系倾斜。或者说，对新东方人而言，以提升一个人的整体素质和培养正确的人生观为重正成为一种教育自觉。(试题模板,双击可修改)</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+
+        arr +='<div class="div_ins_question"></div>';
+        arr +='<div class="spanLeft" style="height: 18px;">\n' +
+            '<div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '</div>';
+        arr +='<div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff"><li style="border: 1px solid #ff9900;">\n' +
+            '                                <a href="javascript:void(0);" onclick="TableObj.edit('+th_length+',5,0);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.del('+th_length+','+ssss+',);">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);"  onclick="TableObj.moveUp('+th_length+');" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="TableObj.moveDown('+th_length+');" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" onclick="cloze_test_reading.addcloze('+th_length+','+ssss+');" title="添加">\n' +
+            '                                    <span class="design-icon design-down"></span><span>添加</span></a>\n' +
+            '                                </li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div>';
+        arr +='<div style="clear: both;"></div>\n' +
+            '                    </div>\n'
+
+
+        arr +=  '<div class="div_preview" tihao ="1"><div class="div_title_question_all">\n' +
+            '<div class="div_topic_questions"></div>\n' +
+
+            '<div style="clear: both;"></div>\n' +
+            '</div>'
+        arr +='<div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="1"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">是的123</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="2"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的123</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+th_length+'][1]" type="radio" value="3"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的123</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div>';
+          arr +='<div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff">\n' +
+            '                                <li style="border: 1px solid #ff9900;">' +
+            '                                    <a href="javascript:void(0);" class = "editedit" onclick="cloze_test_reading.edit_cloze_test('+length+',1,5);">\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+length+',1,'+ssss+',5);" >\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "upup" tihao ="1" onclick="cloze_test_reading.moveUp('+length+',1,'+ssss+',5);" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "downdown" tihao ="1" onclick="cloze_test_reading.moveDown('+length+',1,'+ssss+',5);" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div><div style="clear: both;"></div>\n' +
+            '                    </div>'
+            arr +='</div>';
+        //添加分数
+        addGrade(ssss)
+        th_length += 1;
+        name_length +=1;
+        $('#question').append(arr);
+    }
+
+    var cloze_test_reading = {
+        edit_cloze_test: function (id,num,type) {
+            var box = $('.ss'+id);
+            var boxq = new Object();
+            $(box.find('.div_preview')).each(function(n,thiss){
+                if(parseInt($(thiss).attr('tihao')) == num) {
+                    boxq = $(thiss);
+                    if(type == 4){
+                        var edit_title = $(thiss).find('.question_title').html();
+                        ue.setContent(edit_title,false);
+                    }
+                    return false;
+                }
+            })
+            boxq.find('.div_table_radio_question li').each(function(nnn,thissss){
+                var pp = $(thissss).children("label:last-child").html();
+                if(type == 5){
+                    if(nnn == 0){
+                        ue.setContent(pp,false);
+                    }else{
+                        ue.setContent(pp,true);
+                    }
+                }else if(type == 4){
+                    ue.setContent(pp,true);
+                }
+
+            })
+
+            $('#edit #s_edit').attr('onclick','edit_tm('+id+','+type+',1,'+num+');');
+            $('#edit').modal();
+        },
+
+        del: function (id,sd,sz,type) {
+            Ewin.confirm({ message: "确认要删除吗？",title: "确认操作"}).on(function (e) {
+                if (!e) {
+                    return;
+                }
+
+                var  div = $('.sss'+sz);
+                var each_grade = div.children("div:first-child").find('img').first().attr("spfs");
+                var fenshu  = parseInt(div.find('.partScore').text())-parseInt(each_grade);
+                div.find('.partScore').text(fenshu);
+
+                $("#question .ss"+id+" .div_preview").each(function(n,thiss){
+
+                    if(parseInt($(thiss).attr('tihao')) == sd ){
+                        $(thiss).remove();
+                    }
+                })
+
+                $("#question .ss"+id+" .div_preview").each(function(n,thisss){
+                    $(thisss).attr('tihao',n).find('.deldel').attr('onclick','cloze_test_reading.del('+id+','+n+','+sz+','+type+');');
+                    $(thisss).find('.upup').attr('onclick','cloze_test_reading.moveUp('+id+','+n+','+sz+','+type+');');
+                    $(thisss).find('.downdown').attr('onclick','cloze_test_reading.moveDown('+id+','+n+','+sz+','+type+');');
+                    $(thisss).find('.editedit').attr('onclick','cloze_test_reading.edit_cloze_test('+id+','+n+','+type+');');
+                })
+            })
+        },
+
+        addread: function (id,tx) {
+            add_reading(id,tx);
+        },
+
+        addcloze: function (id,tx) {
+            add_cloze(id,tx);
+        },
+
+        moveUp: function (id,num,sz,type) {
+
+            var box = $('.ss'+id);
+            var boxq = new Object();
+            var boxh = new Object();
+            if(num != 1){
+                var ptihao = parseInt(num - 1);
+                $(box.find('.div_preview')).each(function(n,thiss){
+                    if(parseInt($(thiss).attr('tihao')) == ptihao) {
+                        boxq = $(thiss);
+                        return false;
+                    }
+                })
+
+                $(box.find('.div_preview')).each(function(n,thisss){
+                    if(parseInt($(thisss).attr('tihao')) == num) {
+                        boxh = $(thisss);
+                        return false;
+                    }
+                })
+
+              boxq.attr('tihao',num).find('.upup').attr('onclick','cloze_test_reading.moveUp('+id+','+num+','+sz+','+type+');');
+              boxq.find('.downdown').attr('onclick','cloze_test_reading.moveDown('+id+','+num+','+sz+','+type+');');
+              boxq.find('.deldel').attr('onclick','cloze_test_reading.del('+id+','+num+','+sz+','+type+'));');
+              boxq.find('.editedit').attr('onclick','cloze_test_reading.edit_cloze_test('+id+','+num+','+type+');');
+
+              boxh.attr('tihao',ptihao).find('.upup').attr('onclick','cloze_test_reading.moveUp('+id+','+ptihao+','+sz+','+type+');')
+              boxh.find('.downdown').attr('onclick','cloze_test_reading.moveDown('+id+','+ptihao+','+sz+','+type+');');
+              boxh.find('.deldel').attr('onclick','cloze_test_reading.del('+id+','+ptihao+','+sz+','+type+'));');
+              boxh.find('.editedit').attr('onclick','cloze_test_reading.edit_cloze_test('+id+','+ptihao+','+type+');');
+              boxq.insertAfter(boxh);
+
+            }
+        },
+
+        moveDown: function (id,num,sz,type) {
+            var box = $('.ss'+id);
+            var boxq = new Object();
+            var boxh = new Object();
+            var lengths = parseInt($('.ss'+id+' .div_preview').length-1);
+            if(num != lengths){
+                var ptihao = parseInt(num + 1);
+                $(box.find('.div_preview')).each(function(n,thiss){
+                    if(parseInt($(thiss).attr('tihao')) == ptihao) {
+                        boxq = $(thiss);
+                        return false;
+                    }
+                })
+
+                $(box.find('.div_preview')).each(function(n,thisss){
+                    if(parseInt($(thisss).attr('tihao')) == num) {
+                        boxh = $(thisss);
+                        return false;
+                    }
+                })
+
+                boxq.attr('tihao',num).find('.downdown').attr('onclick','cloze_test_reading.moveDown('+id+','+num+','+sz+','+type+');');
+                boxq.find('.upup').attr('onclick','cloze_test_reading.moveUp('+id+','+num+','+sz+','+type+');');
+                boxq.find('.deldel').attr('onclick','cloze_test_reading.del('+id+','+num+','+sz+');');
+                boxq.find('.editedit').attr('onclick','cloze_test_reading.edit_cloze_test('+id+','+num+','+type+');');
+
+                boxh.attr('tihao',ptihao).find('.downdown').attr('onclick','cloze_test_reading.moveDown('+id+','+ptihao+','+sz+','+type+');');
+                boxh.find('.upup').attr('onclick','cloze_test_reading.moveUp('+id+','+ptihao+','+sz+','+type+');');
+                boxh.find('.deldel').attr('onclick','cloze_test_reading.del('+id+','+ptihao+','+sz+');');
+                boxh.find('.editedit').attr('onclick','cloze_test_reading.edit_cloze_test('+id+','+ptihao+','+type+');');
+                boxh.insertAfter(boxq);
+            }
+        },
+
+
+
+    }
+
+
+    //添加阅读理解
+    function add_reading(id,tx){
+        var length =$('.ss'+id+' .div_preview').length;
+        var arr = '';
+        arr +='<div class="div_preview" tihao ="'+length+'"><div class="div_title_question_all">\n' +
+            '<div class="div_topic_questions"></div>\n' +
+            '<div class="div_title_question"><span class="question_title">蓝天碧海间越过地平线世界的关</span></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div><div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="1"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">是的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="2"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="3"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff">\n' +
+            '                                <li style="border: 1px solid #ff9900;"><a class = "editedit" href="javascript:void(0);" onclick="cloze_test_reading.edit_cloze_test('+id+','+length+',4);" >\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+id+','+length+','+tx+',4);">\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "upup"  onclick="cloze_test_reading.moveUp('+id+','+length+','+tx+',4);" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+id+','+length+','+tx+',4);" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div><div style="clear: both;"></div>\n' +
+            '                    </div>'
+        //添加分数
+        addGrade(tx);
+        name_length +=1;
+        $('.ss'+id).append(arr);
+    }
+    //添加完形填空
+    function add_cloze(id,tx){
+        var length =$('.ss'+id+' .div_preview').length;
+        var arr = '';
+        arr +='<div class="div_preview" tihao ="'+length+'"><div class="div_title_question_all">\n' +
+            '<div class="div_topic_questions"></div>\n' +
+            '<div style="clear: both;"></div>\n' +
+            '</div><div class="div_table_radio_question">\n' +
+            '                            <div class="div_table_clear_top"></div>\n' +
+            '                            <ul>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="1"></label><label style="vertical-align:middle;padding-left:2px;">A.</label><label style="vertical-align:middle;padding-left:2px;">是的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="2"></label><label style="vertical-align:middle;padding-left:2px;">B.</label><label style="vertical-align:middle;padding-left:2px;">是的错的</label></li>\n' +
+            '                                <li style="width:99%;"><label style="vertical-align:middle;padding-left:2px;"><input name="wode['+id+']['+name_length+']" type="radio" value="3"></label><label style="vertical-align:middle;padding-left:2px;">C.</label><label style="vertical-align:middle;padding-left:2px;">是的好的</label></li>\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '\n' +
+            '                            </ul>\n' +
+            '                            <div class="div_table_clear_bottom"></div>\n' +
+            '                        </div><div class="div_ins_question"></div><div class="spanLeft" style="height: 18px;">\n' +
+            '                             <div class="div_ins_question spanLeft" style="clear: none; display: none;"></div>\n' +
+            '                        </div><div class="spanRight" style="clear: none; visibility: visible;">\n' +
+            '                            <ul class="stuff">\n' +
+            '                                <li style="border: 1px solid #ff9900;"><a href="javascript:void(0);" class="editedit" onclick="cloze_test_reading.edit_cloze_test('+id+','+length+',5);" >\n' +
+            '                                    <span class="design-icon design-edit"></span><span>编辑</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "deldel" onclick="cloze_test_reading.del('+id+','+length+','+tx+');" >\n' +
+            '                                    <span class="design-icon design-delete"></span><span>删除</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "upup"  onclick="cloze_test_reading.moveUp('+id+','+length+','+tx+',5);" title="将此题上移">\n' +
+            '                                    <span class="design-icon design-up"></span><span>上移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <li>\n' +
+            '                                    <a href="javascript:void(0);" class = "downdown" onclick="cloze_test_reading.moveDown('+id+','+length+','+tx+',5);" title="将此题下移">\n' +
+            '                                    <span class="design-icon design-down"></span><span>下移</span></a>\n' +
+            '                                </li>\n' +
+            '\n' +
+            '                                <div style="clear:both;"></div>\n' +
+            '                            </ul>\n' +
+            '                        </div><div style="clear: both;"></div>\n' +
+            '                    </div>'
+        //添加分数
+        addGrade(tx);
+        name_length +=1;
+        $('.ss'+id).append(arr);
+    }
+
+
+    //添加题目
+    function  submit(){
+        var divs = $('#tjstkd').children('div');
+        var login_infos = new Object();
+        var point_infos = new Object();
+        var zhi =0;
+        var zhii = 0;
+        var panduan = 1;
+        $(divs).each(function(n,thiss){
+            var  orderid = $(thiss).attr('order');
+            //考点中题数
+            //var  p_num = $('#question .ssss'+orderid).length;
+            var  biaotis = new Object();
+            biaotis.point_order = $(thiss).children("div:first-child").find('img').first().attr("kspx");
+            biaotis.point_grade = $(thiss).find('.spfs').text();
+            biaotis.point_title = $(thiss).find('.kdmc').text();
+            //biaotis.question_all = p_num;
+            biaotis.all_grade = $(thiss).find('.partScore').text();;
+            var p_num = 0;
+            var  orderids = $('.ssss'+orderid);
+            $(orderids).each(function(nn,thisss){
+                zhi++;
+                var leix = parseInt($(thisss).attr('leix'));
+                var textid = $(thisss).find('.div_topic_question').text();
+                var title  = $(thisss).find('.div_title_question').text();
+                var psss = new Object();
+                psss.question_title = title;
+                psss.question_type = leix;
+                psss.question_number =textid;
+                psss.orderid =  orderid;
+                if(leix == 1 ){
+                    p_num++;
+                    var ss = new Array();
+                    $($(thisss).find('.div_table_radio_question li')).each(function(nnn,thissss){
+                        ss.push($(thissss).children("label:last-child").text());
+                    })
+                    var kk = $(thisss).find(".div_table_radio_question input[type='radio']:checked").val();
+                    if(kk == undefined){
+                        panduan = 2;
+                        return false;
+                    }
+                    psss['question_answer'] =kk;
+                    psss['question_content'] = ss;
+                    //leix 为阅读理解题
+                }else if(leix == 3){
+                    p_num++;
+                    var ss = new Array();
+                    $($(thisss).find('.div_table_radio_question li')).each(function(nnn,thissss){
+                        ss.push($(thissss).children("label:last-child").text());
+                    })
+                    var str="";
+                    $(thisss).find(".div_table_radio_question input[type='checkbox']:checked").each(function(n,thisssss){
+                        str+=$(thisssss).val()+",";
+                    })
+                    if(str == ''){
+                        panduan = 2;
+                        return false;
+                    }
+                    psss['question_answer'] = str;
+                    psss['question_content'] = ss;
+
+                }else if(leix == 4 || leix == 5){
+                    var dd = new Object();
+                    $($(thisss).find('.div_preview')).each(function(nnn,thissss){
+                        if(nnn == 0){
+                            return true;
+                        }
+                        zhii++;
+                        p_num++;
+                        var oo = new Object();
+                        oo.question_title = $(thissss).find('.question_title').text();
+                        oo.question_number = $(thissss).attr('tihao');
+                        var ss = new Array();
+                        $($(thissss).find('.div_table_radio_question li')).each(function(nnnn,thisssss){
+                            ss.push($(thisssss).children("label:last-child").text());
+                        })
+
+                        if($(thissss).find(".div_table_radio_question input[type='radio']:checked").val() == undefined){
+                            panduan = 2;
+                            return false;
+                        }
+                        oo.question_answer =$(thissss).find(".div_table_radio_question input[type='radio']:checked").val();
+                        oo.question_content = ss;
+                        dd[zhii] = oo;
+                    })
+                    psss['question_content'] = dd;
+                }
+                biaotis.question_all = p_num;
+                point_infos[orderid] = biaotis;
+                login_infos[zhi] = psss;
+            })
+
+            if(panduan == 2){
+                alert('部分题目答案未填写！')
+                return false;
+            }
+        })
+       // console.log(point_infos);
+        return false;
+        if(panduan ==1){
+            $.ajax({
+                url: "/index.php/index/Tps/sub_paper",
+                type: 'POST',
+                dataType: 'json',
+                data:{'question':login_infos,'point':point_infos},
+                success: function(data){
+                    console.log(data);
+                },
+            });
+        }
+    }
+
+</script>

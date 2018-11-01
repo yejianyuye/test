@@ -1,0 +1,192 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head lang="en"><title>
+    新生注册新东方通行证
+</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="screen-orientation" content="portrait">
+    <!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+
+    <style type="text/css">
+        .p167-find-form-tips1 {
+            color: #999;
+            display: none;
+            font-size: 14px;
+            position: absolute;
+            right: 0;
+            top: 14.5px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<form name="form1" method="post" action="./Register.aspx" id="form1">
+    <!--nav begin-->
+    <div class="m-nav2" style="">
+        <h2>新生注册</h2>
+        <div class="m-nav2-back">
+            <a href="javascript:;" id="riaGoBack"><i></i></a>
+        </div>
+        <div class="m-nav2-action"></div>
+    </div>
+    <div class="m-nav2-extend" style="">&nbsp;</div>
+    <script type="text/javascript">
+
+        // 返回上一页
+        $("#riaGoBack").click(function (event) {
+            window.history.go(-1);
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        // 在微信中干掉导航
+        if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
+            $(".m-nav2,.m-nav2-extend").remove();
+        }
+    </script>
+    <!--nav end-->
+
+    <div class="p139-main">
+        <div class="p139-input-wrap">
+
+            <span id="txtUserIcon" class="icoRight"></span><span class="p139-error-tip" id="txtUserTip"></span>
+
+            <div class="p139-input-group p139-input-bottom">
+                <input name="tel" type="text" maxlength="11" id="txtUser" class="p139-input" placeholder="请输入手机号">
+                <span class="p167-find-form-tips1" style="right: -14px; display: none;">该手机已注册 · <a href="ls_login" style="color:#09b394;">直接登录</a></span>
+            </div>
+
+            <div class="p139-input-group p139-input-captcha p139-input-bottom">
+                <input name="permit_psd" type="password" maxlength="20" id="txtPwd" class="p139-input" placeholder="请输入至少6位密码">
+            </div>
+
+            <div id="trVCode" class="p139-input-group p139-input-bottom p139-input-captcha" style="">
+                <input name="yzm" type="text" maxlength="5" id="txtVCode" class="p139-input" placeholder="请输入验证码">
+                <span class="captcha-img">
+                        <img id="Image1" onclick="this.src=this.src+'?'" class="x-vcode-img"  title="看不清楚？换张图片" src="/index.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor: pointer; vertical-align: top; width: 54px; height: 32px;">
+                </span>
+            </div>
+
+            <div class="p139-input-group  p139-captcha-text">
+                <input name="txtSmsCode" type="text" maxlength="5" id="txtSmsCode" class="p139-input" placeholder="请输入短信码">
+                <input class="p139-verification" type="button" onclick="clickGetSmsCode()" value="获取验证码">
+            </div>
+
+        </div>
+
+        <div class="p139-btn-wrap">
+            <a class="p139-btn" id="btnRegister" href="javascript:clickbtnNext();">注册</a>
+        </div>
+
+        <!--20160825改S-->
+        <div class="p139-option">
+            <span class="p139-option-left" style="width:35%;"></span>
+            <span class="p139-option-right" style="width:65%;"><a href="txz_login">通行证登录</a> | <a href="ls_login">老生登录</a></span>
+        </div>
+        <!--20160825改S-->
+    </div>
+
+    <div style="display: none;">
+        <input type="submit" name="btnNext" value="下一步" id="btnNext">
+
+        <input name="btnSendSmsCode" type="button" id="btnSendSmsCode" value="获取短信码">
+    </div>
+
+</form>
+
+
+<div id="cli_dialog_div"></div>
+</body></html>
+
+<script>
+
+    //校验手机
+    $('#txtUser').change(function(){
+        var tel=$('#txtUser').val();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tpsstudent/register_test",
+            data:{tel:tel} ,
+            success: function (data) {
+                if(data == 1){
+                    $('.p167-find-form-tips1').css("display","block");
+                }else if(data == 0){
+                    $('.p167-find-form-tips1').css("display","none");
+                }
+            }
+        });
+    })
+
+    //校验密码
+    $('#txtPwd').change(function(){
+        var tel=$('#txtPwd').val().length;
+        if(tel < 6){
+            $('#txtUserTip').text('请输入至少6位密码');
+        }else if(tel > 20){
+            $('#txtUserTip').text('请输入不能大于20位密码');
+        }else{
+            $('#txtUserTip').text('');
+        }
+    })
+
+
+
+    $('#btnRegister').click(function(){
+        //校验密码
+        var mima=$('#txtPwd').val().length;
+        if(mima < 6){
+            $('#txtUserTip').text('请输入至少6位密码');
+            return false;
+        }else if(mima > 20){
+            $('#txtUserTip').text('请输入不能大于20位密码');
+            return false;
+        }
+        //校验手机号码
+        var tel = $('#txtUser').val();
+        $ss  = validatemobile(tel);
+        if($ss == false){
+            $('#txtUserTip').text('手机格式不正确');
+            return false;
+        }else{
+            $('#txtUserTip').text('');
+        }
+        //图文验证码
+        var yanzhenma = $('#txtVCode').val();
+        if(yanzhenma==''){
+            $('#txtUserTip').text('验证码不能为空');
+            return false;
+        }
+
+        var formdata = $('#form1').serialize();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tpsstudent/do_register",
+            data:formdata ,
+            success: function (data) {
+               // console.log(data);
+                if(data.error == 0){
+                    alert(data.error_info)
+                }else if(data.error == 1){
+                    window.location.href = '/index.php/web/Tpsstudentinfo/student_index';
+                }
+            }
+        })
+
+
+    })
+
+
+    function validatemobile(mobile){
+        var pattern = /^1\d{10}$/;
+        return pattern.test(mobile);
+    }
+
+</script>

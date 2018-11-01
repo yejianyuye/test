@@ -1,0 +1,122 @@
+<html data-dpr="1" class = "geng" style="font-size: 36px;"><head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+
+    <title>看演示——复制副本</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>新东方TPS系统</title>
+
+    <!-- 获取常量引用版本 -->
+
+    <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+    <link href="/public/static/tps/css/report/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/style.css?v=201805311740" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/extraEditor.css" rel="stylesheet" type="text/css"/>
+    <script src="/public/static/tps/js/iscroll.js?v=201805311740"></script>
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+
+    <script>
+
+
+        $(function(){
+            var width = $(window).width()/10;
+            $('.geng').css('font-size',width);
+            function isWeixinBrowser(){
+                return /micromessenger/.test(navigator.userAgent.toLowerCase())
+            }
+            if(isWeixinBrowser()){
+                $('.wx-header').css('display','none');
+            }else{
+                $('.wx-header').css('display','block');
+            }
+        })
+    </script>
+
+    <script>
+    var myScroll;
+    function loadScroll(){
+        myScroll = new IScroll('#subjectContainer', {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+            click: true,
+            preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/ }
+        });
+    }
+
+
+
+    $(function() {
+
+        $('.wx-serialtit').on('click',function(){
+            if($(this).find('h2').hasClass('active')){
+                $(this).find('h2').removeClass('active');
+                $(this).siblings('.wx-circlenum').show();
+            }else{
+                $(this).find('h2').addClass('active');
+                $(this).siblings('.wx-circlenum').hide();
+            }
+        })
+    })
+</script>
+
+</head>
+<body onload="loadScroll();" style="font-size: 12px;">
+
+<div class="wx-tests">
+    <div class="wx-header" style="display: block;">
+        看演示——复制副本
+    </div>
+    <div class="wx-paperstatic">
+        <div class="wx-pmount">
+            <div class="wx-cir">
+                <span class="wx-big">{$report_ren.zqcount}</span>/{$report_ren.allcount}
+            </div>
+            <p>共作答{$report_ren.wccount}道题</p>
+        </div>
+        <div class="wx-time">
+            <div class="wx-cir">
+                {$time_use.use_time}
+            </div>
+            <p>{$time_use.use_time_ms}</p>
+        </div>
+    </div>
+    <div class="wx-scl" id="subjectContainer" style="height: 496px; overflow-y: hidden;">
+        <div class="containerClass" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+            <div style="padding:20px 0 0px 0px;color:orange;font-weight:bold;width:100%;text-align:center;font-size:14px"><h2>提示：点击题号查看试题详情</h2></div>
+
+            {volist name = "report_question" id = "ss" key = "k"}
+            <div class="wx-sbg">
+                <div class="wx-serialtit">
+                    <h2>{$ss.point_title} <span></span></h2>
+                </div>
+                <div class="wx-circlenum">
+
+                    {volist name = "ss.num_pd" id = "nd" key = "kd"}
+                    <div class="wx-cirn {if condition="($nd.isok == 1)"}  wx-ok   {else} wx-error {/if}">
+                        <a class="subjectId" href="/index.php/web/Wapreport/student_tps_answer?page={$nd.question_page}&xpage={$nd.question_number}&type={$nd.question_type}">{$kd}</a>
+                        <span class="iconfont">{if condition="($nd.isok == 1)"}{else}{/if}</span>
+                    </div>
+                    {/volist}
+
+
+                </div>
+            </div>
+            {/volist}
+
+        </div>
+        <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;">
+            <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 466px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+        </div>
+    </div>
+    <a href="/index.php/web/Tpsstudentinfo/student_index" class="u-home iconfont"></a>
+</div>
+
+<div id="cli_dialog_div"></div>
+</body>
+</html>

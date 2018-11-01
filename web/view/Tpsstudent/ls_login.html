@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <title>
+    老生登陆
+   </title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="screen-orientation" content="portrait">
+    <!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+</head>
+
+
+<body>
+<form name="form1" method="post" action="/index.php/web/Tpsstudent/login_post" id="form1">
+
+    <!--nav begin-->
+    <div class="m-nav2" style="">
+        <h2>老生登陆</h2>
+        <div class="m-nav2-back">
+            <a href="javascript:;" id="riaGoBack"><i></i></a>
+        </div>
+        <div class="m-nav2-action"></div>
+    </div>
+    <div class="m-nav2-extend" style="">&nbsp;</div>
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+        // 返回上一页
+        $("#riaGoBack").click(function (event) {
+            window.history.go(-1);
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        // 在微信中干掉导航
+        if (navigator.userAgent.indexOf('MicroMessenger') > -1) {
+            $(".m-nav2,.m-nav2-extend").remove();
+        }
+    </script>
+    <!--nav end-->
+
+    <div class="p139-main">
+
+        <div class="p139-input-wrap">
+            <span id="txtUserIcon"></span>
+            <span class="p139-error-tip" id="txtUserTip"></span>
+            <div class="p139-input-group p139-input-bottom">
+
+                <input name="tel" type="text" maxlength="11" id="txtUser" class="p139-input" placeholder="请输入报名时的手机号">
+            </div>
+
+            <div class="p139-input-group p139-input-captcha">
+                <input name="student_name" type="text" maxlength="20" id="txtStudentName" class="p139-input" placeholder="请输入学员姓名">
+            </div>
+        </div>
+
+
+        <div class="p139-btn-wrap">
+            <a class="p139-btn" id="btnLogin">下一步</a>
+        </div>
+        <div class="p139-option">
+            <span class="p139-option-left" style="width:35%;"><a href="ls_problem" target="_blank">遇到问题？</a></span>
+            <span class="p139-option-right" style="width:65%;"><a href="txz_login">通行证登录</a> | <a href="student_login">短信登录</a></span>
+        </div>
+        <div class="p139-btn2-wrap">
+            <a class="p139-btn2" href="register">新生注册</a>
+        </div>
+    </div>
+
+
+
+
+</form>
+</body>
+</html>
+
+<script>
+
+
+
+    $('#btnLogin').click(function(){
+        var tel = $('#txtUser').val();
+        $ss  = validatemobile(tel);
+        if($ss == false){
+            $('#txtUserTip').text('手机格式不正确');
+            return false;
+        }else{
+            $('#txtUserTip').text('');
+        }
+        var formdata = $('#form1').serialize();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tpsstudent/laoshen_login_post",
+            data:formdata ,
+            success: function (data) {
+                console.log(data);
+                if(data.error == 0){
+                    alert(data.error_info);
+                }else if(data.error == 1){
+                    window.location.href = '/index.php/web/Tpsstudentinfo/student_index';
+                }
+            }
+        });
+    })
+
+    function validatemobile(mobile)
+    {
+        var pattern = /^1\d{10}$/;
+        return pattern.test(mobile);
+    }
+
+
+
+
+
+
+</script>

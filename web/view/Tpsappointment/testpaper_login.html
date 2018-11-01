@@ -1,0 +1,109 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>新东方通行证 注册</title>
+    <link rel="stylesheet" href="/public/static/tps/css/testpaper_loign.css" />
+
+    <style type="text/css">
+        .icoRight { display: none; }
+        /* 最外层div用icoError会自动隐藏 */
+        .p167-permit-form1 input.p139-input2 { border-bottom: 1px solid #ebebeb; }
+        .p167-permit-form1 input.p139-input3 { height: 52px; line-height: 52px; border-top: 1px solid #ebebeb; width: 318px; padding-left: 0; }
+        .p167-permit-form1 input.p139-input2-n { border-bottom: 0; }
+    </style>
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+
+
+<body style="min-height: 800px;">
+
+<form name="form1" method="post" action="./studentMobileName.aspx" id="form1">
+
+    <div class="p167-nav">
+        <div class="p167-nav-in">
+            <a href="logo.aspx" target="_blank" class="p167-nav-in-left"></a>
+            <span class="p167-nav-in-right"><a href="index.aspx" class="toplink1">线上测试登录</a></span>
+        </div>
+    </div>
+
+
+
+    <div class="p167-permit" style="margin-bottom: 0; position: relative;">
+
+
+        <div class="icoError" id="txtUserIcon" style="{if condition="($res == 2)"}display:block;{else /}display:none;{/if}  position: absolute; top: -85px; left: 0;">
+            <i></i><span id="txtUserTip">{if condition="($res == 2)"}预约试卷只能线上测评一次{/if}</span>
+        </div>
+
+        <h1>线上测试登陆</h1>
+        <div class="p167-permit-form1">
+            <input name="txtUser" type="text" maxlength="11" id="tel" class="p167-permit-phone" placeholder="请输入预约时的手机号" />
+            <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$evaluate_paper_id}" />
+            <input name="txtStudentName" type="text" maxlength="20" id="txtStudentName" class="p139-input p139-input2 p139-input2-n" placeholder="请输入学员姓名" />
+        </div>
+    {if condition="($res == 2)"}
+        <a id="btnLogin" href="javascript:void(0);" class="p167-bind-btn">登录</a>
+    {else /}
+        <a id="btnLogin" href="javascript:void(0);" onclick = "clickbtnNext()" class="p167-bind-btn">登录</a>
+    {/if}
+    </div>
+
+
+
+    <div style="display: none;">
+        <input type="submit" name="btnNext" value="下一步" id="btnNext" />
+    </div>
+</form>
+</body>
+</html>
+<script>
+
+    function clickbtnNext(){
+        var tel = $('#tel').val();
+        if(tel == ''){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入电话号码');
+            return false;
+        }
+
+        var name = $('#txtStudentName').val();
+        var paper_id = $('#paper_id').val();
+        if(name == ''){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入姓名');
+        }
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/index.php/web/Tps/do_login_test",
+            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,},
+            success: function (data) {
+                if(data == -1){
+
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('该考试没有这个预约电话');
+
+                }else if(data == 0){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('电话或者姓名错误');
+
+                }else if(data == -2){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('考生已完成答题');
+
+                }else{
+                    window.location.href = "/index.php/web/PCanswer/testpaper?evaluate_paper_id="+data;
+                }
+            },
+        });
+
+    }
+
+</script>
+
+

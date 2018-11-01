@@ -1,0 +1,180 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>第9届武汉市小学生全科能力测评报告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="/public/static/tps/css/wrcweb/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="/public/static/tps/css/wrcweb/style.css?v=201804121630" rel="stylesheet" type="text/css">
+
+    <!--<script src="/gwots/static/skin/wrcweb/js/report/report.js?v=201804121630"></script>
+    <script src="/gwots/static/js/lib/echarts/echarts.min.wrcweb.js"></script>-->
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/public/static/Chart.js-2.7.2/dist/Chart.js"></script>
+
+    <!-- <script type="text/javascript" src="/public/static/Chart.js-2.7.2/src/charts/Chart.Bar.js"></script>-->
+</head>
+<body>
+<div class="header">
+    <script type="text/javascript">
+        $('.header').load('/index.php/web/Tpsreport/get_titlename?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}');
+    </script>
+</div>
+
+<div class="w1000 cf">
+    
+    <div id="mSubs" class="m-subjects">
+        <!-- 显示全科 -->
+        <a id="allSubId" class="active first" href="/index.php/web/Tpsreport/report_all?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}">全科</a>
+
+        {volist name="geke" id = "ni" key="nk"}
+        <a class="" href="/index.php/web/Tpsreport/report_kemu?evaluate={$data.evaluate}&zhunkaonum={$data.zhunkaonum}&xueke={$ni.id}">
+            {$ni.kemuname}
+        </a>
+        {/volist}
+
+    </div>
+    <div class="wbg">
+        <div class="m-tblWrap cf">
+            <div class="m-topBtn cf">
+                <a href="javascript:void(0);" onclick="window.print();" class="btn btn-s instn">打印报告</a>
+            </div>
+            <div class="g-tblscroll">
+                <table border="0" cellspacing="0" cellpadding="0" class="tbl-2 mt40">
+                    <tbody><tr>
+                        <td class="bg">姓名</td>
+                        <td>{$student_info.student_name}</td>
+                        <td class="bg">学员号</td>
+                        <td>
+                            {$student_info.student_num}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bg">准考证号</td>
+                        <td>{$student_info.zhunkaonum}</td>
+                        <td class="bg">所在年级</td>
+                        <td>{$student_info.nianji}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">考试科目</td>
+                        <td width="400px;">{$student_info.ks_name}</td>
+                        <td class="bg">所在校区</td>
+                        <td>{$student_info.xiaoqu_name}</td>
+                    </tr>
+                    </tbody></table>
+            </div>
+        </div>
+        <div class="analysis">
+            <div class="serial">
+                <span></span>整体情况
+            </div>
+            <div class="g-tblscroll">
+                <table border="0" cellspacing="0" cellpadding="0" class="tbl-2">
+                    <tbody>
+
+                    <tr>
+                        <td class="bg">科目</td>
+                        <td class="bg">分数</td>
+                        <td class="bg">武汉新东方平均分</td>
+                        <td class="bg">{$student_info.xiaoqu_name}平均分</td>
+                    </tr>
+
+
+                    {volist name = "arr"  id = "do" key ="k"}
+                    <tr>
+                        <td class="bg">{$do.xdf_km}</td>
+                        <td>{$do.gr_fs}</td>
+                        <td>{$do.xdf_fs}</td>
+                        <td>{$do.xq_fs}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 平均分统计柱状图 -->
+        <div class="analysis">
+            <div class="serial">
+                <span></span>个人/城市平均分统计表
+            </div>
+            <div id="allCylinderChart" style="height: 387px; -webkit-tap-highlight-color: transparent; user-select: none; background: transparent;" class="g-tblscroll" _echarts_instance_="ec_1524119123580">
+                <div style="position: relative; overflow: hidden; width: 940px; height: 387px; cursor: default;">
+                    <canvas id ="canvas" width="940" height="387" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 940px; height: 387px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div style = "display:none;" id="zhi">
+
+            {volist name = "arr"  id = "do" key ="k"}
+
+            <li  xdf_cj = "{$do.xdf_fs}" gr_cj = "{$do.gr_fs}" ming_c="{$do.xdf_km}"></li>
+
+
+            {/volist}
+        </div>
+
+
+    </div>
+</div>
+
+
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+<script>
+    var xdf_data = [];
+    var gr_data = [];
+    var name_data = [];
+    // xdf_data
+    $('#zhi li').each(function(){
+        xdf_data.push($(this).attr('xdf_cj'));
+        gr_data.push($(this).attr('gr_cj'));
+        name_data.push($(this).attr('ming_c'));
+    })
+
+    var data = {
+        labels: name_data,
+        datasets: [
+            {
+                backgroundColor:"#f18181",
+                borderColor:"#f18181",
+                label: "新东方平均分(左侧)",
+                //yAxisID:123,
+                //borderWidth:2%,
+                data: xdf_data
+            },
+            {
+                backgroundColor:"#7aafe7",
+                borderColor:"#7aafe7",
+                label:"个人分(右侧)",
+                //yAxisID:125,
+                //borderWidth:2%,
+                data: gr_data
+            },
+
+        ]
+    }
+
+
+    $(function () {
+        var ctx = document.getElementById("canvas");
+        var myChart = new Chart(ctx, {
+           // barStrokeWidth: 4,
+            type: 'bar',
+
+            data:data,
+            //  options:option,
+        })
+
+
+    });
+
+
+</script>
+

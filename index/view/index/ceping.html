@@ -1,0 +1,343 @@
+
+
+			<link href="/thinkphp5/public/static/tps/css/ppfullscreen.css" rel="stylesheet" type="text/css" />
+			<div class="hd-tab cf">
+
+				<a href="javascript:void(0);" {if condition="($search_datas.status != 1)"}onclick="otsPaper.tab(this,1);" {/if} class="atab {if condition="($search_datas.status == 1)"}active{/if}">未发布</a>
+				<a href="javascript:void(0);" {if condition="($search_datas.status != 2)"}onclick="otsPaper.tab(this,2);" {/if} class="atab {if condition="($search_datas.status == 2)"}active{/if}">已发布</a>
+				<a href="javascript:void(0);" {if condition="($search_datas.status != 3)"}onclick="otsPaper.tab(this,3);" {/if} class="atab {if condition="($search_datas.status == 3)"}active{/if}">下架</a>
+			</div>
+			<!--  检索条件   -->
+			<div class="sifts cf">
+				<form id="gwcp_qform" onsubmit="return false;">
+					<input id="paperName" name = "paperName" value = "{$search_datas.paper_name}" type="text" placeholder="试卷名称" class="txt" style="color: #999">
+					<div id="paperStage" class="selt-box  " style="width: 50px;">
+						<input type="text" name="paperStage"  value="{$search_datas.xueduan}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+						{if condition="($search_datas.xueduan == '')"}
+						<span class="selt-txt ft" title="学段">学段</span>
+						{else /}
+						<span class="selt-txt ft" title="{$search_datas.xueduan_name}">{$search_datas.xueduan_name}</span>
+						{/if}
+						<i class="iconfont" onclick = "tt(this)"></i>
+						<ul class="opt" style="display: none;">
+							<li onclick = "ss(this)">
+								<a href="javascript:void(0);"  svalue="" title="学段" class="ft">学段</a>
+							</li>
+							{volist name="paper_class" id="vo"  key="k"}
+
+							<li onclick = "ss(this,2)">
+								<a href="javascript:void(0);"  svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+							</li>
+
+							{/volist}
+						</ul>
+					</div>
+
+					<div id="gwcpgrade" class="l">
+						<div id="paperGrade" class="selt-box  " style="width: 50px;">
+							<input type="text" name="paperGrade" valuename="" value="{$search_datas.nianji}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+							{if condition="($search_datas.nianji == '')"}
+							<span class="selt-txt ft" id = "nianji1" title="年级" style="color: rgb(153, 153, 153);">年级</span>
+							{else /}
+							<span class="selt-txt ft" id = "nianji1" title="{$search_datas.nianji_name}" style="color: rgb(153, 153, 153);">{$search_datas.nianji_name}</span>
+							{/if}
+
+							<i class="iconfont" onclick = "tt(this)"></i>
+							<ul class="opt" id="nianji" style="display: none;">
+								{if condition="($search_datas.nianji_search != '')"}
+								{volist name="search_datas.nianji_search" id="vo"  key="k"}
+								<li onclick = "ss(this)">
+									<a href="javascript:void(0);" svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+								</li>
+
+								{/volist}
+								{/if}
+							</ul>
+						</div>
+					</div>
+
+					<div id="paperSubject" class="selt-box  " style="width: 50px;">
+						<input type="text" name="paperSubject" valuename="" value="{$search_datas.xueke}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+						{if condition="($search_datas.xueke == '')"}
+						<span class="selt-txt ft" title="学科">学科</span>
+						{else /}
+						<span class="selt-txt ft" title="{$search_datas.xueke_name}">{$search_datas.xueke_name}</span>
+						{/if}
+
+						<i class="iconfont" onclick = "tt(this)"></i>
+						<ul class="opt" style="display: none;">
+
+								<li onclick = "ss(this)">
+									<a href="javascript:void(0);" svalue="" title="学科" class="ft">学科</a>
+								</li>
+
+								{volist name="paper_class1" id="vo"  key="k"}
+								<li onclick = "ss(this)">
+									<a href="javascript:void(0);" svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
+								</li>
+								{/volist}
+						</ul>
+					</div>
+					<a id="paperSearch" onclick = "paperSearch()" href="javascript:void(0);" class="btn btn-s l">搜索</a>
+					<a class="btn btn-ge r" href = "add_epp?evaluate_id={$evaluate_id}" id="newpaperID"><i class="iconfont"></i>新增</a>
+
+				</form>
+			</div>
+
+
+			<div id="paperDataList">
+				<div class="sift-result">
+
+					{volist name="evaluate_papers" id="vv"  key="kk"}
+					<div class="sift-list" id = "ss{$vv.id}">
+						<div class="h-btns">
+
+
+							{if condition ="($vv.status == 1)"}
+							<a class="btn btn-ge r" onclick="ceping.delPaper('{$vv.id}')"><i class="iconfont"></i></a>
+							<a href="/index.php/index/Tps/edit_epp?evaluate_paper_id={$vv.id}" class="btn btn-ge r"><i class="iconfont"></i>编辑试卷</a>
+							{/if}
+							{if condition ="($vv.status == 1 and $vv.paper_type == 1)"}
+							<a href="/index.php/index/Tps/fabu_paper?evaluate_paper_id={$vv.id}" class="btn btn-ge r"><i class="iconfont"></i>发布</a>
+							{/if}
+							{if condition ="($vv.status == 2)"}
+							<div class="m-btnDropdown r">
+								<span><i class="iconfont"></i>功能</span>
+								<i class="iconfont u-arwIcn u-s1"></i>
+								<i class="iconfont u-arwIcn u-s2"></i>
+								<div class="g-btnBox" style="top: 28px;">
+									<a onclick="otsPaper.syncPaperUser('4221BD20-A19C-4500-A7E4-1FB39CB3E2FD')">同步用户</a>
+									<a href="/index.php/index/Tps/paper_tps" target="_blank">报告</a>
+								</div>
+							</div>
+							<a onclick="ceping.chexiao('{$vv.id}')" class="btn btn-ge r"><i class="iconfont"></i>撤销</a>
+							<a onclick="ceping.qrcode('{$vv.id}')" class="btn btn-ge r" title="二维码"><i class="iconfont"></i></a>
+
+							<a onclick="ceping.xiajia('{$vv.id}')" class="btn btn-ge r"><i class="iconfont"></i>下架</a>
+							{/if}
+
+
+						</div>
+
+						<!-- 控制试卷名称长度显示 -->
+						<h3>
+							<a href="" target="_blank" title="{$vv.paper_name}" class="ftxt"> {$vv.paper_name}</a>
+							<a href="" target="_blank" class="iconfont ml5"></a>
+						</h3>
+
+						<ul class="props">
+							<li>类型: {$vv.type_name}</li>
+							<li>学段: {$vv.xueduan_name}</li>
+							<li>年级: {$vv.nianji_name}</li>
+							<li>学科: {$vv.xueke_name}</li>
+							<li>编辑人: {$vv.edit_name}</li>
+							<li>编辑时间: {$vv.edit_time}</li>
+							<li>编辑状态: {if condition="($vv.paper_type == 1)"} 组卷完成 {else} 组卷中 {/if}</li>
+						</ul>
+					</div>
+					{/volist}
+
+					<ul class="pagination tc">
+						<li class="total">共有{$count}条</li>
+						{$str}
+					</ul>
+
+				</div>
+				<a id="aHref" href="#"></a>
+
+			</div>
+
+
+			<input type="hidden" id="pageNo" name="pageNo" value="1">
+
+			<div class="blockUI blockMsg blockPage" id="erweima" style="display:none;z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 300px; top: 171.5px; left: 567.5px; text-align: left; color: rgb(0, 0, 0); border: 1px solid rgb(166, 201, 226); background-color: rgb(255, 255, 255); cursor: default;">
+				<div id="qrcodeBox" class="zx-dialog">
+					<h3 style="text-align: center;padding-top: 10px;font-size: 14px;color: #00BA97;">新东方数学四年级•寒春分班测<a style = "position: absolute;right: 20px;color: red;font-size: 28px;" class="closeWin" href="javascript:;">×</a></h3>
+
+					<div id = "qrcode" style="margin-left:40px;">
+
+					</div>
+					<!-- <span style="color:red;">二维码适用于微信端的测试，短链接适合于PC端的测试</span> -->
+					<div style="display: block;margin: 0 40px 10px 40px;word-break:break-all;">http://tps.xdf.cn/g/Fveamy</div>
+				</div>
+			</div>
+
+			<div class="blockUI blockMsg blockPage" id="shanchu" style="display:none;z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 380px; top: 164.5px; left: 527.5px; text-align: left; color: rgb(0, 0, 0); border: 1px solid rgb(166, 201, 226); background-color: rgb(255, 255, 255); cursor: default;">
+				<div id="note" class="hd-dialog" style="display: none;">
+					<div class="hd-warnCont">确定删除吗?</div>
+					<div class="btn-block">
+						<a class="btn btn-o" paper_id="">确定</a>
+						<a class="btn btn-e">取消</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="blockUI blockMsg blockPage" id = "chexiao1" style="display: none;z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 380px; top: 302px; left: 530px; text-align: left; color: rgb(0, 0, 0); border: 1px solid rgb(166, 201, 226); background-color: rgb(255, 255, 255); cursor: default;">
+				<div id="chexiao" class="hd-dialog" style="display:none;">
+					<div class="hd-warnCont">确定撤销发布吗?已测评试卷不能撤销?</div>
+					<div class="btn-block">
+						<a class="btn btn-o" paper_id="">确定</a>
+						<a class="btn btn-e">取消</a></div>
+				</div>
+			</div>
+
+			<div class="blockUI blockMsg blockPage" id = "xiajia1" style="display: none;z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 380px; top: 302px; left: 530px; text-align: left; color: rgb(0, 0, 0); border: 1px solid rgb(166, 201, 226); background-color: rgb(255, 255, 255); cursor: default;">
+				<div id="xiajia" class="hd-dialog" style="display:none;">
+					<div class="hd-warnCont">确定下架吗？</div>
+					<div class="btn-block">
+						<a class="btn btn-o" paper_id="">确定</a>
+						<a class="btn btn-e">取消</a></div>
+				</div>
+			</div>
+
+
+			<script type="text/javascript" src="/public/static/erweima/jquery.qrcode.min.js"></script>
+            <script type="text/javascript">
+                //考点下面题目编辑
+                var ceping = {
+                    //生成二维码
+                    qrcode: function (paper_id) {
+                        $.ajax({
+                            type: "get",
+                            dataType: "json",
+                            url: "/index.php/index/Tps/phpqrcode",
+                            data: {'paper_id':paper_id},
+                            success: function (data) {
+
+                                $('#qrcode').html(data);
+								$('#paperDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+                                $('#erweima').css('display','block');
+                                $('#qrcodeBox').css('display','block');
+                            },
+                        });
+                    },
+
+                    delPaper: function (id){
+                        $('#paperDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+                       	$('#note .btn-o').attr('paper_id',id);
+                        $('#note').css('display','block');
+                        $('#shanchu').css('display','block');
+					},
+
+                    chexiao: function (id){
+                        $('#paperDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+                        $('#chexiao1 .btn-o').attr('paper_id',id);
+                        $('#chexiao').css('display','block');
+                        $('#chexiao1').css('display','block');
+                    },
+
+                    xiajia: function (id){
+                        $('#paperDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+                        $('#xiajia .btn-o').attr('paper_id',id);
+                        $('#xiajia').css('display','block');
+                        $('#xiajia1').css('display','block');
+                    }
+
+
+                }
+
+                $('.closeWin').click(function(){
+                    $('.blockOverlay').remove();
+                    $('.blockUI').css('display','none');
+                })
+
+                $('.btn-e').click(function(){
+                    $('.blockOverlay').remove();
+                    $('.blockUI').css('display','none');
+                })
+
+				//删除考卷
+                $('#shanchu .btn-o').click(function(){
+                    var paper_id = $(this).attr('paper_id');
+                   // console.log(paper_id);
+                  //  $('#ss'+paper_id).remove();return false;
+                    $.ajax({
+                        type: "get",
+                        dataType: "json",
+                        url: "/index.php/index/Tps/del_paper",
+                        data: {'paper_id':paper_id},
+                        success: function (data) {
+                            $('.blockOverlay').remove();
+                            $('.blockUI').css('display','none')
+                            if(data == 1){
+
+                                $('.hd-data').load('/index.php/index/Tps/ceping?page=1&status=1&evaluate_id=5');
+							}else{
+                                alert('删除失败');
+							}
+
+                        }
+                    })
+                })
+
+				//撤销
+                $('.btn-e').click(function(){
+                    $('.blockOverlay').remove();
+                    $('.blockUI').css('display','none');
+                })
+
+                //撤销
+                $('#chexiao .btn-o').click(function(){
+                    var paper_id = $(this).attr('paper_id');
+                    $.ajax({
+                        type: "get",
+                        dataType: "json",
+                        url: "/index.php/index/Tps/chexiao_paper",
+                        data: {'paper_id':paper_id},
+                        success: function (data) {
+                            $('.blockOverlay').remove();
+                            $('.blockUI').css('display','none');
+                            if(data == 1){
+
+                                $('.hd-data').load('/index.php/index/Tps/ceping?page=2&status=2&evaluate_id=5');
+                            }else{
+                                alert('删除失败');
+                            }
+
+                        }
+                    })
+                })
+
+                //下架
+                $('.btn-e').click(function(){
+                    $('.blockOverlay').remove();
+                    $('.blockUI').css('display','none');
+                })
+
+                //下架
+                $('#xiajia .btn-o').click(function(){
+                    var paper_id = $(this).attr('paper_id');
+                    $.ajax({
+                        type: "get",
+                        dataType: "json",
+                        url: "/index.php/index/Tps/xiajia_paper",
+                        data: {'paper_id':paper_id},
+                        success: function (data) {
+                            $('.blockOverlay').remove();
+                            $('.blockUI').css('display','none');
+                            if(data == 1){
+                                $('.hd-data').load('/index.php/index/Tps/ceping?page=1&status=2&evaluate_id=5');
+                            }else{
+                                alert('删除失败');
+                            }
+
+                        }
+                    })
+                })
+
+
+
+
+				//功能模块显示问题
+                $(".sift-list .m-btnDropdown").mouseover(function (){
+                    $(this).addClass('active');
+                }).mouseout(function (){
+                    $(this).removeClass('active');
+                });
+
+			</script>
+
+
+
+

@@ -1,0 +1,95 @@
+<html data-dpr="1" style="font-size: 40px;"><head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- 在线测评学员中心页引用头文件 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <script src="/gwots/static/js/noe/weixin/otstest/components.js?v=201805221740"></script><style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js?v=201805221740"></script>
+
+    <script src="/gwots/static/js/noe/weixin/AppUtils.js?v=201805221740"></script>
+
+    <link rel="stylesheet" href="/public/static/tps/css/student_info/style.css?v=1">
+    <link rel="stylesheet" href="/public/static/tps/css/student_info/iconfont.css?v=1">
+    <title>新东方TPS系统</title>
+</head>
+<body style="font-size: 12px;">
+<div class="wx-tests">
+    <div class="wx-header" style="display: block;">
+        新东方TPS系统
+    </div>
+    <div class="wx-scl" id="wrapper" style="height: 618px; overflow-y: hidden;">
+        <div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+            <div class="wx-tester">
+                <span class="wx-testnum"><b>23231...</b>已完成<b id="totalRowID">5</b>个诊断</span>
+                <a href="/gwots/weixin/otstest/passport/logout?loginType=ns" class="relog">重新登录</a>
+            </div>
+            <ul class="wx-hlist" id="reportID_wx-hlist">
+
+
+                {volist name = "appointment_info" id="re" key = "key"}
+                <li>
+                    <span>{$re.paper_name}</span>
+                    <a href="/index.php/web/Wapreport/report?appointment_id={$re.id}">查看报告</a>
+                </li>
+                {/volist}
+
+            </ul>
+            <div class="wx-load">
+                <a href="javascript:;" id="getReportMore" style="display: none;">加载更多...</a>
+            </div>
+        </div>
+        <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;"><div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 610px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div></div></div>
+</div>
+
+<script>
+    var pageNo = 1 ;
+    var maxPage = 0 ;
+    function getReportMore(){
+        var data = {
+            p : pageNo
+        }
+        AppUtils.doPost(ctx+'/weixin/otstest/reportpassport/querylist',data,function(res){
+            if(res.result.maxPage+"" == res.result.pageNo+""){
+                $("#getReportMore").hide();
+            }else{
+                maxPage = res.result.maxPage;
+                pageNo = res.result.pageNo+1;
+            }
+            $("#totalRowID").html(res.result.totalRow);
+            $("#reportID_wx-hlist").append(res.gridHTML);
+            setTimeout(function(){
+                myScroll.refresh();
+            },200);
+        });
+    }
+
+    var myScroll = null;
+
+    function loaded () {
+        myScroll = new IScroll('#wrapper', {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+            click: true
+        });
+    }
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    $(function(){
+        $("#getReportMore").on("tap",function(){
+            getReportMore();
+        });
+        var winHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+        var oH1 = winHeight-$('.wx-header').height();
+        getReportMore();
+        $('.wx-scl').css({height:oH1,overflowY:'hidden'});
+        loaded();
+    });
+</script>
+
+<div id="cli_dialog_div"></div></body></html>

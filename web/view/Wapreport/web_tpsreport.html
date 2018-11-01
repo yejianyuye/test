@@ -1,0 +1,276 @@
+
+<html data-dpr="1" style="font-size: 37.5px;"><head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <!-- header -->
+    <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>看演示——复制副本</title>
+    <link href="/public/static/tps/css/report/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/style.css?v=201805311740" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/report/extraEditor.css" rel="stylesheet" type="text/css"/>
+    <script src="/public/static/tps/js/iscroll.js?v=201805311740"></script>
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script>
+
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+        $(function(){
+
+            function isWeixinBrowser(){
+                return /micromessenger/.test(navigator.userAgent.toLowerCase())
+            }
+
+            $('.wx-header').css('display','none');
+            if(isWeixinBrowser()){
+
+                var oH1=$(window).height()-$('.wx-tabs').height();
+                $('.wx-scl').css({height:oH1,overflowY:'hidden'});
+                $('.wx-header').css('display','none');
+
+            }else{
+                var oH1=$(window).height()-$('.wx-header').height()-$('.wx-tabs').height();
+                $('.wx-scl').css({height:oH1,overflowY:'hidden'});
+                $('.wx-header').css('display','block');
+            }
+        })
+
+    </script>
+    <script>
+        var myScroll;
+        var pointData = "[{text: '单选题', max: 6.0},{text: '完型填空', max: 3.0}]";
+        var pointCorrectData = "[1.0,1.0]";
+
+        function loaded () {
+            myScroll = new IScroll('#wrapper', {
+                scrollbars: true,
+                mouseWheel: true,
+                interactiveScrollbars: true,
+                shrinkScrollbars: 'scale',
+                fadeScrollbars: true,
+                click: true
+            });
+        }
+
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        $(function(){
+
+            $('.wx-stit').on('click',function(){
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    $(this).siblings('.wx-sbox').show();
+                    setTimeout(function () {
+                        myScroll.refresh();
+                    }, 100);
+                }else{
+                    $(this).addClass('active');
+                    $(this).siblings('.wx-sbox').hide();
+                    setTimeout(function () {
+                        myScroll.refresh();
+                    }, 100);
+                }
+            });
+
+            $('.wx-tabs a').on('click',function(){
+                $('.wx-tabs a').removeClass('active');
+                $(this).addClass('active');
+                var t;
+                switch($(this).attr('title')){
+                    case '#whole':
+                        t=0;
+                        myScroll.scrollTo(0, t);
+                        break;
+                    case '#result':
+                        t=$('#whole').outerHeight();
+                        console.log(t);
+                        myScroll.scrollTo(0, -t);
+                        break;
+                    case '#single':
+                        t=$('#whole').outerHeight()+$('#result').outerHeight();
+                        //alert(t);
+                        myScroll.scrollTo(0, -t);
+                        break;
+                    case '#summary':
+                        t=$('#whole').outerHeight()+$('#result').outerHeight()+$('#single').outerHeight();
+                        myScroll.scrollTo(0, -t);
+                        break;
+                }
+            })
+        });
+    </script>
+</head>
+    <body  style="font-size: 12px;" onload="loaded()">
+
+        <div class="wx-tests">
+
+            <div class="wx-header" style="display: block;">
+                看演示——复制副本
+            </div>
+
+            <div class="wx-scl" id="wrapper" style="height: 584px; overflow-y: hidden;">
+                <div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+
+                    <!-- 整体情况 begin -->
+                    <div class="wx-sbg" id="whole">
+                        <div class="wx-summary">
+                            <div class="wx-serialtit">
+                                <h2>等级评定</h2>
+                            </div>
+                            <div class="level">
+                                <div class="level-step">
+                                    <div class="model p3"></div>
+                                    <div class="ruler"></div>
+
+                                    <ul class="steps">
+                                        <li class="st-1"><span>1</span></li>
+                                        <li class="st-2"><span>2</span></li>
+                                        <li class="st-3"><span>3</span></li>
+                                        <li class="st-4"><span>4</span></li>
+                                    </ul>
+                                </div>
+                                <div class="tester">
+                                    亲爱的<span class="cr">2323132</span>同学:
+                                </div>
+                                <p class="para">你于 <span class="cr">{$student_report.start_time}</span>参加新东方 <span class="cr">{$student_report.paper_name}</span>，
+                                    用时<span class="cr">{$student_report.use_time_ms}</span>，
+                                    你的试卷总正确率是 <span class="cr">{$student_report.zql}%</span>，
+                                    以下是对诊断情况的详细分析。</p>
+                                <p class="para">你的<span class="cr">数学</span>学科能力位处<span class="cr">等级{$student_report.dengji}</span>，这说明你对本学科现阶段所要求知识点的掌握不够扎实，这导致你缺乏运用所学知识独立分析并解决问题的能力，答题的正确率较不理想。你的解题技巧有待全面提高，知识点线索需梳理清楚，学科基础知识架构亦有待完善。</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- 整体情况 end -->
+
+                    <div class="wx-sbg" id="result">
+                        <div class="wx-summary">
+                            <div class="wx-serialtit">
+                                <h2>结果分析</h2>
+                            </div>
+                            <table class="wx-tbl" width="100%" cellpadding="0" cellspacing="0">
+                                <tbody><tr>
+                                    <th>知识点</th>
+                                    <th>正确题目/总题目</th>
+                                    <th>掌握度</th>
+                                </tr>
+
+                                {volist name="point_array" id="vo"  key="k" }
+                                <tr>
+                                    <td title="{$vo.point_name}">{$vo.point_name}</td>
+                                    <td>{$vo.point_num}/{$vo.question_all}</td>
+                                    <td>{$vo.point_zq}%</td>
+                                </tr>
+                                {/volist}
+
+                                </tbody>
+                            </table>
+                            <!-- 未在tps系统登录，想直接通过tps报告页面查看测评详情建立分支，目前服务于双十东方业务 -->
+                            <a href="report_answer_detail" class="wx-asw">查看答案</a>
+                            <div class="chart">
+                                <div class="w380" id="imgRadarMapId" style="width: 100%; height: 270px;">
+                                    <img id="radarMapImgId" src="" style="width:100%;height:100%">
+                                </div>
+                                <div id="radarMapId" class="w380" style="display: none; width: 500px; height: 270px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background-color: transparent;" _echarts_instance_="ec_1529475527960"><div style="position: relative; overflow: hidden; width: 500px; height: 270px;"><canvas width="1000" height="540" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 500px; height: 270px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div><div></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wx-sbg" id="single">
+                        <div class="wx-serialtit">
+                            <h2>单项分析</h2>
+                        </div>
+
+
+                        {volist name="point_array" id="vo"  key="k" }
+                        <div class="wx-single">
+                            <h3 class="wx-stit">{$vo.point_name}<span></span></h3>
+                            <div class="wx-sbox">
+                                <div class="wx-sbox">
+                                    <div class="key-prg">
+                                        <div class="percents pc1">
+                                            <h3><span class="p-n">题目比重</span><span class="pcr">{$vo.point_bz}%</span></h3>
+                                            <div class="po-bar"><div class="pi-bar" style="width: 33.33%;"></div></div>
+                                        </div>
+                                        <div class="percents pc2">
+                                            <h3><span class="p-n">答题正确率</span><span class="pcr">{$vo.point_zq}%</span></h3>
+                                            <div class="po-bar"><div class="pi-bar" style="width: 33.33%;"></div></div>
+                                        </div>
+                                        <div class="percents pc4">
+                                            <h3><span class="p-n">掌握程度</span></h3>
+                                            <span class="p-cir {if condition="($vo.point_dengji == 5)"}  cr {/if}"><span>不足</span></span>
+                                            <span class="p-cir {if condition="($vo.point_dengji == 4)"}  cr {/if}"><span>了解</span></span>
+                                            <span class="p-cir {if condition="($vo.point_dengji == 3)"}  cr {/if}"><span>熟悉</span></span>
+                                            <span class="p-cir {if condition="($vo.point_dengji == 2)"}  cr {/if}"><span>掌握</span></span>
+                                            <span class="p-cir {if condition="($vo.point_dengji == 1)"}  cr {/if}"><span>精通</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="result-analysis">
+                                        <h3>结果分析</h3>
+                                        <p class="para">{$vo.dx_desc}。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+
+                    </div>
+
+                    <div class="wx-sbg" id="summary">
+                        <div class="wx-serialtit">
+                            <h2>总结</h2>
+                        </div>
+                        <div class="wx-summary">
+                            <p class="para">
+                                {$student_report.zongji}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="wx-sbg">
+                        <div class="wx-serialtit">
+                            <h2>推荐资讯</h2>
+                        </div>
+                        <div class="wx-summary">
+                            <div class="wx-course">
+
+                                {if condition="($tuijian_isok == 0)"}
+                                    没有相关推荐
+                                {else}
+                                我们根据您的成绩，为你推荐的课程有
+                                {volist name="tuijian" id="vo"  key="k" }
+                                        <a href ="{$vo.tj_kcdz}" >《{$vo.tj_kc}》</a>&nbsp;&nbsp;
+                                {/volist}
+
+                                {/if}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;">
+                    <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 156px; transform: translate(0px, 54px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+                </div>
+            </div>
+
+
+            <div class="wx-tabs" >
+                <a href="javascript:void(0);" title="#whole">整体情况</a>
+                <a href="javascript:void(0);" title="#result">结果分析</a>
+                <a href="javascript:void(0);" title="#single">单项分析</a>
+                <a href="javascript:void(0);" title="#summary">总结</a>
+            </div>
+
+            <a href="/index.php/web/Tpsstudentinfo/student_index" class="u-home iconfont"></a>
+
+        </div>
+
+    <div id="cli_dialog_div"></div>
+    </body>
+</html>

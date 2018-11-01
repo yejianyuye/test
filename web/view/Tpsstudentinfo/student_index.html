@@ -1,0 +1,80 @@
+<html data-dpr="1" class ="geng" style="font-size: 40px;">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>学员入口</title>
+    <!-- 在线测评学员中心页引用头文件 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
+
+    <link rel="stylesheet" href="/public/static/tps/css/student_info/style.css?v=1">
+    <link rel="stylesheet" href="/public/static/tps/css/student_info/iconfont.css?v=1">
+
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="font-size: 12px;">
+<div class="wx-cont">
+    <div class="wx-header" style="display: block;">
+        新东方TPS系统
+    </div>
+    <div class="wx-stuinfo">
+        <img src="/public/static/tps/img/book.png" class="book" alt="">
+        <ul class="m-stu">
+            <li class="stu-name">测试</li>
+            <li title="3333">学员号：3333</li>
+            <li>手机号：15629941330</li>
+            <li>
+                <!-- 根据登录类型，退出登录后跳转到不同的登录页面 -->
+                <a href="/index.php/web/Tpsstudentinfo/del_session"><button>退出登录</button></a>
+            </li>
+        </ul>
+    </div>
+    <div class="wx-menus">
+        <!-- callType用于判断在报告列表页重新登录按钮跳转页面 -->
+        <a href="/index.php/web/Tpsstudentinfo/reportpassport">
+            <button class="f-l">
+                <i class="iconfont cr1"></i>
+                诊断报告
+            </button>
+        </a>
+        <a href="/index.php/web/Tpsstudentinfo/testscore">
+            <button class="f-r">
+                <i class="iconfont cr2"></i>
+                诊断曲线
+            </button>
+        </a>
+    </div>
+    <div class="wx-menus">
+        <!-- 功能暂未上线，字体置为灰色 -->
+        <a href="/index.php/web/Tpsstudentinfo/errorsubject">
+            <button class="f-l">
+                <i class="iconfont cr3"></i>
+                错题本
+            </button>
+        </a>
+        <!-- 功能暂未上线，字体置为灰色 -->
+        <button class="f-r" disabled="disabled" style="color:#ccc;">
+            <i class="iconfont cr4"></i>
+            收藏试题
+        </button>
+    </div>
+</div>
+<script>
+    //文件 a 的宽度
+    $(function(){
+        var width = $(window).width()/10;
+        $('.geng').css('font-size',width);
+    });
+
+
+</script>
+
+
+<div id="cli_dialog_div"></div>
+</body>
+</html>

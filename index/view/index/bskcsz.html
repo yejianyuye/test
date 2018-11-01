@@ -1,0 +1,314 @@
+<!-- 提交表单js -->
+<script type="text/javascript" src="/thinkphp5/public/static/js/jQuery.Form.js"></script>
+<script type="text/javascript" src="/thinkphp5/public/static/js/fuzhuang.js"></script>
+	<div class="hd-tab cf">
+	</div>
+	<div class="sifts cf">
+
+		<form id="gwcp_qform" onsubmit="return false;">
+
+		<a href="javascript:void(0)" class="btn btn-ge r" onclick="wrcExamRoom.showEditBox('')"><i class="iconfont"></i>新增</a>
+		<!-- <a href="#" class="btn btn-ge r" onclick="wrcExamRoom.batchDelete()"><i class="iconfont"></i>批量删除</a> -->
+		<a href="javascript:void(0)" class="btn btn-ge r" onclick="showImportBox()"><i class="iconfont"></i>批量导入</a>
+
+		<!-- 切换活动比赛按钮 -->
+		<a id="changeMatchBtn" href="javascript:;" title="进行中比赛列表" class="iconfont ml5" style="float:left;color:#00BA97;margin-top:2px;margin-right: 3px;"></a>
+
+		<!-- 按比赛查询 -->
+		<div id="wrcmatchs">
+			<!-- 有比赛数据 -->
+			<div id="matchID" class="inputSelectv  l" style="width: 100px;">
+				<input type="hidden" name = "evaluate_paper_id"  {if condition="($search_datas.evaluate_paper_id == '')"} value = "{$bskcsz.0.id}"  {else /}   value = "{$search_datas.evaluate_paper_id }" {/if}  >
+				<input type="text" name = "evaluate_paper_name" class="selt-txtv search" style="width: 100px;" {if condition="($search_datas.evaluate_paper_id == '')"}  title="{$bskcsz.0.paper_name}" value="{$bskcsz.0.paper_name}" {else /} title="{$search_datas.paper_name}" value="{$search_datas.paper_name}" {/if} >
+				<i class="iconfont" onclick = "kaochang(this);" ></i>
+				<div class="opt-wrapv" style="display: none;">
+					<ul class="opt1 list">
+                        {volist name="bskcsz" id="vv"  key="kk"}
+                         <li>
+                            <a href="javascript:void(0);" svalue="{$vv.id}" title="{$vv.paper_name}" class="sch1">{$vv.paper_name}</a>
+                        </li>
+                        {/volist}
+                    </ul>
+					<img src="/static/img/drag.png" id="drag1" class="dragImg">
+				</div>
+			</div>
+		</div>
+
+		<!-- 按年级查询 -->
+		<div id="wrcgrade">
+			<!-- 有年级数据，无带回年级查询条件 -->
+			<div id="gradeID" class="selt-box  " style="width: 100px;">
+				<input type="text" name="nianji" value="{$search_datas.nianji}" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+				<span class="selt-txt ft" title="{$search_datas.nianji_name}">{$search_datas.nianji_name}</span>
+
+				<i class="iconfont" onclick = "tt(this)"></i>
+				<ul class="opt" style="display: none;">
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="1" title="一年级">一年级</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="2" title="二年级">二年级</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="3" title="三年级">三年级</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="4" title="四年级">四年级</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="5" title="五年级">五年级</a>
+					</li>
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="6" title="六年级">六年级</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 按大区查询 -->
+		<!-- 有大区数据，无带回大区查询条件 -->
+		<div id="campusPID" class="selt-box  " style="width: 100px;">
+			<input type="text" name="dq"   value="{$search_datas.dq}"  style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
+
+			{if condition="($search_datas.dq == '')"}
+			<span class="selt-txt ft" title="大区">大区</span>
+			{else /}
+			<span class="selt-txt ft" title="{$search_datas.dq_name}">{$search_datas.dq_name}</span>
+			{/if}
+
+
+			<i class="iconfont" onclick = "tt(this);"></i>
+			<ul class="opt" style="display: none;">
+
+				<li onclick = "ss(this)">
+					<a href="javascript:void(0);" svalue="" title="大区" class="ft">大区</a>
+				</li>
+
+                {volist name="dq" id="vv"  key="kk"}
+                <li onclick = "ss(this,3)">
+                    <a href="javascript:void(0);" svalue="{$vv.qy}" title="{$vv.qy_name}" class="ft">{$vv.qy_name}</a>
+                </li>
+                {/volist}
+
+			</ul>
+		</div>
+
+		<!-- 按校区查询 -->
+		<div id="wrccampus">
+			<!-- 无校区数据 -->
+
+
+
+			<div id="campusID" class="selt-box  " style="width: 100px;">
+				<input type="hidden" name = "xq" value="{$search_datas.xq}">
+				{if condition="($search_datas.xq == '')"}
+				<span id = "xiaoqu" class="selt-txt ft" title="校区">校区</span>
+				{else /}
+				<span id = "xiaoqu" class="selt-txt ft"  title="{$search_datas.xq_name}">{$search_datas.xq_name}</span>
+				{/if}
+
+
+				<i class="iconfont" onclick = "tt(this);"></i>
+                <ul class="opt" id ="xiaoqu1" style="display: none;">
+					{if condition="($search_datas.dq_name != '')"}
+					{volist name="search_datas.xq_list" id="vo"  key="k"}
+					<li onclick = "ss(this)">
+						<a href="javascript:void(0);" svalue="{$vo.qy}" title="{$vo.qy_name}">{$vo.qy_name}</a>
+					</li>
+					{/volist}
+					{/if}
+                </ul>
+			</div>
+		</div>
+		<a id="examRoomSearch" onclick = "paperSearch(this)" href="javascript:void(0)" class="btn btn-s l">搜索</a>
+		</form>
+	</div>
+
+	<!-- 数据列表部分 -->
+	<div id="examRoomDataList">
+
+    {volist name="kaodian" id="vv"  key="kk"}
+	<div class="sift-list">
+		<div class="h-btns">
+			<a href="javascript:void(0);" onclick="otsPaper.showRoom({$vv.id})" class="btn btn-ge" style="margin-right:0px"><i class="iconfont"></i>考场座位</a>
+			<a href="javascript:void(0);" onclick="wrcExamRoom.showEditBox('3FE75D0D-7515-4F4F-BCC5-E8D233A1EF3B')" class="btn btn-ge" style="margin-right:0px"><i class="iconfont"></i>编辑</a>
+			<a href="javascript:void(0);" onclick="wrcExamRoom.deleteExamRoom('3FE75D0D-7515-4F4F-BCC5-E8D233A1EF3B')" class="btn btn-ge" style="margin-right:0px"><i class="iconfont"></i>删除</a>
+		</div>
+		<h3>
+			<a href="javascript:void(0);" style="cursor:default">{$vv.kc_bh}</a>&nbsp;&nbsp;
+			<a href="javascript:void(0);" style="cursor:default">{$vv.kc_name}</a>
+		</h3>
+		<ul class="props">
+			<li>容量:{$vv.student_num}</li>
+			<li>校区: {$vv.xq_name}</li>
+			<li>年级: {$vv.nianji}</li>
+			<li>考场时间安排: {$vv.ks_rq} {$vv.ks_data}</li>
+		</ul>
+	</div>
+    {/volist}
+
+
+
+		<ul class="pagination tc">
+            <li class="total">共有{$count}条</li>
+            {$str}
+		</ul>
+
+
+		<div class="blockUI blockMsg blockPage" style="display:none;z-index: 1011;position: absolute;padding: 0px;margin: 0px;width: 540px;top: 71.5px;left: 447.5px;text-align: left;color: rgb(0, 0, 0);border: 1px solid rgb(166, 201, 226);background-color: rgb(255, 255, 255);cursor: default;"><div id="XBJ_BOX" class="zx-dialog">
+			<h3 class="hd-diaTit zx-diaTit">
+				批量导入机构考场
+				<a class="closeWin" href="javascript:;">×</a>
+			</h3>
+
+			<div id="realContent" style="">
+				<div class="hd-diaCont">
+					<form class="zx-diaCont" id="examroom_eform" onsubmit="return false;" enctype="multipart/form-data">
+						<dl class="hd-form">
+							<dt class="wp10"><span>比赛项目：</span></dt>
+							<dd class="wp90">
+								<div id="importMatchID" class="inputSelectv  l" style="width: 100px;">
+									<input type="hidden" name="paper_name" value="{$bskcsz.0.id}" class="qk">
+									<input type="text" class="selt-txtv search" style="width: 100px;" title="{$bskcsz.0.paper_name}" value="{$bskcsz.0.paper_name}">
+									<i class="iconfont"></i>
+									<div class="opt-wrapv" style="display: none;">
+										<ul class="opt1 list">
+											{volist name="bskcsz" id="vv"  key="kk"}
+											<li><a href="javascript:void(0);" svalue="{$vv.id}" title="{$vv.paper_name}" class="sch1">{$vv.paper_name}</a></li>
+											{/volist}
+										</ul>
+										<img src="/static/img/drag.png" id="drag1" class="dragImg">
+									</div>
+								</div>
+							</dd>
+							<dt class="wp10"><span>选择文件：</span></dt>
+							<dd class="wp90" style="position:relative;">
+
+								<div id="excelUploadBtn" class="uploadify" style="height: 20px; width: 82px;">
+									<div id="excelUploadBtn-button" class="uploadify-button " style="height: 20px; line-height: 20px; width: 82px;">
+										<span class="uploadify-button-text">选择文件</span>
+									</div>
+									<div style = "display:none;">
+										<input id="files" type="file" name="file_stu" onchange="filesize(this)" />
+									</div>
+								</div>
+
+								<div id="excelUploadBtn-queue" class="uploadify-queue">
+								</div>
+							</dd>
+						</dl>
+					</form>
+				</div>
+				<div class="btn-block">
+					<button onclick="uploadexcle()" class="btn btn-s">导入</button>
+					<button class="btn btn-e closeWin">取消</button>
+				</div>
+			</div>
+			<!-- 遮罩 -->
+			<div class="hd-mask">处理中...</div></div></div>
+	</div>
+
+
+
+
+
+	<script type="text/javascript">
+
+
+
+
+        //编辑页面
+        function showImportBox(id){
+            $('#examRoomDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+            $('.blockUI').css('display','block');
+        }
+
+        $('.closeWin').click(function(){
+
+            $('.blockOverlay').remove();
+            $('.blockUI').css('display','none');
+
+		})
+
+        //考场搜索
+        function kaochang(obj){
+            var nex = obj.nextElementSibling;
+            nex.style.setProperty('display','block');
+        }
+
+        $('#matchID .opt-wrapv ul li').click(function(){
+
+                $('#wrcmatchs #matchID .opt-wrapv').css('display','none');
+                $('#wrcmatchs #matchID  .search').attr('title',$(this).find('a').attr('title')).attr('value',$(this).find('a').attr('title'));
+                $('input[name=evaluate_paper_id]').attr('value',$(this).find('a').attr('svalue'));
+
+        })
+
+        //提交表单
+        function uploadexcle(){
+         //   console.log(123);
+            var url = '/index.php/index/Tps/upload_excel_kc';
+            $("#examroom_eform").ajaxSubmit({
+                success: function (data){
+                    switch (data.isok){
+                        case 1:
+                            alert('导入数据成果！');
+                            $('.blockOverlay').remove();
+                            $('.blockUI').css('display','none');
+                            break;
+                        case 0:
+                            alert('电话号码为'+data.info+'导入失败！')
+                            break;
+                        case 2:
+                            alert('导入的文件必须为excel文件！')
+                            break;
+                        case 3:
+                            alert("请选择上传的文件！");
+                            break;
+                        case 5:
+                            alert("上传文件失败！");
+                            break;
+                    }
+                },
+                error: function (error) { alert('无法导入数据'); },
+                url: url, /*设置post提交到的页面*/
+                type: "post", /*设置表单以post方法提交*/
+                dataType: "json" /*设置返回值类型为文本*/
+            });
+        }
+
+        $('#excelUploadBtn-button').click(function(){
+            $('#files').trigger("click");
+		})
+
+		//获取文件大小
+        function filesize(ele) {
+            var size = (ele.files[0].size / 1024).toFixed(2);
+            var str = '<div id="SWFUpload_0_0" class="uploadify-queue-item">';
+                str += '<div class="cancel" ><a href="javascript:void(0);" onclick = "del_excel()">X</a></div>';
+                str += '<span class="fileName">'+ele.files[0].name+'('+size+'k)</span><span class="data"></span>';
+				str +='<div class="uploadify-progress">';
+				str +='<div class="uploadify-progress-bar"></div></div></div>';
+                $('#excelUploadBtn-queue').html(str);
+        }
+
+        function del_excel(){
+            $('#excelUploadBtn-queue').html('');
+            $('#files').val('');
+		}
+
+		$('.wp90 .iconfont').click(function(){
+
+				$('#importMatchID .opt-wrapv').css('display','block');
+
+		})
+
+		$('#importMatchID .opt-wrapv ul li a').click(function(){
+            $('#importMatchID .opt-wrapv').css('display','none');
+            $('#importMatchID .qk').attr('value',$(this).attr('svalue'));
+            $('#importMatchID .selt-txtv').text($(this).attr('title')).attr('value',$(this).attr('title')).attr('title',$(this).attr('title'));
+		})
+        
+
+
+	</script>

@@ -1,0 +1,51 @@
+<div class="hd-data">
+	<div class="hd-tab crump cf">
+		<a href="javascript:void(0);" onclick="otsPaper.paper(this,2);">测评列表</a><i class="iconfont"></i><a title="{$paper_name}">{$paper_name}</a>
+	</div>
+	<div class="sifts cf">
+		<form id="gwcp_qform" onsubmit="return false;">
+			<input name = "userName" value = "{$search_datas.student_name}" type="text"  placeholder="学员姓名" class="txt" style="color: #999;" id="userName">
+		</form>
+		<a id="paperTestDetailSearch" onclick = "paperSearch(this)" href="javascript:void(0);" class="btn btn-s l">搜索</a>
+		<a id="hideExportPaperTestDetailExcel" href="javascript:void(0);"></a>
+		<a id="exportPaperTestDetailExcel" href="javascript:void(0);" class="btn btn-s r" onclick="otsPaperTest.exportPaperTestDetailmobileType('A593CBF2-F89A-4EE3-8C01-E88646A01F90')">导出excel</a>
+	</div>
+	<!-- 数据列表 -->
+	<div id="paperTestDetailData">	<table border="0" cellspacing="0" cellpadding="0" class="rptbl1">
+		<tbody>
+		<tr>
+			<th width="15%">姓名</th>
+			<th width="15%">学员号</th>
+			<th width="15%">联系方式</th>
+			<th width="10%">得分</th>
+			<th width="25%">测评时间</th>
+			<th width="10%">测评用时</th>
+			<th width="10%">测评报告</th>
+		</tr>
+
+		{volist name="evaluate_content" id="vv"  key="kk"}
+		<tr>
+			<td title="{$vv.student_name}">{$vv.student_name}</td>
+			<td>{$vv.examid}</td>
+			<td><span>{$vv.tel}</span><!--<a href="javascript:void(0);" class="preview" onclick="otsPaperTest.showMobile('18971374038',this);"><i class="iconfont"></i></a>--></td>
+			<td><font class="afont">{$vv.student_grade}</font></td>
+			<td>{$vv.tp_time}</td>
+			<td>{$vv.run_time}</td>
+			<td>
+				<a href="http://tps.xdf.cn/gwots/testprocess/control/step?testId=0956A510-4D45-4623-8764-2E3B342A3B2B&amp;clientType=pc&amp;moduleType=report&amp;ext=roleType@teacher" target="_blank" class="btn btn-ge"><i class="iconfont"></i></a>
+			</td>
+		</tr>
+		{/volist}
+
+		</tbody>
+	</table>
+
+		<ul class="pagination tc">
+			<li class="total">共有{$count}条</li>
+			{$str}
+
+		</ul>
+
+	</div>
+	<input type="hidden" id="pageNo" name="pageNo" value="1">
+</div>

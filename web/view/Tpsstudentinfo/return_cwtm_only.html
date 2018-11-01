@@ -1,0 +1,176 @@
+
+
+{if condition = "($question_type==1)"}
+<div class="wx-test" type = "1" id="subjectContainer" style="height: 624px; overflow-y: hidden;">
+    <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+        <div class="wx-question"><p>{$allNum.question_title}  </p></div>
+        <ul class="wx-opts rdo">
+            {volist name = "allNum.contents" id = "vvo" key = "ck"}
+            <li><div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div><div class="wx-ocont"><p>{$vvo}</p></div></li>
+            {/volist}
+        </ul>
+
+        <button onclick="errorsubject();" class="wx-chk">查看答案</button>
+        <span class = "ckda"  style="display:none;margin-left:0.27rem;color:#ffbe32;margin-top:0.27rem;">{$allNum.student_describe}</span>
+        <div  class="ckda wx-parse" style = "display:none;">
+            <div class="wx-ptit">试题解析</div>
+            <div class="wx-pbox">
+                暂无解析
+            </div>
+        </div>
+    </div>
+    <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;">
+        <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 616px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+    </div>
+</div>
+{elseif condition="($question_type==2)"}
+
+<div class="wx-test" type = "2" id="subjectContainer" style="height: 624px; overflow-y: hidden;">
+    <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+        <div class="wx-question" partindex="1"><p>题干:{$allNum.question_title}</p></div>
+
+        <button onclick="errorsubject();" class="wx-chk">查看答案</button>
+        <span class = "ckda"  style="display:none;margin-left:0.27rem;color:#ffbe32;margin-top:0.27rem;">{$allNum.student_describe}</span>
+        <div  class="ckda wx-parse" class="wx-parse" style = "display:none;">
+            <div class="wx-ptit">试题解析</div>
+            <div class="wx-pbox">
+                暂无解析
+            </div>
+        </div>
+    </div>
+    <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;">
+        <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 616px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+    </div>
+</div>
+{elseif condition="($question_type==3)"}
+
+<div class="wx-test" type = "3" id="subjectContainer" style="height: 624px; overflow-y: hidden;">
+    <div class="wx-radio" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+        <div class="wx-question"><p>{$allNum.question_title}(多选)</p></div>
+        <ul class="wx-opts rdo">
+            {volist name = "allNum.contents" id = "vvo" key = "ck"}
+            <li><div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div><div class="wx-ocont"><p>{$vvo}</p></div></li>
+            {/volist}
+        </ul>
+
+        <button onclick="errorsubject();" class="wx-chk">查看答案</button>
+        <span class = "ckda"  style="display:none;margin-left:0.27rem;color:#ffbe32;margin-top:0.27rem;">{$allNum.student_describe}</span>
+        <div  class="ckda wx-parse" style = "display:none;">
+            <div class="wx-ptit">试题解析</div>
+            <div class="wx-pbox">
+                暂无解析
+            </div>
+        </div>
+    </div>
+    <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 0ms; opacity: 0;">
+        <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 616px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
+    </div>
+</div>
+{elseif condition="($question_type==4 || $question_type==5)"}
+
+<div class="wx-test" type = "4">
+    <div class="wx-mask" style="top: 277.5px;"></div>
+    <div class="wx-stem" id="textContainer" style="height: 306.5px;">
+        <div class="wx-passage" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);"><p>{$allNum.question_title}</p></div>
+        <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;"><div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: none; height: 299px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div></div></div>
+    <div class="wx-boundary"></div>
+    <div class="wx-optlist" id="groupContainer" style="height: 306.5px;">
+        <div class="wx-box" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+
+
+            {volist name="allNum.xt" id="vvvo"  key="kkk"}
+            <div class="wx-wrap page{$kkk} {if condition = "($kkk ==1)"} xianshi {/if}" page = "{$kkk}" {if condition = "($kkk ==1)"} style="display: block;"{/if}>
+                <div class="wx-question">
+                    <span class="wx-serial">{$kkk}.{$vvvo.question_title}</span>
+                </div>
+                <ul class="wx-opts rdo">
+
+                   {volist name="vvvo.contents" id = "vo" key = "ck" }
+                    <li>
+                        <div class="wx-opt">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</div>
+                        <div class="wx-ocont"><p> {$vo} </p></div>
+                    </li>
+                    {/volist}
+                </ul>
+                <button onclick="errorsubject();" class="wx-chk">查看答案</button>
+                <span class = "ckda"  style="display:none;margin-left:0.27rem;color:#ffbe32;margin-top:0.27rem;">{$vvvo.student_describe}</span>
+                <div  class="ckda wx-parse" style = "display:none;">
+                    <div class="wx-ptit">试题解析</div>
+                    <div class="wx-pbox">
+                        暂无解析
+                    </div>
+                </div>
+            </div>
+            {/volist}
+
+
+        </div>
+        <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;"><div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 214px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div></div></div>
+</div>
+
+
+{/if}
+
+
+
+</div>
+
+
+<script>
+    var myScroll;
+    var myScrolll;
+    var myScrollll;
+    //var num = 1;//阅读和完型下面错误题目的个数
+    var question_type = {$question_type};
+    function loadScroll(nn){
+        myScroll = new IScroll('#subjectContainer'+nn, {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true
+        });
+    }
+
+    //完型填空和阅读理解
+    function loadScrolls(nn){
+        myScrolll = new IScroll('#textContainer', {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+        });
+        myScrollll = new IScroll('#groupContainer', {
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            fadeScrollbars: true,
+
+        });
+    }
+    $(function(){
+
+        var oH1=$(window).height()-$('.wx-top').height()-$('.wx-btns').height();
+        $('.wx-scl,.wx-test').css({height:oH1,overflowY:'hidden'});
+        if(question_type == 1 || question_type == 2 || question_type == 3 ){
+            loadScroll();
+        }else if(question_type == 4 || question_type == 5){
+            loadScrolls();
+        }
+
+    });
+
+    function errorsubject(){
+
+        $('.ckda').css('display','block');
+
+        if(question_type == 1 || question_type == 2 || question_type == 3 ){
+            myScroll.refresh();
+        }else if(question_type == 4 || question_type == 5){
+            myScrollll.refresh();
+        }
+
+    }
+</script>
