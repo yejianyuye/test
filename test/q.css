@@ -1,0 +1,518 @@
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+#app {
+  width: 100%;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}/*toast*/
+.mint-toast {
+  position: fixed;
+  width: 4rem;
+  background: rgba(51, 51, 51, 0.6);
+  -webkit-border-radius: 0.133333rem;
+          border-radius: 0.133333rem;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  z-index: 10000;
+  -webkit-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+.mint-toast.is-placebottom {
+  bottom: 0.666667rem;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.mint-toast.is-placemiddle {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.mint-toast.is-placetop {
+  top: 0.666667rem;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.mint-toast-icon {
+  display: block;
+  background: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/icon_toast_wrong.48ea316fe53d2c356bf25d50e83bf3f9.png) no-repeat;
+  width: 1.333333rem;
+  height: 1.333333rem;
+  -webkit-background-size: 1.333333rem 1.333333rem;
+          background-size: 1.333333rem 1.333333rem;
+  margin: 0 auto;
+}
+.icon-toast-fail {
+  display: block;
+  background: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/fail.9364f7b484d2f265945851eccd926a1d.png) no-repeat;
+  width: 1.333333rem;
+  height: 1.333333rem;
+  -webkit-background-size: 1.333333rem 1.333333rem;
+          background-size: 1.333333rem 1.333333rem;
+  margin: 0 auto;
+}
+.icon-toast-success {
+  display: block;
+  background: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/success.d57252c9cb05a21d70dc726974860d09.png) no-repeat;
+  width: 1.333333rem;
+  height: 1.333333rem;
+  -webkit-background-size: 1.333333rem 1.333333rem;
+          background-size: 1.333333rem 1.333333rem;
+  margin: 0 auto;
+}
+.mint-toast-text {
+  font-size: 16px;
+  display: block;
+  text-align: center;
+}
+.mint-toast-pop-enter,
+.mint-toast-pop-leave-active {
+  opacity: 0;
+}
+.skin0 {
+  overflow: hidden;
+  min-height: 100%;
+  background: #4883ff;
+}
+.skin0 #app,
+.skin0 .home_ct {
+  min-height: 100%;
+}
+.skin0 .head h2 {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/h2bg0.220fcd52aff63fda86e60faaf4989950.png);
+}
+.skin0 .home_ct {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg0.4bc0d3d910d3dc554b4bb19adbf41188.jpg);
+}
+.skin0 .home_ct > div > .btn {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/btn0.7c9941d5c984ec1dc7a71e014f7b4bb5.png);
+}
+.skin0 .popup.sharesuccess > div {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg0.4bc0d3d910d3dc554b4bb19adbf41188.jpg);
+}
+.skin0 .popup.sharesuccess > div.bg {
+  background-color: #4883ff;
+}
+.skin1 {
+  overflow: hidden;
+  min-height: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#855ae2), to(#aa3ee0));
+  background: -webkit-linear-gradient(top, #855ae2, #aa3ee0);
+  background: -o-linear-gradient(top, #855ae2, #aa3ee0);
+  background: linear-gradient(to bottom, #855ae2, #aa3ee0);
+}
+.skin1 #app,
+.skin1 .home_ct {
+  min-height: 100%;
+}
+.skin1 .head h2 {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/h2bg1.2c8bbf2b6529ae67c4d3300f76a79fa4.png);
+}
+.skin1 .home_ct {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg1.e8158bcacecd0870e9021b7e73ae5030.jpg);
+}
+.skin1 .home_ct > div > .btn {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/btn1.05018e659b25e5136df43c09dd6eb719.png);
+}
+.skin1 .popup.sharesuccess > div {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg1.e8158bcacecd0870e9021b7e73ae5030.jpg);
+}
+.skin1 .popup.sharesuccess > div.bg {
+  background: -webkit-gradient(linear, left top, left bottom, from(#855ae2), to(#aa3ee0));
+  background: -webkit-linear-gradient(top, #855ae2, #aa3ee0);
+  background: -o-linear-gradient(top, #855ae2, #aa3ee0);
+  background: linear-gradient(to bottom, #855ae2, #aa3ee0);
+}
+.skin2 {
+  overflow: hidden;
+  min-height: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fe3f3d), to(#fd7106));
+  background: -webkit-linear-gradient(top, #fe3f3d, #fd7106);
+  background: -o-linear-gradient(top, #fe3f3d, #fd7106);
+  background: linear-gradient(to bottom, #fe3f3d, #fd7106);
+}
+.skin2 #app,
+.skin2 .home_ct {
+  min-height: 100%;
+}
+.skin2 .head h2 {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/h2bg2.bb8e6f0193fcb783e0fef5e5a33b45c3.png);
+}
+.skin2 .home_ct {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg2.7197b68fa60398e61c1bb97223b0b30f.jpg);
+}
+.skin2 .home_ct > div > .btn {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/btn2.cffde8b1050f9c5a9e8b10d800ab6902.png);
+}
+.skin2 .popup.sharesuccess > div {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg2.7197b68fa60398e61c1bb97223b0b30f.jpg);
+}
+.skin2 .popup.sharesuccess > div.bg {
+  background: -webkit-gradient(linear, left top, left bottom, from(#fe3f3d), to(#fd7106));
+  background: -webkit-linear-gradient(top, #fe3f3d, #fd7106);
+  background: -o-linear-gradient(top, #fe3f3d, #fd7106);
+  background: linear-gradient(to bottom, #fe3f3d, #fd7106);
+}
+.skin3 {
+  overflow: hidden;
+  min-height: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#12c55f), to(#20bdc1));
+  background: -webkit-linear-gradient(top, #12c55f, #20bdc1);
+  background: -o-linear-gradient(top, #12c55f, #20bdc1);
+  background: linear-gradient(to bottom, #12c55f, #20bdc1);
+}
+.skin3 #app,
+.skin3 .home_ct {
+  min-height: 100%;
+}
+.skin3 .head h2 {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/h2bg3.323cbbcffc75a6174fac65ee47ef5992.png);
+}
+.skin3 .home_ct {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg3.7bee2e65fc42c1bf7967737afbab3c93.jpg);
+}
+.skin3 .home_ct > div > .btn {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/btn3.411894701b706254db413ee183d454d3.png);
+}
+.skin3 .popup.sharesuccess > div {
+  background-image: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/homebg3.7bee2e65fc42c1bf7967737afbab3c93.jpg);
+}
+.skin3 .popup.sharesuccess > div.bg {
+  background: -webkit-gradient(linear, left top, left bottom, from(#12c55f), to(#20bdc1));
+  background: -webkit-linear-gradient(top, #12c55f, #20bdc1);
+  background: -o-linear-gradient(top, #12c55f, #20bdc1);
+  background: linear-gradient(to bottom, #12c55f, #20bdc1);
+}
+html,
+body {
+  height: 100%;
+  overflow-y: scroll;
+}
+.head {
+  padding-top: 0.746667rem;
+  text-align: center;
+  overflow: hidden;
+}
+.head img {
+  width: 3.253333rem;
+}
+.head h1 {
+  font-size: 0.8rem;
+  color: #fff;
+}
+.head h2 {
+  background-repeat: no-repeat;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+  height: 0.946667rem;
+  width: 9.24rem;
+  margin: 0 auto 0.666667rem;
+  font-size: 0.4rem;
+  color: #942e05;
+  padding-top: 0.173333rem;
+  line-height: 0.773333rem;
+}
+.home_ct {
+  width: 100%;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100% auto;
+          background-size: 100% auto;
+  background-position: top left;
+}
+.home_ct > div > .btn {
+  width: 9.2rem;
+  height: 1.373333rem;
+  margin: 0.4rem auto 0.533333rem;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+}
+.home_ct > div > .btn p {
+  text-indent: -133.333333rem;
+}
+.shiti {
+  width: 8.24rem;
+  margin: 0 auto;
+  background-color: #fff;
+  -webkit-border-radius: 0.133333rem;
+          border-radius: 0.133333rem;
+  padding: 0.133333rem 0.48rem;
+  font-size: 0.346667rem;
+  position: relative;
+  -ms-touch-action: none;
+      touch-action: none;
+}
+.shiti ul {
+  max-height: 5.52rem;
+  min-height: 3.333333rem;
+  overflow: hidden;
+}
+.shiti .scroll-bar {
+  position: absolute;
+  top: 0.133333rem;
+  right: 0.186667rem;
+  width: 6px;
+  height: 100%;
+  -webkit-border-radius: 0.08rem;
+          border-radius: 0.08rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.shiti .scroll-bar div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  -webkit-border-radius: 0.08rem;
+          border-radius: 0.08rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.shiti li {
+  line-height: 1.093333rem;
+  border-bottom: 1px solid #d1d1d1;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shiti li:last-child {
+  border: none;
+}
+.shiti li em,
+.shiti li label {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: normal;
+}
+.shiti li em {
+  width: 0.106667rem;
+  margin-right: 0.266667rem;
+  height: 0.106667rem;
+  background: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/dot.588b0c44a3560f3d28268471f2398985.png) no-repeat;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+}
+#scroll_div {
+  width: 100%;
+  overflow: hidden;
+  height: 2.32rem;
+  font-size: 0;
+}
+.scroll {
+  width: 8.24rem;
+  margin: 0.426667rem auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-border-radius: 0.133333rem;
+          border-radius: 0.133333rem;
+  padding: 0.133333rem 0.48rem;
+  color: #fff;
+}
+.scroll h3 {
+  text-align: center;
+  font-size: 0.373333rem;
+  color: #fff;
+  margin-bottom: 0.266667rem;
+}
+.scroll h3 label {
+  color: #ffdd00;
+  padding: 0 0.1rem;
+}
+.scroll h3:after,
+.scroll h3:before {
+  width: 1.866667rem;
+}
+.scroll li {
+  line-height: 0.773333rem;
+  font-size: 0.373333rem;
+}
+.scroll span {
+  display: inline-block;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.scroll span.name {
+  width: 1.866667rem;
+  padding-right: 0.4rem;
+}
+.scroll span.adr {
+  width: 1.6rem;
+  padding-right: 0.4rem;
+}
+.scroll span.title {
+  width: 3.866667rem;
+}
+.popup {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+}
+.popup.show {
+  display: block;
+}
+.popup.share img {
+  position: relative;
+  width: 5.133333rem;
+  height: 2.693333rem;
+  top: 0.466667rem;
+  left: 4.16rem;
+}
+.popup.sharesuccess > div {
+  position: absolute;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100% auto;
+          background-size: 100% auto;
+  background-position: top left;
+  padding: 1.066667rem 0.466667rem 0 0.466667rem;
+  -webkit-border-radius: 0.266667rem;
+          border-radius: 0.266667rem;
+  width: 6.4rem;
+  height: 8.32rem;
+  left: 50%;
+  margin-left: -3.666667rem;
+  top: 2.8rem;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+}
+.popup.sharesuccess > div.bg {
+  z-index: 1;
+}
+.popup.sharesuccess > div h2 {
+  font-size: 0.693333rem;
+  margin: 0.186667rem;
+}
+.popup.sharesuccess > div .middle-line {
+  margin: 0.32rem 0;
+}
+.popup.sharesuccess > div p {
+  font-size: 0.373333rem;
+}
+.popup.sharesuccess > div p label {
+  color: #fcff00;
+}
+.popup.sharesuccess > div p.tip {
+  font-size: 0.4rem;
+}
+.popup.sharesuccess > div p.tip label {
+  font-size: 0.533333rem;
+}
+.popup.sharesuccess > div > .btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: inline-block;
+  position: absolute;
+  bottom: -2.12rem;
+  width: 0.96rem;
+  height: 0.96rem;
+  left: 50%;
+  margin-left: -0.466667rem;
+}
+.popup.sharesuccess > div > .btn img {
+  width: 100%;
+}
+.middle-line {
+  position: relative;
+}
+.middle-line:after,
+.middle-line:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  width: 1.466667rem;
+  height: 0;
+  top: 50%;
+  border-top: 1px solid rgba(255, 255, 225, 0.6);
+}
+.middle-line:after {
+  right: 0;
+}
+.middle-line:before {
+  left: 0;
+}
+.qrcode {
+  margin: 0.333333rem auto;
+  padding: 0.266667rem;
+  width: 3.093333rem;
+  height: 3.093333rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 0.053333rem;
+          border-radius: 0.053333rem;
+}
+.qrcode img,
+.qrcode a {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+.ended {
+  padding-top: 2.666667rem;
+  color: #fff;
+  text-align: center;
+}
+.ended h2 {
+  font-size: 1.013333rem;
+}
+.ended h2 label {
+  color: #fcff00;
+}
+.ended p {
+  font-size: 0.48rem;
+}
+.ended .bt-tip {
+  font-size: 14px;
+}
+.not_weixin {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-top: 2.933333rem;
+  text-align: center;
+  font-size: 0.48rem;
+  color: #666;
+}
+.not_weixin .not_weixin_img {
+  width: 100%;
+  height: 3.76rem;
+  background: url(https://static.changingedu.com/static/assets/static/student/activity/zhenti/js/images/icon_liulanqi_quesheng.9a499dc632099b417e529c1858a689f4.png) no-repeat;
+  -webkit-background-size: 1.453333rem 1.453333rem;
+          background-size: 1.453333rem 1.453333rem;
+  background-position: center bottom;
+  margin-bottom: 0.48rem;
+}
+[v-cloak] {
+  display: none;
+}
