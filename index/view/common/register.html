@@ -1,0 +1,312 @@
+<html lang="en"><head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Registration Form Template</title>
+
+        <!-- CSS -->
+        <link href="/boot/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/register/font-awesome.min.css">
+        <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/register/form-elements.css">
+        <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/register/style.css">
+
+    </head>
+
+    <body>
+
+    <!-- Top menu -->
+    <nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Bootstrap Registration Form Template</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <span class="li-text">
+                Put some text or
+              </span> 
+              <a href="#"><strong>links</strong></a> 
+              <span class="li-text">
+                here, or some icons: 
+              </span> 
+              <span class="li-social">
+                <a href="#"><i class="fa fa-facebook"></i></a> 
+                <a href="#"><i class="fa fa-twitter"></i></a> 
+                <a href="#"><i class="fa fa-envelope"></i></a> 
+                <a href="#"><i class="fa fa-skype"></i></a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+        <!-- Top content -->
+        <div class="top-content">
+          
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7 text">
+                            <h1><strong>Bootstrap</strong> Registration Form</h1>
+                            <div class="description">
+                              <p>
+                                This is a free responsive registration form made with Bootstrap. 
+                                Download it on <a href="#"><strong>AZMIND</strong></a>, customize and use it as you like!
+                              </p>
+                            </div>
+                            <div class="top-big-link">
+                              <a class="btn btn-link-1" href="#">Button 1</a>
+                              <a class="btn btn-link-2" href="#">Button 2</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 form-box">
+                          <div class="form-top">
+                            <div class="form-top-left">
+                              <h3>注册</h3>
+                                <p>根据要求快速注册:</p>
+                            </div>
+                            <div class="form-top-right">
+                              <i class="fa fa-pencil"></i>
+                            </div>
+                            </div>
+                            <div class="form-bottom">
+                          <form role="form" id="formid" class="registration-form">
+
+
+                              <div class="form-group">
+                                  <label class="sr-only" for="form-email">用户名</label>
+                                  <input type="text" name="user" maxlength="20" placeholder="用户名" class="form-email form-control" id="user">
+                              </div>
+
+                              <div class="form-group">
+                                <label class="sr-only" for="form-first-name">电话号码</label>
+                                  <input type="text" name="tel" maxlength="11" placeholder="输入电话号码" class="form-first-name form-control" id="tel" >
+                              </div>
+                              <div class="form-group">
+                                <label class="sr-only" for="form-last-name">密码</label>
+                                <input type="password" name="password" maxlength="20" placeholder="输入密码" class="form-last-name form-control" id="password" style = "height: 50px;margin: 0;padding: 0 20px;vertical-align: middle;background: #f8f8f8;border: 3px solid #ddd;font-family: 'Roboto', sans-serif;font-size: 16px;font-weight: 300;line-height: 50px;color: #888;">
+                              </div>
+                              <div class="form-group">
+                                <label class="sr-only" for="form-email">确认密码</label>
+                                <input type="password" name="sure_password" maxlength="20" placeholder="确认密码" class="form-email form-control" id="sure_password" style = "height: 50px;margin: 0;padding: 0 20px;vertical-align: middle;background: #f8f8f8;border: 3px solid #ddd;font-family: 'Roboto', sans-serif;font-size: 16px;font-weight: 300;line-height: 50px;color: #888;">
+                              </div>
+
+                              
+                              
+                              <button type="button" id="submit" class="btn">注册!</button>
+                          </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1187.25px; width: 1583px; z-index: -999999; position: fixed;"><img src="/thinkphp5/public/static/tps/img/1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1583px; height: 1187.25px; max-height: none; max-width: none; z-index: -999999; left: 0px; top: -356.125px;"></div>
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+<script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/thinkphp5/public/static/paopao/layer/layer.js"></script>
+<script type="text/javascript">
+  
+
+$("#user").blur(function(){
+    var user_length = $('#user').val().length;
+    var user_data = TableObj.check_use(user_length);
+    if(user_data == 1){
+      layer.alert('用户名字应该在1-10个字符之间', {
+                icon: 1,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+              })
+    }
+})
+
+$("#tel").blur(function(){
+    
+    var data = TableObj.check_tel();
+    if(data==0){
+        layer.alert('该电话号码已被注册', {
+           icon: 1,
+           skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+        })
+     }else if(data==2){
+        layer.alert('该电话号码格式不对', {
+          icon: 1,
+          skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+        })
+     }
+
+   
+  })
+
+$("#password").blur(function(){
+    var password = $('#password').val().length;
+    var password_data = TableObj.check_use(password);
+    if(password_data == 1){
+      layer.alert('密码应该在6-20个字符之间', {
+                icon: 1,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+              })
+    }
+})
+
+$("#sure_password").blur(function(){
+    var sure_password = $('#sure_password').val();
+    var sure_password_data = TableObj.check_sure_password(sure_password);
+    if(sure_password_data == 1){
+          layer.alert('二次密码不一致', {
+              icon: 1,
+              skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          })
+    }   
+    
+})
+
+//校验
+var TableObj = {
+        //校验用户名
+        check_use: function (user) {
+           return ss =  (user<1 || user>10 ) ? 1 : 2;
+        },
+        //校验电话号码
+        check_tel: function () {
+                var tel_val = $('#tel').val();
+                var str = '';
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "/thinkphp5/tps.php/index/login/ajax_check_tel",
+                    data: {'tel':tel_val},
+                    async :false,
+                    success: function (data) {
+
+                       str = data
+                    }
+                })
+                return str;
+        },
+        
+        //校验第一次密码
+        check_password:function(password){
+            return ss =  (password<6 || password>20 ) ? 1 : 2;
+        },
+        //校验确认密码
+        check_sure_password:function(sure_password){
+           return ss =  ($('#password').val()!=sure_password ) ? 1 : 2;
+        }
+
+    }
+
+//注册
+$('#submit').click(function(){
+
+    //校验用户名
+    var user_length = $('#user').val().length;
+    var user_data = TableObj.check_use(user_length);
+    alert(user_length);
+    if(user_data == 1){
+      layer.alert('用户名字应该在1-10个字符之间', {
+                icon: 1,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+              })
+      return false;
+    }
+
+    //校验电话号码
+    var data = TableObj.check_tel();
+    if(data==0){
+        layer.alert('该电话号码已被注册', {
+           icon: 1,
+           skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+        })
+        return false;
+     }else if(data==2){
+        layer.alert('该电话号码格式不对', {
+          icon: 1,
+          skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+        })
+        return false;
+     }
+    
+    //校验密码
+    var password = $('#password').val().length;
+    var password_data = TableObj.check_password(password);
+    if(password_data == 1){
+      layer.alert('密码应该在6-20个字符之间', {
+                icon: 1,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          })
+      return false;
+    }
+    //校验确认密码
+    var sure_password = $('#sure_password').val();
+    var sure_password_data = TableObj.check_sure_password(sure_password);
+    if(sure_password_data == 1){
+          layer.alert('二次密码不一致', {
+              icon: 1,
+              skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          })
+      return false;    
+    } 
+    $.ajax({
+              type: "get",
+              dataType: "json",
+              //url: "/thinkphp5/tps.php/index/login/do_register",
+              url: "{:url('index/login/do_register')}",
+              //"{:url('index/index/text')}"
+              data: $("#formid").serialize(),
+              success: function (data) {
+
+                  if(data ==1){
+                    window.location.href = "/thinkphp5/tps.php/index/index/index";
+                  }else if(data == 2){
+                      ayer.alert('电话号码格式错误', {
+                        icon: 1,
+                        skin: 'layer-ext-moon'
+                     })
+                  }else if(data == 0){
+                      ayer.alert('电话号码已经注册', {
+                        icon: 1,
+                        skin: 'layer-ext-moon' 
+                     })
+                  }else if(data == 3){
+                      ayer.alert('用户名错误', {
+                        icon: 1,
+                        skin: 'layer-ext-moon' 
+                     })
+                  }else if(data == 4){
+                      ayer.alert('密码格式错误', {
+                        icon: 1,
+                        skin: 'layer-ext-moon'
+                     })
+                  }else if(data == 5){
+                      ayer.alert('二次密码不一致', {
+                        icon: 1,
+                        skin: 'layer-ext-moon' 
+                     })
+                  }else if(data == 6){
+                      ayer.alert('注册用户名失败', {
+                        icon: 1,
+                        skin: 'layer-ext-moon' 
+                     })
+                  }
+                 
+              }
+          })
+})
+
+
+
+</script>

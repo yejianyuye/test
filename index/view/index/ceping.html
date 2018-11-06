@@ -99,7 +99,7 @@
 							<a href="/index.php/index/Tps/edit_epp?evaluate_paper_id={$vv.id}" class="btn btn-ge r"><i class="iconfont"></i>编辑试卷</a>
 							{/if}
 							{if condition ="($vv.status == 1 and $vv.paper_type == 1)"}
-							<a href="/index.php/index/Tps/fabu_paper?evaluate_paper_id={$vv.id}" class="btn btn-ge r"><i class="iconfont"></i>发布</a>
+							<a href="fabu_paper?evaluate_paper_id={$vv.id}&souseid={$vv.add_time}" class="btn btn-ge r"><i class="iconfont"></i>发布</a>
 							{/if}
 							{if condition ="($vv.status == 2)"}
 							<div class="m-btnDropdown r">
@@ -107,14 +107,13 @@
 								<i class="iconfont u-arwIcn u-s1"></i>
 								<i class="iconfont u-arwIcn u-s2"></i>
 								<div class="g-btnBox" style="top: 28px;">
-									<a onclick="otsPaper.syncPaperUser('4221BD20-A19C-4500-A7E4-1FB39CB3E2FD')">同步用户</a>
-									<a href="/index.php/index/Tps/paper_tps" target="_blank">报告</a>
+									<a onclick="otsPaper.syncPaperUser()">同步用户</a>
+									<a href="/thinkphp5/tps.php/index/Census/paper_tps?id={$vv.id}&souseid={$vv.add_time}" target="_blank">报告</a>
 								</div>
 							</div>
 							<a onclick="ceping.chexiao('{$vv.id}')" class="btn btn-ge r"><i class="iconfont"></i>撤销</a>
-							<a onclick="ceping.qrcode('{$vv.id}')" class="btn btn-ge r" title="二维码"><i class="iconfont"></i></a>
-
-							<a onclick="ceping.xiajia('{$vv.id}')" class="btn btn-ge r"><i class="iconfont"></i>下架</a>
+							<a onclick="ceping.qrcode('{$vv.id}')"  class="btn btn-ge r" title="二维码"><i class="iconfont"></i></a>
+							<a onclick="ceping.xiajia('{$vv.id}')"  class="btn btn-ge r"><i class="iconfont"></i>下架</a>
 							{/if}
 
 
@@ -192,7 +191,7 @@
 			</div>
 
 
-			<script type="text/javascript" src="/public/static/erweima/jquery.qrcode.min.js"></script>
+			<script type="text/javascript" src="/thinkphp5/public/static/erweima/jquery.qrcode.min.js"></script>
             <script type="text/javascript">
                 //考点下面题目编辑
                 var ceping = {

@@ -7,16 +7,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <link href="/public/static/tps/css/hdiconfont.css?v=201805101740" rel="stylesheet"  type="text/css" rel="stylesheet"/>
-        <link href="/public/static/tps/css/ppfullscreen.css?v=201805101740" rel="stylesheet" type="text/css" rel="stylesheet" /> 
+        <link href="/thinkphp5/public/static/tps/css/hdiconfont.css?v=201805101740" rel="stylesheet"  type="text/css" rel="stylesheet"/>
+        <link href="/thinkphp5/public/static/tps/css/ppfullscreen.css?v=201805101740" rel="stylesheet" type="text/css" rel="stylesheet" /> 
         
-        <link href="/public/static/tps/css/zTreeStyle.css" rel="stylesheet" type="text/css" />
+        <link href="/thinkphp5/public/static/tps/css/zTreeStyle.css" rel="stylesheet" type="text/css" />
         <!-- <link href="http://tps.xdf.cn/static/css/ppfullscreen.css?v=201805101740" rel="stylesheet" type="text/css" /> -->
        <!--  <link href="/public/static/tps/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" /> -->
 
-        <link href="/public/static/tps/css/qtip.css" rel="stylesheet" type="text/css" />
+        <link href="/thinkphp5/public/static/tps/css/qtip.css" rel="stylesheet" type="text/css" />
 
-        <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
     </head>
 
     <body style="overflow-y: auto; position: relative;">
@@ -56,7 +56,7 @@
                         </li>
                         <li>
                             <input type="checkbox" {if condition="($tep.cp_sj == 1)"}checked="checked"{/if} id="testTimeCheckbox" class="input_valign" value="0">测评时间:
-                            <input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if}  id="publishBeginTime" class="input_num Wdate" value="{$tep.cp_begintime}"  style="width:180px;" >至<input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if} id="publishEndTime" class="input_num Wdate" value="{$tep.cp_begintime}"  style="width:180px;" >
+                            <input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if}  id="publishBeginTime" class="input_num Wdate" value="{$tep.cp_begintime}"  style="width:180px;" >至<input type="datetime-local" {if condition="($tep.cp_sj == 0)"}disabled="disabled"{/if} id="publishEndTime" class="input_num Wdate" value="{$tep.cp_endtime}"  style="width:180px;" >
                         </li>
                     </ul>
 
@@ -65,8 +65,10 @@
                             <input type="checkbox" {if condition="($tep.fb_sj == 1)"}checked="checked"{/if} id="publishTimeCheckbox" class="input_valign" value="0">发布报告时间
                             <input  {if condition="($tep.fb_sj == 0)"}disabled="disabled"{/if} value="2018-05-23" type="date" id="publishTime" class="input_num Wdate"   style="width: 130px;">
                         </li>
+                        <li><input type="checkbox" {if condition="($tep.is_appointment == 1)"}checked="checked"{/if} id="is_appointment" class="input_valign" value="">是否需要预约</li>
                         <li><input type="checkbox" {if condition="($tep.stop == 1)"}checked="checked"{/if} id="flagPauseCheckbox" class="input_valign" value="">支持暂停</li>
                         <li><input type="checkbox" {if condition="($tep.luanxu == 1)"}checked="checked"{/if} id="flagDisOrderCheckbox" class="input_valign" value="">试题乱序展示</li>
+
                     </ul>
 
                     <ul class="tx-info cr">
@@ -232,7 +234,7 @@
         $.ajax({
                 type: "get",
                 dataType: "json",
-                url: "/index.php/index/tps/add_evaluate_tuijian",
+                url: "add_evaluate_tuijian",
                 data: {'minScore':minScore,'maxScore':maxScore,'dengji_name':dengji_name,'dengji':dengji,'evaluate_paper_id':evaluate_paper_id},
                 success: function (data) {
                     if(data){
@@ -419,25 +421,32 @@
        }
 
        var forminfo = $("form").serialize();
+       //是否支持在线测评
+       var is_appointment = $('#is_appointment').is(':checked');
        //支持暂停
        var zczt = $('#flagPauseCheckbox').is(':checked');
        //试题乱序展示
        var stlxzs = $('#flagDisOrderCheckbox').is(':checked');
+
        //推荐课程
        var tjkc = $('#pushCourseCheckbox').is(':checked');
-       forminfo = forminfo + '&zczt='+zczt+ '&stlxzs='+stlxzs+ '&tjkc='+tjkc+ '&fb_sj='+fb_sj+ '&publishTime='+publishTime+ '&cp_sj='+cp_sj+ '&publishBeginTime='+publishBeginTime+ '&publishEndTime='+publishEndTime+ '&cp_sc='+cp_sc+ '&cp_time='+cp_time+ '&evaluate_paper_id='+evaluate_paper_id;
+       forminfo = forminfo + '&zczt='+zczt+ '&stlxzs='+stlxzs+ '&tjkc='+tjkc+ '&fb_sj='+fb_sj+ '&publishTime='+publishTime+ '&cp_sj='+cp_sj+ '&publishBeginTime='+publishBeginTime+ '&publishEndTime='+publishEndTime+ '&cp_sc='+cp_sc+ '&cp_time='+cp_time+ '&evaluate_paper_id='+evaluate_paper_id+ '&is_appointment='+is_appointment;
 
        $.ajax({
            type: "get",
            dataType: "json",
-           url: "/index.php/index/tps/add_evaluate_fabu",
+           url: "add_evaluate_fabu",
            /*data: {'evaluate_paper_id':evaluate_paper_id,'cp_sc':cp_sc,'cp_time':cp_time,'cp_sj':cp_sj,'publishBeginTime':publishBeginTime,'publishEndTime':publishEndTime,'fb_sj':fb_sj,'publishTime':publishTime,'zczt':zczt,'stlxzs':stlxzs,'tjkc':tjkc,forminfo},*/
            data:forminfo,
            success: function (data) {
-
-                if(data){
+               // console.log(data);
+                if(data==1){
                     alert('发布成功');
-                    window.location.href= "/index.php/index/Tps/index"
+                   // window.location.href= "index"
+                }else if(data == 2){
+                    alert('测评开始时间不能大于截至时间');
+                }else{
+                    alert('发布失败');
                 }
 
 

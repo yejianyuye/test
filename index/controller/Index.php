@@ -8,6 +8,9 @@ use   \think\Session;
 class Index extends \think\Controller
 {
 
+    private $admin_name = "叶建宇";
+
+
     //显示主页面
     public function index(){
         return view('index');
@@ -180,7 +183,7 @@ class Index extends \think\Controller
     public function fabu_paper(){
         $data = Request::instance()->get();
 
-        $tep = Db::table('tps_evaluate_paper')->where('id',$data['evaluate_paper_id'])->find();
+        $tep = Db::table('tps_evaluate_paper')->where("id =".$data['evaluate_paper_id']." and paper_type= 1 and add_time =".$data['souseid'])->find();
         $tep['cp_begintime'] = str_replace(" ","T",$tep['cp_begintime']);
         $tep['cp_endtime'] = str_replace(" ","T",$tep['cp_endtime']);
         $tep['fb_time'] = str_replace(" ","T",$tep['fb_time']);
@@ -205,20 +208,17 @@ class Index extends \think\Controller
             $tev[$tk]['tj_kcdzarray'] = explode(';',$tev[$tk]['tj_kcdz']);
 
         }  
-        //var_dump($tev);die;
+        //var_dump($tev);
         return view('fabu', [
             'evaluate_paper_id'  => $data['evaluate_paper_id'],
             'tep'  => $tep,
             'tev'  => $tev,
             'first_id'  => $first_id['id'],
-           // 'count'  => $count,
         ]);
     }
 
     //添加分数段推荐
     public function add_evaluate_tuijian(){
-
-
 
             $data = Request::instance()->get();
             $minScore = $data['minScore'];
@@ -241,10 +241,7 @@ class Index extends \think\Controller
     //发布测评报告
     public function add_evaluate_fabu(){
 
-
-            //phpinfo();die;
             $data = Request::instance()->get();
-
            // 测评时长
             $fabu['cp_sc'] = $data['cp_sc']=='true' ? 1 :0;
             if($fabu['cp_sc'] ==1){
@@ -254,18 +251,18 @@ class Index extends \think\Controller
             $fabu['cp_sj'] = $data['cp_sj']=='true' ? 1 :0;
             if($fabu['cp_sj'] ==1){
                 if($data['publishEndTime'] <=$data['publishBeginTime']){
-                       // return 0;
+                        return 2;
                 }
                 $fabu['cp_begintime'] = $data['publishBeginTime'];
                 $fabu['cp_endtime'] = $data['publishEndTime'];
-
             }
-
             //发布报告时间
             $fabu['fb_sj'] = $data['fb_sj']=='true' ? 1 :0;
             if($fabu['fb_sj'] ==1){
                 $fabu['fb_time'] = $data['publishTime'];
             }
+            //支持预约
+            $fabu['is_appointment'] = $data['is_appointment']=='true' ? 1 : 0;
             //支持暂停
             $fabu['stop'] = $data['zczt']=='true' ? 1 : 0;
             //试题乱序展示
@@ -274,6 +271,10 @@ class Index extends \think\Controller
             // var_dump($data);
             $fabu['tuijian_kc'] = $data['tjkc']=='true' ? 1 : 0;
 
+            $fabu['fbsj_time'] = date("Y-m-d H:i:s", time());
+
+            Db::startTrans();
+            $tj_res = 0;
             if($fabu['tuijian_kc'] == 1){
                 //删除之前paper下面的课程
                 Db::table('tps_evaluate_tuijian')->where('evaluate_paper_id',$data['evaluate_paper_id'])->delete();
@@ -288,12 +289,21 @@ class Index extends \think\Controller
                     $insert['tj_kc']=implode(';',$data['kec'][$dk]);
                     $insert['tj_kcbh']=implode(';',$data['kcnum'][$dk]);
                     $insert['tj_kcdz']=implode(';',$data['kcurl'][$dk]);
-                    Db::table('tps_evaluate_tuijian')->insert($insert);
+                    $tj_res=Db::table('tps_evaluate_tuijian')->insert($insert);
                 }
             }
+
             $data['status'] = 2;
-            $e_res = Db::table('tps_evaluate_paper')->where('id',$data['evaluate_paper_id'])->update($fabu);
-            return $e_res;
+            //var_dump($data);die;
+            $tep = Db::table('tps_evaluate_paper')->where('id ='.$data['evaluate_paper_id'].' and status=1')->update($fabu);
+            if($tj_res && $tep){
+                Db::commit();
+                return $data=1;
+            }else{
+                Db::rollback();
+                return $data=0; 
+            }
+            
     }
 
 

@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>试卷测评统计</title> 
+<!-- 获取常量引用版本 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link href="/thinkphp5/public/static/tps/css/hdiconfont.css?v=201810231830" rel="stylesheet" type="text/css">
+<link href="/thinkphp5/public/static/tps/css/ppfullscreen.css?v=201810231830" rel="stylesheet" type="text/css">
+<!-- 基础文件引入 -->
+<link href="/thinkphp5/public/static/tps/css/baseui.css" rel="stylesheet" type="text/css">
+<link href="/thinkphp5/public/static/tps/css/zTreeStyle.css" rel="stylesheet" type="text/css">
+<link href="/thinkphp5/public/static/tps/css/validationEngine.jquery.css" rel="stylesheet" type="text/css">
+<link href="/thinkphp5/public/static/tps/css/qtip.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://10.103.123.197:8088/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body style="overflow-y: auto; position: relative;">
+	<!--头部-->
+	<div class="hd-section">
+	  	<div class="cf">
+	  	 	<h2 class="tit-1 r" id="backPaper" style="cursor:pointer;">
+		  	 	<a class="hd-back" href="javascript:window.close();" style="width:70px">关闭</a>
+		  	</h2>
+	  	</div>
+	</div>
+	<div class="mid-section">
+	   <div class="mid-wrap">
+	       <div class="ovs">
+	           <div class="hd-wrap">
+				<div class="m-ctit">新东方数学四年级•寒春分班测</div>
+				<ul class="m-num">
+						<li>
+							<div class="num-top">完成率</div>
+							<div class="num-bottom">98.67%</div>
+						</li>
+						<li>
+							<div class="num-top">已完成测评数/测评总数</div>
+							<div class="num-bottom">74/75</div>
+						</li>
+						<li>
+							<div class="num-top">平均正确率</div>
+							<div class="num-bottom">60.13%</div>
+						</li>
+						<li>
+							<div class="num-top">平均答题时间</div>
+							<div class="num-bottom">9.29分</div>
+						</li>
+				</ul>
+				<div class="hd-tab cf">
+					<a href="javascript:void(0);" class="atab active">新东方数学四年级•寒春分班测</a>
+				</div>
+				<ul class="m-itemlist">
+					<li>
+							考试时长：{$redata.cp_time}分钟
+					</li>
+					<li>学科：{$redata.xueke}</li>
+					<li>满分：{$redata.grade}分</li>
+					<li>发布时间：{$redata.fb_time} </li>
+					<li>发布人：{$redata.fb_name}</li>
+					<li>题目数量：10</li>
+				</ul>
+				<div class="hd-tab cf">
+					<a href="javascript:void(0);" onclick = "xygkcj(1,this);"  class="atab operCls active">学员成绩详情</a>
+					<a href="javascript:void(0);" onclick = "xygkcj(2,this);"  class="atab operCls">各题目详情</a>
+				</div>
+				<div id="dataListId">	
+
+					
+				</div>
+			</div>
+	       </div>
+	   </div>
+	</div>
+	<!--底部-->
+<div class="ft-section">
+	武汉新东方培训学校
+</div>
+<div id="cli_dialog_div"></div>
+</body>
+</html>
+<script type="text/javascript">
+	
+	$(function(){
+        $('#dataListId').load('xygkcj');
+    })
+
+	function xygkcj(id,objs){
+		$('.mid-section .hd-wrap .hd-tab a').removeClass('active');
+		$(objs).addClass('active');
+		if(id==1){
+			$('#dataListId').load('xygkcj');
+		}else if(id==2){
+			$('#dataListId').load('gtmxq');
+		}
+	}
+
+</script>

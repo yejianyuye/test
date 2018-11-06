@@ -1,0 +1,115 @@
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="textml; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache">
+        <title>新东方TPS系统登陆</title>
+        <link href="/thinkphp5/public/static/tps/css/hdiconfont.css" rel="stylesheet" type="text/css">
+        <link href="/thinkphp5/public/static/tps/css/ppfullscreen.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+        <script>
+            var ctx = '';
+        </script>
+    </head>
+    <body>
+        <div class="hd-header">
+            <div class="hd-inside cf">
+              <a href="#" class="l">
+                 <img src="/thinkphp5/public/static/tps/img/xdf.jpg" alt="">
+              </a>
+            </div>
+        </div>
+        <div class="hd-lbg">
+        <div class="hd-wrap">
+            <div class="hd-lgbg">
+                  <div class="log-main">
+                      <div class="log-mbg"></div>
+                      <div class="rel">
+                          <h2 class="log-tit">欢迎登录</h2>
+                          <div class="log-error">
+                          </div>
+                           <form id="loginForm" method="post" action="/sys/login">
+                          <div class="log-wbg">
+                                 <ul class="log-form">
+                                    <li class="log-li log-line">
+                                        <strong>账号：</strong>
+                                        <label for="user">
+                                            <input placeholder="请输入电话号码！" id="user" name="username" class="text" type="text">
+                                        </label>
+                                    </li>
+                                    <li class="log-li log-line">
+                                        <strong>密码：</strong>
+                                        <label for="pass">
+                                            <input placeholder="请输入密码！" name="password" id="pass" class="text" type="password" autocomplete="off">
+                                        </label>
+                                    </li>
+                                </ul>
+                                
+                                <input type="hidden" name="refreshToken" value="6CF2ED46-21A5-4D2A-A662-2990BEB71F72">
+                                <input id="formSubmit" type="submit" style="display: none;">
+                          </div>
+                          </form>
+                          <div class="log-fw">
+                            <a href="" style="float:right;" >注册</a>
+                              <a href="" style="color:#d22828;">忘记密码?</a>
+                          </div>
+                          <button class="log-btn" id="formSubmitBtn" type="submit">登&nbsp;&nbsp;录</button>
+                      </div>
+                  </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer-copyright">
+            <p class="copyright-cont">
+              <a href="mailto:president@xdf.cn" rel="nofollow" target="_blank">总裁信箱</a> | 
+              <a href="http://www.xdf.cn" rel="nofollow" target="_blank">www.xdf.cn</a> | 
+              <a href="http://zhaopin.xdf.cn/" rel="nofollow" target="_blank">加入我们</a> | 
+              <a href="http://www.xdf.cn/about/law.html" rel="nofollow" target="_blank">法律声明</a> | 
+              <a href="http://www.xdf.cn/zhuanti/help/suggestion.html" rel="nofollow" target="_blank">联系我们</a> | 
+              <a href="http://dh.xdf.cn/" rel="nofollow" target="_blank">教育导航</a> | 
+              <a href="#" rel="nofollow" target="_blank">服务监督</a> | 
+              <a href="#" rel="nofollow" target="_blank">友情链接</a> | 
+              <a href="http://www.xdf.cn/csr/" rel="nofollow" target="_blank">社会责任</a> | 
+              <a href="#" rel="nofollow" target="_blank">企业微博</a> | 
+              <a href="http://www.neworiental.org/english/" rel="nofollow" target="_blank">English Website</a>  
+            </p>
+            
+            <p class="copyright-cont">
+                          新东方教育科技集团
+            </p>
+            <p class="copyright-cont">
+                          经营许可证编号：京ICP备05067667　 | 　京ICP证060601号 　|　 京网文[2013]0911-960号 　| 　京公网安备1101084985
+            </p>
+            <p class="copyright-cont">
+              <!-- Copyright &copy; 2011-2016 www.xdf.cn ALL Rights Reserved -->
+               Copyright 2011-2016 Neworiental Corporation, All Rights Reserved
+            </p>
+          </div>
+    
+    <script>
+        $(function(){
+            var username=$('#user').val();
+            $("#formSubmitBtn").on("click",function(e){
+                e.preventDefault();
+                $("#formSubmit").trigger("click");
+            });
+            $("#captchaimg").on("click",function(e){
+                $("#captchaimg").attr("src",ctx+"/common/captcha?t=" + Math.random());
+            });
+            $('#user').focus(function (){
+                username=$('#user').val();
+            });
+            $('#user').blur(function (){
+                if(username!=""&&$('#user').val()!=username){
+                    $('#errordiv').hide();
+                }
+            });
+            
+        })
+    </script>
+
+<div id="cli_dialog_div"></div>
+</body>
+</html>
