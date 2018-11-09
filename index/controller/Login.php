@@ -6,30 +6,41 @@ use   \think\Session;
 
 class Login extends \think\Controller
 {
-    //登陆
+    //登陆页面
     public function login()
     {
         return view('common/login');
     }
 
+    //登陆
     public function do_login()
     {
-        $data = Request::instance()->post();
-        $res = Db::table('user')->where('username', $data['username'])->find();
+        $data = Request::instance()->get();
+        $res = Db::table('tps_user')->where('tel', $data['tel'])->find();
         if($res){
             if($res['password'] == md5($data['password'])){
-                Session::set('xxwb_admin',$res['id']);
-                $this->error(('登录成功！'), url('/index/Grade/bootstrap'));
+
+                Session::set('tps_adminid',$res['id']);
+                Session::set('tps_zuid',$res['zu_id']);
+                Session::set('password',md5($data['password']));
+                return 1;
             }else{
-                $this->error(('用户名或者密码错误'), url('/index/Login/xxwb_login'));
+                return 2;
             }
 
         }else{
-            $this->error(('用户名不存在'), url('/index/Login/xxwb_login'));
+            return 0;
         }
     }
+    //推出登陆
+    public function log_out(){
+        Session::set('tps_adminid','');
+        Session::set('tps_zuid','');
+        Session::set('password','');
+        $this->redirect('Common/login', ['cate_id' => 2]);
+    }
 
-    //登陆
+    //注册页面
     public function register()
     {
         return view('common/register');
@@ -79,16 +90,32 @@ class Login extends \think\Controller
         }
         $insert_data['username'] = $data['user'];
         $insert_data['password'] = md5($data['password']);
-        $insert_data['tel'] = $data['tel'];
-        $insert_data['md_tel'] = md5($data['tel']);
-        $getId = Db::table('tps_user')->insertGetId($insert_data);
-        if($getId){
-            Session::set('tps_admin',$getId);
-            Session::set('tps_tel',$insert_data['tel']);
-            return 1;
+        $insert_data['add_time'] = date("Y-m-d H:i:s", time());
+        if(array_key_exists('type',$data) && $data['type'] == 2 ){
+            $insert_data['tel'] =  $data['tel'];
+            $insert_data['zu_id'] = Session::get('tps_zuid');
+            $insert_data['admin'] = 0;
+            $getId = Db::table('tps_user')->insertGetId($insert_data);
+            if($getId){
+                return 1;
+            }else{
+                return 6;
+            }
         }else{
-            return 6;
+            $insert_data['tel'] = $insert_data['zu_id'] =  $data['tel'];
+            $getId = Db::table('tps_user')->insertGetId($insert_data);
+            if($getId){
+                Session::set('tps_adminid',$getId);
+                Session::set('tps_zuid',$data['tel']);
+                Session::set('password',md5($data['password']));
+                return 1;
+            }else{
+                return 6;
+            }
         }
+        
+        
+        
 
     }
 

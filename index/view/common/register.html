@@ -215,7 +215,6 @@ $('#submit').click(function(){
     //校验用户名
     var user_length = $('#user').val().length;
     var user_data = TableObj.check_use(user_length);
-    alert(user_length);
     if(user_data == 1){
       layer.alert('用户名字应该在1-10个字符之间', {
                 icon: 1,
@@ -270,34 +269,38 @@ $('#submit').click(function(){
               success: function (data) {
 
                   if(data ==1){
+                    layer.alert('添加成功', {
+                        icon: 1,
+                        skin: 'layer-ext-moon'
+                     })
                     window.location.href = "/thinkphp5/tps.php/index/index/index";
                   }else if(data == 2){
-                      ayer.alert('电话号码格式错误', {
+                      layer.alert('电话号码格式错误', {
                         icon: 1,
                         skin: 'layer-ext-moon'
                      })
                   }else if(data == 0){
-                      ayer.alert('电话号码已经注册', {
+                      layer.alert('电话号码已经注册', {
                         icon: 1,
                         skin: 'layer-ext-moon' 
                      })
                   }else if(data == 3){
-                      ayer.alert('用户名错误', {
+                      layer.alert('用户名错误', {
                         icon: 1,
                         skin: 'layer-ext-moon' 
                      })
                   }else if(data == 4){
-                      ayer.alert('密码格式错误', {
+                      layer.alert('密码格式错误', {
                         icon: 1,
                         skin: 'layer-ext-moon'
                      })
                   }else if(data == 5){
-                      ayer.alert('二次密码不一致', {
+                      layer.alert('二次密码不一致', {
                         icon: 1,
                         skin: 'layer-ext-moon' 
                      })
                   }else if(data == 6){
-                      ayer.alert('注册用户名失败', {
+                      layer.alert('注册用户名失败', {
                         icon: 1,
                         skin: 'layer-ext-moon' 
                      })

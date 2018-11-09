@@ -5,15 +5,21 @@ use   \think\Request;
 use   \think\Db;
 use   \think\Log;
 use   \think\Session;
-class Index extends \think\Controller
+use   \app\index\controller\Cologin;
+use   \app\common\controller\Tpsinfo;
+class Index extends cologin
 {
 
     private $admin_name = "叶建宇";
-
+   // private $admin_tel = Session::get('tps_zuid');
 
     //显示主页面
     public function index(){
-        return view('index');
+        //var_dump('password ='.Session::get('password').' and id='.Session::get('tps_adminid'));die;
+        $res = Db::table('tps_user')->where('password ='.'\''.Session::get('password').'\''.' and id='.Session::get('tps_adminid'))->find();
+        return view('index',[
+            'admin_info'=>$res,
+        ]);
     }
 
     //获取试卷的状态以及一些信息
@@ -64,10 +70,17 @@ class Index extends \think\Controller
 
     //二维码扫描
     public function chengji(){
-        
+       // $res = Db::table('tps_user')->where('zu_id ='.)->select();
         return view();
     }
     
+    //二维码扫描
+    public function guanliyuan(){
+        $res = Db::table('tps_user')->where('zu_id ='.Session::get('tps_zuid'))->select();
+        return view('guanliyuan',[
+            'ss'=>$res,
+        ]);
+    }
 
     //测评试卷页面
     public function ceping(){
@@ -122,6 +135,8 @@ class Index extends \think\Controller
             unset($data['miaoshu']);
         }
         $data['edit_time'] = date("Y-m-d H:i:s", time());
+        $data['tel_allow'] = Session::get('tps_zuid');
+
         //加一重id对试卷的校验
         $res['souseid'] = $data['add_time'] = time();
         $res['id'] = Db::table('tps_evaluate_paper')->insertGetId($data);
@@ -137,11 +152,31 @@ class Index extends \think\Controller
         $paper_class = $this->get_paper_class($paper_data);
         $paper_data1['type'] = 1;
         $paper_class1 = $this->get_paper_class($paper_data1);
+
+        $paper_info = Db::table('tps_evaluate_paper')->field('xueke,nianji,xueduan,add_time,id,paper_name,miaoshu')->where('id ='.$data['evaluate_paper_id'].' and add_time='.$data['souseid'])->find();
+        $paper_info['xueke_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['xueke'])->value('name');
+        $paper_info['nianji_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['nianji'])->value('name');
+        $paper_info['xueduan_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['xueduan'])->value('name');
+
+        $paper_info['evaluate_paper_id'] = $data['evaluate_paper_id'];
+        //$paper_info['souseid'] = $data['souseid'];
+       // $paper_info['edit_id'] = Session::get('tps_adminid');
         return view('edit_epp', [
             'paper_class'  => $paper_class,
             'paper_class1'  => $paper_class1,
-            'evaluate_id'  => $data['evaluate_id'],
+            'paper_info'  => $paper_info,
+            'paper_data'  => $data,
         ]);
+    }
+
+    //完成学科，学段，年级的信息编辑
+    public function finish_edit(){
+        $data = Request::instance()->get();
+        $data['paper_type'] = 0;
+        $data['edit_id'] = Session::get('tps_adminid');
+        $data['edit_time'] =date("Y-m-d H:i:s",time());
+        return Db::table('tps_evaluate_paper')->where('id ='.$data['id']. ' and add_time ='.$data['add_time'])->update($data);
+        
     }
 
     //编辑测评
@@ -177,6 +212,29 @@ class Index extends \think\Controller
         }else{
             return  0;
         }
+    }
+
+    //预览试卷
+    public function paper_preview(){
+        //预约id
+        $get_test_paper_id = 18;
+        $search_data['id'] = $get_test_paper_id;
+        $appointment_info = Db::table('tps_appointment')->field('status,time_allow,evaluate_paper_id')->where($search_data)->find();
+            if($appointment_info['status'] == 2){
+                echo '该测评只能测评一次，考生已完成该测评';die;
+            }else{
+                $tpsinfo = New Tpsinfo();
+                $paper_question_all = $tpsinfo->get_paper($appointment_info['evaluate_paper_id'],1);
+                //echo '<pre>';print_r($paper_question_all);echo '<pre>';die;
+                return view('paper/paper_preview', [
+                    'id'  => $get_test_paper_id,
+                    'paper_question'  => $paper_question_all['paper_question'],
+                    'count'  => $paper_question_all['count'],
+                    'pageall'  => $paper_question_all['pageall'],
+                    'time_allow'  => $appointment_info['time_allow'],
+                    'evaluate_paper_id'  => $appointment_info['evaluate_paper_id'],
+                ]);
+            }
     }
 
     //发布试卷

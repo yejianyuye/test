@@ -12,9 +12,10 @@
 <link href="http://10.103.123.197:8088/thinkphp5/public/static/tps/css/yjy4.css" rel="stylesheet" type="text/css" />
 <link href="http://10.103.123.197:8088/thinkphp5/public/static/tps/css/yjy5.css" rel="stylesheet" type="text/css" />
 <link href="http://10.103.123.197:8088/thinkphp5/public/static/tps/css/dateRange.css" rel="stylesheet" type="text/css" />
+
 <!--<link href="/public/static/tps/css/monthPicker.css" rel="stylesheet" type="text/css" />-->
 <script type="text/javascript" src="http://10.103.123.197:8088/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
-
+<script type="text/javascript" src="https://www.jzclassroom.com/thinkphp5/public/static/paopao/layer/layer.js"></script>
 </head>
 <body style="overflow-y:auto;position:relative;">
 
@@ -25,8 +26,8 @@
 		<a class="hd-fdb" href="/sys/version/view"><i class="iconfont" style="color:#FF0000;"></i><img  src="http://10.103.123.197:8088/thinkphp5/static/img/rdot.png" class="nv" alt="">版本更新</a>
 		<a class="hd-fdb" href="/tps/feedback/index"><i class="iconfont"></i>意见反馈</a>
 		<div class="hd-user" id="user1">
-			<a href="javascript:void(0);" title="叶建宇">叶建宇<i class="iconfont"></i></a>
-			<a href="/sys/logout" class="log-out">退出</a>
+			<a href="javascript:void(0);" title="叶建宇" class="name">{$admin_info.username}<i class="iconfont"></i></a>
+			<a href="{:url('index/login/log_out')}" class="log-out">退出</a>
 		</div>
 	</div>
 </div>
@@ -62,12 +63,22 @@
 					<a href="javascript:void(0);" class="inner" onclick="otsPaper.paper(this,4);" title="阶段测评结果">比赛考场设置</a>
 				</div>
 			</div>
-			<div class="hd-block">
-				<h2><i class="iconfont"></i>练习作业</h2>
-				<div class="hd-box">
 
+            <div class="hd-block">
+                <h2><i class="iconfont "></i>问卷调查</h2>
+                <div class="hd-box">
+                    <a href="javascript:void(0);" class="inner" onclick="otsPaper.paper(this,1);" title="阶段测评试卷">阶段测评试卷</a>
+                    <a href="javascript:void(0);" class="inner" onclick="otsPaper.paper(this,3);" title="阶段测评结果">阶段测评结果</a>
+                </div>
+            </div>
+        {if condition = "($admin_info.admin == 1)"}
+			<div class="hd-block">
+				<h2><i class="iconfont"></i>管理</h2>
+				<div class="hd-box">
+                    <a href="javascript:void(0);" class="inner" onclick="otsPaper.paper(this,10);" title="管理员列表">管理员列表</a>
 				</div>
 			</div>
+        {/if}
 			<div class="hd-block">
 			</div>
 			<div class="hd-block">
@@ -107,6 +118,13 @@
 
 <script type="text/javascript">
 
+
+    $("#user1").mouseover(function (){  
+            $("#user1").addClass('active'); 
+    }).mouseout(function (){  
+            $("#user1").removeClass('active');   
+    });  
+
     //开始时显示的画面
     $(function(){
         $('.hd-data').load('chengji');
@@ -140,6 +158,8 @@
                 $('.hd-data').load('bskcsz?page=1');
             }else if(type == 0){
                 $('.hd-data').load('chengji');
+            }else if(type == 10){
+                $('.hd-data').load('guanliyuan');
             }
         },
 

@@ -13,25 +13,20 @@ class Cologin extends \think\Controller
     //校验登陆
     public function _initialize(){
         //检测是否登录
-        $xsl_adminid= Session::get('tps_adminid');
+        $tps_adminid= Session::get('tps_adminid');
 
-        if (!$xsl_adminid)
-        {
-            $this->error(('请先登录！！！'), url('/index/Login/logins'));
+        if (!$tps_adminid){
+            $this->error(('请先登录！！！'), url('/index/Login/login'));
         }else{
-            $res = Db::table('user')->where('id', $xsl_adminid)->find();
-            if($res['username'] != Session::get('admin_name') || $res['password'] != Session::get('password') ){
-                $this->error(('请先登录！！！'), url('/index/Login/logins'));
+            $res = Db::table('tps_user')->where('id',$tps_adminid)->find();
+            if($res['zu_id'] != Session::get('tps_zuid') ){
+                $this->error(('请先登录！！！'), url('/index/Login/login'));
             }
         }
-
-         $this->xsl_adminid = $xsl_adminid;
-         $this->status =Session::get('status');
-
+         //$this->tps_adminid = $tps_adminid;
+         //$this->status =Session::get('status');
     }
 
-
-
-
+    
 
 }

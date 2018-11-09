@@ -12,27 +12,9 @@ class Pcanswer extends \think\Controller
     //考试试卷
     public function testpaper(){
         //预约id
-      // $get_test_paper_id= Session::get('get_test_paper_id');
-        //$search_data['id'] = $get_test_paper_id;
         $get_test_paper_id = 18;
         $search_data['id'] = $get_test_paper_id;
         $appointment_info = Db::table('tps_appointment')->field('status,time_allow,evaluate_paper_id')->where($search_data)->find();
-       //$tel= Session::get('tel');
-
-
-      //  if(!array_key_exists('evaluate_paper_id',$data)  || $data['evaluate_paper_id']== ''){
-     //       echo '没有选择考卷';die;
-       // }
-
-       // if (!$get_test_paper_id){
-        //    $this->redirect('Tps/testpaper_login', array('evaluate_paper_id'=>$data['evaluate_paper_id']));
-       // }else{
-           // $search_data['evaluate_paper_id'] = $data['evaluate_paper_id'];
-
-           // $search_data['tel'] = $tel;
-            //var_dump($search_data);die;
-
-            //var_dump($appointment_info);die;
             if($appointment_info['status'] == 2){
                 echo '该测评这样测评一次，考生已完成该测评';die;
             }else{

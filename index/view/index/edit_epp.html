@@ -5,18 +5,18 @@
     <title>新东方武汉教研平台</title>
     <meta name="keywords" content="新东方武汉教研平台">
     <meta name="description" content="新东方武汉教研平台">
-    <link href="/public/static/tps/css/yjy.css" rel="stylesheet" type="text/css" />
-    <link href="/public/static/tps/css/yjy1.css" rel="stylesheet" type="text/css" />
+    <link href="/thinkphp5/public/static/tps/css/yjy.css" rel="stylesheet" type="text/css" />
+    <link href="/thinkphp5/public/static/tps/css/yjy1.css" rel="stylesheet" type="text/css" />
 
     <!--<link href="/public/static/tps/css/monthPicker.css" rel="stylesheet" type="text/css" />-->
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <!--头部-->
 <div class="hd-section">
     <div class="cf">
         <h2 class="tit-1 l">
-            <span class="hd-gb"><a class="hd-back" href="/index.php/index/Tps/index"><i class="iconfont"></i>返回组卷中心</a></span>
+            <span class="hd-gb"><a class="hd-back" href="/thinkphp5/tps.php/index/index/index"><i class="iconfont"></i>返回组卷中心</a></span>
         </h2>
     </div>
 </div>
@@ -42,34 +42,36 @@
                         <span id="errorinfotip">错误信息显示</span>
                     </div>
                 </dd>
-                <input type="hidden" name="edit_name" value="叶建宇">
-                <input  name = "evaluate_id" type="hidden" value="{$evaluate_id}">
+                <input type="hidden" name="id" value = "{$paper_data['evaluate_paper_id']}" >
+                <input type="hidden" name="add_time" value = "{$paper_data['souseid']}" >
+              
                 <dt class="testoption" style="display: block;">测评学段、年级、学科</dt>
                 <dd class="cf testoption" style="display:block;">
 
                     <div id="paperStage" class="selt-box  " style="width: 70px;">
-                        <input type="text" name="xueduan" valuename="" value="" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
-                        <span class="selt-txt ft" title="学段">学段</span>
+                        <input type="hidden" name="xueduan" value="{$paper_info['xueduan']}">
+
+                        <span class="selt-txt ft" title="{$paper_info['xueduan_name']}">{$paper_info['xueduan_name']}</span>
 
                         <i class="iconfont" onclick = "tt(this)"></i>
-                        <ul class="opt" style="display: none;">
+                        <ul class="opt" style="display:none;">
                             <li onclick = "ss(this)">
                                 <a href="javascript:void(0);"  svalue="" title="学段" class="ft">学段</a>
                             </li>
                             {volist name="paper_class" id="vo"  key="k"}
-
+                        
                             <li onclick = "ss(this,2)">
                                 <a href="javascript:void(0);"  svalue="{$vo.id}" title="{$vo.name}">{$vo.name}</a>
                             </li>
-
+                           
                             {/volist}
                         </ul>
                     </div>
 
                     <div id="gwcpgrade" class="l">
                         <div id="paperGrade" class="selt-box  " style="width: 70px;">
-                            <input type="hidden" name="nianji" value="">
-                            <span class="selt-txt ft" id = "nianji1" title="年级">年级</span>
+                            <input type="hidden" name="nianji" value="{$paper_info['nianji']}">
+                            <span class="selt-txt ft" id = "nianji1" title="{$paper_info['nianji_name']}">{$paper_info['nianji_name']}</span>
                             <i class="iconfont" onclick = "tt(this)"></i>
                             <ul class="opt" id="nianji" style="display: none;">
 
@@ -78,8 +80,8 @@
                     </div>
 
                     <div id="paperSubject" class="selt-box  " style="width: 70px;">
-                        <input type="text" name="xueke" valuename="" value="" class="validate[required]" style="height:0px;border:0px;width:180px;position:absolute;right:0;top:0;">
-                        <span class="selt-txt ft" title="学科">学科</span>
+                        <input type="hidden" name="xueke" value="{$paper_info['xueke']}">
+                        <span class="selt-txt ft" title="{$paper_info['xueke_name']}">{$paper_info['xueke_name']}</span>
                         <i class="iconfont" onclick = "tt(this)"></i>
                         <ul class="opt" style="display: none;">
                             <li onclick = "ss(this)">
@@ -98,13 +100,13 @@
 
                 <dt>测评名称</dt>
                 <dd>
-                    <input id="paper_name" name = "paper_name" type="text" class="hd-ipt" value="">
+                    <input id="paper_name" name = "paper_name" type="text" class="hd-ipt" value="{$paper_info['paper_name']}">
                     <em class="zx-m" style="margin-left:2px;color:red;">*</em>
                 </dd>
 
                 <dt>描述信息</dt>
                 <dd class="cf">
-                    <textarea id="paperMemo" name="miaoshu" rows="" cols="" maxlength="1000"></textarea>
+                    <textarea id="paperMemo" name="miaoshu" rows="" cols="" maxlength="1000">{$paper_info['miaoshu']}</textarea>
                 </dd>
 
                 <dd class="bn">
@@ -117,14 +119,14 @@
 </div>
 <!--底部-->
 <div class="ft-section">
-    <!--Copyright 2011-2016 Neworiental Corporation, All Rights Reserved-->
     测评试卷添加
 </div>
 <div id="cli_dialog_div"></div>
 </body>
 </html>
 <script>
-
+    var evaluate_paper_id = {$paper_data.evaluate_paper_id};
+    var souseid = {$paper_data.souseid};
     function tt(obj){
         var nex = obj.nextElementSibling;
         $('.selt-box .opt').css('display','none');
@@ -144,7 +146,7 @@
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: "/index.php/index/Tps/get_paper_children",
+                url: "get_paper_children",
                 data: {'id':zhi},
                 success: function (data) {
                     if(data){
@@ -182,13 +184,13 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/index/Tps/add_ep",
+            url: "finish_edit",
             data: search_tj,
             success: function (data) {
                     if(data){
-                        window.location.href ="/index.php/index/Tps/edit_all_paper?evaluate_paper_id="+data;
+                        window.location.href ="/thinkphp5/tps.php/index/paper/edit_all_paper?evaluate_paper_id="+evaluate_paper_id+"&souseid="+souseid;
                     }else{
-                        alert('添加失败！');
+                        alert('下一步失败！');
                     }
             },
         });

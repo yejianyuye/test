@@ -21,7 +21,19 @@ class Paper extends \think\Controller
     public function edit_all_paper(){
 
         $evaluate_paper_id = Request::instance()->get('evaluate_paper_id');
-        $paper_title = Db::table('tps_evaluate_paper')->where('id',$evaluate_paper_id)->find();
+        $add_time = Request::instance()->get('souseid');
+        //var_dump('id = '.$evaluate_paper_id.' and add_time ='.$add_time.' and tel_allow='.Session::get('tps_zuid'));die;
+        $paper_title = Db::table('tps_evaluate_paper')->where('id = '.$evaluate_paper_id.' and add_time ='.$add_time.' and tel_allow='.Session::get('tps_zuid'))->find();
+        if($paper_title == null){
+            $ssk['firsr_one'] = '试卷已过期';
+            $ssk['firsr_two'] = '试卷已去远方，请尝试其他诊断......';
+            return view('common/pc_no_paper',[
+
+                'common_info'=>$ssk,
+
+            ]);
+        }
+
         $paper_point = Db::table('tps_paper_point')->where('evaluate_paper_id',$paper_title['id'])->order('point_order desc, id asc')->select();
         $paper_question = '';
         foreach($paper_point as $pk=>$pv){
@@ -50,6 +62,8 @@ class Paper extends \think\Controller
                 }
             }
         }
+
+        //echo '<pre>';print_r($paper_question);echo '<pre>';die;
         return $this->fetch('tps_edit_all', [
             'paper_title'  => $paper_title,
             'paper_point' => $paper_point,

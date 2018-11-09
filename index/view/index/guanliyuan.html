@@ -1,0 +1,233 @@
+			
+			
+			<div class="sifts cf">
+				<form id="gwcp_qform" onsubmit="return false;">
+					<a class="btn btn-ge r" href="javascript:void(0);" onclick="addname();" id="newpaperID"><i class="iconfont"></i>新增</a>
+
+				</form>
+			</div>
+
+			<div id="paperDataList">
+				<div class="sift-result">
+
+					{volist name = "ss" id = "sid"}
+					<div class="sift-list" id="ss1">
+						<h3>
+							<a href="" target="_blank" title="试卷名称1" class="ftxt"> {$sid.username}</a>
+							<a href="" target="_blank" class="iconfont ml5"></a>
+						</h3>
+
+						<ul class="props">
+							<li>手机号: {$sid.tel}</li>
+							<li>编辑时间: {$sid.add_time}</li>
+						</ul>
+					</div>
+					{/volist}
+
+				</div>
+				<a id="aHref" href="#"></a>
+
+			</div>
+
+			<div id= "adminname"  class="blockUI blockMsg blockPage" style="display:none;z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 440px; top: 108.5px; left: 600.5px; text-align: left; color: rgb(0, 0, 0); border: 1px solid rgb(166, 201, 226); background-color: rgb(255, 255, 255); cursor: default;">
+				<div id="XBJ_BOX" class="zx-dialog">
+
+					<h3 class="hd-diaTit zx-diaTit">
+						设置预约报名宣传内容
+						<a class="closeWin" href="javascript:void(0);">×</a>
+					</h3>
+
+					<div id="realContent" style="height:385px;">
+						<div class="hd-diaCont">
+							<form id="matchAdvertisementValidation" class="zx-diaCont">
+								<dd id="errorinfo" style="display:none;margin-left:65px">
+									<div class="error-tips">
+										<i class="iconfont"></i>
+										<span id="errorinfotip">添加后台管理者</span>
+									</div>
+								</dd>
+								
+								<dl class="hd-form">
+									<dt class="wp10" style="width:20%"><span>用户名：</span></dt>
+									<dd class="wp90" style="width:80%">
+										<input id="user" maxlength="20"  name="user" class="itxt" style="padding:0;float:left" type="text">
+									</dd>
+								</dl>
+
+								<dl class="hd-form">
+									<dt class="wp10" style="width:20%"><span>电话：</span></dt>
+									<dd class="wp90" style="width:80%">
+										<input id="tel" maxlength="11" name="tel" class="itxt" style="padding:0;float:left" type="text">
+									</dd>
+								</dl>
+
+								<dl class="hd-form">
+									<dt class="wp10" style="width:20%"><span>密码：</span></dt>
+									<dd class="wp90" style="width:80%">
+										<input id="password" maxlength="20" name="password" class="itxt" style="padding:0;float:left" type="password">			
+									</dd>
+								</dl>
+
+								<dl class="hd-form">
+									<dt class="wp10" style="width:20%"><span>确认密码：</span></dt>
+									<dd class="wp90" style="width:80%">
+										<input id="sure_password" maxlength="20" name="sure_password" class="itxt" style="padding:0;float:left" type="password">			
+									</dd>
+								</dl>
+				
+							</form>
+						</div>
+					</div>
+
+					<div class="btn-block">
+						<button onclick="saveAdvertisement()" class="btn btn-s">确定</button>
+						<button class="btn btn-e closeWin">取消</button>
+					</div>
+
+				</div>
+			</div>
+
+			<script type="text/javascript">
+				
+				function addname(){
+					$('#paperDataList').append('<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>');
+					$('#adminname').css('display','block');
+				}
+
+				$('.closeWin').click(function(){
+                    $('.blockOverlay').remove();
+                    $('.blockUI').css('display','none');
+                })
+
+                //校验
+				var TableObj = {
+				        //校验用户名
+				        check_use: function (user) {
+				           return ss =  (user<1 || user>10 ) ? 1 : 2;
+				        },
+				        //校验电话号码
+				        check_tel: function () {
+				                var tel_val = $('#tel').val();
+				                var str = '';
+				                $.ajax({
+				                    type: "get",
+				                    dataType: "json",
+				                    url: "/thinkphp5/tps.php/index/login/ajax_check_tel",
+				                    data: {'tel':tel_val},
+				                    async :false,
+				                    success: function (data) {
+
+				                       str = data
+				                    }
+				                })
+				                return str;
+				        },
+				        
+				        //校验第一次密码
+				        check_password:function(password){
+				            return ss =  (password<6 || password>20 ) ? 1 : 2;
+				        },
+				        //校验确认密码
+				        check_sure_password:function(sure_password){
+				           return ss =  ($('#password').val()!=sure_password ) ? 1 : 2;
+				        }
+
+				    }
+
+                function saveAdvertisement(){
+
+                	//校验用户名
+				    var user_length = $('#user').val().length;
+				    var user_data = TableObj.check_use(user_length);
+				    if(user_data == 1){
+				      layer.alert('用户名字应该在1-10个字符之间', {
+				                icon: 1,
+				                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+				              })
+				      return false;
+				    }
+				    //校验电话号码
+				    var data = TableObj.check_tel();
+				    if(data==0){
+				        layer.alert('该电话号码已被注册', {
+				           icon: 1,
+				           skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+				        })
+				        return false;
+				     }else if(data==2){
+				        layer.alert('该电话号码格式不对', {
+				          icon: 1,
+				          skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+				        })
+				        return false;
+				     }
+				    //校验密码
+				    var password = $('#password').val().length;
+				    var password_data = TableObj.check_password(password);
+				    if(password_data == 1){
+				      layer.alert('密码应该在6-20个字符之间', {
+				                icon: 1,
+				                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+				          })
+				      return false;
+				    }
+				    //校验确认密码
+				    var sure_password = $('#sure_password').val();
+				    var sure_password_data = TableObj.check_sure_password(sure_password);
+				    if(sure_password_data == 1){
+				          layer.alert('二次密码不一致', {
+				              icon: 1,
+				              skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+				          })
+				      return false;    
+				    } 
+				    var data = $("#matchAdvertisementValidation").serialize()+'&type=2';
+				   
+				    $.ajax({
+				              type: "get",
+				              dataType: "json",
+				              //url: "/thinkphp5/tps.php/index/login/do_register",
+				              url: "{:url('index/login/do_register')}",
+				              //"{:url('index/index/text')}"
+				              data: data,
+				              success: function (data) {
+
+				                  if(data ==1){
+				                    window.location.href = "/thinkphp5/tps.php/index/index/index";
+				                  }else if(data == 2){
+				                      layer.alert('电话号码格式错误', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon'
+				                     })
+				                  }else if(data == 0){
+				                      layer.alert('电话号码已经注册', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon' 
+				                     })
+				                  }else if(data == 3){
+				                      layer.alert('用户名错误', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon' 
+				                     })
+				                  }else if(data == 4){
+				                      layer.alert('密码格式错误', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon'
+				                     })
+				                  }else if(data == 5){
+				                      layer.alert('二次密码不一致', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon' 
+				                     })
+				                  }else if(data == 6){
+				                      layer.alert('注册用户名失败', {
+				                        icon: 1,
+				                        skin: 'layer-ext-moon' 
+				                     })
+				                  }
+				                 
+				              }
+				          })
+
+                }
+			</script>

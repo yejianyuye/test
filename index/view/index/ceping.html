@@ -1,8 +1,8 @@
 
 
 			<link href="/thinkphp5/public/static/tps/css/ppfullscreen.css" rel="stylesheet" type="text/css" />
+			
 			<div class="hd-tab cf">
-
 				<a href="javascript:void(0);" {if condition="($search_datas.status != 1)"}onclick="otsPaper.tab(this,1);" {/if} class="atab {if condition="($search_datas.status == 1)"}active{/if}">未发布</a>
 				<a href="javascript:void(0);" {if condition="($search_datas.status != 2)"}onclick="otsPaper.tab(this,2);" {/if} class="atab {if condition="($search_datas.status == 2)"}active{/if}">已发布</a>
 				<a href="javascript:void(0);" {if condition="($search_datas.status != 3)"}onclick="otsPaper.tab(this,3);" {/if} class="atab {if condition="($search_datas.status == 3)"}active{/if}">下架</a>
@@ -96,7 +96,7 @@
 
 							{if condition ="($vv.status == 1)"}
 							<a class="btn btn-ge r" onclick="ceping.delPaper('{$vv.id}')"><i class="iconfont"></i></a>
-							<a href="/index.php/index/Tps/edit_epp?evaluate_paper_id={$vv.id}" class="btn btn-ge r"><i class="iconfont"></i>编辑试卷</a>
+							<a href="edit_epp?evaluate_paper_id={$vv.id}&souseid={$vv.add_time}" class="btn btn-ge r"><i class="iconfont"></i>编辑试卷</a>
 							{/if}
 							{if condition ="($vv.status == 1 and $vv.paper_type == 1)"}
 							<a href="fabu_paper?evaluate_paper_id={$vv.id}&souseid={$vv.add_time}" class="btn btn-ge r"><i class="iconfont"></i>发布</a>
@@ -122,7 +122,7 @@
 						<!-- 控制试卷名称长度显示 -->
 						<h3>
 							<a href="" target="_blank" title="{$vv.paper_name}" class="ftxt"> {$vv.paper_name}</a>
-							<a href="" target="_blank" class="iconfont ml5"></a>
+							<a href="paper_preview" target="_blank" class="iconfont ml5"></a>
 						</h3>
 
 						<ul class="props">
