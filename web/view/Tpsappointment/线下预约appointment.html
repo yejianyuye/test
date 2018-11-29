@@ -9,9 +9,9 @@
     <title>预约考场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- 引入微信SDK -->
-    <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+    <link href="/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
     <style>
         body {
             height:auto;
@@ -87,12 +87,18 @@
         <!-- 手机号+姓名形式查询，不显示LOGO -->
         <!-- U2登录方式查看报告 -->
         <a href="#" class="t-clogo" style="cursor:default;">
-            <img src="/thinkphp5/public/static/tps/img/xdf-1.jpg" alt="新东方" align="absbottom" />
+            <img src="/public/static/tps/img/xdf-1.jpg" alt="新东方" align="absbottom" />
             测试1
         </a>
-        <div class="t-cities accessType"></div>
-    </div>		
-</div>
+        <div class="t-cities accessType">
+        </div>
+        <div class="t-log accessType">
+            <!-- 手机号+姓名查询，不显示登录注册 -->
+            <!-- 角色类型为学员，显示U2返回的用户信息 -->
+            <span class="user l">欢迎,180316151108713_v</span>
+            <a href="/gwots/wrcweb/passport/logout" class="btn btn-e r"  style="margin-left:20px;">退出</a>
+        </div>
+    </div>		</div>
 <div class="w1000 cf">
     <a href="/gwots/wrcweb/passport/logout" class="f-exit"></a>
     <div class="crump">
@@ -106,7 +112,7 @@
                 <h2>同学，您好！</h2>
                 <div class="frm1 int-sl">
                         <span class="frm-tit">电话</span>
-                        <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" class="input_num" name="tel" id="tel" value="" /><span style="color:red;">*</span>
+                        <input type="text"  maxlength="11" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" class="input_num" name="tel" id="tel" value="" /><span style="color:red;">*</span>
                 </div>
             </div>
 
@@ -210,12 +216,13 @@
     </div>
     <div class="wr">
         <div class="imgPub">
-            <img src="/thinkphp5/public/static/tps/img/a1.jpg" alt="" />
-            <img src="/thinkphp5/public/static/tps/img/a2.jpg" alt="" />
+            <img src="/public/static/tps/img/a1.jpg" alt="" />
+            <img src="/public/static/tps/img/a2.jpg" alt="" />
         </div>
     </div>
 </div>
 </body>
+<input type="hidden" id="matchID" value="30EB99BE-EF5D-4624-BBD2-FF1172E2A832">
 <input type="hidden" id="newStudent" value="1">
 <input type="hidden" id="smallCampusID" value="">
 </html>
@@ -247,7 +254,7 @@
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: "get_dq_children",
+                url: "/index.php/web/tpsappointment/get_dq_children",
                 data: {'id':qy},
                 success: function (data) {
                     if(data){
@@ -276,7 +283,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "get_rq",
+            url: "/index.php/web/tpsappointment/get_rq",
             data: {'xq':xq,'nianji':nianji},
             success: function (data) {
                 if(data){
@@ -306,7 +313,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "get_sj",
+            url: "/index.php/web/tpsappointment/get_sj",
             data: {'xq':xq,'nianji':nianji,'ks_rq':rq},
             success: function (data) {
                 if(data){
@@ -333,7 +340,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "get_papertest",
+            url: "/index.php/web/tpsappointment/get_papertest",
             data: {'xq':xq,'nianji':nianji,'ks_rq':rq,'ks_data':sj},
             success: function (data) {
                 if(data){
@@ -354,7 +361,6 @@
         $(obj).addClass('active');
     }
 
-    //预约提交
     $('#apply').click(function(){
         var tel = $.trim($('input[name="tel"]').val());
         //学员姓名
@@ -480,7 +486,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "to_appointment",
+            url: "/index.php/web/tpsappointment/to_appointment",
             data: data,
             success: function (data) {
                 if(data.res == 0){
@@ -488,7 +494,7 @@
 
                 }else if(data.res == 1){
                     alert('预约成功！');
-                    window.location.href = "studentment?zhunkaonum="+data.zhunkaonum+"&tel="+data.tel+"&student_name="+data.student_name;
+                    window.location.href = "/index.php/web/tpsappointment/studentment?zhunkaonum="+data.zhunkaonum+"&tel="+data.tel+"&student_name="+data.student_name;
                 }else if(data.res == 2 || data.res == 3){
                     alert('预约失败!');
                 }else if(data.res == 4){
@@ -509,5 +515,3 @@
 
 
 </script>
-
-

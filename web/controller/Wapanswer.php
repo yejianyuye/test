@@ -7,36 +7,6 @@ use   \app\common\controller\Tpsinfo;
 use   \think\Session;
 class Wapanswer extends \think\Controller
 {
-
-    //考试试卷
-    public function testpaper(){
-        //预约id
-       // $get_test_paper_id= Session::get('get_test_paper_id');
-        $get_test_paper_id = 18;
-        $appointment_info = Db::table('tps_appointment')
-            ->alias('ta')
-            ->field('ta.status,ta.evaluate_paper_id,tep.cp_sc,tep.cp_time')
-            ->join('tps_evaluate_paper tep','tep.id = ta.evaluate_paper_id')
-            ->where('ta.id',$get_test_paper_id)
-            ->find();
-
-        if($appointment_info['status'] == 2){
-            echo '该测评这样测评一次，考生已完成该测评';die;
-        }else{
-            $tpsinfo = New Tpsinfo();
-            $paper_question_all = $tpsinfo->get_paper_wap($appointment_info['evaluate_paper_id'],1);
-            return view('testpaper', [
-                'id'  => $get_test_paper_id,
-                'evaluate_paper_id'  => $appointment_info['evaluate_paper_id'],
-                'paper_question'  => $paper_question_all['paper_ss'],
-                'num'  => $paper_question_all['num'],
-                'time_allow'  => $appointment_info['cp_sc'],
-                'cp_time'  => $appointment_info['cp_time']*60,
-            ]);
-        }
-
-    }
-
     //手机端上传测评信息
     public function upload_testpaper(){
 
@@ -44,27 +14,26 @@ class Wapanswer extends \think\Controller
 
         $student_cp = $data['zhiall'];
 
-      //  var_dump($data);die;
-     //   echo '<pre>';print_r($student_cp);echo '<pre>';die;
+        //根据考点分数 总得分  试卷 ==》》  考点所占比重  正确率  等级 名称
+        //做完试卷所用的时间
+        $student_report['use_time'] = $data['use_time'];
+        $student_report['use_time_ms'] = $this->usetime($data['use_time']);
+        //$student_report['create_time'] = time();
+        $student_report['create_time'] = date("Y-m-d H:i:s", time());
+        //$student_report['use_time_ms'] = $this->usetime($data['use_time']);
+        $student_report['tel'] = $data['tel'];
+        $student_report['souseid'] = $data['souseid'];
+        $student_report['evaluate_paper_id'] = $data['evaluate_paper_id'];
 
-        //根据用户预约id获取用户电话号码以及学科id
-        $appointment_info = Db::table('tps_appointment')
-            ->alias('ta')
-            ->field('tep.xueke,ta.tel')
-            ->join('tps_evaluate_paper tep','ta.evaluate_paper_id = tep.id')
-            ->where('ta.id='.$data['appointment_id'])
-            ->find();
+        $report_id = Db::table('tps_student_report')->insertGetId($student_report);
 
         //总分分数
-        $insert_data['appointment_id'] = $data['appointment_id'];
+        //$insert_data['appointment_id'] = $data['appointment_id'];
         $insert_data['evaluate_paper_id'] = $data['evaluate_paper_id'];
         $insert_data['tel'] = $appointment_info['tel'];
+        $insert_data['tel'] = ;
         //学科id
         $insert_data['xueke'] = $appointment_info['xueke'];
-
-
-        //var_dump($insert_data);die;
-
         //每一小题的的得分
         $points_grade = array();
        // 得分分数
@@ -120,11 +89,8 @@ class Wapanswer extends \think\Controller
                             $insert_data['student_describe'] = '';
                             $insert_data['grade'] = 0;
                             $insert_data['tk_isok'] = '';
-
                             //填空题默认为没有做，
                             $insert_data['isok'] = 3;
-
-                            //var_dump($insert_data);
                             foreach($q_answer as $qk=>$qv){
                                 $kong = $qk+1;
                                 if($student_cp[$sk][$ssk][$sssk][$qk]!=''){
@@ -215,7 +181,6 @@ class Wapanswer extends \think\Controller
         }
         //获取每个考点下面的分数总和
         $point_array = array();
-
         foreach($points_grade as $ik=>$iv){
             $point_array[$ik] = 0;
             foreach($points_grade[$ik] as $iik=>$iiv){
@@ -223,7 +188,6 @@ class Wapanswer extends \think\Controller
                 $get_grade = $get_grade +$iiv;
             }
         }
-
         //根据考点分数 总得分  试卷 ==》》  考点所占比重  正确率  等级 名称
         $student_report = $this->point_detail($point_array,$insert_data['evaluate_paper_id'],$get_grade);
         $student_report['appointment_id'] = $insert_data['appointment_id'];

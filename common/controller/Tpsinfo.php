@@ -9,7 +9,8 @@ class Tpsinfo {
     //pc端题目显示
     public function get_paper($evaluate_paper_id){
 
-        $paper_title = Db::table('tps_evaluate_paper')->where('id',$evaluate_paper_id)->find();
+        $paper_title = Db::table('tps_evaluate_paper')->where('id ='.$evaluate_paper_id['evaluate_paper_id'])->find();
+       // var_du
         $paper_point = Db::table('tps_paper_point')->where('evaluate_paper_id',$paper_title['id'])->order('point_order desc, id asc')->select();
         $paper_question = '';
         foreach($paper_point as $pk=>$pv){
@@ -17,13 +18,32 @@ class Tpsinfo {
             foreach($paper_question[$pk] as $ssk=>$ssv) {
                 $paper_question[$pk][$ssk]['contents'] = explode("{#}", $paper_question[$pk][$ssk]['question_content']);
                 $paper_question[$pk][$ssk]['children'] = Db::table('tps_paper_question')->where('paper_point_id',$paper_point[$pk]['id'])->where('parent_id',$paper_question[$pk][$ssk]['id'])->order('question_number asc')->select();
-                foreach($paper_question[$pk][$ssk]['children'] as $sssk=>$sssv){
-                    $paper_question[$pk][$ssk]['children'][$sssk]['question_answer_shuzi'] = $this->question_answer($paper_question[$pk][$ssk]['children'][$sssk]['question_answer']);
-                    $paper_question[$pk][$ssk]['children'][$sssk]['contents'] =  explode("{#}",$paper_question[$pk][$ssk]['children'][$sssk]['question_content']);
-                }
+                    if($paper_question[$pk][$ssk]['question_type'] == 1 ){
+
+                        $paper_question[$pk][$ssk]['question_answer_shuzi'] = $this->question_answer($paper_question[$pk][$ssk]['question_answer']);
+
+                    }
+
+                    if($paper_question[$pk][$ssk]['question_type'] == 3){
+                        $question_answer = array();
+                        $ss = explode(',',$paper_question[$pk][$ssk]['question_answer']);
+                        foreach($ss as $sk=>$sv){
+                            $question_answer[] = $this->question_answer($sv);
+                        }
+                        $paper_question[$pk][$ssk]['question_answer_shuzi'] = $question_answer;
+                    }
+
+                    if($paper_question[$pk][$ssk]['question_type'] == 4 || $paper_question[$pk][$ssk]['question_type'] == 5){
+                        foreach($paper_question[$pk][$ssk]['children'] as $sssk=>$sssv){
+                            $paper_question[$pk][$ssk]['children'][$sssk]['question_answer_shuzi'] = $this->question_answer($paper_question[$pk][$ssk]['children'][$sssk]['question_answer']);
+                            $paper_question[$pk][$ssk]['children'][$sssk]['contents'] =  explode("{#}",$paper_question[$pk][$ssk]['children'][$sssk]['question_content']);
+                        }
+                    }
+
+                    
             }
         }
-       // echo '<pre>';print_r($paper_question);echo '<pre>';die;
+     //   echo '<pre>';print_r($paper_question);echo '<pre>';die;
         $page = 1;
         $paper_page = array();
         $num = 1;
@@ -56,7 +76,7 @@ class Tpsinfo {
             }
         }
         //echo '<pre>';print_r($paper_page);echo '<pre>';
-        $count = Db::table('tps_paper_question')->where('evaluate_paper_id',$evaluate_paper_id)->where('parent_id',0)->count();
+        $count = Db::table('tps_paper_question')->where('evaluate_paper_id',$evaluate_paper_id['evaluate_paper_id'])->where('parent_id',0)->count();
         $data['paper_question'] = $paper_page;
         $data['pageall'] = count($paper_page);
         $data['count'] = $count;
@@ -243,7 +263,7 @@ class Tpsinfo {
     }
 
     //单个错误题目
-    public function return_cwtm_only(){
+     function return_cwtm_only(){
 
         $data = Request::instance()->get();
 
@@ -282,5 +302,62 @@ class Tpsinfo {
 
 
     }
+
+
+
+    //判断一个试卷测评是否现在可以继续
+    public function paper_cantest($paper){
+        $add_time = $paper['souseid'];
+        $evaluate_paper_id = $paper['evaluate_paper_id'];
+        $paper_info = Db::table('tps_evaluate_paper')->field('cp_sj,cp_begintime,cp_endtime')->where('add_time ='.$add_time.' and id ='.$evaluate_paper_id)->find();
+        //var_dump($paper_info);die;
+        //不需要预约
+        if($paper_info['cp_sj'] == 0){
+            return 1;
+        }else if($paper_info['cp_sj'] == 1){
+
+            $now_time = date('Y-m-d H:i:s',time());
+            //var_dump($now_time);die;
+            //$now_time = time();
+            if($paper_info['cp_begintime'] < $now_time && $now_time < $paper_info['cp_endtime']){
+                //现在的时间在测评时间内可以参加测评 
+                return 1;
+            }else{
+                //现在的时间不在测评时间
+                return 2;
+            }
+
+        }
+
+    }
+
+
+    //判断一个试卷测评是否可以预约
+    public function paper_appointment($paper){
+        $add_time = $paper['souseid'];
+        $evaluate_paper_id = $paper['evaluate_paper_id'];
+        $paper_info = Db::table('tps_evaluate_paper')->field('cp_sj,cp_begintime,cp_endtime')->where('add_time ='.$add_time.' and id ='.$evaluate_paper_id)->find();
+        //var_dump($paper_info);die;
+        //不需要预约
+        if($paper_info['cp_sj'] == 0){
+            return 1;
+        }else if($paper_info['cp_sj'] == 1){
+
+            $now_time = date('Y-m-d H:i:s',time());
+            //var_dump($now_time);die;
+            //$now_time = time();
+            if($now_time < $paper_info['cp_endtime']){
+                //现在的时间在测评时间内可以参加测评 
+                return 1;
+            }else{
+                //现在的时间不在测评时间
+                return 2;
+            }
+
+        }
+
+    }
+
+
 
 }

@@ -47,14 +47,10 @@
 
     <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
-
     <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
-    
 </head>
 <body>
-
 <div class="header">
-<div id="top_header" style="width:1000px;"></div>
     <div class="w1000 cf">
         <!-- 手机号+姓名形式查询，不显示LOGO -->
         <!-- U2登录方式查看报告 -->
@@ -66,10 +62,12 @@
         <div class="t-log accessType">
         </div>
     </div>
-
 </div>
 <div class="w1000 cf">
-    <div class="crump"></div>
+    <a href="/gwots/wrcweb/passport/logout" class="f-exit"></a>
+    <div class="crump">
+
+    </div>
     <div class="wl">
         <div class="g-wp">
             <div class="m-form1">
@@ -85,7 +83,7 @@
                     </tr>
                     <tr>
                         <td class="bg">学员号</td>
-                        <td>{$appointment.student_num}</td>
+                        <td>{$appointment.studentNo}</td>
                     </tr>
                     <tr>
                         <td class="bg">准考证号</td>
@@ -95,30 +93,47 @@
                         <td class="bg">推荐老师</td>
                         <td>{$appointment.teacher}</td>
                     </tr>
+
+                    <tr>
+                        <td class="bg">预约年级</td>
+                        <td>{$appointment.nianji}年级</td>
+                    </tr>
+                    <tr>
+                        <td class="bg">预约校区</td>
+                        <td>{$appointment_info.dq_name} {$appointment_info.xq_name}</td>
+                    </tr>
+                    <!-- 需要分配考场座次的活动显示考场座次信息 -->
+                    <!-- 不分配考场座次，显示报名校区；分配考场座次，显示考试校区 -->
+                    <tr>
+                        <td class="bg">考场名</td>
+                        <td>{$appointment_info.kc_name}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="bg">考试时间</td>
+
+                        <td>{$appointment_info.ks_rq} {$appointment_info.ks_data}</td>
+                    </tr>
+
+
+                    <!-- 不需要分配考场座次的活动显示身份证号 -->
+
                     <tr>
                         <td class="bg">就读公立校</td>
                         <td>{$appointment.school}</td>
                     </tr>
-                    
-                    {if condition ="($appointment.cantest==1)"}
-                    <tr>
-                        <td class="bg">考试提示：</td>
-                        <td>
-                            <a href="/thinkphp5/tps.php/web/tps/testpaper?souseid={$appointment.souseid}&evaluate_paper_id={$appointment.evaluate_paper_id}"  style="color:#2663c1">现在考试已经开始，是否直接考试</a>
-                        </td>
-                    </tr>
-                   {/if}
+
                     <tr>
                         <td class="bg">提示：</td>
                         <td>
+                            <!--请妥善保存预约信息-->
                             <span class="finish">请妥善保存预约信息</span>
                         </td>
                     </tr>
-                    
+
 
                 </table>
                 <div class="m-buttons">
-
                 </div>
             </div>
         </div>
@@ -130,8 +145,13 @@
         </div>
     </div>
 </div>
- <script type="text/javascript" src="/thinkphp5/public/static/fireworks_forMainPage.js"></script>
 </body>
 </html>
 
+
+<script type="text/javascript" src="/public/static/erweima/jquery.qrcode.min.js"></script>
+
+<script>
+jQuery('#qrcode').qrcode({width: 200,height: 200,correctLevel:0,render: "table",text: "http://www.baidu.com"});
+</script>
 

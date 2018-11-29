@@ -1,18 +1,14 @@
-
-
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <title>
-    短信登录
+    《{$paper_name}》预约登陆
    </title>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="screen-orientation" content="portrait">
     <!-- uc强制竖屏 -->
     <meta name="x5-orientation" content="portrait">
     <!-- QQ强制竖屏 -->
-    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/student_login/style.css?v=1">
 
 
 
@@ -20,18 +16,18 @@
 
 
 <body>
-<form name="form1" method="post" action="/index.php/web/Tpsstudent/login_post" id="form1">
+<form name="form1">
 
     <!--nav begin-->
     <div class="m-nav2" style="">
-        <h2>短信登录</h2>
+        <h2>《{$paper_name}》预约登陆</h2>
         <div class="m-nav2-back">
             <a href="javascript:;" id="riaGoBack"><i></i></a>
         </div>
         <div class="m-nav2-action"></div>
     </div>
     <div class="m-nav2-extend" style="">&nbsp;</div>
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
 
         // 返回上一页
@@ -55,7 +51,8 @@
             <span class="p139-error-tip" id="txtUserTip"></span>
             <div class="p139-input-group p139-input-bottom">
                 <input name="tel" type="text" maxlength="11" id="tel" class="p139-input" placeholder="请输入预约时的手机号">
-                <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$evaluate_paper_id}" />
+                <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$data.evaluate_paper_id}" />
+                <input name="souseid" type="hidden" id="souseid" value = "{$data.souseid}" />
             </div>
 
             <div class="p139-input-group p139-input-bottom">
@@ -91,15 +88,17 @@
 
         var name = $('#txtStudentName').val();
         var paper_id = $('#paper_id').val();
+        var souseid = $('#souseid').val();
         if(name == ''){
             $('#txtUserTip').text('请输入姓名');
         }
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/web/Tpsappointment/do_login_test",
-            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,},
+            url: "/thinkphp5/tps.php/web/Tpsappointment/do_login_test",
+            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,'souseid':souseid,},
             success: function (data) {
+                //console.log(data);return false;
                 if(data == -1){
 
                     $('#txtUserIcon').css('display','block');
@@ -114,7 +113,7 @@
                     $('#txtUserTip').html('考生已完成答题');
 
                 }else{
-                    window.location.href = "/index.php/web/Wapanswer/testpaper?evaluate_paper_id="+data;
+                    window.location.href = "/thinkphp5/tps.php/web/tps/testpaper?evaluate_paper_id="+data.evaluate_paper_id+'&souseid='+data.souseid;
                 }
             },
         });

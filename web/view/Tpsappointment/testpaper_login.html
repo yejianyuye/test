@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>新东方通行证 注册</title>
-    <link rel="stylesheet" href="/public/static/tps/css/testpaper_loign.css" />
+    <title>新东方预约登陆</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/testpaper_loign.css" />
 
     <style type="text/css">
         .icoRight { display: none; }
@@ -13,16 +13,14 @@
         .p167-permit-form1 input.p139-input3 { height: 52px; line-height: 52px; border-top: 1px solid #ebebeb; width: 318px; padding-left: 0; }
         .p167-permit-form1 input.p139-input2-n { border-bottom: 0; }
     </style>
-
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
 </head>
 
 
 <body style="min-height: 800px;">
 
-<form name="form1" method="post" action="./studentMobileName.aspx" id="form1">
+<form name="form1">
 
     <div class="p167-nav">
         <div class="p167-nav-in">
@@ -36,27 +34,20 @@
     <div class="p167-permit" style="margin-bottom: 0; position: relative;">
 
 
-        <div class="icoError" id="txtUserIcon" style="{if condition="($res == 2)"}display:block;{else /}display:none;{/if}  position: absolute; top: -85px; left: 0;">
-            <i></i><span id="txtUserTip">{if condition="($res == 2)"}预约试卷只能线上测评一次{/if}</span>
+        <div class="icoError" id="txtUserIcon" style="display:none;position: absolute; top: -85px; left: 0;">
+            <i></i><span id="txtUserTip"></span>
         </div>
 
-        <h1>线上测试登陆</h1>
+        <h1>《{$paper_name}》预约登陆</h1>
         <div class="p167-permit-form1">
             <input name="txtUser" type="text" maxlength="11" id="tel" class="p167-permit-phone" placeholder="请输入预约时的手机号" />
-            <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$evaluate_paper_id}" />
+
+            <input name="evaluate_paper_id" type="hidden" id="paper_id" value = "{$data.evaluate_paper_id}" />
+            <input name="souseid" type="hidden"  id="souseid" value = "{$data.souseid}" />
+
             <input name="txtStudentName" type="text" maxlength="20" id="txtStudentName" class="p139-input p139-input2 p139-input2-n" placeholder="请输入学员姓名" />
         </div>
-    {if condition="($res == 2)"}
-        <a id="btnLogin" href="javascript:void(0);" class="p167-bind-btn">登录</a>
-    {else /}
         <a id="btnLogin" href="javascript:void(0);" onclick = "clickbtnNext()" class="p167-bind-btn">登录</a>
-    {/if}
-    </div>
-
-
-
-    <div style="display: none;">
-        <input type="submit" name="btnNext" value="下一步" id="btnNext" />
     </div>
 </form>
 </body>
@@ -73,15 +64,17 @@
 
         var name = $('#txtStudentName').val();
         var paper_id = $('#paper_id').val();
+        var souseid = $('#souseid').val();
         if(name == ''){
             $('#txtUserIcon').css('display','block');
             $('#txtUserTip').html('请输入姓名');
         }
+
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/web/Tps/do_login_test",
-            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,},
+            url: "/thinkphp5/tps.php/web/Tpsappointment/do_login_test",
+            data: {'student_name':name,'tel':tel,'evaluate_paper_id':paper_id,'souseid':souseid,},
             success: function (data) {
                 if(data == -1){
 
@@ -97,7 +90,7 @@
                     $('#txtUserTip').html('考生已完成答题');
 
                 }else{
-                    window.location.href = "/index.php/web/PCanswer/testpaper?evaluate_paper_id="+data;
+                    window.location.href = "/thinkphp5/tps.php/web/tps/testpaper?evaluate_paper_id="+data.evaluate_paper_id+'&souseid='+data.souseid;
                 }
             },
         });

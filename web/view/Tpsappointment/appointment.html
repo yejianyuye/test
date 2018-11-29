@@ -9,9 +9,9 @@
     <title>预约考场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- 引入微信SDK -->
-    <link href="/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
     <style>
         body {
             height:auto;
@@ -84,21 +84,14 @@
 <body>
 <div class="header">
     <div class="w1000 cf">
-        <!-- 手机号+姓名形式查询，不显示LOGO -->
-        <!-- U2登录方式查看报告 -->
         <a href="#" class="t-clogo" style="cursor:default;">
-            <img src="/public/static/tps/img/xdf-1.jpg" alt="新东方" align="absbottom" />
+            <img src="/thinkphp5/public/static/tps/img/xdf-1.jpg" alt="新东方" align="absbottom" />
             测试1
         </a>
         <div class="t-cities accessType">
         </div>
-        <div class="t-log accessType">
-            <!-- 手机号+姓名查询，不显示登录注册 -->
-            <!-- 角色类型为学员，显示U2返回的用户信息 -->
-            <span class="user l">欢迎,180316151108713_v</span>
-            <a href="/gwots/wrcweb/passport/logout" class="btn btn-e r"  style="margin-left:20px;">退出</a>
-        </div>
-    </div>		</div>
+    </div>		
+</div>
 <div class="w1000 cf">
     <a href="/gwots/wrcweb/passport/logout" class="f-exit"></a>
     <div class="crump">
@@ -110,6 +103,8 @@
         <div class="g-wp">
             <div class="m-form1">
                 <h2>同学，您好！</h2>
+                <h2>欢迎来到试卷《<a style = "color:red;">{$paper_name}</a>》预约</h2>
+                <h2>如果您已预约，请选择下方的登陆</h2>
                 <div class="frm1 int-sl">
                         <span class="frm-tit">电话</span>
                         <input type="text"  maxlength="11" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" class="input_num" name="tel" id="tel" value="" /><span style="color:red;">*</span>
@@ -155,214 +150,36 @@
 
             </div>
 
-            <div class="m-form1" id="grade_campus">
-                <dl class="frm-cj" id="grade">
-                    <dt>请选择你要诊断的年级信息</dt>
-                    <dd>
-                        <span class="grade" gradeID="1" >一年级</span>
-                        <span class="grade" gradeID="2" >二年级</span>
-                        <span class="grade" gradeID="3" >三年级</span>
-                        <span class="grade" gradeID="4" >四年级</span>
-                        <span class="grade" gradeID="5" >五年级</span>
-                        <span class="grade" gradeID="6" >六年级</span>
-                    </dd>
-                </dl>
-
-                <dl class="frm-cj" id="campus" style="display:none;">
-                    <dt>请选择诊断所在区</dt>
-                    <dd>
-                        {volist  name = "dq" id = "vv"}
-                        <span class="campus" campusID="{$vv.qy}">{$vv.qy_name}</span>
-                        {/volist}
-                    </dd>
-                </dl>
-
-                <dl class="frm-cj" id="smallCampus" style="display: none;">
-                    <dt>请选择校区</dt>
-                    <dd id="smallCampu">
-                    </dd>
-                </dl>
-
-                <dl class="frm-cj" id="yuyuerqs" style="display: none;">
-                    <dt>预约日期</dt>
-                    <dd id="yuyuerq">
-
-
-                    </dd>
-                </dl>
-
-                <dl class="frm-cj" id="yuyuesjs" style="display: none;">
-                    <dt>预约时间</dt>
-                    <dd id="yuyuesj">
-
-
-                    </dd>
-                </dl>
-
-                <dl class="frm-cj" id="papertests" style="display: none;">
-                    <dt>选择考卷名称</dt>
-                    <dd id="papertest">
-                    </dd>
-                </dl>
-
+            
+            <div class="m-buttons" style = "padding-top:20px;">
+                <button href="javascript:void(0);" class="active" id="apply" >预约</button>
             </div>
-            <div class="m-buttons">
-                <button href="javascript:void(0);" class="active" id="apply">预约</button>
-                <!--
-                <a href="/gwots/wrcweb/amt/detail">已经预约!点击查看预约信息</a>
-                -->
+            <div class="m-buttons" style = "padding-top:20px;">
+                <button onclick = "login({$appointment_data.evaluate_paper_id},{$appointment_data.souseid});" style = "background-color:#385cfd; border: 1px solid #385cfd;" href="javascript:void(0);" class="active">登陆</button>
             </div>
         </div>
     </div>
     <div class="wr">
         <div class="imgPub">
-            <img src="/public/static/tps/img/a1.jpg" alt="" />
-            <img src="/public/static/tps/img/a2.jpg" alt="" />
+            <img src="/thinkphp5/public/static/tps/img/a1.jpg" alt="" />
+            <img src="/thinkphp5/public/static/tps/img/a2.jpg" alt="" />
         </div>
     </div>
 </div>
 </body>
-<input type="hidden" id="matchID" value="30EB99BE-EF5D-4624-BBD2-FF1172E2A832">
-<input type="hidden" id="newStudent" value="1">
-<input type="hidden" id="smallCampusID" value="">
+
+<input type="hidden" name = "evaluate_paper_id" value="{$appointment_data.evaluate_paper_id}">
+<input type="hidden" name = "souseid" value="{$appointment_data.souseid}">
 </html>
 
 <script>
-    //年级点击
-    $(function(){
-        $('.grade').click(function(){
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-            $('#campus').css('display','block');
-            $('#campus .campus').removeClass('active');
-            $('#smallCampus').css('display','none');
-            $('#yuyuerqs').css('display','none');
-            $('#yuyuesjs').css('display','none');
-            $('#papertests').css('display','none');
-        });
-    });
-    //所在大区点击
-    $(function(){
-        $('.campus').click(function(){
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-            $('#smallCampus .campus').removeClass('active');
-            $('#yuyuerqs').css('display','none');
-            $('#yuyuesjs').css('display','none');
-            $('#papertests').css('display','none');
-            var qy = $(this).attr('campusID');
-            $.ajax({
-                type: "get",
-                dataType: "json",
-                url: "/index.php/web/tpsappointment/get_dq_children",
-                data: {'id':qy},
-                success: function (data) {
-                    if(data){
-                        var ss = '';
-                        for(var i = 0;i < data.length;i++){
-                            ss +='<span onclick = "smallCampus(this)" campusid="'+data[i].qy+'" class="smallCampus">'+data[i].qy_name+'<i class="iconfont"></i></span>';
-                        }
-                        $('#smallCampus').css('display','block');
-                        $('#smallCampu').html(ss);
-                        $('#papertests').css('display','none');
-                    }
-                },
-            });
-        });
-    });
-
-    //所在学区点击
-    function smallCampus(obj){
-        $(obj).siblings().removeClass('active');
-        $(obj).addClass('active');
-        $('#yuyuerqs .campus').removeClass('active');
-        $('#yuyuesjs').css('display','none');
-        $('#papertests').css('display','none');
-        var xq = $(obj).attr('campusid');
-        var nianji = $('.frm-cj .grade.active').attr('gradeID');
-        $.ajax({
-            type: "get",
-            dataType: "json",
-            url: "/index.php/web/tpsappointment/get_rq",
-            data: {'xq':xq,'nianji':nianji},
-            success: function (data) {
-                if(data){
-                    var ss = '';
-                    for(var i = 0;i < data.length;i++){
-                        /* ss +='<li onclick = "ss(this)"><a href="javascript:void(0);"  svalue="'+data[i].qy+'" title="">'+data[i].qy_name+'</a></li>';*/
-                        ss +='<span onclick = "yuyuerq(this)" campusid="'+data[i][0]+'" class="smallCampus">'+data[i][0]+'<i class="iconfont"></i></span>';
-                    }
-                    $('#yuyuerqs').css('display','block');
-                    $('#yuyuerq').html(ss);
-                }else{
-                    alert('没有对应的考试时间')
-                }
-            },
-        });
-    }
-
-    //预约日期点击
-    function yuyuerq(obj){
-        $(obj).siblings().removeClass('active');
-        $(obj).addClass('active');
-        var rq = $(obj).attr('campusid');
-        var nianji = $('.frm-cj .grade.active').attr('gradeID');
-        var xq = $('#smallCampus .active').attr('campusid');
-        $('#yuyuesjs .campus').removeClass('active');
-        $('#papertests').css('display','none');
-        $.ajax({
-            type: "get",
-            dataType: "json",
-            url: "/index.php/web/tpsappointment/get_sj",
-            data: {'xq':xq,'nianji':nianji,'ks_rq':rq},
-            success: function (data) {
-                if(data){
-                    var ss = '';
-                    for(var i = 0;i < data.length;i++){
-                        /* ss +='<li onclick = "ss(this)"><a href="javascript:void(0);"  svalue="'+data[i].qy+'" title="">'+data[i].qy_name+'</a></li>';*/
-                        ss +='<span onclick = "yuyuedata(this)" campusid="'+data[i][0]+'" class="smallCampus">'+data[i][0]+'<i class="iconfont"></i></span>';
-                    }
-                    $('#yuyuesjs').css('display','block');
-                    $('#yuyuesj').html(ss);
-                }
-            },
-        });
-    }
-
-    //预约时间点击
-    function yuyuedata(obj){
-        $(obj).siblings().removeClass('active');
-        $(obj).addClass('active');
-        var sj = $(obj).attr('campusid');
-        var nianji = $('.frm-cj .grade.active').attr('gradeID');
-        var xq = $('#smallCampus .active').attr('campusid');
-        var rq = $('#yuyuerqs .active').attr('campusid');
-        $.ajax({
-            type: "get",
-            dataType: "json",
-            url: "/index.php/web/tpsappointment/get_papertest",
-            data: {'xq':xq,'nianji':nianji,'ks_rq':rq,'ks_data':sj},
-            success: function (data) {
-                if(data){
-                    var ss = '';
-                    for(var i = 0;i < data.length;i++){
-                        ss +='<span onclick = "papertest(this)" campusid="'+data[i][1]+'" class="smallCampus">'+data[i][0]+'<i class="iconfont"></i></span>';
-                    }
-                    $('#papertests').css('display','block');
-                    $('#papertest').html(ss);
-                }
-            },
-        });
-    }
-
-    //预约考试点击
-    function papertest(obj){
-        $(obj).siblings().removeClass('active');
-        $(obj).addClass('active');
-    }
-
+  
     $('#apply').click(function(){
         var tel = $.trim($('input[name="tel"]').val());
+        //paper试卷id
+        var evaluate_paper_id = $.trim($('input[name="evaluate_paper_id"]').val());
+        //paper试卷id
+        var souseid = $.trim($('input[name="souseid"]').val());
         //学员姓名
         var student_name = $('input[name="studentName"]').val();
         if(student_name == ''){
@@ -390,8 +207,8 @@
         }
         //所属状态
         var status = $('input[name="stuFlag"]:checked').val();
-        console.log(status);
 
+        var data = {};
         //检测---收集学员号、推荐老师信息
         if (status == 2){
 
@@ -415,90 +232,37 @@
                 return;
             }
         }
-
-
-        var gradeObj = $('#grade').find('span.active');
-        var campusObj = $('#campus').find('span.active');
-        var smallCampusObj = $('#smallCampus').find('span.active');
-        var rqObj = $('#yuyuerqs').find('span.active');
-        var dataObj = $('#yuyuesjs').find('span.active');
-        var papertestsObj = $('#papertests').find('span.active');
-        if(gradeObj.length == 0){
-            showMsg('请选择年级');
-            return;
-        }
-
-        if(campusObj.length == 0){
-            showMsg('请选择大区');
-            return;
-        }
-
-        if(smallCampusObj.length == 0){
-            showMsg('请选择校区');
-            return;
-        }
-
-        if(rqObj.length == 0){
-            showMsg('请选择日期');
-            return;
-        }
-
-        if(dataObj.length == 0){
-            showMsg('请选择时间');
-            return;
-        }
-
-        if(papertestsObj.length == 0){
-            showMsg('请选择考卷名称');
-            return;
-        }
-        var gradeID = gradeObj.attr('gradeID');
-        var campusPID = campusObj.attr('campusID');
-        var campusID = smallCampusObj.attr('campusID');
-        var rqID = rqObj.attr('campusid');
-        var dataID = dataObj.attr('campusid');
-        var papertest = papertestsObj.attr('campusID');
-
-
-        var data = {};
-        data.nianji = gradeID;
-        data.dq = campusPID;
-        data.xq = campusID;
-        data.rq = rqID;
-        data.data = dataID;
-        data.evaluate_paper_id = papertest;
-
+        
+        data.evaluate_paper_id=evaluate_paper_id;
         data.tel = tel;
         data.student_name = student_name;
         data.school = ownCollege;
         data.student_status = status;
-
-
+        data.souseid = souseid;
+        
         if (status == 2){
-            data.status = 2;
+            data.student_status = 2;
             data.student_num = studentNo;
-            data.recommend_teacher = teacherName;
+            data.teacher = teacherName;
         } else {
-            data.newStudent = 0;
-            data.studentNo = "XS";
+            data.student_status = 1;
+            data.student_num = "XS";
             data.teacher = "XDF";
         }
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/web/tpsappointment/to_appointment",
+            url: "/thinkphp5/tps.php/web/Tpsappointment/to_appointment",
             data: data,
             success: function (data) {
-                if(data.res == 0){
-                   alert('预约位置已经满了!');
-
+            //console.log(data);
+                if(data.res == 2){
+                   alert('同一预约试卷,一个手机号码只能预约一次!');
                 }else if(data.res == 1){
                     alert('预约成功！');
-                    window.location.href = "/index.php/web/tpsappointment/studentment?zhunkaonum="+data.zhunkaonum+"&tel="+data.tel+"&student_name="+data.student_name;
-                }else if(data.res == 2 || data.res == 3){
-                    alert('预约失败!');
-                }else if(data.res == 4){
-                    alert('同一场考试,一个手机号码只能预约一次');
+                    window.location.href = "/thinkphp5/tps.php/web/tpsappointment/studentment?tel="+data.tel+"&evaluate_paper_id="+data.evaluate_paper_id+"&souseid="+data.souseid;
+                }else{
+                    alert('预约失败！');   
                 }
             },
         });
@@ -512,6 +276,9 @@
         $(window).scrollTop(0);
     }
 
+    function login(id,souseid){
+        window.location.href ="/thinkphp5/tps.php/web/tpsappointment/testpaper_login?evaluate_paper_id="+id+"&souseid="+souseid;
+    }
 
 
 </script>

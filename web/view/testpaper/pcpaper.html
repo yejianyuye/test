@@ -16,13 +16,9 @@
             }
         }
     </script>
-
-
-
-    <!--<link href="/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>-->
     <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
-    <script src="/thinkphp5/public/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="/thinkphp5/public/static/tps/js/jq_cookie/jquery.cookie.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/tps/js/jq_cookie/jquery.cookie.js"></script>
 
     <style>
         .test .opts li {
@@ -57,6 +53,8 @@
                     <img src="/thinkphp5/public/static/tps/img/xdf-1.jpg" alt="新东方">
                 </a>
                 <div class="t-cities accessType">
+                    <!-- 当没有paperSchName，因为不知道显示那个学校，所以不显示 -->
+                    <!-- <a href="javascript:;">武汉新东方</a> -->
                 </div>
                 <div class="t-log accessType">
                 </div>
@@ -69,8 +67,7 @@
                 <span style="color:#ff6c00;margin-left:15px;">（此测评只能测一次）</span>
             </div>
             <div class="wl">
-               <form id="testpaper" action = "/thinkphp5/index.php/web/Tps/upload_testpaper" method="post">
-                   <input type="hidden" name="appointment_id" value="{$id}">
+               <form id="testpaper" action = "/index.php/web/Tps/upload_testpaper" method="post">
                    <input type="hidden" name="evaluate_paper_id" value="{$evaluate_paper_id}">
                    <input type="hidden" name="allnum" value="{$count}">
                     <div id="paperContainer">
@@ -197,7 +194,6 @@
                     <div class="pagination">
                         <a href="javascript:void(0);" onclick = testing.prev(1);  class="prev"><span></span>上一页</a>
                         <a href="javascript:void(0);" onclick = testing.next(1); class="next" id="nextBtn"><span></span>下一页</a>
-                        <a href="javascript:void(0);" onclick = testing.finish(); ><span></span>完成</a>
                     </div>
                </form>
             </div>
@@ -207,7 +203,7 @@
 
                         <div class="countdown">
                             <div class="time">
-                                <span id="countDownText">00:01:59</span>
+                                <span id="countDownText">00:00:00</span>
                             </div>
                         </div>
 
@@ -223,10 +219,9 @@
             </div>
         </div>
 
-        <span id="hid_testID" style="display:none;">4E5A3F64-BC9C-4D2F-8726-BF52BD0D71A4</span>
 
-
-        <div class="blockUI blockOverlay" style="display:none;z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>
+        <div class="blockUI blockOverlay" style="display:none;z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;">
+        </div>
         <div class="blockUI blockMsg blockPage" style="z-index: 1011; position: absolute; padding: 0px; margin: 0px; width: 490px; top: 18px; left: 466.5px; text-align: center; color: rgb(0, 0, 0); border: 0px; background-color: rgb(255, 255, 255); cursor: default; border-radius: 5px;">
 
             <div id="pause" style="display:none;" class="pause">
@@ -295,18 +290,17 @@
     //停掉计时器
     var timecan = null;
     var pageall = {$pageall};
-
     //获取预约id
     var appointment_id = {$id};
-   //$.cookie('paperTestTime_17', '');
     //考试测评时间
     var paperTestTime = '';
 
     //获取考点时间
+    var cp_time = {$cp_time};
     var time_sy = $.cookie('paperTestTime_'+appointment_id);
-    //console.log(time_sy);
-    var time_allow = {$time_allow};
-    //console.log(formatSeconds(time_allow));
+
+    console.log(time_sy);
+
     $(function(){
         //判断是否为空时间
         $('.page1').css('display','block');
@@ -316,12 +310,13 @@
             str += '<li class ="yanse'+n+'" title="'+n+'" >'+n+'</li>';
         }
         $('#fixed-menu').append(str);
-        if(time_sy != 'NaN' && time_sy != ''){
+        if(time_sy != 'NaN' && time_sy != '' && time_sy != undefined){
+            //console.log(123);
             $("#countDownText").text(formatSeconds(time_sy));
             paperTestTime = parseInt(time_sy);
         }else{
-            $("#countDownText").text(formatSeconds(time_allow));
-            paperTestTime = parseInt(time_allow);
+            $("#countDownText").text(formatSeconds(cp_time));
+            paperTestTime = parseInt(cp_time);
         }
         timer.countDown();
     })
@@ -329,11 +324,8 @@
     //计时器
     var timer = {
 
-
         timess : 1,
-        /**
-         * 继续测试
-         */
+        //继续测试
         conTest:function(){
             testing.countDown();
             $.unblockUI();
@@ -345,17 +337,20 @@
                     paperTestTime = paperTestTime - 1;
                     $("#countDownText").text(formatSeconds(paperTestTime));
                     //以预约场次作为cookie的判断
-                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 30});
+                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 2,path:'/'});
+                    var ss = $.cookie('paperTestTime_'+appointment_id);
+                    console.log(ss);
                     if (paperTestTime < 1) {
                         clearInterval(timecan);
-
+                        $.cookie('paperTestTime_' + appointment_id, '', { expires: -1 ,path:'/'});
                         //fix 对于测试时间到没有完成的测评自动提交填空题答案
                         $('.blockUI').css('display', 'block');
                         $('#timeTips').css('display', 'block');
-                        //$('#testpaper').submit();
                     }
                 }, 1000);
-
+            }else{
+                //console.log('wode');
+                $.cookie('paperTestTime_' + appointment_id, '', { expires: -1 ,path:'/'});
             }
         }
 
@@ -471,12 +466,10 @@
                 url: "/index.php/web/Tps/upload_testpaper",
                 data: $('#testpaper').serialize(),
                 success: function (data) {
-                    alert('123');
+
+                  //  alert('123');
                 },
             });
-
-           // $('#testpaper').submit();
-
         },
 
     }
@@ -513,8 +506,6 @@
                 }else{
                     $('.yanse'+tk).removeClass('active');
                 }
-
-
             }
         },
     }

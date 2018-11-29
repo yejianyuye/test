@@ -50,7 +50,6 @@ class Paper extends \think\Controller
                     $question_answer = array();
                     $ss = explode(',',$paper_question[$pk][$ssk]['question_answer']);
                     foreach($ss as $sk=>$sv){
-
                         $question_answer[] = $this->question_answer($sv);
                     }
                     $paper_question[$pk][$ssk]['question_answer_shuzi'] = $question_answer;
@@ -439,12 +438,6 @@ class Paper extends \think\Controller
     //完成整套试卷编辑  发布前准备
     public function do_all_paper(){
         $data = Request::instance()->get();
-        //$evaluate_paper_id = $data['evaluate_paper_id'];
-       // $paper_question = Db::table('tps_paper_question')->field('paper_point_id,question_number,question_answer,parent_id')->where('evaluate_paper_id',$data['evaluate_paper_id'])->select();
-
-
-
-
 
         $paper_question = Db::table('tps_paper_question')
             ->alias('tpq')
@@ -459,15 +452,11 @@ class Paper extends \think\Controller
         $res = '';
         foreach($paper_question as $pk=>$pv){
             if($paper_question[$pk]['question_answer'] == '') {
-
-                // $paper_question = Db::table('tps_paper_question')->field('paper_point_id,question_number,question_grade,question_answer,parent_id')->where('evaluate_id',$data['evaluate_paper_id'])->select();
                 if ($paper_question[$pk]['parent_id']==0 && $paper_question[$pk]['question_type'] != 4 && $paper_question[$pk]['question_type'] != 5){
 
                     if ($paper_question[$pk]['parent_id'] == 0) {
-                            //  $point_title = Db::table('tps_paper_point')->where('id',$paper_question[$pk]['paper_point_id'])->value('point_title');
                             $res .= '考点 《' . $paper_question[$pk]['point_title'] . '》,第' . $paper_question[$pk]['question_number'] . '题,答案未填写<br>';
                     } else {
-                            // $point_title = Db::table('tps_paper_point')->where('id',$paper_question[$pk]['paper_point_id'])->value('point_title');
                             $paper_questions = Db::table('tps_paper_question')->field('question_number')->where('id', $paper_question[$pk]['parent_id'])->find();
 
                             $res .= '考点 《' . $paper_question[$pk]['point_title'] . '》,第' . $paper_questions['question_number'] . '题,第' . $paper_question[$pk]['question_number'] . '小题,答案未填写<br>';

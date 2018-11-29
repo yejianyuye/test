@@ -1,5 +1,4 @@
 
-
 			<link href="/thinkphp5/public/static/tps/css/ppfullscreen.css" rel="stylesheet" type="text/css" />
 			
 			<div class="hd-tab cf">
@@ -112,7 +111,7 @@
 								</div>
 							</div>
 							<a onclick="ceping.chexiao('{$vv.id}')" class="btn btn-ge r"><i class="iconfont"></i>撤销</a>
-							<a onclick="ceping.qrcode('{$vv.id}')"  class="btn btn-ge r" title="二维码"><i class="iconfont"></i></a>
+							<a onclick="ceping.qrcode('{$vv.id}','{$vv.add_time}')"  class="btn btn-ge r" title="二维码"><i class="iconfont"></i></a>
 							<a onclick="ceping.xiajia('{$vv.id}')"  class="btn btn-ge r"><i class="iconfont"></i>下架</a>
 							{/if}
 
@@ -122,7 +121,7 @@
 						<!-- 控制试卷名称长度显示 -->
 						<h3>
 							<a href="" target="_blank" title="{$vv.paper_name}" class="ftxt"> {$vv.paper_name}</a>
-							<a href="paper_preview" target="_blank" class="iconfont ml5"></a>
+							<a href="paper_preview?evaluate_paper_id={$vv.id}&souseid={$vv.add_time}" target="_blank" class="iconfont ml5"></a>
 						</h3>
 
 						<ul class="props">
@@ -132,6 +131,7 @@
 							<li>学科: {$vv.xueke_name}</li>
 							<li>编辑人: {$vv.edit_name}</li>
 							<li>编辑时间: {$vv.edit_time}</li>
+							<li>是否需要预约: {if condition="($vv.is_appointment == 1)"} 需要 {else} 不需要 {/if}</li></li>
 							<li>编辑状态: {if condition="($vv.paper_type == 1)"} 组卷完成 {else} 组卷中 {/if}</li>
 						</ul>
 					</div>
@@ -196,12 +196,12 @@
                 //考点下面题目编辑
                 var ceping = {
                     //生成二维码
-                    qrcode: function (paper_id) {
+                    qrcode: function (paper_id,souseid) {
                         $.ajax({
                             type: "get",
                             dataType: "json",
-                            url: "/index.php/index/Tps/phpqrcode",
-                            data: {'paper_id':paper_id},
+                            url: "phpqrcode",
+                            data: {'paper_id':paper_id,'souseid':souseid},
                             success: function (data) {
 
                                 $('#qrcode').html(data);
@@ -282,14 +282,14 @@
                     $.ajax({
                         type: "get",
                         dataType: "json",
-                        url: "/index.php/index/Tps/chexiao_paper",
+                        url: "chexiao_paper",
                         data: {'paper_id':paper_id},
                         success: function (data) {
                             $('.blockOverlay').remove();
                             $('.blockUI').css('display','none');
                             if(data == 1){
 
-                                $('.hd-data').load('/index.php/index/Tps/ceping?page=2&status=2&evaluate_id=5');
+                                $('.hd-data').load('ceping?page=2&status=2&');
                             }else{
                                 alert('删除失败');
                             }
@@ -298,7 +298,7 @@
                     })
                 })
 
-                //下架
+                //下架显示
                 $('.btn-e').click(function(){
                     $('.blockOverlay').remove();
                     $('.blockUI').css('display','none');
@@ -310,15 +310,15 @@
                     $.ajax({
                         type: "get",
                         dataType: "json",
-                        url: "/index.php/index/Tps/xiajia_paper",
+                        url: "xiajia_paper",
                         data: {'paper_id':paper_id},
                         success: function (data) {
                             $('.blockOverlay').remove();
                             $('.blockUI').css('display','none');
                             if(data == 1){
-                                $('.hd-data').load('/index.php/index/Tps/ceping?page=1&status=2&evaluate_id=5');
+                                $('.hd-data').load('ceping?page=1&status=2&evaluate_id=5');
                             }else{
-                                alert('删除失败');
+                                alert('下架失败');
                             }
 
                         }

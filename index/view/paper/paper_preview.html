@@ -67,9 +67,8 @@
                 <span style="color:#ff6c00;margin-left:15px;">（此测评只能测一次）</span>
             </div>
             <div class="wl">
-               <form id="testpaper" action = "/thinkphp5/index.php/web/Tps/upload_testpaper" method="post">
-                   <input type="hidden" name="appointment_id" value="{$id}">
-                   <input type="hidden" name="evaluate_paper_id" value="{$evaluate_paper_id}">
+               <form id="testpaper" method="post" submit = "false">
+                  
                    <input type="hidden" name="allnum" value="{$count}">
                     <div id="paperContainer">
 
@@ -77,7 +76,8 @@
                         {volist name="paper_question" id="vo"  key="k"}
                         {volist name="vo" id="vvo"  key="kk"}
                         {if condition="($vvo.question_type == 1)"}
-                        <div class="test page{$k}" style = "display:none;">
+                        <div class="test page{$k} tiao{$vvo.test_paper_num}" ss="{$k}" name="ttt{$vvo.test_paper_num}" style = "display:none;">
+                            <a name="ttt{$vvo.test_paper_num}"></a>
                             <div class="serial">
                                 <span class="subjectNum" ></span>
                                 <em>Q{$vvo.test_paper_num}</em>
@@ -86,7 +86,7 @@
                             <ul class="opts rdo">
                                 {volist name="vvo['contents']" id="co"  key="ck"}
                                 <li class="item  active" style="cursor:pointer">
-                                    <input class="iconfont"  onclick="xuanze.num({$vvo.test_paper_num},1);"   name="wode[{$vvo.paper_point_id}][1][{$vvo.id}]" type = "radio" value = '{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}'>
+                                    <input disabled="true" {if condition="($ck == $vvo.question_answer_shuzi )"} checked = "checked" {/if}  class="iconfont"  onclick="xuanze.num({$vvo.test_paper_num},1);"   name="wode[{$vvo.paper_point_id}][1][{$vvo.id}]" type = "radio" value = '{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}'>
                                     <span class="optletter">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</span>
                                     <div class="optcont"><p>{$co}</p>
                                         <div></div>
@@ -96,8 +96,9 @@
                             </ul>
                         </div>
                         {elseif condition="($vvo.question_type == 2)"}
-                        <div class="test test-main bdl page{$k} tiankong" point_id ="{$vvo.paper_point_id}"  test_paper_num = "{$vvo.test_paper_num}"  style = "display:none;">
-                            <div class="serial">
+                        <div class="test test-main bdl tiankong page{$k} tiao{$vvo.test_paper_num}" ss="{$k}" point_id ="{$vvo.paper_point_id}"  test_paper_num = "{$vvo.test_paper_num}"  style = "display:none;">
+                            <a name="ttt{$vvo.test_paper_num}"></a>
+                            <div class="serial tiao{$vvo.test_paper_num}">
                                 <span class="subjectNum"></span>
                                 <em>Q{$vvo.test_paper_num}</em>
                             </div>
@@ -108,7 +109,8 @@
 
                         {elseif condition="($vvo.question_type == 3)"}
 
-                        <div class="test page{$k}" style = "display:none;">
+                        <div class="test page{$k} tiao{$vvo.test_paper_num}" ss="{$k}" name="ttt{$vvo.test_paper_num}" style = "display:none;">
+                            <a name="ttt{$vvo.test_paper_num}"></a>
                             <div class="serial">
                                 <span class="subjectNum" ></span>
                                 <em>Q{$vvo.test_paper_num}</em>
@@ -117,7 +119,7 @@
                             <ul class="opts rdo">
                                 {volist name="vvo['contents']" id="co"  key="ck"}
                                 <li class="item  active" style="cursor:pointer">
-                                    <input class="iconfont" onclick="xuanze.num({$vvo.test_paper_num},3);"  name="wode[{$vvo.paper_point_id}][3][{$vvo.id}][{$ck}]" type = "checkbox" value ='{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}'>
+                                    <input disabled="true" style= "color:#fff;opacity:1" class="iconfont" onclick="xuanze.num({$vvo.test_paper_num},3);"  name="wode[{$vvo.paper_point_id}][3][{$vvo.id}][{$ck}]" type = "checkbox" {volist name="vvo['question_answer_shuzi']" id="cco"  key="cck"}  {if condition="($ck== $cco)"}  checked = "checked" {/if}    {/volist} value ='{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}'>
                                     <span class="optletter">{if condition="($ck == 1)"}A{elseif condition="($ck == 2)"/}B{elseif condition="($ck == 3)"/}C{elseif condition="($ck == 4)"/}D{elseif condition="($ck == 5)"/}E{/if}.</span>
                                     <div class="optcont"><p>{$co}</p>
                                         <div></div>
@@ -128,8 +130,9 @@
                         </div>
                         {elseif condition="($vvo.question_type == 5)"}
 
-                        <div class="test-main page{$k} " style = "display:none;">
-                            <div class="serial">
+                        <div class="test test-main page{$k} tiao{$vvo.test_paper_num}" ss="{$k}" name="ttt{$vvo.test_paper_num}" style = "display:none;">
+                            <a name="ttt{$vvo.test_paper_num}"></a>
+                            <div class="serial tiao{$vvo.test_paper_num}">
                                 <span class="subjectNum"></span><em>Q{$vvo.test_paper_num}</em>
                             </div>
                             <p></p><p><strong>阅读片断</strong>,<strong>按要求答题。</strong></p>
@@ -139,13 +142,13 @@
 
 
                         {volist name="vvo['children']" id="vvvo"  key="kkk"}
-                        <div class="test rd subjectItem page{$k} ss{$vvo.test_paper_num}" style = "display:none;">
+                        <div class="test rd subjectItem page{$k}"  style = "display:none;">
                             <div class="bg"></div>
                             <div class="serial">{$vvvo.question_number}</div>
                             <ul class="opts rdo">
                                 {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
                                 <li class="item active">
-                                    <input class="iconfont" onclick="xuanze.num({$vvo.test_paper_num},5);" name="wode[{$vvo.paper_point_id}][5][{$vvvo.id}]" type = "radio" value='{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}'>
+                                    <input class="iconfont" disabled="disabled" style= "color:#fff;opacity:1" {if condition="($kkkk == $vvvo.question_answer_shuzi )"} checked = "checked" {/if} onclick="xuanze.num({$vvo.test_paper_num},5);" name="wode[{$vvo.paper_point_id}][5][{$vvvo.id}]" type = "radio" value='{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}'>
                                     <span class="optletter">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</span>
                                     <div class="optcont"><p>{$vvvvo}</p>
                                         <div></div>
@@ -158,8 +161,9 @@
                         {/volist}
 
                         {elseif condition="($vvo.question_type == 4)"}
-                        <div class="test-main page{$k}" style = "display:none;">
-                            <div class="serial">
+                        <div class="test test-main page{$k} tiao{$vvo.test_paper_num}" ss="{$k}" name="ttt{$vvo.test_paper_num}" style = "display:none;">
+                            <a name="ttt{$vvo.test_paper_num}"></a>
+                            <div class="serial tiao{$vvo.test_paper_num}">
                                 <span class="subjectNum"></span><em>Q{$vvo.test_paper_num}</em>
                             </div>
                             <p></p><p><strong>阅读片断</strong>,<strong>按要求答题。</strong></p>
@@ -169,14 +173,14 @@
 
 
                         {volist name="vvo['children']" id="vvvo"  key="kkk"}
-                        <div class="test rd subjectItem page{$k} ss{$vvo.test_paper_num}" style = "display:none;">
+                        <div class="test rd subjectItem page{$k}" style = "display:none;">
                             <div class="bg"></div>
                             <div class="serial">{$vvvo.question_number}</div>
                             <div class="stem"><p>{$vvvo.question_title}</p></div>
                             <ul class="opts rdo">
                                 {volist name="vvvo['contents']" id="vvvvo"  key="kkkk"}
                                 <li class="item active">
-                                    <input class="iconfont" onclick="xuanze.num({$vvo.test_paper_num},4);" name="wode[{$vvo.paper_point_id}][4][{$vvvo.id}]" type = "radio" value = '{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}'>
+                                    <input class="iconfont" disabled="disabled" {if condition="($kkkk == $vvvo.question_answer_shuzi )"} checked = "checked" {/if}  onclick="xuanze.num({$vvo.test_paper_num},4);" name="wode[{$vvo.paper_point_id}][4][{$vvvo.id}]" type = "radio" value = '{if condition="($kkkk == 1)"}A{elseif condition="($kkkk == 2)"/}B{elseif condition="($kkkk == 3)"/}C{elseif condition="($kkkk == 4)"/}D{elseif condition="($kkkk == 5)"/}E{/if}'>
                                     <span class="optletter">{if condition="($kkkk == 1)"}A.{elseif condition="($kkkk == 2)"/}B.{elseif condition="($kkkk == 3)"/}C.{elseif condition="($kkkk == 4)"/}D.{elseif condition="($kkkk == 5)"/}E.{/if}</span>
                                     <div class="optcont"><p>{$vvvvo}</p>
                                         <div></div>
@@ -204,7 +208,7 @@
 
                         <div class="countdown">
                             <div class="time">
-                                <span id="countDownText">00:01:59</span>
+                                <span id="countDownText">00:00:00</span>
                             </div>
                         </div>
 
@@ -219,8 +223,6 @@
                 </div>
             </div>
         </div>
-
-        <span id="hid_testID" style="display:none;">4E5A3F64-BC9C-4D2F-8726-BF52BD0D71A4</span>
 
 
         <div class="blockUI blockOverlay" style="display:none;z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); opacity: 0.6; cursor: default; position: fixed;"></div>
@@ -278,9 +280,6 @@
                 <p>您有未完成的测评,请继续作答</p>
                 <div class="btns">
                     <a href="javascript:;" class="btn btn-o" onclick="testing.conTest();">继续</a>
-                    <!--
-                    <a href="javascript:;" class="btn btn-oe closeWin" onclick="testing.newTest();">重测</a>
-                    -->
                 </div>
             </div>
 
@@ -289,103 +288,22 @@
 </html>
 
 <script>
-    //停掉计时器
-    var timecan = null;
-    var pageall = {$pageall};
-    //获取预约id
-    var appointment_id = {$id};
-    //考试测评时间
-    var paperTestTime = '';
 
-    //获取考点时间
-    var time_sy = $.cookie('paperTestTime_'+appointment_id);
-    var time_allow = {$time_allow};
+    var pageall = {$pageall};
     $(function(){
         //判断是否为空时间
         $('.page1').css('display','block');
         var count = {$count};
         var str = '';
         for(n=1;n<count+1;n++){
-            str += '<li class ="yanse'+n+'" title="'+n+'" >'+n+'</li>';
+            str += '<li onclick="tiaozhuan('+n+')" class ="yanse'+n+'" title="'+n+'" ><a style = "color: #585858;" href="#ttt'+n+'">'+n+'</li>';
         }
         $('#fixed-menu').append(str);
 
-        if(time_sy != 'NaN' && time_sy != '' && time_sy != undefined){
-            //console.log(321);
-            $("#countDownText").text(formatSeconds(time_sy));
-            paperTestTime = parseInt(time_sy);
-        }else{
-            //console.log(123);
-            $("#countDownText").text(formatSeconds(time_allow));
-            paperTestTime = parseInt(time_allow);
-        }
-        timer.countDown();
     })
 
-    //计时器
-    var timer = {
 
-        timess : 1,
-        /**
-         * 继续测试
-         */
-        conTest:function(){
-            testing.countDown();
-            $.unblockUI();
-        },
-
-        countDown : function() {
-            if (paperTestTime > 0) {
-                timecan = setInterval(function () {
-                    paperTestTime = paperTestTime - 1;
-                    $("#countDownText").text(formatSeconds(paperTestTime));
-                    //以预约场次作为cookie的判断
-                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 30});
-                    if (paperTestTime < 1) {
-                        clearInterval(timecan);
-
-                        //fix 对于测试时间到没有完成的测评自动提交填空题答案
-                        $('.blockUI').css('display', 'block');
-                        $('#timeTips').css('display', 'block');
-                    }
-                }, 1000);
-
-            }
-        }
-
-    }
-
-    //时间转换戳转化
-    function  formatSeconds(value){
-        var theTime = parseInt(value);// 秒
-        var theTime1 = 0;// 分
-        var theTime2 = 0;// 小时
-        if(theTime > 60) {
-            theTime1 = parseInt(theTime/60);
-            theTime = parseInt(theTime%60);
-            if(theTime1 > 60) {
-                theTime2 = parseInt(theTime1/60);
-                theTime1 = parseInt(theTime1%60);
-            }
-        }
-        var result = "";
-        if(theTime>=10){
-            result = ""+parseInt(theTime);
-        }else{
-            result = "0"+parseInt(theTime);
-        }
-        if(theTime1 >= 10){
-            result = ""+parseInt(theTime1)+":"+result;
-        }else{
-            result = "0"+parseInt(theTime1)+":"+result;
-        }
-        if(theTime2 >= 10){
-            result = ""+parseInt(theTime2)+":"+result;
-        }else{
-            result = "0"+parseInt(theTime2)+":"+result;
-        }
-        return result;
-    }
+   
 
 
     var testing = {
@@ -441,74 +359,27 @@
             $('#finishTips').css('display','block');
         },
 
-        //提交题目  完成题目  获取题目信息
-        finish: function () {
-            var str = '';
-            $('#finishTips').css('display','none');
-            $('.blockUI').css('display','none');
-            //使填空题能够提交
-            $('.tiankong').each(function(n,obj){
-                var point_id = $(this).attr('point_id');
-                //var test_paper_num = $(obj).attr('test_paper_num');
-                $(obj).find('.stem_blank .tkxz').each(function(nn,objj){
-                    var th = $(objj).attr('th');
-                    var val = $(objj).val();
-                    str +='<input type="hidden" name="wode['+point_id+'][2]['+th+']['+nn+']" value = "'+val+'">';
-                })
-
-            })
-            $('#testpaper').append(str);
-            //var subdata =
-            $.ajax({
-                type: "get",
-                dataType: "json",
-                url: "/index.php/web/Tps/upload_testpaper",
-                data: $('#testpaper').serialize(),
-                success: function (data) {
-
-                  //  alert('123');
-                },
-            });
-        },
 
     }
 
-    //查看做了哪些题目
-    var xuanze = {
-        num: function (id,type) {
-            if(type == 1){
-                $('.yanse'+id).addClass('active');
-            }else if(type == 3){
-                $('.yanse'+id).addClass('active');
-             //完型填空和阅读理解
-            }else if(type == 4 || type == 5){
-               var length = $('.ss'+id).length;
-               var x_length = $('.ss'+id+' .iconfont:checked').length;
-               if(length == x_length){
-                   $('.yanse'+id).addClass('active');
-               }
-            //填空题
-            }else if(type == 2){
-                var kk = 2;
-                var tk = 0;
-                $('.tiankong'+id).each(function(){
-                    var val = $(this).val();
-                    if(val == ''){
-                        kk =1;
-                        return false;
-                    }
-                    tk = $(this).parents('.tiankong').attr('test_paper_num');
-                })
+   
 
-                if(kk ==2){
-                    $('.yanse'+tk).addClass('active');
-                }else{
-                    $('.yanse'+tk).removeClass('active');
-                }
-            }
-        },
+    //右侧跳转
+    function tiaozhuan(n){
+        var ss = $('.tiao'+n).attr('ss');
+        $('#paperContainer .test').css('display','none');
+        //$('.page'+id).css('display','none');
+        $('.page'+ss).css('display','block');
+        if(pageall == ss){
+            $('.prev').attr('onclick','testing.prev('+ss+');');
+            $('.next').attr('onclick','testing.finishs();');
+            $('.next').html('<span></span>完成');
+        }else{
+            $('.prev').attr('onclick','testing.prev('+ss+');');
+            $('.next').attr('onclick','testing.next('+ss+');');
+        }
+
     }
-
 
 
 </script>

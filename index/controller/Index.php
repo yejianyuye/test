@@ -92,6 +92,7 @@ class Index extends cologin
         $count = Db::table('tps_evaluate_paper')->where($datas['map'])->count();
         $pageCount=ceil($count/2);
         $evaluate_papers   = $this->get_class($evaluate_paper);
+        //var_dump($evaluate_papers);die;
         //搜索学段,如小学，初中，高中
         $paper_data['type'] = 0;
         $paper_data['parent_id'] = 0;
@@ -157,10 +158,8 @@ class Index extends cologin
         $paper_info['xueke_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['xueke'])->value('name');
         $paper_info['nianji_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['nianji'])->value('name');
         $paper_info['xueduan_name'] = Db::table('tps_paper_class')->where('id = '.$paper_info['xueduan'])->value('name');
-
         $paper_info['evaluate_paper_id'] = $data['evaluate_paper_id'];
-        //$paper_info['souseid'] = $data['souseid'];
-       // $paper_info['edit_id'] = Session::get('tps_adminid');
+
         return view('edit_epp', [
             'paper_class'  => $paper_class,
             'paper_class1'  => $paper_class1,
@@ -216,25 +215,19 @@ class Index extends cologin
 
     //预览试卷
     public function paper_preview(){
-        //预约id
-        $get_test_paper_id = 18;
-        $search_data['id'] = $get_test_paper_id;
-        $appointment_info = Db::table('tps_appointment')->field('status,time_allow,evaluate_paper_id')->where($search_data)->find();
-            if($appointment_info['status'] == 2){
-                echo '该测评只能测评一次，考生已完成该测评';die;
-            }else{
-                $tpsinfo = New Tpsinfo();
-                $paper_question_all = $tpsinfo->get_paper($appointment_info['evaluate_paper_id'],1);
-                //echo '<pre>';print_r($paper_question_all);echo '<pre>';die;
-                return view('paper/paper_preview', [
-                    'id'  => $get_test_paper_id,
-                    'paper_question'  => $paper_question_all['paper_question'],
-                    'count'  => $paper_question_all['count'],
-                    'pageall'  => $paper_question_all['pageall'],
-                    'time_allow'  => $appointment_info['time_allow'],
-                    'evaluate_paper_id'  => $appointment_info['evaluate_paper_id'],
-                ]);
-            }
+        $data = Request::instance()->get();
+            
+        $tpsinfo = New Tpsinfo();
+        $paper_question_all = $tpsinfo->get_paper($data,1);
+       // echo '<pre>';print_r($paper_question_all);echo '<pre>';die;
+        return view('paper/paper_preview', [
+            'paper_question'  => $paper_question_all['paper_question'],
+            'count'  => $paper_question_all['count'],
+            'pageall'  => $paper_question_all['pageall'],
+            
+            
+        ]);
+    
     }
 
     //发布试卷
@@ -351,7 +344,8 @@ class Index extends cologin
                 }
             }
 
-            $data['status'] = 2;
+            $fabu['status'] = 2;
+            //$data['status'] = 2;
             //var_dump($data);die;
             $tep = Db::table('tps_evaluate_paper')->where('id ='.$data['evaluate_paper_id'].' and status=1')->update($fabu);
             if($tj_res && $tep){
@@ -386,23 +380,18 @@ class Index extends cologin
         $data = Request::instance()->get();
 
 
-        $paper_id = Db::table('tps_evaluate_paper')->where('id',$data['paper_id'])->value('status');
-        if($paper_id == 2){
-            $e_res = Db::table('tps_evaluate_paper')->where('id',$data['paper_id'])->update(['status' => 1]);
+       // $paper_id = Db::table('tps_evaluate_paper')->where('id',$data['paper_id'])->value('status');
+       // if($paper_id == 2){
+        return  Db::table('tps_evaluate_paper')->where('id ='.$data['paper_id'].' and status = 2 and tel_allow ='.Session::get('tps_zuid'))->update(['status' => 1]);
 
-           return $e_res;
-        }
+       //return $e_res;
+        
     }
 
     //发布考卷后下架
     public function xiajia_paper(){
         $data = Request::instance()->get();
-
-        $paper_id = Db::table('tps_evaluate_paper')->where('id',$data['paper_id'])->value('status');
-        if($paper_id == 2){
-            $e_res = Db::table('tps_evaluate_paper')->where('id',$data['paper_id'])->update(['status' => 3]);
-            return $e_res;
-        }
+        return  Db::table('tps_evaluate_paper')->where('id ='.$data['paper_id'].' and status = 2 and tel_allow ='.Session::get('tps_zuid'))->update(['status' => 3]);
     }
 
 
@@ -410,25 +399,12 @@ class Index extends cologin
     //php 生成测评二维码
     public function phpqrcode(){
 
-        require_once   $_SERVER['DOCUMENT_ROOT'].'/vendor/phpqrcode/phpqrcode.php';
-       // require_once   $_SERVER['DOCUMENT_ROOT'].'/vendor/PHPExcel/classes/PHPExcel.php';
-       // var_dump($_SERVER['DOCUMENT_ROOT'].'vendor/phpqrcode/phpqrcode.php');die;
+        
         $data = Request::instance()->get();
-        $url = 'http://192.168.68.49:8088/index.php/web/Tps/testpaper_login?evaluate_paper_id='.$data['paper_id'];
-        $value = $url;                  //二维码内容
-
-        $errorCorrectionLevel = 'L';    //容错级别
-        $matrixPointSize = 5;           //生成图片大小
-        $erweimaname = time();
-        //生成二维码图片
-        $filename =  $_SERVER['DOCUMENT_ROOT'].'public/upload/erweima/'.$erweimaname.'.png';
-        \QRcode::png($value,$filename , $errorCorrectionLevel, $matrixPointSize, 2);
-        $QR = $filename;                //已经生成的原始二维码图片文件
-        $QR = imagecreatefromstring(file_get_contents($QR));
-        //输出图片
-        imagepng($QR, 'qrcode.png');
-        imagedestroy($QR);
-        return '<img src="/public/upload/erweima/'.$erweimaname.'.png" alt="使用微信扫描支付">';
+        $url = 'http://10.103.123.197:8088/thinkphp5/tps.php/web/Tps/testpaper?evaluate_paper_id='.$data['paper_id'].'&souseid='.$data['souseid'];
+        $eweima = eweima($url);
+        
+        return '<img src="/thinkphp5/public/upload/erweima/'.$eweima.'.png" alt="使用微信扫描支付">';
     }
     //搜索条件处理
     public function search_tj($data){

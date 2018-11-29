@@ -4,14 +4,14 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>看演示——复制副本</title>
+    <title>{$paper_name}</title>
     <!-- 获取常量引用版本 -->
     <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
 
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/public/static/tps/js/jq_cookie/jquery.cookie.js"></script>
-    <link href="/public/static/tps/css/student_info/iconfont.css" rel="stylesheet" type="text/css">
-    <link href="/public/static/tps/css/student_info/style.css?v=201805221740" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/tps/js/jq_cookie/jquery.cookie.js"></script>
+    <link href="/thinkphp5/public/static/tps/css/student_info/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="/thinkphp5/public/static/tps/css/student_info/style.css?v=201805221740" rel="stylesheet" type="text/css">
 
 
 
@@ -21,7 +21,7 @@
         overflow: initial;
     }
 </style>
-    <title>看演示——复制副本</title>
+    <title>{$paper_name}</title>
 </head>
 <body style="font-size: 12px;">
 
@@ -33,6 +33,8 @@
             </div>
             <div class="order" onclick = "testing.finish();" style="padding-right:9.75px;">
                 <span id="subjectIndex">1</span>/{$num}
+                <input type="hidden" id = "telid" value="{$tel}">
+                <input type="hidden" id = "souseid" value="{$souseid}">
             </div>
         </div>
     </div>
@@ -156,18 +158,13 @@
     var evaluate_paper_id = {$evaluate_paper_id};
     //获取预约id
     var appointment_id = {$id};
-    //$.cookie('paperTestTime_17', '');
-    //考试测评时间
-    var paperTestTime = 0;
-
-
-
-
-
-    //删除cookie
-     // $.cookie('paperTestTime_'+appointment_id, '');
-
-
+    //获取考点时间
+    var cp_time = {$cp_time};
+    var time_sy = $.cookie('paperTestTime_'+appointment_id);
+    //设置考评时间 allowtime 设置时长考试时间 noallowtime 不设置时长考试时间
+   // var allowtime =  
+    var noallowtime = 0;
+    var time_allow = {$time_allow};
     //页面加载算高度
     $(function() {
         //初始化第一页显示
@@ -179,22 +176,18 @@
         $('.wx-optlist').css('height',oH1/2);
         $('.wx-mask').css('top',oH1/2-29);
         //设置cookie
-        var time_sy = $.cookie('paperTestTime_'+appointment_id);
         //设置是否开始时间限制
-        var time_allow = {$time_allow};
+        
         //时间函数
         if(time_sy != 'NaN' && time_sy != '' && time_sy != undefined){
+
             $("#countDownText").text(formatSeconds(time_sy));
             paperTestTime = parseInt(time_sy);
         }else{
-            //允许的时长
-            var timeall = 0;
-            if(time_allow == 1){
-                timeall ={$cp_time};
-            }
-            $("#countDownText").text(formatSeconds(timeall));
-            paperTestTime = parseInt(timeall);
+            $("#countDownText").text(formatSeconds(cp_time));
+            paperTestTime = parseInt(cp_time); 
         }
+
         if(time_allow == 1){
             timer.countDown();
         }else{
@@ -205,11 +198,7 @@
 
     //计时器
     var timer = {
-
-        timess : 1,
-        /**
-         * 继续测试
-         */
+        //继续测试
         conTest:function(){
             testing.countDown();
             $.unblockUI();
@@ -221,9 +210,10 @@
                     paperTestTime = paperTestTime - 1;
                     $("#countDownText").text(formatSeconds(paperTestTime));
                     //以预约场次作为cookie的判断
-                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 1});
+                    $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 2,path:'/'});
                     if (paperTestTime < 1) {
                         clearInterval(timecan);
+                        $.cookie('paperTestTime_' + appointment_id, '', { expires: -1 ,path:'/'});
                         //fix 对于测试时间到没有完成的测评自动提交填空题答案
                         $('.blockUI').css('display', 'block');
                         $('#timeTips').css('display', 'block');
@@ -233,20 +223,15 @@
         },
 
         countUp : function() {
+            
             timecan = setInterval(function () {
-                paperTestTime = paperTestTime + 1;
-                $("#countDownText").text(formatSeconds(paperTestTime));
-                //以预约场次作为cookie的判断
-                $.cookie('paperTestTime_' + appointment_id, paperTestTime, {expires: 1});
-                if (paperTestTime < 1) {
-                    clearInterval(timecan);
-                    //fix 对于测试时间到没有完成的测评自动提交填空题答案
-                    $('.blockUI').css('display', 'block');
-                    $('#timeTips').css('display', 'block');
-                }
-            }, 1000);
-        },
+                    noallowtime = noallowtime + 1;
+                    $("#countDownText").text(formatSeconds(noallowtime));
+                    //以预约场次作为cookie的判断
+                    $.cookie('paperTestTime_' + appointment_id, noallowtime, {expires: 2,path:'/'});
+                }, 1000);
 
+        },
 
     }
 
@@ -346,23 +331,22 @@
         //提交题目  完成题目  获取题目信息
         finish: function () {
             var use_time = $.cookie('paperTestTime_'+appointment_id);
-            var time_allow = {$time_allow};
-            var timeall = 0;
-            if(time_allow == 1){
-                timeall ={$cp_time};
-                use_time = parseInt(timeall)-parseInt(use_time);
-            }
 
+            if(time_allow == 1){
+                use_time = parseInt(cp_time)-parseInt(use_time);
+            }
+            var tel = $('#telid').val();
+            var souseid = $('#souseid').val();
+            
             var zhiall = all_xuanze();
 
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: "/index.php/web/Wapanswer/upload_testpaper",
-                data:{'zhiall':zhiall,'use_time':use_time,'evaluate_paper_id':evaluate_paper_id,'appointment_id':appointment_id},
+                url: "/thinkphp5/tps.php/web/Wapanswer/upload_testpaper",
+                data:{'zhiall':zhiall,'use_time':use_time,'evaluate_paper_id':evaluate_paper_id,'tel':tel,'souseid':souseid},
                 success: function (data) {
-                   //console.log(appoint'zhiall':zhiallment_id);//
-                    // $.cookie('paperTestTime_' + appointment_id,null);
+                   
 
 
                 },
@@ -389,8 +373,6 @@
             $(obj).addClass('active');
             var childcount = $('.page'+num).attr('childcount');
             if(xnum == childcount){
-
-               // xiayiti();
                 setTimeout("xiayiti()",1000);
                 $('.page'+num+' .wx-optlist .wx-wrap').css('display','none');
                 $('.page'+num+' .wx-optlist .xpage1').css('display','block');
