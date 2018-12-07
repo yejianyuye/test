@@ -148,8 +148,8 @@ class Tpsinfo {
 
     }
 
-    //wap端学生单科题目展示   $evaluate_paper_id==》试卷id  $appointment_id==>预约id
-    public function get_paper_students_question($evaluate_paper_id,$appointment_id){
+    //wap端学生单科题目展示   $evaluate_paper_id==》试卷id  $report_id==>报告id
+    public function get_paper_students_question($evaluate_paper_id,$report_id){
 
         $paper_title = Db::table('tps_evaluate_paper')->where('id',$evaluate_paper_id)->find();
         $paper_point = Db::table('tps_paper_point')->where('evaluate_paper_id',$paper_title['id'])->order('point_order desc, id asc')->select();
@@ -178,14 +178,14 @@ class Tpsinfo {
                 if($ppv['question_type'] == 4 || $ppv['question_type'] == 5){
 
                     foreach($paper_question[$pk][$ppk]['children'] as $pppk=>$pppv){
-                        $tps_student_answer = Db::table('tps_student_answer')->field('isok,student_answer')->where('paper_question_id ='.$paper_question[$pk][$ppk]['children'][$pppk]['id'].' and appointment_id ='.$appointment_id)->find();
+                        $tps_student_answer = Db::table('tps_student_answer')->field('isok,student_answer')->where('paper_question_id ='.$paper_question[$pk][$ppk]['children'][$pppk]['id'].' and report_id ='.$report_id)->find();
                         $paper_question[$pk][$ppk]['children'][$pppk]['student_answer'] = $tps_student_answer['student_answer'];
                         $paper_question[$pk][$ppk]['children'][$pppk]['answer_isok'] = $tps_student_answer['isok'];
                         $paper_question[$pk][$ppk]['children'][$pppk]['student_question_answer_shuzi'] = $this->question_answer($tps_student_answer['student_answer']);
                     }
 
                 }else{
-                    $tps_student_answer = Db::table('tps_student_answer')->field('isok,student_answer,student_describe')->where('paper_question_id ='.$paper_question[$pk][$ppk]['id'].' and appointment_id ='.$appointment_id)->find();
+                    $tps_student_answer = Db::table('tps_student_answer')->field('isok,student_answer,student_describe')->where('paper_question_id ='.$paper_question[$pk][$ppk]['id'].' and report_id ='.$report_id)->find();
                     $paper_question[$pk][$ppk]['student_answer'] = $tps_student_answer['student_answer'];
                     $paper_question[$pk][$ppk]['answer_isok'] = $tps_student_answer['isok'];
                     $paper_question[$pk][$ppk]['student_describe'] = $tps_student_answer['student_describe'];
@@ -209,8 +209,6 @@ class Tpsinfo {
                                 }
                             }
                         }
-                       // var_dump($paper_question);die;
-                      //  $paper_question[$pk][$ppk]['question_answer_shuzi'] = $question_answer;
 
                     }elseif($ppv['question_type'] == 2){
 

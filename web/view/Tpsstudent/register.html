@@ -8,8 +8,8 @@
     <!-- uc强制竖屏 -->
     <meta name="x5-orientation" content="portrait">
     <!-- QQ强制竖屏 -->
-    <link rel="stylesheet" href="/public/static/tps/css/student_login/style.css?v=1">
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/student_login/style.css?v=1">
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
 
     <style type="text/css">
         .p167-find-form-tips1 {
@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<form name="form1" method="post" action="./Register.aspx" id="form1">
+<form name="form1" id="form1">
     <!--nav begin-->
     <div class="m-nav2" style="">
         <h2>新生注册</h2>
@@ -69,7 +69,7 @@
             <div id="trVCode" class="p139-input-group p139-input-bottom p139-input-captcha" style="">
                 <input name="yzm" type="text" maxlength="5" id="txtVCode" class="p139-input" placeholder="请输入验证码">
                 <span class="captcha-img">
-                        <img id="Image1" onclick="this.src=this.src+'?'" class="x-vcode-img"  title="看不清楚？换张图片" src="/index.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor: pointer; vertical-align: top; width: 54px; height: 32px;">
+                        <img id="Image1" onclick="this.src=this.src+'?'" class="x-vcode-img"  title="看不清楚？换张图片" src="/thinkphp5/tps.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor: pointer; vertical-align: top; width: 54px; height: 32px;">
                 </span>
             </div>
 
@@ -87,7 +87,7 @@
         <!--20160825改S-->
         <div class="p139-option">
             <span class="p139-option-left" style="width:35%;"></span>
-            <span class="p139-option-right" style="width:65%;"><a href="txz_login">通行证登录</a> | <a href="ls_login">老生登录</a></span>
+            <span class="p139-option-right" style="width:65%;"><a href="ls_login">老生登录</a></span>
         </div>
         <!--20160825改S-->
     </div>
@@ -112,7 +112,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/web/Tpsstudent/register_test",
+            url: "register_test",
             data:{tel:tel} ,
             success: function (data) {
                 if(data == 1){
@@ -168,14 +168,13 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/index.php/web/Tpsstudent/do_register",
+            url: "do_register",
             data:formdata ,
             success: function (data) {
-               // console.log(data);
                 if(data.error == 0){
                     alert(data.error_info)
                 }else if(data.error == 1){
-                    window.location.href = '/index.php/web/Tpsstudentinfo/student_index';
+                    window.location.href = '/thinkphp5/index.php/web/Tpsstudentinfo/student_index';
                 }
             }
         })

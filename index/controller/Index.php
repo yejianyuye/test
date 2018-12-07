@@ -401,7 +401,7 @@ class Index extends cologin
 
         
         $data = Request::instance()->get();
-        $url = 'http://10.103.123.197:8088/thinkphp5/tps.php/web/Tps/testpaper?evaluate_paper_id='.$data['paper_id'].'&souseid='.$data['souseid'];
+        $url = 'http://10.103.123.24:8088/thinkphp5/tps.php/web/Tps/testpaper?evaluate_paper_id='.$data['paper_id'].'&souseid='.$data['souseid'];
         $eweima = eweima($url);
         
         return '<img src="/thinkphp5/public/upload/erweima/'.$eweima.'.png" alt="使用微信扫描支付">';

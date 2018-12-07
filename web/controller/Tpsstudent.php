@@ -4,38 +4,31 @@ namespace app\web\controller;
 use   \think\Request;
 use   \think\Db;
 use   \think\Session;
-
+use   \app\web\controller\Tpslogin;
 
 class Tpsstudent extends \think\Controller
 {
-
-    public function __construct()
-    {
-        //检测是否登录
-        //  var_dump(md5('xdf_zhaoxing'));die;
-        $student_num= Session::get('student_num');
-        $tel= Session::get('tel');
-        if($student_num && $tel){
-            $count = Db::table('tps_students')->where('tel ='.$tel.' and student_num = '.$student_num)->count();
-            if($count == 1){
-                $this->redirect('Tpsstudentinfo/student_index');
-            }
-        }
-
+    private $ispc = 0;
+    //校验登陆
+    public function _initialize(){
+        $this->ispc = check_wap();
     }
-
     //短信登陆页面
     public function student_login(){
-
-
-        return view('student_login');
-
-
+        if($this->ispc){
+            return view('student_login');
+        }else{
+            return view('pc_student_login');
+        }
     }
 
     //老生登陆页面
     public function ls_login(){
-        return view('ls_login');
+        if($this->ispc){
+            return view('ls_login');
+        }else{
+            return view('pc_ls_login');
+        }
     }
 
 
@@ -44,16 +37,28 @@ class Tpsstudent extends \think\Controller
         return view('ls_problem');
     }
 
-    //新东方通行证登陆页面
+    //新东方通行证登陆页面()
     public function txz_login(){
-       // var_dump(md5(123456));die;
         return view('txz_login');
     }
 
 
     //注册页面
     public function register(){
-        return view('register');
+       if($this->ispc){
+            return view('register');
+        }else{
+            return view('pc_register');
+        }
+    }
+
+    //忘记密码
+    public function forgetpwd(){
+        if($this->ispc){
+            return view('forgetpwd');
+        }else{
+            return view('pc_forgetpwd');
+        }
     }
 
     //测试手机是否已经使用
@@ -63,6 +68,14 @@ class Tpsstudent extends \think\Controller
         $count = Db::table('tps_students')->where('tel ='.$code['tel'])->count();
 
         return $count;
+
+    }
+
+    //公共头部
+    public function pc_total_head(){
+
+
+        return view();
 
     }
 
@@ -120,14 +133,11 @@ class Tpsstudent extends \think\Controller
     }
 
 
-    //忘记密码
-    public function forgetpwd(){
-        return view('forgetpwd');
-    }
-
     //显示验证码
     public function show_captcha(){
+        //echo 123;die;
         $captcha = new \think\captcha\Captcha();
+        //var_dump($captcha);die;
         $captcha->imageW=121;
         $captcha->imageH = 32;  //图片高
         $captcha->fontSize =14;  //字体大小

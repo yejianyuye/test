@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8">
+    <title>新东方通行证 登录</title>
+<link rel="stylesheet" href="/thinkphp5/public/static/tps/css/testpaper_loign.css">
+
+    <style type="text/css">
+        .icoRight { display: none; }
+        /* 最外层div用icoError会自动隐藏 */
+        .p139-input2 { width: 240px; }
+        .p167-find-form input.p139-input2 { width: 316px; }
+        .p167-find-form input.p139-input-n { height: 52px; line-height: 52px; padding-left: 0; }
+    </style>
+
+<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">  
+<script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body style="min-height: 800px;">
+
+<form name="form1" id="form1">
+
+        <div class="p167-nav">
+            <script type="text/javascript">
+                $('.p167-nav').load('pc_total_head');
+            </script>
+        </div>
+
+        <div class="p167-permit" style="margin-bottom: 0; position: relative;">
+
+            <div class="" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;">
+                    <i></i><span id="txtUserTip"></span>
+            </div>
+
+            <h1>新东方通行证 忘记密码</h1>
+            <div class="p167-find-form">
+
+                <input name="txtUser" type="text" maxlength="50" id="txtUser" class="p139-input" placeholder="请输入手机 / 邮箱">
+
+                <!-- 验证码 -->
+                <div id="trVCode" class="p167-permit-phone" style="border-bottom: 1px solid #ebebeb;">
+                    <table>
+                        <tbody><tr>
+                            <td style="width: 247px;">
+                                <input name="txtVCode" type="text" maxlength="5" id="txtVCode" class="p139-input p139-input-n" placeholder="请输入图片验证码" style="width:120px;">
+                            </td>
+                            <td>
+                                <span class="captcha-img">
+                                    <img id="Image1" class="x-vcode-img" onclick="this.src=this.src+'?'" title="看不清楚？换张图片" src="/thinkphp5/tps.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor: pointer; vertical-align: top; width: 68px; height: 40px;">
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+
+                <!-- 短信码、邮箱码 -->
+                <div class="p167-insert-form" style="margin-top: 0;">
+                    <input name="txtSmsCode" type="text" maxlength="5" id="txtSmsCode" class="p139-input p139-input2" placeholder="请输入效验码">
+                    
+                    <input class="p167-insert-verification" onclick="clickGetSmsEmailCode()" type="button" value="获取验证码">
+                </div>
+
+                <input name="txtPwd" type="password" maxlength="20" id="txtPwd" class="p139-input" placeholder="请输入新密码至少6位">
+
+
+            </div>
+            <a id="btnLogin" href="javascript:clickbtnNext();" class="p167-bind-btn">重置密码</a>
+            
+        </div>
+
+        <div class="p167-passportbox">
+            <a href="ls_login" class="p167-passport" style="display: inline;">
+                <span>老生登录</span>
+                <i></i>
+            </a>
+        </div>
+        <style type="text/css">
+            .p167-permit { padding: 10px 40px 36px 40px; }
+            .p167-passportbox { text-align: center; margin-top: 40px; }
+            .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 4px; }
+            .p167-passportbox { text-align: center; margin-top: 40px; }
+            .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 10px; }
+            .p121-messege { margin-bottom: 15px; color: #999; margin-top: -20px; }
+        </style>
+        <!--20160825改E-->
+
+        <div class="p167-footer">
+            <p>Copyright Neworiental Corporation, All Rights Reserved</p>
+            <p>© 新东方 版权所有</p>
+        </div>
+        
+    </form>
+
+
+    <div id="cli_dialog_div"></div>
+</body>
+</html>

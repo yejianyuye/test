@@ -5,15 +5,15 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>新东方数学四年级•寒春分...</title>
 
-    <link rel="stylesheet" href="/public/static/tps/css/re_iconfont.css" type="text/css" />
-    <link rel="stylesheet" href="/public/static/tps/css/style201804121630.css"  type="text/css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/re_iconfont.css" type="text/css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/style201804121630.css"  type="text/css" />
 </head>
 
 <body>
 <div class="header">
     <div class="w1000 cf">
         <a href="#" class="t-logo">
-            <img src="/public/static/tps/img/xdf-1.jpg" alt="新东方">
+            <img src="/thinkphp5/public/static/tps/img/xdf-1.jpg" alt="新东方">
         </a>
         <div class="t-cities accessType">
             <!-- 当没有paperSchName，因为不知道显示那个学校，所以不显示 -->
@@ -34,21 +34,20 @@
             <div class="wx-paperstatic">
                 <div class="wx-pmount">
                     <div class="wx-cir">
-                        <span class="wx-big">1</span>/10
+                        <span class="wx-big">{$report_ren.zqcount}</span>/{$report_ren.allcount}
                     </div>
-                    <p>共作答{$zq}道题</p>
+                    <p>共作答{$report_ren.wccount}道题</p>
                 </div>
                 <div class="wx-time">
                     <div class="wx-cir">
-                        30:00
+                        {$time_use.use_time}
                     </div>
-                    <p>{$grade}分</p>
+                    <p>{$time_use.use_time_ms}</p>
                 </div>
             </div>
             <div style="padding:20px 0 0px 0px;color:orange;font-weight:bold;width:100%;text-align:center;font-size:14px"><h2>提示：点击题号查看试题详情</h2></div>
 
-
-            {volist name = "student_report" id = "ss" key = "k"}
+            {volist name = "report_question" id = "ss" key = "k"}
             <div class="wx-serialtit">
                 <h2>{$ss.point_title}</h2>
             </div>
@@ -56,16 +55,13 @@
             <div class="wx-circlenum">
                 {volist name = "ss.num_pd" id = "nd" key = "kd"}
                 <div class="wx-cirn {if condition="($nd == 0)"}  wx-error  {else} wx-ok {/if}">
-                    <a href="/gwots/testprocess/testing/subject?testID=2E250D58-528E-48CA-8329-ACD90D080B85&amp;subjectID=C8D95E42-E978-4BD5-8286-6E980B4F5920&amp;smallSubjectID=C8D95E42-E978-4BD5-8286-6E980B4F5920&amp;type=&amp;ext=roleType@">{$kd}</a>
-                    {if condition="($nd == 0)"}
-                            <span class="iconfont"></span>
+                    <a href="pc_student_tps_answer?page={$nd.question_page}&xpage={$nd.question_number}&type={$nd.question_type}&report_id={$report_id}">{$kd}</a>
+                    {if condition="($nd.isok == 2)"}
+                            <span class="iconfont" style = "color:#e60404;"></span>
                     {else}
                             <span class="iconfont"></span>
                     {/if}
                 </div>
-
-
-
                 {/volist}
             </div>
             {/volist}
@@ -82,6 +78,12 @@
                 <img src="/thinkphp5/public/static/tps/img/a1.jpg" alt="">
             </div>
         </div>
+
+        
+
+
+
+
     </div>
 </div>
 

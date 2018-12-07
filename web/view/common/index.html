@@ -1,0 +1,117 @@
+<html>
+<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Cache-Control" content="no-transform">
+		<meta http-equiv="Cache-Control" content="no-siteapp">
+		<title>新东方TPS系统</title>
+		
+
+<link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/> 
+
+<script type="text/javascript">
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'bee6b2827eb1129e']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+</script>
+<script>
+ $(function(){
+ 	var mySwiper = new Swiper('.swiper-container',{
+	    loop:true,
+	    autoplay : 3000,
+        autoplayStopOnLast : false,
+        autoplayDisableOnInteraction : false,
+	    grabCursor: true
+	})
+	$('.arrow-left').on('click', function(e){
+	    e.preventDefault()
+	    mySwiper.swipePrev()
+	})
+	$('.arrow-right').on('click', function(e){
+	    e.preventDefault()
+	    mySwiper.swipeNext()
+	})
+ });
+</script>
+	</head>
+<body>
+<div class="header">
+	<div class="w1000 cf">
+		<!-- 跳转首页 -->
+		<!-- <a id="logo_img" href="#" class="t-logo"> --> 
+		<span class="t-logo">
+			<img src="/gwots/static/skin/testflow/pc/img/xdf.jpg" alt="新东方">
+		</span>
+		<!-- </a> -->
+		<div class="t-cities accessType"></div>
+			<!-- 学员查看报告, 显示登录、注册按钮 -->
+		<div class="t-log accessType">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="user l">欢迎,测试&nbsp;&nbsp;&nbsp;&nbsp;</span>	
+					<a href="/gwots/testflow/home/userTestResultIndex" class="btn btn-s  ml5">查看诊断历史</a>
+					<a href="/gwots/tpscloud/passport/logout?redirectUrl=/testflow/home/index" class="btn btn-e r">退出</a>
+		</div>
+	</div>		
+
+</div>	
+
+<div class="w1000 cf">
+	<div class="content">
+		<div class="loop">
+		    <a class="arrow-left" href="#"></a> 
+		    <a class="arrow-right" href="#"></a>
+		    <div class="swiper-container" style="cursor: -webkit-grab;">
+		      <div class="swiper-wrapper" style="width: 3020px; height: 284px; transform: translate3d(-1510px, 0px, 0px); transition-duration: 0.3s;"><div class="swiper-slide swiper-slide-duplicate" style="width: 755px; height: 284px;"> <img src="/gwots/static/skin/testflow/pc/img/l2.jpg"> </div>
+		        <div class="swiper-slide" style="width: 755px; height: 284px;"> <img src="/gwots/static/skin/testflow/pc/img/l1.jpg"> </div>
+		        <div class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 755px; height: 284px;"> <img src="/gwots/static/skin/testflow/pc/img/l2.jpg"> </div>
+		      <div class="swiper-slide swiper-slide-duplicate" style="width: 755px; height: 284px;"> <img src="/gwots/static/skin/testflow/pc/img/l1.jpg"> </div></div>
+		    </div>
+        </div>
+        <h2 class="title"> 
+        	测评流程
+        </h2>
+        <ul class="progress cf">
+           <li class="cir">
+           	  <span class="c-icn ci1"></span>
+           	  <p>选择测评</p>
+           </li>
+           <li class="line">
+           	
+           </li>
+           <li class="cir m">
+           	   <span class="c-icn ci2"></span>
+           	  <p>开始答题</p>
+           </li>
+           <li class="line">
+           	
+           </li>
+           <li class="cir m">
+           	   <span class="c-icn ci3"></span>
+           	   <p>注册登陆</p>
+           </li>
+           <li class="line">
+           	
+           </li>
+           <li class="cir m">
+           	    <span class="c-icn ci4"></span>
+           	   <p>查看报告(TESTING)</p>
+           </li>
+           
+        </ul>
+	</div>
+</div>
+	
+<div id="cli_dialog_div"></div>
+</body>
+</html>

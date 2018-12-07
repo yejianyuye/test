@@ -1,10 +1,16 @@
 <?php
-namespace app\index\controller;
+namespace app\web\controller;
+
 use   \think\Request;
 use   \think\Db;
 use   \think\Session;
-
-class Cologin extends \think\Controller
+/*
+*根据大区分为预约id和非预约id
+*
+*
+*
+*/
+class Tps extends \think\Controller
 {
 
     //校验登陆
@@ -24,6 +30,17 @@ class Cologin extends \think\Controller
          //$this->status =Session::get('status');
     }
 
+    /*public function _initialize(){
+        //检测是否登录
+        $student_num= Session::get('student_num');
+        $tel= Session::get('tel');
+        if($student_num && $tel){
+            $count = Db::table('tps_students')->where('tel ='.$tel.' and student_num = '.$student_num)->count();
+            if($count == 1){
+                $this->redirect('Tpsstudentinfo/student_index');
+            }
+        }
+    }*/
     
 
 }

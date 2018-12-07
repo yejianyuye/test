@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8">
+<title>新东方通行证 注册</title>
+<link rel="stylesheet" href="/thinkphp5/public/static/tps/css/testpaper_loign.css">
+<style type="text/css">
+    .icoRight { display: none; }
+    /* 最外层div用icoError会自动隐藏 */
+  .p167-permit-form1 input.pwdReg { border-bottom:1px solid #ebebeb;  }
+      .p167-permit-form1 input.vcodeInput{width:100px; height:52px;  line-height:52px;  padding-left:0 }
+    .p167-permit-form1 input.p167-permit-phone2 {border-bottom: 0;  }
+</style>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">  
+<script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+
+
+    <body style="min-height: 800px;">
+
+        <form name="form1" method="post" action="" id="form1">
+
+            <div class="p167-nav">
+                <script type="text/javascript">
+                    $('.p167-nav').load('pc_total_head');
+                </script>
+            </div>
+
+            <div class="p167-permit" style="margin-bottom: 0; position: relative;">
+
+                <div class="icoError" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;display:none;">
+                    <i></i><span id="txtUserTip"></span>
+                </div>
+
+                <h1>注册</h1>
+                <div class="p167-permit-form1">
+                    <input name="txtUser" type="text" maxlength="11" id="txtUser" class="p167-permit-phone " placeholder="请输入手机号">
+                    <input name="txtPwd" type="password" maxlength="20" id="txtPwd" class="pwdReg" placeholder="请输入至少6位密码">
+                    <!-- 验证码 -->
+                    <div id="trVCode" class="p167-permit-phone" style="border-bottom: 1px solid #ebebeb;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 240px;">
+                                        <input name="txtVCode" type="text" maxlength="5" id="txtVCode" class="vcodeInput  vcodeInput-n " placeholder="请输入验证码" style="width:100px;">
+                                    </td>
+                                    <td>
+                                        <span class="captcha-img">
+                                            <img id="Image1" class="x-vcode-img" onclick="this.src=this.src+'?'" title="看不清楚？换张图片" src="/thinkphp5/tps.php/web/Tpsstudent/show_captcha" align="middle" style="border-width:0px;cursor: pointer; vertical-align: top; width: 68px; height: 40px;">
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p167-insert-form" style="margin-top: 0px;">
+                        <input name="txtSmsCode" type="text" maxlength="5" id="txtSmsCode" class="p167-permit-phone  p167-permit-phone2" placeholder="请输入短信码">
+                        <input class="p167-insert-verification" type="button" onclick="clickGetSmsCode()" value="获取验证码">
+                    </div>
+                    <span class="p167-find-form-tips1" style="top:126px;right:40px;">该手机已注册 · <a href="index.aspx">直接登录</a></span>
+                </div>
+
+                <div style="margin-top: 5px; color:#8F8F8F;font-size:12px;">我接受并同意<a href="/users/serviceclause.aspx" target="_blank"><span style="color:#18C787;font-size:12px;">《用户服务条款》</span></a>和<a href="/users/privacy_pc.htm" target="_blank"><span style="color:#18C787;font-size:12px;">《隐私权相关政策》</span></a></div>
+
+                <a id="btnLogin" href="javascript:clickbtnNext();" class="p167-bind-btn" style="margin-top: 5px;">同意并注册</a>
+            </div>
+
+            <div class="p167-passportbox">
+                <a href="ls_login" class="p167-passport" style="display: inline;">
+                    <span>老生登录</span>
+                    <i></i>
+                </a>
+            </div>
+
+            <style type="text/css">
+                .p167-permit { padding: 10px 40px 36px 40px; }
+                .p167-passportbox { text-align: center; margin-top: 40px; }
+                .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 4px; }
+                .p167-passportbox { text-align: center; margin-top: 40px; }
+                .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 10px; }
+                .p121-messege { margin-bottom: 15px; color: #999; margin-top: -20px; }
+            </style>
+
+            <div class="p167-footer">
+                <p>Copyright Neworiental Corporation, All Rights Reserved</p>
+                <p>© 新东方 版权所有</p>
+            </div>
+        </form>
+
+        <div id="cli_dialog_div"></div>
+    </body>
+</html>
+

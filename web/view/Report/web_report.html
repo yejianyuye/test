@@ -8,13 +8,13 @@
     <style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}</style>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>看演示——复制副本</title>
-    <link href="/public/static/tps/css/report/iconfont.css" rel="stylesheet" type="text/css"/>
-    <link href="/public/static/tps/css/report/style.css?v=201805311740" rel="stylesheet" type="text/css"/>
-    <link href="/public/static/tps/css/report/extraEditor.css" rel="stylesheet" type="text/css"/>
-    <script src="/public/static/tps/js/iscroll.js?v=201805311740"></script>
+    <title>{$student_report.paper_name}</title>
+    <link href="/thinkphp5/public/static/tps/css/report/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/thinkphp5/public/static/tps/css/report/style.css?v=201805311740" rel="stylesheet" type="text/css"/>
+    <link href="/thinkphp5/public/static/tps/css/report/extraEditor.css" rel="stylesheet" type="text/css"/>
+    <script src="/thinkphp5/public/static/tps/js/iscroll.js?v=201805311740"></script>
 
-    <script type="text/javascript" src="/public/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
     <script>
 
         document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -108,7 +108,7 @@
         <div class="wx-tests">
 
             <div class="wx-header" style="display: block;">
-                看演示——复制副本
+                {$student_report.paper_name}
             </div>
 
             <div class="wx-scl" id="wrapper" style="height: 584px; overflow-y: hidden;">
@@ -122,7 +122,9 @@
                             </div>
                             <div class="level">
                                 <div class="level-step">
-                                    <div class="model p3"></div>
+                                    
+                                    <div class="model p{$student_report.dengji}"></div>
+                                    
                                     <div class="ruler"></div>
 
                                     <ul class="steps">
@@ -133,7 +135,7 @@
                                     </ul>
                                 </div>
                                 <div class="tester">
-                                    亲爱的<span class="cr">2323132</span>同学:
+                                    亲爱的<span class="cr">{$student_report.tel}</span>同学:
                                 </div>
                                 <p class="para">你于 <span class="cr">{$student_report.start_time}</span>参加新东方 <span class="cr">{$student_report.paper_name}</span>，
                                     用时<span class="cr">{$student_report.use_time_ms}</span>，
@@ -170,13 +172,7 @@
                                 </tbody>
                             </table>
                             <!-- 未在tps系统登录，想直接通过tps报告页面查看测评详情建立分支，目前服务于双十东方业务 -->
-                            <a href="report_answer_detail" class="wx-asw">查看答案</a>
-                            <div class="chart">
-                                <div class="w380" id="imgRadarMapId" style="width: 100%; height: 270px;">
-                                    <img id="radarMapImgId" src="" style="width:100%;height:100%">
-                                </div>
-                                <div id="radarMapId" class="w380" style="display: none; width: 500px; height: 270px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background-color: transparent;" _echarts_instance_="ec_1529475527960"><div style="position: relative; overflow: hidden; width: 500px; height: 270px;"><canvas width="1000" height="540" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 500px; height: 270px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div><div></div></div>
-                            </div>
+                            <a href="report_answer_detail?report_id={$report_id}" class="wx-asw">查看答案</a>
                         </div>
                     </div>
 
@@ -184,7 +180,6 @@
                         <div class="wx-serialtit">
                             <h2>单项分析</h2>
                         </div>
-
 
                         {volist name="point_array" id="vo"  key="k" }
                         <div class="wx-single">
@@ -194,11 +189,11 @@
                                     <div class="key-prg">
                                         <div class="percents pc1">
                                             <h3><span class="p-n">题目比重</span><span class="pcr">{$vo.point_bz}%</span></h3>
-                                            <div class="po-bar"><div class="pi-bar" style="width: 33.33%;"></div></div>
+                                            <div class="po-bar"><div class="pi-bar" style="width: {$vo.point_bz}%;"></div></div>
                                         </div>
                                         <div class="percents pc2">
                                             <h3><span class="p-n">答题正确率</span><span class="pcr">{$vo.point_zq}%</span></h3>
-                                            <div class="po-bar"><div class="pi-bar" style="width: 33.33%;"></div></div>
+                                            <div class="po-bar"><div class="pi-bar" style="width: {$vo.point_zq}%;"></div></div>
                                         </div>
                                         <div class="percents pc4">
                                             <h3><span class="p-n">掌握程度</span></h3>
@@ -267,7 +262,7 @@
                 <a href="javascript:void(0);" title="#summary">总结</a>
             </div>
 
-            <a href="/index.php/web/Tpsstudentinfo/student_index" class="u-home iconfont"></a>
+            <a href="/thinkphp5/tps.php/web/Tpsstudentinfo/student_index" class="u-home iconfont"></a>
 
         </div>
 

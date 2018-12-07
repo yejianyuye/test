@@ -186,7 +186,7 @@
             data: search_tj,
             success: function (data) {         
                     if(data){
-                        window.location.href ="/thinkphp5/tps.php/index/paper/edit_all_paper?evaluate_paper_id="+data.id+'&souseid ='+data.id;
+                        window.location.href ="/thinkphp5/tps.php/index/paper/edit_all_paper?evaluate_paper_id="+data.id+"&souseid="+data.souseid;
                     }else{
                         alert('添加失败！');
                     }

@@ -70,6 +70,9 @@
                <form id="testpaper" action = "/index.php/web/Tps/upload_testpaper" method="post">
                    <input type="hidden" name="evaluate_paper_id" value="{$evaluate_paper_id}">
                    <input type="hidden" name="allnum" value="{$count}">
+                   <input type="hidden" name="tel" value="{$tel}">
+                   <input type="hidden" name="use_time" value="">
+                   <input type="hidden" name="souseid" value="{$souseid}">
                     <div id="paperContainer">
 
 
@@ -299,7 +302,24 @@
     var cp_time = {$cp_time};
     var time_sy = $.cookie('paperTestTime_'+appointment_id);
 
-    console.log(time_sy);
+    var time_allow = {$time_allow};
+
+    $.fn.ghostsf_serialize = function () {
+        var a = this.serializeArray();
+        var $radio = $('input[type=radio],input[type=checkbox]', this);
+        var temp = {};
+        $.each($radio, function () {
+            if (!temp.hasOwnProperty(this.name)) {
+                if ($("input[name='" + this.name + "']:checked").length == 0) {
+                    temp[this.name] = "";
+                    a.push({name: this.name, value: ""});
+                }
+            }
+        });
+        //console.log(a);
+        return jQuery.param(a);
+    };            
+
 
     $(function(){
         //判断是否为空时间
@@ -444,6 +464,12 @@
 
         //提交题目  完成题目  获取题目信息
         finish: function () {
+            //确定所用时间
+            var use_time = $.cookie('paperTestTime_'+appointment_id);
+            if(time_allow == 1){
+                use_time = parseInt(cp_time)-parseInt(use_time);
+            }    
+            $('#testpaper input[name="use_time"]').val(use_time);
             var str = '';
             $('#finishTips').css('display','none');
             $('.blockUI').css('display','none');
@@ -458,16 +484,16 @@
                 })
 
             })
+
             $('#testpaper').append(str);
-            //var subdata =
+
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: "/index.php/web/Tps/upload_testpaper",
-                data: $('#testpaper').serialize(),
+                url: "/thinkphp5/tps.php/web/Wapanswer/pc_upload_testpaper",
+                data: $('#testpaper').ghostsf_serialize(),
                 success: function (data) {
-
-                  //  alert('123');
+                     window.location.href = "/thinkphp5/tps.php/web/report/report?evaluate_paper_id="+data.evaluate_paper_id+"&souseid="+data.souseid+"&report_id="+data.report_id;
                 },
             });
         },

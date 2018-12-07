@@ -13,7 +13,7 @@
     <link href="/thinkphp5/public/static/tps/css/student_info/iconfont.css" rel="stylesheet" type="text/css">
     <link href="/thinkphp5/public/static/tps/css/student_info/style.css?v=201805221740" rel="stylesheet" type="text/css">
 
-
+    <script type="text/javascript" src="https://www.jzclassroom.com/thinkphp5/public/static/paopao/layer/layer.js"></script>
 
     <style>
     body{
@@ -23,7 +23,7 @@
 </style>
     <title>{$paper_name}</title>
 </head>
-<body style="font-size: 12px;">
+<body>
 
 <div class="wx-tests">
     <div class="wx-top">
@@ -160,6 +160,7 @@
     var appointment_id = {$id};
     //获取考点时间
     var cp_time = {$cp_time};
+    var souseid = {$souseid};
     var time_sy = $.cookie('paperTestTime_'+appointment_id);
     //设置考评时间 allowtime 设置时长考试时间 noallowtime 不设置时长考试时间
    // var allowtime =  
@@ -215,8 +216,8 @@
                         clearInterval(timecan);
                         $.cookie('paperTestTime_' + appointment_id, '', { expires: -1 ,path:'/'});
                         //fix 对于测试时间到没有完成的测评自动提交填空题答案
-                        $('.blockUI').css('display', 'block');
-                        $('#timeTips').css('display', 'block');
+                        var dialogs = '<div class="query layermask shijianss"><div class="alertBox"><div class="wx-zw"></div><p>时间已到，试卷已提交</p><div class="btns"><a href="javascript:;" "testing.sure();" class="btn btn-o">确定</a></div></div></div>';
+                            testing.finish();
                     }
                 }, 1000);
             }
@@ -230,7 +231,6 @@
                     //以预约场次作为cookie的判断
                     $.cookie('paperTestTime_' + appointment_id, noallowtime, {expires: 2,path:'/'});
                 }, 1000);
-
         },
 
     }
@@ -322,6 +322,10 @@
             $('.layermask').remove();
         },
 
+        sure:function () {
+            //跳转到个人主页
+        },
+
         //完成题目
         finishs: function () {
             $('.blockUI').css('display','block');
@@ -339,7 +343,14 @@
             var souseid = $('#souseid').val();
             
             var zhiall = all_xuanze();
-
+           // $('.loadingmask').css('display','block');
+            var tt = '<div class="query layermask"></div>';
+            $(".loadingmask").after(tt);
+            layer.msg('提交中', {
+                icon: 16
+                ,shade: 0.01
+            });
+            //return false;
             $.ajax({
                 type: "get",
                 dataType: "json",
@@ -347,7 +358,7 @@
                 data:{'zhiall':zhiall,'use_time':use_time,'evaluate_paper_id':evaluate_paper_id,'tel':tel,'souseid':souseid},
                 success: function (data) {
                    
-
+                    window.location.href = "/thinkphp5/tps.php/web/Report/report?evaluate_paper_id="+evaluate_paper_id+"&souseid="+souseid+"&report_id="+data.report_id
 
                 },
             });

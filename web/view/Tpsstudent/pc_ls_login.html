@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8">
+    <title>新东方老生登陆</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/tps/css/testpaper_loign.css">
+    <style type="text/css">
+        .icoRight { display: none; }
+        /* 最外层div用icoError会自动隐藏 */
+        .p167-permit-form1 input.p139-input2 { border-bottom: 1px solid #ebebeb; }
+        .p167-permit-form1 input.p139-input3 { height: 52px; line-height: 52px; border-top: 1px solid #ebebeb; width: 318px; padding-left: 0; }
+        .p167-permit-form1 input.p139-input2-n { border-bottom: 0; }
+    </style>
+
+    
+
+<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">  
+<script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
+</head>
+    <body style="min-height: 800px;">
+
+        <form name="form1" method="post">
+            
+            <div class="p167-nav">
+                <script type="text/javascript">
+                    $('.p167-nav').load('pc_total_head');
+                </script>
+            </div>
+
+            <div class="p167-permit" style="margin-bottom: 0; position: relative;">
+
+                <div class="" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;">
+                    <i></i><span id="txtUserTip"></span>
+                </div>
+
+                <h1>老生登录</h1>
+                <div class="p167-permit-form1">
+                    
+                    <input name="txtUser" type="text" maxlength="11" id="txtUser" class="p167-permit-phone" placeholder="请输入报名时的手机号">
+                    
+
+                    <input name="txtStudentName" type="text" maxlength="20" id="txtStudentName" class="p139-input p139-input2 p139-input2-n" placeholder="请输入学员姓名">
+
+                </div>
+                <a id="btnLogin" href="javascript:clickbtnNext();" class="p167-bind-btn">登录</a>
+                <a href="forgetpwd" class="p167-permit-tips" style="margin-bottom:0;">忘记密码？</a>
+            </div>
+
+            <div class="p167-passportbox">
+                <a href="student_login" class="p167-passport" style="display: inline;">
+                    <span>短信登录</span>
+                    <i></i>
+                </a>
+            </div>
+                <style type="text/css">
+                .p167-permit { padding: 10px 40px 36px 40px; }
+                .p167-passportbox { text-align: center; margin-top: 40px; }
+                .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 4px; }
+                .p167-passportbox { text-align: center; margin-top: 40px; }
+                .p167-passportleft { border-right: 1px solid #bebebe; padding-right: 10px; margin-right: 10px; }
+                .p121-messege { margin-bottom: 15px; color: #999; margin-top: -20px; }
+            </style>
+            <!--20160825改E-->
+            <div class="p167-footer">
+                <p>Copyright Neworiental Corporation, All Rights Reserved</p>
+                <p>© 新东方 版权所有</p>
+            </div>
+        </form>
+
+
+        <div id="cli_dialog_div"></div>
+    </body>
+</html>
+<script type="text/javascript">
+
+            function RefreshImage() {
+                RefreshImageById("Image1");
+            }
+
+            function clickbtnNext() {
+                if (Verify())
+                    $("#btnNext").click();
+            }
+</script>
