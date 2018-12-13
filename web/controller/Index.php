@@ -3,18 +3,21 @@ namespace app\web\controller;
 use think\Controller;
 use think\View;
 use think\Db;
-use think\Model;
+use   \think\Session;
 
-//use think\Validate;
-//namespace think;
-//require_once   $_SERVER['DOCUMENT_ROOT'].'/thinkphp/library/think/App.php';
-//include   '192.168.68.49:8080/thinkphp/library/think/App.php';
-//http://192.168.68.49:8080
-class Index extends Model
+class Index extends \think\Controller
 {
     public function index()
     {
-        return view('common/index');
+
+    	$res = Db::table('tps_students')->where('tel ='.Session::get('tel').' and student_num ='.Session::get('student_num'))->find();
+    	
+    		$res['isok'] = $res ? 1 : 0;
+        return view('common/index',[
+
+        	'redata'=>$res,
+        ]);
     }
+    
        
 }

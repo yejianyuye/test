@@ -8,8 +8,6 @@ use   \think\Session;
 /*
 *根据大区分为预约id和非预约id
 *
-*
-*
 */
 class Tps extends \think\Controller
 {

@@ -15,22 +15,14 @@
 
     <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>
-
+    <script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <div class="header">
-    <div class="w1000 cf">
-        <a href="#" class="t-logo">
-            <img src="/thinkphp5/public/static/tps/img/xdf-1.jpg" alt="新东方" />
-        </a>
-        <div class="t-cities accessType">
-        </div>
-        <div class="t-log accessType">
-            <span class="user l">欢迎,{$student_report.paper_name}</span>
-            <a href="/gwots/otstest/paper/userindex" class="btn btn-s  ml5">查看诊断历史</a>
-            <a href="/gwots/otstest/passport/logout" class="btn btn-e r">退出</a>
-        </div>
-    </div>      </div>
+        <script type="text/javascript" >
+            $('.header').load('pc_report_common_head');
+        </script>
+</div>
 <div class="w1000 cf">
     <div class="crump">
         <a href="/gwots/otstest/home/index">首页</a><i class="iconfont">&gt;</i>

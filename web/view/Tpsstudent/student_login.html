@@ -92,14 +92,18 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/thinkphp5/index.php/web/Tpsstudent/duanxin_login_post",
+            url: "/thinkphp5/tps.php/web/Tpsstudent/duanxin_login_post",
             data:formdata ,
             success: function (data) {
-                console.log(data);
+                //alert(data.return_url);
                 if(data.error == 0){
                     alert(data.error_info)
                 }else if(data.error == 1){
-                    window.location.href = '/thinkphp5/index.php/web/Tpsstudentinfo/student_index';
+                    if(data.return_url == null || data.return_url == ''){
+                        window.location.href = "/thinkphp5/tps.php/web/Tpsstudentinfo/student_index";
+                    }else{
+                        window.location.href = data.return_url;
+                    }
                 }
             }
         });

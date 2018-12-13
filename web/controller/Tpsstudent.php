@@ -163,24 +163,28 @@ class Tpsstudent extends \think\Controller
         if($result===false){
             $return_data['error'] = 0;
             $return_data['error_info']='验证码错误';
-        }
-        //校验电话号码
-        $check_num = checknum($code['tel']);
-        if($check_num == 0){
-            $return_data['error'] = 0;
-            $return_data['error_info']='电话号码错误';
-
         }else{
-            $count = Db::table('tps_students')->where('tel ='.$code['tel'])->find();
-            if($count==''){
-                $count['tel']=$code['tel'];
-                //创建唯一学员号
-                $count['student_num'] = $this->get_student_num();
-                $in_res = Db::table('tps_students')->insert($count);
+            //校验电话号码
+            $check_num = checknum($code['tel']);
+            if($check_num == 0){
+                $return_data['error'] = 0;
+                $return_data['error_info']='电话号码格式错误';
+
+            }else{
+                $count = Db::table('tps_students')->where('tel ='.$code['tel'])->find();
+                if($count==''){
+                    $count['tel']=$code['tel'];
+                    //创建唯一学员号
+                    $count['student_num'] = $this->get_student_num();
+                    $in_res = Db::table('tps_students')->insert($count);
+                }
+                $this->set_session($count);
+                $return_data['error'] = 1;
+                $return_data['return_url'] = Session::get('return_url');
             }
-            $this->set_session($count);
-            $return_data['error'] = 1;
         }
+        
+        
         return $return_data;
     }
 
@@ -201,7 +205,8 @@ class Tpsstudent extends \think\Controller
             }else if($telinfo['student_name'] == $code['student_name']){
                 $return_data['error'] = 1;
                 $this->set_session($telinfo);
-
+                $return_data['error'] = 1;
+                $return_data['return_url'] = Session::get('return_url');
             }
         }
 
@@ -221,14 +226,11 @@ class Tpsstudent extends \think\Controller
             $return_data['error'] = 0;
             $return_data['error_info']='通行证密码不能为空';
         }else{
-            //dump(123);
             $telinfo = Db::table('tps_students')->where('mail',$code['mail'])->find();
-           // var_dump($telinfo);die;
             if($telinfo==''){
                 $return_data['error'] = 0;
                 $return_data['error_info']='通行证不存在';
             }else{
-                //var_dump($code['permit_psd']);die;
                 if($telinfo['permit_psd'] != md5($code['permit_psd']) ) {
                     $return_data['error'] = 0;
                     $return_data['error_info'] = '通行证与密码不匹配';
@@ -247,6 +249,8 @@ class Tpsstudent extends \think\Controller
     public function set_session($data){
         Session::set('student_num',$data['student_num']);
         Session::set('tel',$data['tel']);
+        //$sm_del = Session::delete('tel');
+       // $se_del = Session::delete('student_num');
         //return 1;
     }
 

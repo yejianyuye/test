@@ -1,32 +1,16 @@
 <?php
 namespace app\web\controller;
-
+/*手机端端测评报告  已预约id为基本导向*/
 use   \think\Request;
 use   \think\Db;
 use   \think\Session;
+use   \app\web\controller\Cologin;
 
-class Tpsstudentinfo extends \think\Controller
+class Tpsstudentinfo extends Cologin
 {
 
-    public  $tel = '13419541891';
-    public  $xueke = 24;
-
-    /*public function __construct()
-    {
-        //检测是否登录
-        //  var_dump(md5('xdf_zhaoxing'));die;
-        $tel= Session::get('tel');
-        //var_dump($student_num);die;
-        if (!$tel)
-        {
-            $this->error(('请先登录！！！'), url('/web/Tpsstudent/student_login'));
-        }else{
-            $res = Db::table('tps_students')->where('tel', $tel)->find();
-            if($res['student_num'] != Session::get('student_num')){
-                $this->error(('请先登录！！！'), url('/web/Tpsstudent/student_login'));
-            }
-        }
-    }*/
+    //public  $tel = '13419541891';
+   // public  $xueke = 24;
 
     //推出登陆
     public function del_session(){
@@ -40,27 +24,30 @@ class Tpsstudentinfo extends \think\Controller
     //tps查询入口
     public function student_index(){
 
-        return view();
-    }
-
-    //tps诊断报告
-    public function reportpassport(){
-
-        //电话号码==》预约id==>诊断的试卷
-        $tel = $this->tel;
-        $appointment_info = Db::table('tps_evaluate_paper')
-            ->alias('tep')
-            ->field('tep.paper_name,ta.id')
-            ->join('tps_appointment ta','tep.id = ta.evaluate_paper_id')
-            ->join('tps_student_report tsr','tsr.appointment_id = ta.id')
-            ->where('ta.tel',$tel)
-            ->select();
-
-        return view('reportpassport', [
-            'appointment_info'  => $appointment_info,
+        return view('student_index',[
+            'student_num'=>session::get('student_num'),
+            'tel'=>session::get('tel')
         ]);
     }
 
+    //tps诊断报告
+    public function report_list(){
+
+        //电话号码==》诊断id==>诊断的试卷
+        $student_report=Db::table('tps_student_report')
+                        ->alias('s')
+                        ->field('s.evaluate_paper_id,s.souseid,s.id,tep.paper_name')
+                        ->join('tps_evaluate_paper tep','tep.id = s.evaluate_paper_id')
+                        ->where("s.tel =".session::get('tel'))
+                        ->select();
+
+        $count = Db::table('tps_student_report')->where("tel =".session::get('tel'))->count();
+
+        return view('report_list', [
+            'student_report'  => $student_report,
+            'count'  => $count,
+        ]);
+    }
 
     //tps诊断曲线
     public function testscore(){
@@ -73,21 +60,17 @@ class Tpsstudentinfo extends \think\Controller
     //tps 记错本
     public function errorsubject(){
 
-
-        $tel = $this->tel;
+        $tel = session::get('tel');
         //以电话号码为主线   进行学号考试科目错题汇总
-        $appointment_info = Db::table('tps_appointment')
-            ->alias('ta')
-            ->field('tpc.id,tpc.name')
-            ->join('tps_evaluate_paper tep','tep.id = ta.evaluate_paper_id')
+        $appointment_info = Db::table('tps_student_report')
+            ->alias('tsr')
+            ->field('tpc.name,tep.xueke,tsr.evaluate_paper_id')
+            ->join('tps_evaluate_paper tep','tep.id = tsr.evaluate_paper_id')
             ->join('tps_paper_class tpc','tpc.id = tep.xueke')
-            ->where('ta.tel',$tel)
+            ->where('tsr.tel',$tel)
             ->group('tep.xueke')
             ->select();
 
-        foreach($appointment_info as $ak=>$av){
-            $appointment_info[$ak]['count'] = Db::table('tps_student_answer')->where('xueke ='.$appointment_info[$ak]['id'].' and tel ='.$tel)->count();
-        }
         return view('errorsubject', [
             'appointment_info'  => $appointment_info,
         ]);
@@ -95,18 +78,17 @@ class Tpsstudentinfo extends \think\Controller
 
     //参加测评的学科的错题
     public function cwtm(){
-        $tel = $this->tel;
-        //$data = Request::instance()->get();
-        $data['xueke'] = $this->xueke;
+        //$tel = $this->tel;
+        $data = Request::instance()->get();
+        //$data['xueke'] = $this->xueke;
         $data['curPage'] = 1;
         $data['pageSize'] = 10;
 
 
         $allNum = Db::table('tps_student_answer')
-
-            ->where('tel='.$tel.' and isok !=1 and question_type !=4 and question_type !=5 and xueke='.$data['xueke'])
-            ->whereor('tel='.$tel.' and tg_type =1  and xueke='.$data['xueke'])
-            ->count();
+                ->where('tel='.$tel.' and isok !=1 and question_type !=4 and question_type !=5 and xueke='.$data['xueke'])
+                ->whereor('tel='.$tel.' and tg_type =1  and xueke='.$data['xueke'])
+                ->count();
         $data['allNum'] = ceil($allNum/$data['pageSize']);
         $data['tel'] = $tel;
 
@@ -197,8 +179,6 @@ class Tpsstudentinfo extends \think\Controller
                             ->where('tsa.parent_id ='.$allNum['paper_question_id'].' and tsa.tel ='.$tel.' and tsa.isok !=1')
                             ->group('tsa.paper_question_id')
                             ->select();
-
-            //$allNum['num'] = $wynum;
 
             foreach($allNum['xt'] as $ak=>$av){
                 $allNum['xt'][$ak]['contents'] =  explode("{#}",$allNum['xt'][$ak]['question_content']);

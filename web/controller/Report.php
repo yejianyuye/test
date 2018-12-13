@@ -4,16 +4,16 @@ namespace app\web\controller;
 use   \think\Request;
 use   \think\Db;
 use   \think\Session;
+use   \app\web\controller\Cologin;
 use   \app\common\controller\Tpsinfo;
 
-class Report extends \think\Controller
+class Report extends Cologin
 {
     
     //学生测评报告
     public function report(){
         $data = Request::instance()->get();
         $report_id = $data['report_id'];
-        //$appointment_id = 18;
         $student_report  = Db::table('tps_student_report')
             ->alias('s')
             ->field('s.all_score,s.evaluate_paper_id,s.create_time,s.use_time_ms,s.dengji,s.point_id,s.point_dengji,s.point_name,s.point_bz,s.point_zq,s.point_num,s.question_all,s.tel,d.res_desc,d.zongji,d.tuijian,tep.paper_name,tep.grade')
@@ -22,9 +22,7 @@ class Report extends \think\Controller
             ->where('s.id = '.$data['report_id'])
             ->find();
         if($student_report == null){
-
             echo '报告暂时没有生成';die;
-
         }else{
             //正确率(总分暂时没有添加)
             $student_report['zql'] = round(($student_report['all_score']/$student_report['grade'])*100,2);
@@ -96,7 +94,12 @@ class Report extends \think\Controller
             ->order('p.point_order asc')
             ->select();
         //获取考试时间
-        $time_use  = Db::table('tps_student_report')->field('use_time_ms,use_time')->where('id ='.$data['report_id'])->find();
+        $time_use  = Db::table('tps_student_report')
+                    ->alias('tsr')
+                    ->field('tsr.use_time_ms,tsr.use_time,tep.paper_name')
+                    ->join('tps_evaluate_paper tep','tsr.evaluate_paper_id= tep.id')
+                    ->where('tsr.id ='.$data['report_id'])
+                    ->find();
         $theTime0 = 0;// 秒
         $theTime1 = 0;// 分
         if($time_use['use_time'] > 60) {
@@ -240,18 +243,58 @@ class Report extends \think\Controller
     //pc版 考试测评列表
     public function pc_report_list(){
 
-       $student_report  = Db::table('tps_student_report')
-            ->alias('s')
-            ->field('s.evaluate_paper_id,s.create_time,s.souseid,s.id,tep.paper_name')
-            ->join('tps_evaluate_paper tep','tep.id = s.evaluate_paper_id')
-            ->where("s.tel = '15629941330'")
-            ->limit('','2')
-            ->select();
-
+       $data = $this->get_all_report(1);
        return view('pc_report_list',[
-            'student_report'=>$student_report, 
+            'data'=>$data,
+            'all_page'=>$data['all_page'],
+            
        ]);
 
+    }
+
+    //获取所有的测评报告
+    public function get_all_report($page){
+
+        $data['page'] = $page == 1 ? $page : Request::instance()->get('page');
+        $limit = 2;
+        $return_data['student_report']  = Db::table('tps_student_report')
+        ->alias('s')
+        ->field('s.evaluate_paper_id,s.create_time,s.souseid,s.id,tep.paper_name')
+        ->join('tps_evaluate_paper tep','tep.id = s.evaluate_paper_id')
+        ->where("s.tel =".session::get('tel'))
+        ->limit($data['page'],$limit)
+        ->select();
+
+        $return_data['count']  = Db::table('tps_student_report')
+        ->alias('s')
+        ->field('s.evaluate_paper_id,s.create_time,s.souseid,s.id,tep.paper_name')
+        ->join('tps_evaluate_paper tep','tep.id = s.evaluate_paper_id')
+        ->where("s.tel =".session::get('tel'))
+        ->count();
+        $return_data['page'] = $data['page'];
+        $return_data['all_page'] = ceil($return_data['count']/$limit);
+        return $return_data;
+       
+
+    }
+
+    //pc版 考试测评列表
+    public function pc_report_common_head(){
+
+
+       return view('pc_report_common_head',[
+            'tel'=>session::get('tel'),
+       ]);
+
+    }
+
+    //退出登陆
+    public function log_out(){
+
+        Session::set('student_num','');
+        Session::set('tel','');
+        Session::set('return_url','');
+        $this->redirect('Tpsstudent/student_login');
     }
 
 

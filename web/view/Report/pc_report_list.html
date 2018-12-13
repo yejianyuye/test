@@ -7,35 +7,19 @@
 <title>新东方TPS系统</title>
 <link href="/thinkphp5/public/static/tps/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="/thinkphp5/public/static/tps/css/iconfont.css" rel="stylesheet" type="text/css"/>     
-<script src="/gwots/static/js/biz/testflow/module/pc/home/usertestresult/usertestresult.js"></script>
-    <script>
-        $(function(){
-            $('.test-list li:odd').addClass('cr1');
-            userTestResult.init();
-        })
-    </script>
+<script type="text/javascript" src="/thinkphp5/public/static/js/jquery-3.2.1.min.js"></script>
 </head>
     <body>
         <input type="hidden" id="pageNo" name="pageNo" value="1">
         <div class="header">
-            <div class="w1000 cf">
-                <span class="t-logo">
-                    <img src="/gwots/static/skin/testflow/pc/img/xdf.jpg" alt="新东方">
-                </span>
-                <div class="t-cities accessType"></div>
-                    <!-- 学员查看报告, 显示登录、注册按钮 -->
-                    <div class="t-log accessType">
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span class="user l">欢迎,测试&nbsp;&nbsp;&nbsp;&nbsp;</span>   
-                                <a href="/gwots/testflow/home/userTestResultIndex" class="btn btn-s  ml5">查看诊断历史</a>
-                                <a href="/gwots/tpscloud/passport/logout?redirectUrl=/testflow/home/index" class="btn btn-e r">退出</a>
-                    </div>
-                </div>     
-            </div>
+              <script type="text/javascript" >
+                 $('.header').load('pc_report_common_head');
+              </script>  
+        </div>
 
         <div class="w1000 cf">
             <div class="crump">
-                <a href="/gwots/testflow/home/index">首页</a><i class="iconfont">&gt;</i>我的诊断列表
+                <a href="/thinkphp5/tps.php/web/index/index">首页</a><i class="iconfont">&gt;</i>我的诊断列表
             </div>
             <div class="wl" id="data">  
                 <table border="0" cellspacing="0" cellpadding="0" class="history">
@@ -46,8 +30,8 @@
                         <th width="15%">查看报告</th>
                         </tr>       
                     </thead>
-                    <tbody>
-                        {volist name = "student_report" id="report_info"}
+                    <tbody id="append">
+                        {volist name = "data.student_report" id="report_info"}
                         <tr>
                             <td><a href="javascript:void(0);" class="l" style="text-decoration: none;cursor: default;" title="{$report_info.paper_name}">{$report_info.paper_name}</a></td>
                             <td>{$report_info.create_time}</td>
@@ -59,44 +43,17 @@
     
                 <ul class="paging">
 
-                        <li>共有9条</li>
-                        <li>共{}页</li>
-                        <li class="pageup noClick"><a href="javascript:void(0);"><span>&lt;</span> 上一页</a></li> 
-                        <li><a class="pageCurrent" href="javascript:void(0);">1</a></li>
-                        <li class="pagedown noClick"><a href="javascript:void(0);">下一页 <span>&gt;</span></a></li>
-                        <li>跳转到<input type="text" class="input_num" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" value="" size="5">
-                            <a href="javascript:void(0);" onclick="enterNumber(this);" class="jumpToPage">确定</a></li>
+                        <li>共有{$data.count}条</li>
+                        <li class="pageup noClick"><a href="javascript:void(0);" onclick="preNumber();"><span>&lt;</span> 上一页</a></li> 
+                        <li><a class="pageCurrent" href="javascript:void(0);">{$data.page}</a></li>
+                        <li class="pagedown noClick"><a href="javascript:void(0);" onclick="nextNumber();">下一页 <span>&gt;</span></a></li>
+                        <li>跳转到<input type="text" id = "input_num" class="input_num" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" value="" size="5">
+                            <a href="javascript:void(0);" onclick="enterNumber();" class="jumpToPage">确定</a></li>
                 </ul>
 
-                <script>
-                    $(function(){
-                        $("input[name='pageNo']").val('1');
-                    });
+               
                 
-                    function changePageNo(pageNo){
-                        $("input[name='pageNo']").val(pageNo);
-                        userTestResult.qform() 
-                    }
                     
-                    function changePageSize(_this){
-                        $("input[name='pageNo']").val(1);
-                        $("#").val($(_this).val());
-                        userTestResult.qform() 
-                    }
-                    
-                    function enterNumber(obj){
-                        var pageNo = $(obj).prev().val();
-                        if(pageNo <= 0){
-                            alert('请输入正确页码');
-                            return;
-                        }
-                        if(pageNo > 1){
-                            alert('请输入正确页码');
-                            return;
-                        }
-                        changePageNo(pageNo);
-                    }
-                </script>
 
 
             </div>
@@ -111,3 +68,67 @@
         <div id="cli_dialog_div"></div>
     </body>
 </html>
+<script>
+                    var allpage = {$all_page};
+                    function get_all_report(pageNo){
+                        var pagenum = pageNo;
+                        $.ajax({
+                            type: "get",
+                            dataType: "json",
+                            url: "get_all_report",
+                            data:{'page':pagenum},
+                            success: function (data) {
+                                if(data.student_report){
+                                    var str = '';
+                                    $.each(data.student_report,function(index,value){
+                                        str += '<tr><td><a href="javascript:void(0);" style="text-decoration: none;cursor: default;" title="'+value.paper_name+'">'+value.paper_name+'</a></td><td>'+value.create_time+'</td><td class="check"><a href="report?evaluate_paper_id='+value.evaluate_paper_id+'&souseid='+value.souseid+'&report_id='+value.id+'" target="_blank">查看报告</a></td></tr>';
+                                    });
+                                    $('#append').html(str);
+                                    var pageCurrent = $('.pageCurrent').text(data.page);
+                                    
+                                }
+                            }
+                        })
+
+                    }
+                    
+                    //上一页
+                    function preNumber(){
+                        var pageCurrent = parseInt($('.pageCurrent').text());
+                        var topage = pageCurrent -1;
+                        if(topage <= 0){
+                            alert('已经是第一页了');
+                            return;
+                        }
+                        get_all_report(topage);
+                    }
+
+                    //下一页
+                    function nextNumber(){
+                        
+                        var pageCurrent = parseInt($('.pageCurrent').text());
+                        var topage = pageCurrent +1;
+                        if(topage > allpage){
+                            alert('已经超过总页数');
+                            return;
+                        }
+                        get_all_report(topage);
+
+                    }
+                    
+                    function enterNumber(){
+                        var topage = parseInt($('#input_num').val());
+                        console.log(topage);
+                        if(topage <= 0){
+                            alert('请输入正确页码');
+                            return;
+                        }
+                        if(topage > allpage){
+                            alert('已经超过总页数');
+                            return;
+                        }
+                        get_all_report(topage);
+                    }
+
+
+                </script>

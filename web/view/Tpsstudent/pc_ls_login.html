@@ -17,7 +17,7 @@
 </head>
     <body style="min-height: 800px;">
 
-        <form name="form1" method="post">
+        <form  method="post" id = "form1">
             
             <div class="p167-nav">
                 <script type="text/javascript">
@@ -27,20 +27,20 @@
 
             <div class="p167-permit" style="margin-bottom: 0; position: relative;">
 
-                <div class="" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;">
-                    <i></i><span id="txtUserTip"></span>
+                <div class="icoError" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;display:none;">
+                    <i></i><span id="txtUserTip">手机格式不正确</span>
                 </div>
 
                 <h1>老生登录</h1>
                 <div class="p167-permit-form1">
                     
-                    <input name="txtUser" type="text" maxlength="11" id="txtUser" class="p167-permit-phone" placeholder="请输入报名时的手机号">
+                    <input name="tel" type="text" maxlength="11" id="txtUser" class="p167-permit-phone" placeholder="请输入报名时的手机号">
                     
 
-                    <input name="txtStudentName" type="text" maxlength="20" id="txtStudentName" class="p139-input p139-input2 p139-input2-n" placeholder="请输入学员姓名">
+                    <input name="student_name" type="text" maxlength="20" id="txtStudentName" class="p139-input p139-input2 p139-input2-n" placeholder="请输入学员姓名">
 
                 </div>
-                <a id="btnLogin" href="javascript:clickbtnNext();" class="p167-bind-btn">登录</a>
+                <a id="btnLogin" href="javascript:void(0);" class="p167-bind-btn">登录</a>
                 <a href="forgetpwd" class="p167-permit-tips" style="margin-bottom:0;">忘记密码？</a>
             </div>
 
@@ -71,12 +71,40 @@
 </html>
 <script type="text/javascript">
 
-            function RefreshImage() {
-                RefreshImageById("Image1");
+    $('#btnLogin').click(function(){
+        var tel = $('#txtUser').val();
+        $ss  = validatemobile(tel);
+        if($ss == false){
+            $('#txtUserTip').text('手机格式不正确');
+            return false;
+        }else{
+            $('#txtUserTip').text('');
+        }
+        var formdata = $('#form1').serialize();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/thinkphp5/tps.php/web/Tpsstudent/laoshen_login_post",
+            data:formdata,
+            success: function (data) {
+                if(data.error == 0){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html(data.error_info);
+                }else if(data.error == 1){
+                    if(data.return_url == null || data.return_url == ''){
+                        window.location.href = "/thinkphp5/tps.php/web/index/index";
+                    }else{
+                        window.location.href = data.return_url;
+                    }
+                }
             }
+        });
+    })
 
-            function clickbtnNext() {
-                if (Verify())
-                    $("#btnNext").click();
-            }
+    function validatemobile(mobile)
+    {
+        var pattern = /^1\d{10}$/;
+        return pattern.test(mobile);
+    }
+            
 </script>

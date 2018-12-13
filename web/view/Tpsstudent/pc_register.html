@@ -16,7 +16,7 @@
 
     <body style="min-height: 800px;">
 
-        <form name="form1" method="post" action="" id="form1">
+        <form name="form1" id="form1">
 
             <div class="p167-nav">
                 <script type="text/javascript">
@@ -26,21 +26,21 @@
 
             <div class="p167-permit" style="margin-bottom: 0; position: relative;">
 
-                <div class="icoError" id="txtUserIcon" style="position: absolute; top: -85px; left: 0;display:none;">
+                <div class="icoError" id="txtUserIcon" style="position: absolute;top:-85px;left:0;display:none;">
                     <i></i><span id="txtUserTip"></span>
                 </div>
 
                 <h1>注册</h1>
                 <div class="p167-permit-form1">
-                    <input name="txtUser" type="text" maxlength="11" id="txtUser" class="p167-permit-phone " placeholder="请输入手机号">
-                    <input name="txtPwd" type="password" maxlength="20" id="txtPwd" class="pwdReg" placeholder="请输入至少6位密码">
+                    <input name="tel" type="text" maxlength="11" id="txtUser" class="p167-permit-phone " placeholder="请输入手机号">
+                    <input name="permit_psd" type="password" maxlength="20" id="txtPwd" class="pwdReg" placeholder="请输入至少6位密码">
                     <!-- 验证码 -->
                     <div id="trVCode" class="p167-permit-phone" style="border-bottom: 1px solid #ebebeb;">
                         <table>
                             <tbody>
                                 <tr>
                                     <td style="width: 240px;">
-                                        <input name="txtVCode" type="text" maxlength="5" id="txtVCode" class="vcodeInput  vcodeInput-n " placeholder="请输入验证码" style="width:100px;">
+                                        <input name="yzm" type="text" maxlength="5" id="txtVCode" class="vcodeInput  vcodeInput-n " placeholder="请输入验证码" style="width:100px;">
                                     </td>
                                     <td>
                                         <span class="captcha-img">
@@ -61,7 +61,7 @@
 
                 <div style="margin-top: 5px; color:#8F8F8F;font-size:12px;">我接受并同意<a href="/users/serviceclause.aspx" target="_blank"><span style="color:#18C787;font-size:12px;">《用户服务条款》</span></a>和<a href="/users/privacy_pc.htm" target="_blank"><span style="color:#18C787;font-size:12px;">《隐私权相关政策》</span></a></div>
 
-                <a id="btnLogin" href="javascript:clickbtnNext();" class="p167-bind-btn" style="margin-top: 5px;">同意并注册</a>
+                <a id="btnRegister" href="javascript:void(0);" class="p167-bind-btn" style="margin-top: 5px;">同意并注册</a>
             </div>
 
             <div class="p167-passportbox">
@@ -89,4 +89,101 @@
         <div id="cli_dialog_div"></div>
     </body>
 </html>
+
+<script>
+
+    //校验手机
+    $('#txtUser').change(function(){
+        var tel=$('#txtUser').val();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "register_test",
+            data:{tel:tel} ,
+            success: function (data) {
+                console.log(data);
+                if(data == 1){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html('该手机号码已被注册');
+                }else if(data == 0){
+                    $('#txtUserIcon').css('display','none');
+                    $('#txtUserTip').html('');
+                }
+            }
+        });
+    })
+
+    //校验密码
+    $('#txtPwd').change(function(){
+        var tel=$('#txtPwd').val().length;
+        if(tel < 6){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入至少6位密码');
+        }else if(tel > 20){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入不能大于20位密码');
+        }else{
+            $('#txtUserIcon').css('display','none');
+            $('#txtUserTip').html('');
+        }
+    })
+
+
+
+    $('#btnRegister').click(function(){
+        //校验密码
+        var mima=$('#txtPwd').val().length;
+        if(mima < 6){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入至少6位密码');
+            return false;
+        }else if(mima > 20){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('请输入不能大于20位密码');
+            return false;
+        }
+        //校验手机号码
+        var tel = $('#txtUser').val();
+        $ss  = validatemobile(tel);
+        if($ss == false){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('手机格式不正确');
+            return false;
+        }else{
+            $('#txtUserTip').text('');
+        }
+        //图文验证码
+        var yanzhenma = $('#txtVCode').val();
+        if(yanzhenma==''){
+            $('#txtUserIcon').css('display','block');
+            $('#txtUserTip').html('验证码不能为空');
+            return false;
+        }
+
+        var formdata = $('#form1').serialize();
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "do_register",
+            data:formdata ,
+            success: function (data) {
+                if(data.error == 0){
+                    $('#txtUserIcon').css('display','block');
+                    $('#txtUserTip').html(data.error_info);
+                }else if(data.error == 1){
+                    window.location.href = '/thinkphp5/tps.php/web/index/index';
+                }
+            }
+        })
+
+
+    })
+
+
+    function validatemobile(mobile){
+        var pattern = /^1\d{10}$/;
+        return pattern.test(mobile);
+    }
+
+</script>
 

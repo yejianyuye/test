@@ -201,6 +201,7 @@ class Wapanswer extends \think\Controller
             $parent_info['report_id'] = $insert_data['report_id'];
             $parent_info['paper_question_id'] = $insert_data['parent_id'];
             $parent_info['parent_id'] = 0;
+            //阅读理解题干
             $parent_info['tg_type'] = 1;
             $parent_info['evaluate_paper_id'] = $insert_data['evaluate_paper_id'];
             Db::table('tps_student_answer')->insert($parent_info);
