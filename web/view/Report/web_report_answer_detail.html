@@ -84,8 +84,10 @@
         </div>
     </div>
     <div class="wx-scl" id="subjectContainer" style="height: 496px; overflow-y: hidden;">
-        <div class="containerClass" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
-            <div style="padding:20px 0 0px 0px;color:orange;font-weight:bold;width:100%;text-align:center;font-size:14px"><h2>提示：点击题号查看试题详情</h2></div>
+        <div class="containerClass">
+            <div style="padding:20px 0 0px 0px;color:orange;font-weight:bold;width:100%;text-align:center;font-size:14px">
+                <h2>提示：点击题号查看试题详情</h2>
+            </div>
 
             {volist name = "report_question" id = "ss" key = "k"}
             <div class="wx-sbg">
@@ -107,9 +109,7 @@
             {/volist}
 
         </div>
-        <div class="iScrollVerticalScrollbar iScrollLoneScrollbar" style="position: absolute; z-index: 9999; width: 4px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; transform: translateZ(0px); transition-duration: 500ms; opacity: 0;">
-            <div class="iScrollIndicator" style="box-sizing: border-box; position: absolute; background: rgba(255, 190, 50, 0.9); border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 3px; width: 100%; transition-duration: 0ms; display: block; height: 466px; transform: translate(0px, 0px) translateZ(0px); transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);"></div>
-        </div>
+
     </div>
     <a href="/thinkphp5/tps.php/web/Tpsstudentinfo/student_index" class="u-home iconfont"></a>
 </div>
